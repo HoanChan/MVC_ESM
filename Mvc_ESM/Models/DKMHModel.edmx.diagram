@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="30756090fa764061b26e89a62d0fda10" Name="Diagram1">
+        <EntityTypeShape EntityType="DKMHModel.bachoc" Width="1.5" PointX="5.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DKMHModel.bomon" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DKMHModel.chuyennganh" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DKMHModel.giaovien" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DKMHModel.khoa" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DKMHModel.khoi" Width="1.5" PointX="8" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DKMHModel.lichhocvu" Width="1.5" PointX="14.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DKMHModel.lop" Width="1.5" PointX="10.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DKMHModel.monhoc" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DKMHModel.nhom" Width="1.5" PointX="12.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DKMHModel.pdkmh" Width="1.5" PointX="14.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DKMHModel.phong" Width="1.5" PointX="3" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="DKMHModel.sinhvien" Width="1.5" PointX="8.25" PointY="10.125" IsExpanded="true" />
+        <AssociationConnector Association="DKMHModel.FK_Khoi_bachoc" ManuallyRouted="false" />
+        <AssociationConnector Association="DKMHModel.FK_bomon_khoa" ManuallyRouted="false" />
+        <AssociationConnector Association="DKMHModel.FK_giaovien_bomon" ManuallyRouted="false" />
+        <AssociationConnector Association="DKMHModel.FK_monhoc_bomon" ManuallyRouted="false" />
+        <AssociationConnector Association="DKMHModel.FK_chuyennganh_khoa" ManuallyRouted="false" />
+        <AssociationConnector Association="DKMHModel.FK_sinhvien_chuyennganh" ManuallyRouted="false" />
+        <AssociationConnector Association="DKMHModel.FK_Khoi_khoa" ManuallyRouted="false" />
+        <AssociationConnector Association="DKMHModel.FK_monhoc_khoa" ManuallyRouted="false" />
+        <AssociationConnector Association="DKMHModel.FK_phong_khoa" ManuallyRouted="false" />
+        <AssociationConnector Association="DKMHModel.FK_lop_Khoi" ManuallyRouted="false" />
+        <AssociationConnector Association="DKMHModel.FK_lichhocvu_nhom" ManuallyRouted="false" />
+        <AssociationConnector Association="DKMHModel.FK_lichhocvu_phong" ManuallyRouted="false" />
+        <AssociationConnector Association="DKMHModel.FK_sinhvien_lop" ManuallyRouted="false" />
+        <AssociationConnector Association="DKMHModel.FK_nhom_monhoc" ManuallyRouted="false" />
+        <AssociationConnector Association="DKMHModel.FK_pdkmh_nhom" ManuallyRouted="false" />
+        <AssociationConnector Association="DKMHModel.FK_pdkmh_sinhvien" ManuallyRouted="false" />
+        <AssociationConnector Association="DKMHModel.tkbmacdinh" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

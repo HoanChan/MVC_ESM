@@ -1,0 +1,58 @@
+﻿@model Mvc_ESM.Models.monhoc
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>monhoc</legend>
+
+    <div class="display-label">MaMonHoc</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MaMonHoc)
+    </div>
+
+    <div class="display-label">TenMonHoc</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TenMonHoc)
+    </div>
+
+    <div class="display-label">TCLyThuyet</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TCLyThuyet)
+    </div>
+
+    <div class="display-label">TCThucHanh</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TCThucHanh)
+    </div>
+
+    <div class="display-label">MonThiNghiem</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MonThiNghiem)
+    </div>
+
+    <div class="display-label">khoa</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.khoa.TenKhoa)
+    </div>
+
+    <div class="display-label">bomon</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.bomon.TenBoMon)
+    </div>
+
+    <div class="display-label">GhiChu</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GhiChu)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Mvc_ESM.Models.monhoc>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            MaMonHoc
+        </th>
+        <th>
+            TenMonHoc
+        </th>
+        <th>
+            TCLyThuyet
+        </th>
+        <th>
+            TCThucHanh
+        </th>
+        <th>
+            MonThiNghiem
+        </th>
+        <th>
+            khoa
+        </th>
+        <th>
+            bomon
+        </th>
+        <th>
+            GhiChu
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaMonHoc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenMonHoc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TCLyThuyet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TCThucHanh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MonThiNghiem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.khoa.TenKhoa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bomon.TenBoMon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GhiChu)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.MaMonHoc }) |
+            @Html.ActionLink("Details", "Details", new { id = item.MaMonHoc }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.MaMonHoc })
+        </td>
+    </tr>
+}
+
+</table>
