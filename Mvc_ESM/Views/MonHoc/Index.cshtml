@@ -1,43 +1,55 @@
 ﻿@model IEnumerable<Mvc_ESM.Models.monhoc>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Môn học";
 }
 
-<h2>Index</h2>
+<h2>Danh sách môn học</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Tạo mới", "Create")
 </p>
-<table>
-    <tr>
-        <th>
-            MaMonHoc
+@using (Html.BeginForm("Index","MonHoc",FormMethod.Post, new {@id="FilterForm"})){
+<p>
+       
+         <p>Khoa: @Html.DropDownList("Khoa", "Tất cả")  
+           Tên: @Html.TextBox("SearchString", Mvc_ESM.Static_Helper.MonHocHelper.SearchString)  
+         <input type="submit" value="Thực hiện" /></p>
+        
+</p>
+}
+<table id = "table">
+    <thead>
+		<tr>
+			<th>
+            Mã môn học
         </th>
         <th>
-            TenMonHoc
+            Tên môn học
         </th>
         <th>
-            TCLyThuyet
+            Số TC LT
         </th>
         <th>
-            TCThucHanh
+            Số TC TH
         </th>
         <th>
-            MonThiNghiem
+            Là môn thí nghiệm
         </th>
         <th>
-            khoa
+            Khoa QL
         </th>
         <th>
-            bomon
+            Bộ môn
         </th>
         <th>
-            GhiChu
+            Ghi chú
         </th>
         <th></th>
-    </tr>
-
+		</tr>
+	</thead>
+	<tbody>
+    
 @{
     foreach (var item in Model) {
         <tr>
@@ -66,32 +78,38 @@
                 @Html.DisplayFor(modelItem => item.GhiChu)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.MaMonHoc }) |
-                @Html.ActionLink("Details", "Details", new { id = item.MaMonHoc }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.MaMonHoc })
+                @Html.ActionLink("Sửa", "Edit", new { id = item.MaMonHoc }) |
+                @Html.ActionLink("Xem", "Details", new { id = item.MaMonHoc }) |
+                @Html.ActionLink("Xoá", "Delete", new { id = item.MaMonHoc })
             </td>
         </tr>
     }
 }
+        </tbody>
 </table>
-<p> 
-    @{
-        List<int> Pages = new List<int>();
-        for(int i = 0; i < ViewBag.Count/25; i++)
-        {
-            Pages.Add( i + 1 );
-        }
-        using (Html.BeginForm("Index", "Monhoc", FormMethod.Post, new { id = "TheForm" })){
-            @Html.DropDownList(
-                "Pages",
-                new SelectList(Pages),
-                new{ //anonymous type
-                    @class = "DropDownList",
-                    onchange = "document.getElementById('TheForm').submit();"
+
+@*<link href="@Url.Content("~/Content/page.css")" rel="stylesheet" type="text/css" />*@
+<link href="@Url.Content("~/Content/table.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/jquery.js")" type="text/javascript" lang="javascript" ></script>
+<script src="@Url.Content("~/Scripts/jquery.dataTables.js")" type="text/javascript" lang="javascript" ></script>
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+		$('#table').dataTable( {
+		    "sPaginationType": "full_numbers",
+            "oLanguage": {
+		        "sLengthMenu": "Hiển thị _MENU_ kết quả mỗi trang",
+                "sZeroRecords": "Không tìm thấy dữ liệu",
+                "sInfo": "Đang hiển thị kết quả thứ _START_ đến _END_ của _TOTAL_ kết quả",
+                "sInfoEmpty": "Đang hiển thị kết quả thứ 0 đến 0 của 0 kết quả",
+                "sInfoFiltered": "(Lọc từ _MAX_ kết quả)",
+                "sSearch": "Tìm:",
+                "oPaginate": {
+                    "sFirst": "<<Đầu tiên",
+                    "sLast": "Cuối cùng>>",
+                    "sPrevious": "&lt;Trước",
+                    "sNext": "Sau>",
                 }
-            
-           );
-        }
-    }
-    /@(ViewBag.Count/25)
-</p>
+		    }
+		} );
+	} );
+</script>

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mvc_ESM.Models;
+using System.Collections;
 
 namespace Mvc_ESM.Controllers
 { 
@@ -18,21 +19,39 @@ namespace Mvc_ESM.Controllers
         [HttpGet]
         public ViewResult Index()
         {
-            var monhocs = db.monhocs.Include(m => m.bomon).Include(m => m.khoa);
-            ViewBag.Count = monhocs.Count();
-            monhocs = monhocs.OrderBy(m => m.MaMonHoc).Take(25);
+            var monhocs = (from m in db.monhocs
+                           where (m.bomon.KhoaQL.Equals(Static_Helper.MonHocHelper.Khoa) || Static_Helper.MonHocHelper.Khoa == "") && m.TenMonHoc.Contains(Static_Helper.MonHocHelper.SearchString)
+                           select m
+                           ).Include(m => m.bomon).Include(m => m.khoa);
+            InitViewBag();
             return View(monhocs.ToList());
         }
 
         [HttpPost]
-        public ViewResult Index(int Pages)
+        public ViewResult Index(String Khoa, String SearchString)
         {
-            var monhocs = db.monhocs.Include(m => m.bomon).Include(m => m.khoa);
-            ViewBag.Count = monhocs.Count();
-            monhocs = monhocs.OrderBy(m => m.MaMonHoc).Skip((Pages - 1) * 25).Take(25);
-            //ViewBag.Pages = Pages;
+            Static_Helper.MonHocHelper.Khoa = Khoa;
+            Static_Helper.MonHocHelper.SearchString = SearchString;
+            var monhocs = (from m in db.monhocs 
+                           where (m.bomon.KhoaQL.Equals(Khoa) || Khoa == "") && m.TenMonHoc.Contains(SearchString)
+                           select m
+                           ).Include(m => m.bomon).Include(m => m.khoa);
+                //db.monhocs.Where(m => m.bomon.KhoaQL.Equals(Khoa) && m.TenMonHoc.Contains(SearchString)).Include(m => m.bomon).Include(m => m.khoa);
+            InitViewBag();
             return View(monhocs.ToList());
         }
+
+        private void InitViewBag()
+        {
+            var KhoaLst = new ArrayList();
+            var KhoaQry = from d in db.khoas
+                          orderby d.TenKhoa
+                          select new { MaKhoa = d.MaKhoa, TenKhoa = d.TenKhoa };
+            KhoaLst.AddRange(KhoaQry.ToArray());
+            ViewBag.Khoa = new SelectList(KhoaLst,"MaKhoa","TenKhoa");
+            ViewBag.SearchString = "";
+        }
+
 
         //
         // GET: /MonHoc/Details/5
