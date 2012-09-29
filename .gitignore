@@ -4,3 +4,6 @@ obj
 
 # mstest test results
 TestResults
+Mvc_ESM/App_Data/DKMH.mdf
+Mvc_ESM/App_Data/DKMH_log.ldf
+Mvc_ESM.v11.suo

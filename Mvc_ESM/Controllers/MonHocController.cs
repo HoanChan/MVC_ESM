@@ -15,10 +15,22 @@ namespace Mvc_ESM.Controllers
 
         //
         // GET: /MonHoc/
-
+        [HttpGet]
         public ViewResult Index()
         {
             var monhocs = db.monhocs.Include(m => m.bomon).Include(m => m.khoa);
+            ViewBag.Count = monhocs.Count();
+            monhocs = monhocs.OrderBy(m => m.MaMonHoc).Take(25);
+            return View(monhocs.ToList());
+        }
+
+        [HttpPost]
+        public ViewResult Index(int Pages)
+        {
+            var monhocs = db.monhocs.Include(m => m.bomon).Include(m => m.khoa);
+            ViewBag.Count = monhocs.Count();
+            monhocs = monhocs.OrderBy(m => m.MaMonHoc).Skip((Pages - 1) * 25).Take(25);
+            //ViewBag.Pages = Pages;
             return View(monhocs.ToList());
         }
 

@@ -38,38 +38,60 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaMonHoc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenMonHoc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TCLyThuyet)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TCThucHanh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MonThiNghiem)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.khoa.TenKhoa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.bomon.TenBoMon)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GhiChu)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.MaMonHoc }) |
-            @Html.ActionLink("Details", "Details", new { id = item.MaMonHoc }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.MaMonHoc })
-        </td>
-    </tr>
+@{
+    foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaMonHoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenMonHoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TCLyThuyet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TCThucHanh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MonThiNghiem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.khoa.TenKhoa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bomon.TenBoMon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GhiChu)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MaMonHoc }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MaMonHoc }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MaMonHoc })
+            </td>
+        </tr>
+    }
 }
-
 </table>
+<p> 
+    @{
+        List<int> Pages = new List<int>();
+        for(int i = 0; i < ViewBag.Count/25; i++)
+        {
+            Pages.Add( i + 1 );
+        }
+        using (Html.BeginForm("Index", "Monhoc", FormMethod.Post, new { id = "TheForm" })){
+            @Html.DropDownList(
+                "Pages",
+                new SelectList(Pages),
+                new{ //anonymous type
+                    @class = "DropDownList",
+                    onchange = "document.getElementById('TheForm').submit();"
+                }
+            
+           );
+        }
+    }
+    /@(ViewBag.Count/25)
+</p>
