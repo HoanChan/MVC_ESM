@@ -12,7 +12,7 @@
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend>monhoc</legend>
+        <legend>@ViewBag.Title</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.MaMonHoc)

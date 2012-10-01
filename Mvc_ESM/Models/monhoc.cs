@@ -6,14 +6,13 @@
 //    Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
 
 namespace Mvc_ESM.Models
 {
     using System;
     using System.Collections.Generic;
-using System.ComponentModel;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class monhoc
     {
         public monhoc()
@@ -21,28 +20,42 @@ using System.ComponentModel;
             this.nhoms = new HashSet<nhom>();
         }
 
+        //Thiếu kiểm tra tính duy nhất
+        [ConcurrencyCheck]
         [Required(ErrorMessage = "Không được để trống")]
-        [DisplayName("Mã môn học")]
-        [StringLength(7,MinimumLength = 1, ErrorMessage = "Dài từ 1 tới 7 ký tự")]
+        [StringLength(7, MinimumLength = 1, ErrorMessage = "Dài từ 1 tới 7 ký tự")]
+        [Display(Name = "Mã môn học", Description = "")]
         public string MaMonHoc { get; set; }
+
         [Required(ErrorMessage = "Không được để trống")]
         [StringLength(60, ErrorMessage = "Không được dài quá 60 ký tự")]
+        [Display(Name = "Tên môn học", Description = "")]
         public string TenMonHoc { get; set; }
+
         [Required(ErrorMessage = "Không được để trống")]
-        [DataType(DataType.Currency, ErrorMessage = "Phải nhập số")] 
+        [RegularExpression(@"^\d+$", ErrorMessage = "Phải nhập số")]
+        [Display(Name = "Số Chỉ lý thuyết", Description = "")]
         public byte TCLyThuyet { get; set; }
+
         [Required(ErrorMessage = "Không được để trống")]
-        [DataType(DataType.Currency, ErrorMessage = "Phải nhập số")] 
+        [RegularExpression(@"^\d+$", ErrorMessage = "Phải nhập số")]
+        [Display(Name = "Số chỉ thực hành", Description = "")]
         public byte TCThucHanh { get; set; }
+
         [Required(ErrorMessage = "Không được để trống")]
-        [Range(0, 1, ErrorMessage = "Chỉ được nhập 1 hoặc 0")]
-        [DataType(DataType.Currency,ErrorMessage = "Phải nhập số")] 
+        [RegularExpression(@"^[10]$", ErrorMessage = "Chỉ được nhập 1 hoặc 0")]
+        [Display(Name = "Là môn thí nghệm", Description = "")]
         public byte MonThiNghiem { get; set; }
-        
+
+        [Display(Name = "Khoa Xếp lịch", Description = "")]
         public string KhoaXepLich { get; set; }
+
         [Required(ErrorMessage = "Không được để trống")]
+        [Display(Name = "Bộ môn quản lý", Description = "Thuộc bộ môn")]
         public string BoMonQL { get; set; }
-        [StringLength(500,  ErrorMessage = "Không được dài quá 500 ký tự")]
+
+        [StringLength(500, ErrorMessage = "Không được dài quá 500 ký tự")]
+        [Display(Name = "Ghi chú", Description = "")]
         public string GhiChu { get; set; }
     
         public virtual bomon bomon { get; set; }

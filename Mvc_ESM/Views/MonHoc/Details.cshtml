@@ -1,55 +1,39 @@
 ﻿@model Mvc_ESM.Models.monhoc
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Môn học";
 }
 
-<h2>Details</h2>
+<h2>Chi tiết @ViewBag.Title</h2>
 
 <fieldset>
-    <legend>monhoc</legend>
+    <legend>@ViewBag.Title</legend>
 
-    <div class="display-label">MaMonHoc</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.MaMonHoc)
-    </div>
+    <div class="display-label">@Html.LabelFor(model => model.MaMonHoc)</div>
+    <div class="display-field">@Html.DisplayFor(model => model.MaMonHoc)</div>
 
-    <div class="display-label">TenMonHoc</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TenMonHoc)
-    </div>
+    <div class="display-label">@Html.LabelFor(model => model.TenMonHoc)</div>
+    <div class="display-field">@Html.DisplayFor(model => model.TenMonHoc)</div>
 
-    <div class="display-label">TCLyThuyet</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TCLyThuyet)
-    </div>
+    <div class="display-label">@Html.LabelFor(model => model.TCLyThuyet)</div>
+    <div class="display-field">@Html.DisplayFor(model => model.TCLyThuyet)</div>
 
-    <div class="display-label">TCThucHanh</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TCThucHanh)
-    </div>
+    <div class="display-label">@Html.LabelFor(model => model.TCThucHanh)</div>
+    <div class="display-field">@Html.DisplayFor(model => model.TCThucHanh)</div>
 
-    <div class="display-label">MonThiNghiem</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.MonThiNghiem)
-    </div>
+    <div class="display-label">@Html.LabelFor(model => model.MonThiNghiem)</div>
+    <div class="display-field">@Html.DisplayFor(model => model.MonThiNghiem)</div>
 
-    <div class="display-label">khoa</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.khoa.TenKhoa)
-    </div>
+    <div class="display-label">@Html.LabelFor(model => model.KhoaXepLich)</div>
+    <div class="display-field">@Html.DisplayFor(model => model.khoa.TenKhoa)</div>
 
-    <div class="display-label">bomon</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.bomon.TenBoMon)
-    </div>
+    <div class="display-label">@Html.LabelFor(model => model.BoMonQL)</div>
+    <div class="display-field">@Html.DisplayFor(model => model.bomon.TenBoMon)</div>
 
-    <div class="display-label">GhiChu</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.GhiChu)
-    </div>
+    <div class="display-label">@Html.LabelFor(model => model.GhiChu)</div>
+    <div class="display-field">@Html.DisplayFor(model => model.GhiChu)</div>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new {  id=Model.MaMonHoc  }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Sửa", "Edit", new {  id = Model.MaMonHoc  }) |
+    @Html.ActionLink("Quay về danh sách", "Index")
 </p>
