@@ -98,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MonHocController.cs" />
     <Compile Include="Global.asax.cs">
@@ -146,6 +147,7 @@
     <Compile Include="Models\monhoc.cs">
       <DependentUpon>DKMHModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MyEventsDataModel.cs" />
     <Compile Include="Models\nhom.cs">
       <DependentUpon>DKMHModel.tt</DependentUpon>
     </Compile>
@@ -239,19 +241,9 @@
     <Content Include="Views\MonHoc\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\SinhVien\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\SinhVien\Details.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\SinhVien\Create.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\SinhVien\Edit.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\SinhVien\Delete.cshtml" />
+    <Content Include="Views\Calendar\Data.cshtml" />
+    <Content Include="Views\Calendar\Index.cshtml" />
+    <Content Include="Views\Calendar\Save.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

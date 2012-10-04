@@ -48,7 +48,7 @@ namespace Mvc_ESM.Controllers
                           orderby d.TenKhoa
                           select new { MaKhoa = d.MaKhoa, TenKhoa = d.TenKhoa };
             KhoaLst.AddRange(KhoaQry.ToArray());
-            ViewBag.Khoa = new SelectList(KhoaLst,"MaKhoa","TenKhoa");
+            ViewBag.Khoa = new SelectList(KhoaLst, "MaKhoa", "TenKhoa");
             ViewBag.SearchString = "";
         }
 
