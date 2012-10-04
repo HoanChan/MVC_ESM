@@ -5,19 +5,44 @@
 }
 
 <h2>Danh sách @ViewBag.Title</h2>
-
 <p>
     @Html.ActionLink("Tạo mới", "Create")
 </p>
 @using (Html.BeginForm("Index","MonHoc",FormMethod.Post, new {@id="FilterForm"})){
 <p>
        
-         <p>Khoa: @Html.DropDownList("Khoa", "Tất cả")  
-           Tên: @Html.TextBox("SearchString", Mvc_ESM.Static_Helper.MonHocHelper.SearchString)  
-         <input type="submit" value="Thực hiện" /></p>
-        
+         <p>
+            Khoa: @Html.DropDownList("Khoa", ViewBag.Khoa as SelectList, new {id = "KhoaList"})  
+            Bộ môn: @Html.DropDownList("BoMon", ViewBag.BoMon as SelectList, "Tất cả", new {id = "BoMonList" })
+            Tên: @Html.TextBox("SearchString", Mvc_ESM.Static_Helper.MonHocHelper.SearchString, new { id = "SearchString" })  
+            <input type="submit" value="Thực hiện" />
+         </p>
 </p>
 }
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#KhoaList").change(function () {
+            var id= $(this).val();
+            $.getJSON("/MonHoc/LoadBoMonsByKhoa", { KhoaID: id },
+            function (Data) {
+                var select = $("#BoMonList");
+                select.empty();
+                select.append($('<option/>', {
+                    value: "",
+                    text: "Tất cả"
+                }));
+                $.each(Data, function (index, itemData) {
+                    select.append($('<option/>', {
+                        value: itemData.Value,
+                        text: itemData.Text
+                    }));
+                });
+                $("#SearchString").empty();
+            });
+        });
+    });
+
+</script>
 <table id = "table">
     <thead>
 		<tr>
@@ -87,13 +112,14 @@
 }
         </tbody>
 </table>
-<link href="@Url.Content("~/Content/TableThemes/table_jui.css")" rel="stylesheet" type="text/css" />
-<link href="@Url.Content("~/Content/TableThemes/smoothness/jquery-ui-1.8.4.custom.css")" rel="stylesheet" type="text/css" />
+@*<link href="@Url.Content("~/Content/TableThemes/table_jui.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/TableThemes/smoothness/jquery-ui-1.8.4.custom.css")" rel="stylesheet" type="text/css" />*@
+<link href="@Url.Content("~/Content/table.css")" rel="stylesheet" type="text/css" />
 <script src="@Url.Content("~/Scripts/jquery.dataTables.js")" type="text/javascript" lang="javascript" ></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 	    $('#table').dataTable({
-	        "bJQueryUI": true,
+	        //"bJQueryUI": true,
 		    "sPaginationType": "full_numbers",
             "oLanguage": {
 		        "sLengthMenu": "Hiển thị _MENU_ kết quả mỗi trang",

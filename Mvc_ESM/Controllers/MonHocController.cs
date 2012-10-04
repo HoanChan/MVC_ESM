@@ -14,44 +14,57 @@ namespace Mvc_ESM.Controllers
     {
         private DKMHEntities db = new DKMHEntities();
 
+        [HttpGet]
+        public JsonResult LoadBoMonsByKhoa(string KhoaID)
+        {
+            var Data =  from b in db.bomons where b.khoa.MaKhoa == KhoaID select new SelectListItem()
+            {
+                Text = b.TenBoMon,
+                Value = b.MaBoMon,
+            };
+
+            return Json(Data, JsonRequestBehavior.AllowGet);
+        } 
+
         //
         // GET: /MonHoc/
         [HttpGet]
         public ViewResult Index()
         {
             var monhocs = (from m in db.monhocs
-                           where (m.bomon.KhoaQL.Equals(Static_Helper.MonHocHelper.Khoa) || Static_Helper.MonHocHelper.Khoa == "") && m.TenMonHoc.Contains(Static_Helper.MonHocHelper.SearchString)
+                           where ((Static_Helper.MonHocHelper.BoMon == "" && m.bomon.KhoaQL.Equals(Static_Helper.MonHocHelper.Khoa)) || (Static_Helper.MonHocHelper.BoMon != "" && m.bomon.MaBoMon.Equals(Static_Helper.MonHocHelper.BoMon))) && (m.TenMonHoc.Contains(Static_Helper.MonHocHelper.SearchString) || Static_Helper.MonHocHelper.SearchString == "")
                            select m
                            ).Include(m => m.bomon).Include(m => m.khoa);
-            InitViewBag();
+            InitViewBag(false);
             return View(monhocs.ToList());
         }
 
         [HttpPost]
-        public ViewResult Index(String Khoa, String SearchString)
+        public ViewResult Index(String Khoa, String BoMon, String SearchString)
         {
             Static_Helper.MonHocHelper.Khoa = Khoa;
             Static_Helper.MonHocHelper.SearchString = SearchString;
+            Static_Helper.MonHocHelper.BoMon = BoMon;
             var monhocs = (from m in db.monhocs 
-                           where (m.bomon.KhoaQL.Equals(Khoa) || Khoa == "") && m.TenMonHoc.Contains(SearchString)
+                           where ((BoMon == "" && m.bomon.KhoaQL.Equals(Khoa)) || (BoMon != "" && m.bomon.MaBoMon.Equals(BoMon))) && (m.TenMonHoc.Contains(SearchString) || SearchString == "")
                            select m
                            ).Include(m => m.bomon).Include(m => m.khoa);
-                //db.monhocs.Where(m => m.bomon.KhoaQL.Equals(Khoa) && m.TenMonHoc.Contains(SearchString)).Include(m => m.bomon).Include(m => m.khoa);
-            InitViewBag();
+            InitViewBag(true);
             return View(monhocs.ToList());
         }
 
-        private void InitViewBag()
+        private void InitViewBag(Boolean IsPost)
         {
-            var KhoaLst = new ArrayList();
             var KhoaQry = from d in db.khoas
                           orderby d.TenKhoa
                           select new { MaKhoa = d.MaKhoa, TenKhoa = d.TenKhoa };
-            KhoaLst.AddRange(KhoaQry.ToArray());
-            ViewBag.Khoa = new SelectList(KhoaLst, "MaKhoa", "TenKhoa");
+            ViewBag.Khoa = new SelectList(KhoaQry.ToArray(), "MaKhoa", "TenKhoa");
+            var BoMonQry = from b in db.bomons
+                            where b.khoa.MaKhoa == (IsPost ? Static_Helper.MonHocHelper.Khoa : KhoaQry.FirstOrDefault().MaKhoa)
+                            select new { MaBoMon = b.MaBoMon, TenBoMon = b.TenBoMon };
+            ViewBag.BoMon = new SelectList(BoMonQry.ToArray(), "MaBoMon", "TenBoMon");
             ViewBag.SearchString = "";
         }
-
 
         //
         // GET: /MonHoc/Details/5

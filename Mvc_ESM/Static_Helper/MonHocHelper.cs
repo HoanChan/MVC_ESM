@@ -9,5 +9,6 @@ namespace Mvc_ESM.Static_Helper
     {
         public static String Khoa = "";
         public static String SearchString = "Linux";
+        public static String BoMon = "";
     }
 }
