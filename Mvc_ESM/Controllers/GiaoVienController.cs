@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mvc_ESM.Models;
+using System.Collections;
 
 namespace Mvc_ESM.Controllers
 { 
@@ -15,11 +16,39 @@ namespace Mvc_ESM.Controllers
 
         //
         // GET: /GiaoVien/
-
+        [HttpGet]
         public ViewResult Index()
         {
-            var giaoviens = db.giaoviens.Include(g => g.bomon);
+            var giaoviens = (from m in db.giaoviens
+                             where (m.bomon.KhoaQL.Equals(Static_Helper.GiaoVienHelper.Khoa) || Static_Helper.GiaoVienHelper.Khoa == "") && (m.HoLot + " " + m.TenGiaoVien).Contains(Static_Helper.GiaoVienHelper.SearchString)
+                             select m
+                           ).Include(m => m.bomon);
+            InitViewBag();
             return View(giaoviens.ToList());
+        }
+        [HttpPost]
+        public ViewResult Index(String Khoa, String SearchString)
+        {
+            Static_Helper.GiaoVienHelper.Khoa = Khoa;
+            Static_Helper.GiaoVienHelper.SearchString = SearchString;
+            var giaoviens = (from m in db.giaoviens
+                           where (m.bomon.KhoaQL.Equals(Khoa) || Khoa == "") && (m.HoLot + " " + m.TenGiaoVien).Contains(Static_Helper.GiaoVienHelper.SearchString)
+                           select m
+                           ).Include(m => m.bomon);
+            InitViewBag();
+            return View(giaoviens.ToList());
+        }
+
+
+        private void InitViewBag()
+        {
+            var KhoaLst = new ArrayList();
+            var KhoaQry = from d in db.khoas
+                          orderby d.TenKhoa
+                          select new { MaKhoa = d.MaKhoa, TenKhoa = d.TenKhoa };
+            KhoaLst.AddRange(KhoaQry.ToArray());
+            ViewBag.Khoa = new SelectList(KhoaLst, "MaKhoa", "TenKhoa");
+            ViewBag.SearchString = "";
         }
 
         //
