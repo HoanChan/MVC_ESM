@@ -12,7 +12,7 @@
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend>giaovien</legend>
+        <legend>@ViewBag.Title</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.MaGiaoVien)
@@ -31,7 +31,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.BoMonQL, "bomon")
+            @Html.LabelFor(model => model.BoMonQL, "Bộ môn")
         </div>
         <div class="editor-field">
             @Html.DropDownList("BoMonQL", String.Empty)
@@ -63,11 +63,11 @@
         </div>
 
         <p>
-            <input type="submit" value="Save" />
+            <input type="submit" value="Lưu" />
         </p>
     </fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Quay lại danh sách", "Index")
 </div>
