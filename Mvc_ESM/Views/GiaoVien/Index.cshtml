@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Mvc_ESM.Models.giaovien>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            MaGiaoVien
+        </th>
+        <th>
+            TenGiaoVien
+        </th>
+        <th>
+            bomon
+        </th>
+        <th>
+            HoLot
+        </th>
+        <th>
+            HocHam
+        </th>
+        <th>
+            HocVi
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaGiaoVien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenGiaoVien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bomon.TenBoMon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoLot)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HocHam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HocVi)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

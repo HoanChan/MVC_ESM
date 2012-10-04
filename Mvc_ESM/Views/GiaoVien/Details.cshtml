@@ -1,0 +1,45 @@
+﻿@model Mvc_ESM.Models.giaovien
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>giaovien</legend>
+
+    <div class="display-label">MaGiaoVien</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MaGiaoVien)
+    </div>
+
+    <div class="display-label">TenGiaoVien</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TenGiaoVien)
+    </div>
+
+    <div class="display-label">bomon</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.bomon.TenBoMon)
+    </div>
+
+    <div class="display-label">HoLot</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HoLot)
+    </div>
+
+    <div class="display-label">HocHam</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HocHam)
+    </div>
+
+    <div class="display-label">HocVi</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HocVi)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
