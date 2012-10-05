@@ -5,10 +5,10 @@ using System.Web;
 
 namespace Mvc_ESM.Static_Helper
 {
-    public class MonHocHelper
+    public class SubjectHelper
     {
         public static String Khoa = "";
-        public static String SearchString = "Linux";
+        public static String SearchString = "";
         public static String BoMon = "";
     }
 }

@@ -8,13 +8,13 @@
 <p>
     @Html.ActionLink("Tạo mới", "Create")
 </p>
-@using (Html.BeginForm("Index","MonHoc",FormMethod.Post, new {@id="FilterForm"})){
+@using (Html.BeginForm("Index","Subject",FormMethod.Post, new {@id="FilterForm"})){
 <p>
        
          <p>
             Khoa: @Html.DropDownList("Khoa", ViewBag.Khoa as SelectList, new {id = "KhoaList"})  
             Bộ môn: @Html.DropDownList("BoMon", ViewBag.BoMon as SelectList, "Tất cả", new {id = "BoMonList" })
-            Tên: @Html.TextBox("SearchString", Mvc_ESM.Static_Helper.MonHocHelper.SearchString, new { id = "SearchString" })  
+            Tên: @Html.TextBox("SearchString", Mvc_ESM.Static_Helper.SubjectHelper.SearchString, new { id = "SearchString" })  
             <input type="submit" value="Thực hiện" />
          </p>
 </p>
@@ -23,7 +23,7 @@
     $(document).ready(function () {
         $("#KhoaList").change(function () {
             var id= $(this).val();
-            $.getJSON("/MonHoc/LoadBoMonsByKhoa", { KhoaID: id },
+            $.getJSON("/Subject/LoadSubjectsByFacultyID", { FacultyID: id },
             function (Data) {
                 var select = $("#BoMonList");
                 select.empty();
@@ -120,6 +120,8 @@
 	$(document).ready(function() {
 	    $('#table').dataTable({
 	        //"bJQueryUI": true,
+	        //"bAutoWidth": true,
+	        "bStateSave": true,
 		    "sPaginationType": "full_numbers",
             "oLanguage": {
 		        "sLengthMenu": "Hiển thị _MENU_ kết quả mỗi trang",

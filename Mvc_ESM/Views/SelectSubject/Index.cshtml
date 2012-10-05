@@ -1,0 +1,197 @@
+﻿@model IEnumerable<Mvc_ESM.Models.monhoc>
+
+@{
+    ViewBag.Title = "Chọn Môn Học sẽ thi";
+}
+
+<h2>@ViewBag.Title</h2>
+<form>
+<table id="table">
+    <thead>
+        <tr>
+            <th>
+                Sẽ tổ chức thi
+            </th>
+            <th>
+                Mã môn học
+            </th>
+            <th>
+                Tên môn học
+            </th>
+            <th>
+                Bộ môn
+            </th>
+            <th>
+                Khoa
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <input type="checkbox" checked="checked" name="SubjectID" value="@item.MaMonHoc">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaMonHoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenMonHoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bomon.TenBoMon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bomon.khoa.TenKhoa)
+            </td>
+        </tr>
+    }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </tfoot>
+</table>
+    <p></p>
+    <br />
+    <button id="SummitButton" type="button">Lưu</button>
+</form>
+<link href="@Url.Content("~/Content/table.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/jquery.dataTables.js")" type="text/javascript" lang="javascript" ></script>
+<script type="text/javascript" charset="utf-8">
+    (function ($) {
+        /*
+         * Function: fnGetColumnData
+         * Purpose:  Return an array of table values from a particular column.
+         * Returns:  array string: 1d data array
+         * Inputs:   object:oSettings - dataTable settings object. This is always the last argument past to the function
+         *           int:iColumn - the id of the column to extract the data from
+         *           bool:bUnique - optional - if set to false duplicated values are not filtered out
+         *           bool:bFiltered - optional - if set to false all the table data is used (not only the filtered)
+         *           bool:bIgnoreEmpty - optional - if set to false empty values are not filtered from the result array
+         * Author:   Benedikt Forchhammer <b.forchhammer /AT\ mind2.de>
+         */
+        $.fn.dataTableExt.oApi.fnGetColumnData = function (oSettings, iColumn, bUnique, bFiltered, bIgnoreEmpty) {
+            // check that we have a column id
+            if (typeof iColumn == "undefined") return new Array();
+
+            // by default we only want unique data
+            if (typeof bUnique == "undefined") bUnique = true;
+
+            // by default we do want to only look at filtered data
+            if (typeof bFiltered == "undefined") bFiltered = true;
+
+            // by default we do not want to include empty values
+            if (typeof bIgnoreEmpty == "undefined") bIgnoreEmpty = true;
+
+            // list of rows which we're going to loop through
+            var aiRows;
+
+            // use only filtered rows
+            if (bFiltered == true) aiRows = oSettings.aiDisplay;
+                // use all rows
+            else aiRows = oSettings.aiDisplayMaster; // all row numbers
+
+            // set up data array   
+            var asResultData = new Array();
+
+            for (var i = 0, c = aiRows.length; i < c; i++) {
+                iRow = aiRows[i];
+                var aData = this.fnGetData(iRow);
+                var sValue = aData[iColumn];
+
+                // ignore empty values?
+                if (bIgnoreEmpty == true && sValue.length == 0) continue;
+
+                    // ignore unique values?
+                else if (bUnique == true && jQuery.inArray(sValue, asResultData) > -1) continue;
+
+                    // else push the value onto the result data array
+                else asResultData.push(sValue);
+            }
+
+            return asResultData;
+        }
+    }(jQuery));
+
+    function fnCreateSelect(aData, index) {
+        var r = '<select id="tb_r_' + index + '"><option value="">Tất cả</option>', i, iLen = aData.length;
+        for (i = 0 ; i < iLen ; i++) {
+            r += '<option value="' + aData[i] + '">' + aData[i] + '</option>';
+        }
+        return r + '</select>';
+    }
+    var oTable
+	$(document).ready(function() {
+	    oTable = $('#table').dataTable({
+	        //"bJQueryUI": true,
+		    "sPaginationType": "full_numbers",
+            "oLanguage": {
+		        "sLengthMenu": "Hiển thị _MENU_ kết quả mỗi trang",
+                "sZeroRecords": "Không tìm thấy dữ liệu",
+                "sInfo": "Đang hiển thị kết quả thứ _START_ đến _END_ của _TOTAL_ kết quả",
+                "sInfoEmpty": "Đang hiển thị kết quả thứ 0 đến 0 của 0 kết quả",
+                "sInfoFiltered": "(Lọc từ _MAX_ kết quả)",
+                "sSearch": "Tìm:",
+                "oPaginate": {
+                    "sFirst": "<<Đầu tiên",
+                    "sLast": "Cuối cùng>>",
+                    "sPrevious": "&lt;Trước",
+                    "sNext": "Sau>",
+                }
+		    }
+	    });
+
+	    /* Add a select menu for each TH element in the table footer */
+	    $("tfoot th").each(function (i) {
+	        if (i == 3 || i == 4) {
+	            this.innerHTML = fnCreateSelect(oTable.fnGetColumnData(i),i);
+	            $('select', this).change(function () {
+	                var Name = $(this).val();
+	                if (i == 4) {
+	                    $.getJSON("/Subject/LoadSubjectsByFacultyName", { FacultyName: Name },
+                        function (Data) {
+                            var select = $("#tb_r_3"); // cột thứ 3
+                            select.empty();
+                            select.append($('<option/>', {
+                                value: "",
+                                text: "Tất cả"
+                            }));
+                            $.each(Data, function (index, itemData) {
+                                select.append($('<option/>', {
+                                    value: itemData.Text,
+                                    text: itemData.Text
+                                }));
+                            });
+                        });
+	                    oTable.fnFilter("", 3);
+	                }
+	                if ($(this).val() == "") {
+	                    oTable.fnFilter("", i);
+	                }
+	                else {
+	                    //fnFilter(Giá trị sẽ lọc, cột áp dụng, dùng regex, dùng smart)
+	                    //regex = biểu thức chính quy
+	                    //smart và so khớp không quan tâm vị trí
+	                    oTable.fnFilter("^" + Name + "$", i, true, false);
+	                }
+	            });
+	        }
+
+	    });
+
+	    $('#SummitButton').click(function () {
+	        var sData = oTable.$('input').serialize();
+	        alert("The following data would have been submitted to the server: \n\n" + sData);
+	        //http://api.jquery.com/jQuery.post/
+	        $.post("/SelectSubject/SelectSuccess", sData);
+	        return false; 
+	    });
+	} );
+</script>
