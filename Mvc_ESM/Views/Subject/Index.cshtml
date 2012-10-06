@@ -8,21 +8,34 @@
 <p>
     @Html.ActionLink("Tạo mới", "Create")
 </p>
-@using (Html.BeginForm("Index","Subject",FormMethod.Post, new {@id="FilterForm"})){
-<p>
-       
-         <p>
-            Khoa: @Html.DropDownList("Khoa", ViewBag.Khoa as SelectList, new {id = "KhoaList"})  
-            Bộ môn: @Html.DropDownList("BoMon", ViewBag.BoMon as SelectList, "Tất cả", new {id = "BoMonList" })
-            Tên: @Html.TextBox("SearchString", Mvc_ESM.Static_Helper.SubjectHelper.SearchString, new { id = "SearchString" })  
-            <input type="submit" value="Thực hiện" />
-         </p>
-</p>
-}
-<script type="text/javascript">
+<link href="@Url.Content("~/Content/TableThemes/table_jui.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/TableThemes/page.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/UI/jquery-ui.js")" type="text/javascript" lang="javascript" ></script>
+<link href="@Url.Content("~/Content/ui-lightness/jquery-ui.css")" rel="stylesheet" type="text/css" />
+@*<link href="@Url.Content("~/Content/table.css")" rel="stylesheet" type="text/css" />*@
+<script src="@Url.Content("~/Scripts/jquery.dataTables.min.js")" type="text/javascript" lang="javascript" ></script>
+<script type="text/javascript" charset="utf-8">
+    function fnFormatDetails(oTable, nTr) {
+        var aData = oTable.fnGetData(nTr);
+        var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="margin-left:25%; margin-right:auto">';
+        sOut += '<tr><td>Mã môn học:            </td><td>' + aData[1] + '</td></tr>';
+        sOut += '<tr><td>Tên môn học:           </td><td>' + aData[2] + '</td></tr>';
+        sOut += '<tr><td>Số tín chỉ lý thuyết:  </td><td>' + aData[3] + '</td></tr>';
+        sOut += '<tr><td>Số tín chỉ thực hành:  </td><td>' + aData[4] + '</td></tr>';
+        sOut += '<tr><td>Là môn thí nghiệm:     </td><td>' + aData[5] + '</td></tr>';
+        sOut += '<tr><td>Khoa quản lý:          </td><td>' + aData[6] + '</td></tr>';
+        sOut += '<tr><td>Thuộc bộ môn:          </td><td>' + aData[7] + '</td></tr>';
+        sOut += '<tr><td>Ghi chú:               </td><td>' + aData[8] + '</td></tr>';
+        sOut += '</table>';
+
+        return sOut;
+    }
+
     $(document).ready(function () {
+
+        //Reload lại danh sách bộ môn khi khoa được chọn
         $("#KhoaList").change(function () {
-            var id= $(this).val();
+            var id = $(this).val();
             $.getJSON("/Subject/LoadSubjectsByFacultyID", { FacultyID: id },
             function (Data) {
                 var select = $("#BoMonList");
@@ -40,9 +53,121 @@
                 $("#SearchString").empty();
             });
         });
-    });
 
+        // Cài đặt và bẫy sự kiện click của button delete
+        $('#table tbody td button#Deletebtn').button({
+            icons: {
+                primary: "ui-icon-trash" // hình cái thùng rác
+            }
+        }).live('click', function () {
+            var id = $(this).attr("value");
+            //delete dialog
+            var aDialog = $("#dialog-confirm");
+            aDialog.removeAttr("style"); // bỏ thuộc tính ẩn của div
+            aDialog.dialog({
+                resizable: false,
+                modal: true,
+                buttons: {
+                    "Xoá": function () {
+                        $.post("/Subject/Delete", "id=" + id, function (data) {
+                            alert(data);
+                            if (data == "Xoá thành công!")
+                                window.location = "@Url.Action("Index", "Subject")";
+                        });
+                        $(this).dialog("close");
+                    },
+                    "Không": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        });
+
+        $('#table tbody td button#Modifybtn').button({
+            icons: {
+                primary: "ui-icon-pencil" // hình cái thùng rác
+            }
+        }).live('click', function () {
+            var id = $(this).attr("value");
+            window.location = '@Url.Action("Edit", "Subject")' + "/" + id;
+        });
+
+        //thêm nút detail ở cột đầu tiên
+        var nCloneTh = document.createElement('th');
+        var nCloneTd = document.createElement('td');
+        nCloneTd.innerHTML = '<img id="details" src="@Url.Content("~/Content/TableThemes/details_open.png")">';
+        nCloneTd.setAttribute("style", "text-align:center;");
+        $('#table thead tr').each(function () {
+            this.insertBefore(nCloneTh, this.childNodes[0]);
+        });
+
+        $('#table tbody tr').each(function () {
+            this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
+        });
+        // cài đặt sự kiện nút detail được click
+        $('#table tbody td img#details').live('click', function () {
+            var nTr = $(this).parents('tr')[0];
+            if (oTable.fnIsOpen(nTr)) {
+                this.src = "@Url.Content("~/Content/TableThemes/details_open.png")";
+                oTable.fnClose(nTr);
+            }
+            else {
+                this.src = "@Url.Content("~/Content/TableThemes/details_close.png")";
+                oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr), 'details');
+            }
+        });
+        //cài đặt bảng
+        var oTable = $('#table').dataTable({
+            "aoColumnDefs": [
+                { "bSortable": false, "aTargets": [0] },
+                { "bSortable": false, "aTargets": [1] },
+                { "bSortable": false, "aTargets": [3] },
+                { "bSortable": false, "aTargets": [4] },
+                { "bSortable": false, "aTargets": [5] },
+                { "bSortable": false, "aTargets": [6] },
+                { "bSortable": false, "aTargets": [8] },
+                { "bSortable": false, "aTargets": [9] }
+            ], // không hiện nút sắp xếp!
+            "aaSorting": [[2, 'asc']], //Xếp cột thứ 3
+            "bStateSave": true,
+            "bJQueryUI": true,
+		    "sPaginationType": "full_numbers",
+            "oLanguage": {
+		        "sLengthMenu": "Hiển thị _MENU_ kết quả mỗi trang",
+                "sZeroRecords": "Không tìm thấy dữ liệu",
+                "sInfo": "Đang hiển thị kết quả thứ _START_ đến _END_ của _TOTAL_ kết quả",
+                "sInfoEmpty": "Đang hiển thị kết quả thứ 0 đến 0 của 0 kết quả",
+                "sInfoFiltered": "(Lọc từ _MAX_ kết quả)",
+                "sSearch": "Tìm:",
+                "oPaginate": {
+                    "sFirst": "Đầu",
+                    "sLast": "Cuối",
+                    "sPrevious": "Trước",
+                    "sNext": "Sau",
+                }
+            }
+        });
+        // Ẩn cột
+        oTable.fnSetColumnVis(3, false);
+        oTable.fnSetColumnVis(4, false);
+        oTable.fnSetColumnVis(5, false);
+        oTable.fnSetColumnVis(6, false);
+        oTable.fnSetColumnVis(8, false);
+
+	} );
 </script>
+
+@using (Html.BeginForm("Index","Subject",FormMethod.Post, new {@id="FilterForm"})){
+<p>
+       
+         <p>
+            Khoa: @Html.DropDownList("Khoa", ViewBag.Khoa as SelectList, new {id = "KhoaList"})  
+            Bộ môn: @Html.DropDownList("BoMon", ViewBag.BoMon as SelectList, "Tất cả", new {id = "BoMonList" })
+            Tên: @Html.TextBox("SearchString", Mvc_ESM.Static_Helper.SubjectHelper.SearchString, new { id = "SearchString" })  
+            <input type="submit" value="Thực hiện" />
+         </p>
+</p>
+}
 <table id = "table">
     <thead>
 		<tr>
@@ -102,41 +227,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.GhiChu)
             </td>
-            <td>
-                @Html.ActionLink("Sửa", "Edit", new { id = item.MaMonHoc }) |
-                @Html.ActionLink("Xem", "Details", new { id = item.MaMonHoc }) |
-                @Html.ActionLink("Xoá", "Delete", new { id = item.MaMonHoc })
+            <td style ="text-align:center;">
+                <button id ="Modifybtn" value="@item.MaMonHoc">Sửa</button>
+                @*@Html.ActionLink("Sửa", "Edit", new { id = item.MaMonHoc })*@ |
+                <button id ="Deletebtn" value="@item.MaMonHoc">Xoá</button>
             </td>
         </tr>
     }
 }
         </tbody>
 </table>
-@*<link href="@Url.Content("~/Content/TableThemes/table_jui.css")" rel="stylesheet" type="text/css" />
-<link href="@Url.Content("~/Content/TableThemes/smoothness/jquery-ui-1.8.4.custom.css")" rel="stylesheet" type="text/css" />*@
-<link href="@Url.Content("~/Content/table.css")" rel="stylesheet" type="text/css" />
-<script src="@Url.Content("~/Scripts/jquery.dataTables.js")" type="text/javascript" lang="javascript" ></script>
-<script type="text/javascript" charset="utf-8">
-	$(document).ready(function() {
-	    $('#table').dataTable({
-	        //"bJQueryUI": true,
-	        //"bAutoWidth": true,
-	        "bStateSave": true,
-		    "sPaginationType": "full_numbers",
-            "oLanguage": {
-		        "sLengthMenu": "Hiển thị _MENU_ kết quả mỗi trang",
-                "sZeroRecords": "Không tìm thấy dữ liệu",
-                "sInfo": "Đang hiển thị kết quả thứ _START_ đến _END_ của _TOTAL_ kết quả",
-                "sInfoEmpty": "Đang hiển thị kết quả thứ 0 đến 0 của 0 kết quả",
-                "sInfoFiltered": "(Lọc từ _MAX_ kết quả)",
-                "sSearch": "Tìm:",
-                "oPaginate": {
-                    "sFirst": "<<Đầu tiên",
-                    "sLast": "Cuối cùng>>",
-                    "sPrevious": "&lt;Trước",
-                    "sNext": "Sau>",
-                }
-		    }
-		} );
-	} );
-</script>
+<div id="dialog-confirm" title="Xoá dữ liệu?" style="visibility: hidden">
+	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Bạn có muốn xoá dữ liệu này không?</p>
+</div>

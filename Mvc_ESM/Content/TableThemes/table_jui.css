@@ -50,7 +50,7 @@
 }
 
 .paging_full_numbers {
-	width: 450px !important;
+	width: auto !important;
 }
 
 .dataTables_wrapper .ui-toolbar {
@@ -151,6 +151,13 @@ table.display thead th div.DataTables_sort_wrapper span {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * DataTables display
  */
+
+table.dataTable {
+	margin: 0 auto;
+	clear: both;
+	width: 100%;
+}
+
 table.display {
 	margin: 0 auto;
 	width: 100%;

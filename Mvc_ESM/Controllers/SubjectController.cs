@@ -47,16 +47,24 @@ namespace Mvc_ESM.Controllers
         [HttpGet]
         public ViewResult Index()
         {
-            Static_Helper.SubjectHelper.Khoa = (from d in db.khoas
-                                                orderby d.TenKhoa
-                                                select d).FirstOrDefault().MaKhoa;
-            Static_Helper.SubjectHelper.SearchString = "";
-            Static_Helper.SubjectHelper.BoMon = "";
+            if (Static_Helper.SubjectHelper.Khoa == null || Static_Helper.SubjectHelper.Khoa == "")
+            {
+                Static_Helper.SubjectHelper.Khoa = (from d in db.khoas
+                                                    orderby d.TenKhoa
+                                                    select d).FirstOrDefault().MaKhoa;
+                Static_Helper.SubjectHelper.SearchString = "";
+                Static_Helper.SubjectHelper.BoMon = "";
+                InitViewBag(false);
+            }
+            else
+            {
+                InitViewBag(true);
+            }
             var monhocs = (from m in db.monhocs
                            where m.bomon.KhoaQL.Equals(Static_Helper.SubjectHelper.Khoa)
                            select m
                            ).Include(m => m.bomon).Include(m => m.khoa);
-            InitViewBag(false);
+            
             return View(monhocs.ToList());
         }
 
@@ -86,15 +94,6 @@ namespace Mvc_ESM.Controllers
                             select new { MaBoMon = b.MaBoMon, TenBoMon = b.TenBoMon };
             ViewBag.BoMon = new SelectList(BoMonQry.ToArray(), "MaBoMon", "TenBoMon");
             ViewBag.SearchString = "";
-        }
-
-        //
-        // GET: /MonHoc/Details/5
-
-        public ViewResult Details(string id)
-        {
-            monhoc monhoc = db.monhocs.Find(id);
-            return View(monhoc);
         }
 
         //
@@ -154,24 +153,23 @@ namespace Mvc_ESM.Controllers
         }
 
         //
-        // GET: /MonHoc/Delete/5
- 
-        public ActionResult Delete(string id)
-        {
-            monhoc monhoc = db.monhocs.Find(id);
-            return View(monhoc);
-        }
-
-        //
         // POST: /MonHoc/Delete/5
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(string id)
-        {            
-            monhoc monhoc = db.monhocs.Find(id);
-            db.monhocs.Remove(monhoc);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+        public String DeleteConfirmed(string id)
+        {
+            try
+            {
+                monhoc monhoc = db.monhocs.Find(id);
+                db.monhocs.Remove(monhoc);
+                db.SaveChanges();
+                return "Xoá thành công!";
+            }
+            catch (Exception e)
+            {
+                return "Xoá không được [" + e.Message + "]";
+            }
+            
         }
 
         protected override void Dispose(bool disposing)
