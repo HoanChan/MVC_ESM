@@ -1,0 +1,39 @@
+﻿@model Mvc_ESM.Models.monhoc
+
+@{
+    ViewBag.Title = "Môn học";
+}
+
+<h2>Chi tiết @ViewBag.Title</h2>
+
+<fieldset>
+    <legend>@ViewBag.Title</legend>
+
+    <div class="display-label">@Html.LabelFor(model => model.MaMonHoc)</div>
+    <div class="display-field">@Html.DisplayFor(model => model.MaMonHoc)</div>
+
+    <div class="display-label">@Html.LabelFor(model => model.TenMonHoc)</div>
+    <div class="display-field">@Html.DisplayFor(model => model.TenMonHoc)</div>
+
+    <div class="display-label">@Html.LabelFor(model => model.TCLyThuyet)</div>
+    <div class="display-field">@Html.DisplayFor(model => model.TCLyThuyet)</div>
+
+    <div class="display-label">@Html.LabelFor(model => model.TCThucHanh)</div>
+    <div class="display-field">@Html.DisplayFor(model => model.TCThucHanh)</div>
+
+    <div class="display-label">@Html.LabelFor(model => model.MonThiNghiem)</div>
+    <div class="display-field">@Html.DisplayFor(model => model.MonThiNghiem)</div>
+
+    <div class="display-label">@Html.LabelFor(model => model.KhoaXepLich)</div>
+    <div class="display-field">@Html.DisplayFor(model => model.khoa.TenKhoa)</div>
+
+    <div class="display-label">@Html.LabelFor(model => model.BoMonQL)</div>
+    <div class="display-field">@Html.DisplayFor(model => model.bomon.TenBoMon)</div>
+
+    <div class="display-label">@Html.LabelFor(model => model.GhiChu)</div>
+    <div class="display-field">@Html.DisplayFor(model => model.GhiChu)</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new {  id = Model.MaMonHoc  }) |
+    @Html.ActionLink("Quay về danh sách", "Index")
+</p>
