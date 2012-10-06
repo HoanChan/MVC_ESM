@@ -1,0 +1,48 @@
+﻿@model Mvc_ESM.Models.giaovien
+
+@{
+    ViewBag.Title = "Giáo viên";
+}
+
+<h2>Xóa @ViewBag.Title</h2>
+
+<h3>Bạn có chắc muốn xóa không?</h3>
+<fieldset>
+    <legend>@ViewBag.Title</legend>
+
+    <div class="display-label">Mã giáo</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MaGiaoVien)
+    </div>
+
+    <div class="display-label">Họ lót</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HoLot)
+    </div>
+
+    <div class="display-label">Tên giáo viên</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TenGiaoVien)
+    </div>
+
+    <div class="display-label">Bộ môn</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.bomon.TenBoMon)
+    </div>
+
+    <div class="display-label">Học hàm</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HocHam)
+    </div>
+
+    <div class="display-label">Học vị</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HocVi)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Xóa" /> |
+        @Html.ActionLink("Quay lại danh sách", "Index")
+    </p>
+}
