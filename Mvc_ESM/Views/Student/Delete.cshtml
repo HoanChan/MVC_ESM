@@ -1,0 +1,60 @@
+﻿@model Mvc_ESM.Models.sinhvien
+
+@{
+    ViewBag.Title = "Sinh viên";
+}
+
+<h2>Xóa @ViewBag.Title</h2>
+
+<h3>Bạn có thật sự muốn xóa không?</h3>
+<fieldset>
+    <legend>@ViewBag.Title</legend>
+
+    <div class="display-label">Mã sinh viên</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MaSinhVien)
+    </div>
+
+    <div class="display-label">Họ</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Ho)
+    </div>
+
+    <div class="display-label">Tên</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Ten)
+    </div>
+
+    <div class="display-label">Phái</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Phai)
+    </div>
+
+    <div class="display-label">Ngày sinh</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NgaySinh)
+    </div>
+
+    <div class="display-label">Nơi sinh</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NoiSinh)
+    </div>
+
+    <div class="display-label">Chuyên ngành</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.chuyennganh1.TenChuyenNganh)
+    </div>
+
+    <div class="display-label">Lớp</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.lop1.CVHT)
+    </div>
+
+    
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Xóa" /> |
+        @Html.ActionLink("Quay lại danh sách", "Index")
+    </p>
+}

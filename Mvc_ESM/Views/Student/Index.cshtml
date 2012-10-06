@@ -1,0 +1,125 @@
+﻿@model IEnumerable<Mvc_ESM.Models.sinhvien>
+@{
+    ViewBag.Title = "Sinh Viên";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Tạo mới", "Create")
+</p>
+
+@using (Html.BeginForm("Index", "Student", FormMethod.Post, new { @id = "FilterForm" }))
+{
+    <p>
+
+        <p>
+            Khoa: @Html.DropDownList("Khoa", ViewBag.Khoa as SelectList, new { id = "KhoaList" })
+            Lớp: @Html.DropDownList("Lop", ViewBag.Lop as SelectList, "Tất cả", new { id = "LopList" })
+            Tên: @Html.TextBox("SearchString", Mvc_ESM.Static_Helper.StudentHelper.SearchString, new { id = "SearchString" })
+            <input type="submit" value="Thực hiện" />
+        </p>
+
+    </p>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#KhoaList").change(function () {
+            var id = $(this).val();
+            $.getJSON("/Student/LoadClassByFacultyID", { FacultyID: id },
+            function (Data) {
+                var select = $("#LopList");
+                select.empty();
+                select.append($('<option/>', {
+                    value: "",
+                    text: "Tất cả"
+                }));
+
+                $.each(Data, function (index, itemData) {
+                    select.append($('<option/>', {
+                        value: itemData.Value,
+                        text: itemData.Text
+                    }));
+                });
+                $("#SearchString").empty();
+            });
+        });
+    });
+</script>
+
+<table id="table">
+    <thead>
+        <tr>
+            <th>Mã sinh viên
+            </th>
+            <th>Họ
+            </th>
+            <th>Tên
+            </th>
+            <th>Phái
+            </th>
+            <th>NgàySinh
+            </th>
+            <th>Lớp
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaSinhVien)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ho)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ten)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phai)
+                </td>
+               <td>
+                    @Html.DisplayFor(modelItem => item.NgaySinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lop)
+                </td>
+                
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new { id=item.MaSinhVien }) |
+                    @Html.ActionLink("Xem", "Details", new { id=item.MaSinhVien }) |
+                    @Html.ActionLink("Xóa", "Delete", new { id=item.MaSinhVien })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<link href="@Url.Content("~/Content/table.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/jquery.dataTables.js")" type="text/javascript" lang="javascript" ></script>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        $('#table').dataTable({
+            "bStateSave": true,
+            "sPaginationType": "full_numbers",
+            "oLanguage": {
+                "sLengthMenu": "Hiển thị _MENU_ kết quả mỗi trang",
+                "sZeroRecords": "Không tìm thấy dữ liệu",
+                "sInfo": "Đang hiển thị kết quả thứ _START_ đến _END_ của _TOTAL_ kết quả",
+                "sInfoEmpty": "Đang hiển thị kết quả thứ 0 đến 0 của 0 kết quả",
+                "sInfoFiltered": "(Lọc từ _MAX_ kết quả)",
+                "sSearch": "Tìm:",
+                "oPaginate": {
+                    "sFirst": "<<Đầu tiên",
+                    "sLast": "Cuối cùng>>",
+                    "sPrevious": "&lt;Trước",
+                    "sNext": "Sau>",
+                }
+            }
+        });
+    });
+</script>

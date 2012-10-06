@@ -1,0 +1,47 @@
+﻿@model Mvc_ESM.Models.sinhvien
+
+@{
+    ViewBag.Title = "Sinh viên";
+}
+
+<h2>Chi tiết @ViewBag.Title</h2>
+
+<fieldset>
+    <legend>@ViewBag.Title</legend>
+
+    <div class="display-label">Mã sinh viên</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MaSinhVien)
+    </div>
+
+    <div class="display-label">Họ</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Ho)
+    </div>
+
+    <div class="display-label">Tên</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Ten)
+    </div>
+
+    <div class="display-label">Phái</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Phai)
+    </div>
+
+    <div class="display-label">Ngày sinh</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NgaySinh)
+    </div>
+   
+    <div class="display-label">Lớp</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Lop)
+    </div>
+
+   
+</fieldset>
+<p>
+    @Html.ActionLink("Chỉnh sửa", "Edit", new { id=Model.MaSinhVien}) |
+    @Html.ActionLink("Quay lại danh sách", "Index")
+</p>
