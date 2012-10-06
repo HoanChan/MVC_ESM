@@ -9,10 +9,24 @@ using Mvc_ESM.Models;
 using System.Collections;
 
 namespace Mvc_ESM.Controllers
-{ 
-    public class GiaoVienController : Controller
+{
+    public class TeacherController : Controller
     {
         private DKMHEntities db = new DKMHEntities();
+
+        [HttpGet]
+        public JsonResult LoadBoMonsByKhoa(string KhoaID)
+        {
+            var Data = from b in db.bomons
+                       where b.khoa.MaKhoa == KhoaID
+                       select new SelectListItem()
+                       {
+                           Text = b.TenBoMon,
+                           Value = b.MaBoMon,
+                       };
+
+            return Json(Data, JsonRequestBehavior.AllowGet);
+        }
 
         //
         // GET: /GiaoVien/
@@ -20,34 +34,38 @@ namespace Mvc_ESM.Controllers
         public ViewResult Index()
         {
             var giaoviens = (from m in db.giaoviens
-                             where (m.bomon.KhoaQL.Equals(Static_Helper.GiaoVienHelper.Khoa) || Static_Helper.GiaoVienHelper.Khoa == "") && (m.HoLot + " " + m.TenGiaoVien).Contains(Static_Helper.GiaoVienHelper.SearchString)
+                             where ((Static_Helper.TeacherHelper.BoMon == "" && m.bomon.KhoaQL.Equals(Static_Helper.TeacherHelper.Khoa)) || (Static_Helper.TeacherHelper.BoMon != "" && m.bomon.MaBoMon.Equals(Static_Helper.TeacherHelper.BoMon))) && ((m.HoLot + " " + m.TenGiaoVien).Contains(Static_Helper.TeacherHelper.SearchString) || Static_Helper.TeacherHelper.SearchString == "")
                              select m
                            ).Include(m => m.bomon);
-            InitViewBag();
+            InitViewBag(false);
             return View(giaoviens.ToList());
         }
+
         [HttpPost]
-        public ViewResult Index(String Khoa, String SearchString)
+        public ViewResult Index(String Khoa, String BoMon, String SearchString)
         {
-            Static_Helper.GiaoVienHelper.Khoa = Khoa;
-            Static_Helper.GiaoVienHelper.SearchString = SearchString;
+            Static_Helper.TeacherHelper.Khoa = Khoa;
+            Static_Helper.TeacherHelper.SearchString = SearchString;
+            Static_Helper.TeacherHelper.BoMon = BoMon;
             var giaoviens = (from m in db.giaoviens
-                           where (m.bomon.KhoaQL.Equals(Khoa) || Khoa == "") && (m.HoLot + " " + m.TenGiaoVien).Contains(Static_Helper.GiaoVienHelper.SearchString)
-                           select m
+                             where ((BoMon == "" && m.bomon.KhoaQL.Equals(Khoa)) || (BoMon != "" && m.bomon.MaBoMon.Equals(BoMon))) && ((m.HoLot + " " + m.TenGiaoVien).Contains(SearchString) || SearchString == "")
+                             select m
                            ).Include(m => m.bomon);
-            InitViewBag();
+            InitViewBag(true);
             return View(giaoviens.ToList());
         }
 
-
-        private void InitViewBag()
+        private void InitViewBag(Boolean IsPost)
         {
-            var KhoaLst = new ArrayList();
             var KhoaQry = from d in db.khoas
                           orderby d.TenKhoa
                           select new { MaKhoa = d.MaKhoa, TenKhoa = d.TenKhoa };
-            KhoaLst.AddRange(KhoaQry.ToArray());
-            ViewBag.Khoa = new SelectList(KhoaLst, "MaKhoa", "TenKhoa");
+            ViewBag.Khoa = new SelectList(KhoaQry.ToArray(), "MaKhoa", "TenKhoa");
+                
+            var BoMonQry = from b in db.bomons
+                           where b.khoa.MaKhoa == (IsPost ? Static_Helper.TeacherHelper.Khoa : KhoaQry.FirstOrDefault().MaKhoa)
+                           select new { MaBoMon = b.MaBoMon, TenBoMon = b.TenBoMon };
+            ViewBag.BoMon = new SelectList(BoMonQry.ToArray(), "MaBoMon", "TenBoMon");
             ViewBag.SearchString = "";
         }
 
@@ -67,7 +85,7 @@ namespace Mvc_ESM.Controllers
         {
             ViewBag.BoMonQL = new SelectList(db.bomons, "MaBoMon", "TenBoMon");
             return View();
-        } 
+        }
 
         //
         // POST: /GiaoVien/Create
@@ -79,16 +97,16 @@ namespace Mvc_ESM.Controllers
             {
                 db.giaoviens.Add(giaovien);
                 db.SaveChanges();
-                return RedirectToAction("Index");  
+                return RedirectToAction("Index");
             }
 
             ViewBag.BoMonQL = new SelectList(db.bomons, "MaBoMon", "TenBoMon", giaovien.BoMonQL);
             return View(giaovien);
         }
-        
+
         //
         // GET: /GiaoVien/Edit/5
- 
+
         public ActionResult Edit(string id)
         {
             giaovien giaovien = db.giaoviens.Find(id);
@@ -114,7 +132,7 @@ namespace Mvc_ESM.Controllers
 
         //
         // GET: /GiaoVien/Delete/5
- 
+
         public ActionResult Delete(string id)
         {
             giaovien giaovien = db.giaoviens.Find(id);
@@ -126,7 +144,7 @@ namespace Mvc_ESM.Controllers
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(string id)
-        {            
+        {
             giaovien giaovien = db.giaoviens.Find(id);
             db.giaoviens.Remove(giaovien);
             db.SaveChanges();
