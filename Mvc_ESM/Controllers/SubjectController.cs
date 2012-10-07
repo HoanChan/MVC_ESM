@@ -1,46 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Mvc_ESM.Models;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Mvc_ESM.Models;
-using System.Collections;
 
 namespace Mvc_ESM.Controllers
 { 
     public class SubjectController : Controller
     {
         private DKMHEntities db = new DKMHEntities();
-
-        [HttpGet]
-        public JsonResult LoadSubjectsByFacultyID(string FacultyID)
-        {
-            var Data = from b in db.bomons
-                       where b.khoa.MaKhoa == FacultyID
-                       select new SelectListItem()
-            {
-                Text = b.TenBoMon,
-                Value = b.MaBoMon,
-            };
-
-            return Json(Data, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
-        public JsonResult LoadSubjectsByFacultyName(string FacultyName)
-        {
-            var Data = (from b in db.bomons
-                       where b.khoa.TenKhoa == FacultyName || FacultyName == ""
-                       select new SelectListItem()
-                       {
-                           Text = b.TenBoMon,
-                           Value = b.MaBoMon,
-                       }).Distinct();
-
-            return Json(Data, JsonRequestBehavior.AllowGet);
-        } 
 
         //
         // GET: /MonHoc/

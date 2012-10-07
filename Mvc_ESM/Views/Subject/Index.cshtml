@@ -12,7 +12,6 @@
 <link href="@Url.Content("~/Content/TableThemes/page.css")" rel="stylesheet" type="text/css" />
 <script src="@Url.Content("~/Scripts/UI/jquery-ui.js")" type="text/javascript" lang="javascript" ></script>
 <link href="@Url.Content("~/Content/ui-lightness/jquery-ui.css")" rel="stylesheet" type="text/css" />
-@*<link href="@Url.Content("~/Content/table.css")" rel="stylesheet" type="text/css" />*@
 <script src="@Url.Content("~/Scripts/jquery.dataTables.min.js")" type="text/javascript" lang="javascript" ></script>
 <script type="text/javascript" charset="utf-8">
     function fnFormatDetails(oTable, nTr) {
@@ -36,7 +35,7 @@
         //Reload lại danh sách bộ môn khi khoa được chọn
         $("#KhoaList").change(function () {
             var id = $(this).val();
-            $.getJSON("/Subject/LoadSubjectsByFacultyID", { FacultyID: id },
+            $.getJSON("/Services/LoadSubjectsByFacultyID", { FacultyID: id },
             function (Data) {
                 var select = $("#BoMonList");
                 select.empty();
@@ -130,22 +129,7 @@
             ], // không hiện nút sắp xếp!
             "aaSorting": [[2, 'asc']], //Xếp cột thứ 3
             "bStateSave": true,
-            "bJQueryUI": true,
-		    "sPaginationType": "full_numbers",
-            "oLanguage": {
-		        "sLengthMenu": "Hiển thị _MENU_ kết quả mỗi trang",
-                "sZeroRecords": "Không tìm thấy dữ liệu",
-                "sInfo": "Đang hiển thị kết quả thứ _START_ đến _END_ của _TOTAL_ kết quả",
-                "sInfoEmpty": "Đang hiển thị kết quả thứ 0 đến 0 của 0 kết quả",
-                "sInfoFiltered": "(Lọc từ _MAX_ kết quả)",
-                "sSearch": "Tìm:",
-                "oPaginate": {
-                    "sFirst": "Đầu",
-                    "sLast": "Cuối",
-                    "sPrevious": "Trước",
-                    "sNext": "Sau",
-                }
-            }
+            @Html.Partial("_DataTable")
         });
         // Ẩn cột
         oTable.fnSetColumnVis(3, false);

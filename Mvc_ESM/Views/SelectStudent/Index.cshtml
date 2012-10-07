@@ -1,5 +1,95 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿
+@{
+    ViewBag.Title = "Lập danh sách sinh viên cấm thi";
 }
+<h2>@ViewBag.Title</h2>
+<form id="InputForm">
+    <p>
+        Mã số sinh viên:
+        <input type="text" id ="StudentIDTextBox" /> 
+        <input type="button" id ="AddStudent" value="Thêm"/>
+    </p>
+</form>
+<form>
+<table id="table">
+    <thead>
+        <tr>
+            <th>
+                MSSV
+            </th>
+            <th>
+                Họ
+            </th>
+            <th>
+                Tên
+            </th>
+            <th>
+                Lớp
+            </th>
+            <th>
+                Khoa
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </tfoot>
+</table>
+    <p></p>
+    <br />
+    <button id="SummitButton" type="button">Lưu</button>
+</form>
 
-<h2>Index</h2>
+<link href="@Url.Content("~/Content/TableThemes/table_jui.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/TableThemes/page.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/UI/jquery-ui.js")" type="text/javascript" lang="javascript" ></script>
+<link href="@Url.Content("~/Content/ui-lightness/jquery-ui.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/jquery.dataTables.min.js")" type="text/javascript" lang="javascript" ></script>
+<script type="text/javascript" charset="utf-8">
+    var oTable;
+	$(document).ready(function() {
+	    oTable = $('#table').dataTable({
+	        @Html.Partial("_DataTable")
+	    });
+	    $('#AddStudent').button().click(function (e) {
+	        e.preventDefault();
+	        var id = $('#StudentIDTextBox').val();
+	        $.getJSON("/Services/LoadStudentInfo", { StudentID: id },
+                function (Data) {
+                    if (Data[0].MSSV == "false") {
+                        alert("Không tìm thấy sinh viên có mã số: " + id);
+                    }
+                    else {
+                        var label = '<input id="StudentID" type="text" value="' + Data[0].MSSV + '" readonly=true style="border: 0px; background-color:transparent;">';
+                        oTable.fnAddData([label, Data[0].Ho, Data[0].Ten, Data[0].Lop, Data[0].Khoa ]);
+                    }
+            });
+	    });
+	    $('#SummitButton').button().click(function () {
+	        var sData = "";
+	        oTable.$("#StudentID").each(function (index, item) {
+	            sData = sData + (sData==''?'':'&') + 'StudentID=' + item.value;
+	        });
+	        
+	        //http://api.jquery.com/jQuery.post/
+	        $.post("/SelectStudent/SelectSuccess", sData);
+	        alert("Đã lưu xong");
+	        return false; 
+	    });
+	} );
+</script>
