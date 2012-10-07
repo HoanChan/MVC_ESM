@@ -34,14 +34,9 @@ namespace Mvc_ESM.Controllers
 
         public ActionResult Data()
         {
-            
             return View(db.Events);
         }
 
-        public ActionResult Get()
-        {
-            return View();
-        }
 		public ActionResult Save(Event changedEvent, FormCollection actionValues)
 		{
 			String action_type = actionValues["!nativeeditor_status"];
