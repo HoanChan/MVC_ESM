@@ -54,20 +54,20 @@
 
         $('#table tbody td button#Deletebtn').button({
             icons: {
-                primary: "ui-icon-trash"
+                primary: "ui-icon-trash" 
             }
         }).live('click', function () {
             var id = $(this).attr("value");
             var aDialog = $("#dialog-confirm");
-            aDialog.removeAttr("style");
+            aDialog.removeAttr("style"); 
             aDialog.dialog({
-                resiable: false,
+                resizable: false,
                 modal: true,
                 buttons: {
-                    "Xóa": function () {
-                        $.post("/Student/Delete", "id= " + id, function (data) {
-                            aler(data);
-                            if (data == "Xóa thành công!")
+                    "Xoá": function () {
+                        $.post("/Student/Delete", "id=" + id, function (data) {
+                            alert(data);
+                            if (data == "Xoá thành công!")
                                 window.location = "@Url.Action("Index", "Student")";
                         });
                         $(this).dialog("close");
