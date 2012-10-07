@@ -132,7 +132,7 @@ namespace Mvc_ESM.Controllers
 
         //
         // GET: /GiaoVien/Delete/5
-
+/*
         public ActionResult Delete(string id)
         {
             giaovien giaovien = db.giaoviens.Find(id);
@@ -150,6 +150,25 @@ namespace Mvc_ESM.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        */
+
+        [HttpPost, ActionName("Delete")]
+        public String DeleteConfirmed(string id)
+        {
+            try
+            {
+                giaovien giaovien = db.giaoviens.Find(id);
+                db.giaoviens.Remove(giaovien);
+                db.SaveChanges();
+                return "Xoá thành công!";
+            }
+            catch (Exception e)
+            {
+                return "Xoá không được [" + e.Message + "]";
+            }
+
+        }
+
 
         protected override void Dispose(bool disposing)
         {

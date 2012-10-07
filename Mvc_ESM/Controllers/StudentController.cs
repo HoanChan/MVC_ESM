@@ -37,9 +37,9 @@ namespace Mvc_ESM.Controllers
             Static_Helper.StudentHelper.SearchString = "";
             Static_Helper.StudentHelper.Lop = "Tất cả";
             var students = (from m in db.sinhviens
-                            where m.chuyennganh1.KhoaQL.Equals(Static_Helper.StudentHelper.Khoa)
+                            where m.lop1.khoi.KhoaQL.Equals(Static_Helper.StudentHelper.Khoa)
                             select m
-                           ).Include(m => m.chuyennganh1);
+                           ).Include(m => m.lop1);
             InitViewBag(false);
             return View(students.ToList());
         }
@@ -51,9 +51,9 @@ namespace Mvc_ESM.Controllers
             Static_Helper.StudentHelper.SearchString = SearchString;
             Static_Helper.StudentHelper.Lop = Lop;
             var sinhviens = (from m in db.sinhviens
-                             where (Lop == "" && m.chuyennganh1.KhoaQL.Equals(Khoa)) || (Lop != "" && m.lop1.MaLop.Equals(Lop)) && (m.Ten.Contains(SearchString) || SearchString == "")
+                             where (Lop == "" && m.lop1.khoi.KhoaQL.Equals(Khoa)) || (Lop != "" && m.lop1.MaLop.Equals(Lop)) && (m.Ten.Contains(SearchString) || SearchString == "")
                              select m
-                           ).Include(m=>m.lop1).Include(m => m.chuyennganh1);
+                           ).Include(m=>m.lop1);
             InitViewBag(true);
             return View(sinhviens.ToList());
         }
@@ -142,7 +142,7 @@ namespace Mvc_ESM.Controllers
 
         //
         // GET: /Student/Delete/5
-
+        /*
         public ActionResult Delete(string id)
         {
             sinhvien sinhvien = db.sinhviens.Find(id);
@@ -159,6 +159,23 @@ namespace Mvc_ESM.Controllers
             db.sinhviens.Remove(sinhvien);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }*/
+
+        [HttpPost, ActionName("Delete")]
+        public String DeleteConfirmed(string id)
+        {
+            try
+            {
+                sinhvien sinhvien = db.sinhviens.Find(id);
+                db.sinhviens.Remove(sinhvien);
+                db.SaveChanges();
+                return "Xoá thành công!";
+            }
+            catch (Exception e)
+            {
+                return "Xoá không được [" + e.Message + "]";
+            }
+
         }
 
         protected override void Dispose(bool disposing)

@@ -9,10 +9,17 @@
     @Html.ActionLink("Tạo mới", "Create")
 </p>
 
+
+<link href="@Url.Content("~/Content/TableThemes/table_jui.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/TableThemes/page.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/UI/jquery-ui.js")" type="text/javascript" lang="javascript" ></script>
+<link href="@Url.Content("~/Content/ui-lightness/jquery-ui.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/jquery.dataTables.min.js")" type="text/javascript" lang="javascript" ></script>
+
+
 @using (Html.BeginForm("Index", "Teacher", FormMethod.Post, new { @id = "FilterForm" }))
 {
     <p>
-
         <p>
             Khoa: @Html.DropDownList("Khoa", ViewBag.Khoa as SelectList, new { id = "KhoaList" })
             Bộ môn: @Html.DropDownList("BoMon", ViewBag.BoMon as SelectList, "Tất cả", new { id = "BoMonList" })
@@ -44,7 +51,52 @@
                 $("#SearchString").empty();
             });
         });
-    });
+
+        $('#table tbody td button#Deletebtn').button({
+            icons: {
+                primary: "ui-icon-trash"
+            }
+        }).live('click', function () {
+            var id = $(this).attr("value");
+            var aDialog = $("#dialog-confirm");
+            aDialog.removeAttr("style");
+            aDialog.dialog({
+                resiable: false,
+                modal: true,
+                buttons: {
+                    "Xóa": function () {
+                        $.post("/Teacher/Delete", "id= " + id, function (data) {
+                            aler(data);
+                            if (data == "Xóa thành công!")
+                                window.location = "@Url.Action("Index", "Teacher")";
+                        });
+                        $(this).dialog("close");
+                    },
+                    "Không": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        });
+
+           $('#table tbody td button#Modifybtn').button({
+               icons: {
+                   primary: "ui-icon-pencil"
+               }
+           }).live('click', function () {
+               var id = $(this).attr("value");
+               window.location = '@Url.Action("Edit","Teacher")' + "/" + id;
+        });
+
+           $('#table tbody td button#Detailbtn').button({
+               icons: {
+                   primary: "ui-icon-info"
+               }
+           }).live('click', function () {
+               var id = $(this).attr("value");
+               window.location = '@Url.Action("Details","Teacher")' + "/" + id;
+        });
+       });
 </script>
 
 <table id="table">
@@ -89,17 +141,29 @@
                     @Html.DisplayFor(modelItem => item.HocVi)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.MaGiaoVien }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.MaGiaoVien }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.MaGiaoVien })
+             
+               @*     @Html.ActionLink("Details", "Details", new { id = item.MaGiaoVien }) |
+                           @Html.ActionLink("Edit", "Edit", new { id = item.MaGiaoVien }) |
+                   @Html.ActionLink("Delete", "Delete", new { id = item.MaGiaoVien })
+                    <button id="Detailbtn" value="@item.MaGiaoVien">Xem</button>*@
+                    <button id="Modifybtn" value="@item.MaGiaoVien">Sửa</button> | 
+                    <button id="Deletebtn" value="@item.MaGiaoVien">Xóa</button>
+
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<div id="dialog-confirm" title="Xóa dữ liệu?" style="visibility: hidden">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Bạn có muốn xoá dữ liệu này không?</p>
+</div>
+
 <link href="@Url.Content("~/Content/TableThemes/table_jui.css")" rel="stylesheet" type="text/css" />
 <link href="@Url.Content("~/Content/TableThemes/smoothness/jquery-ui-1.8.4.custom.css")" rel="stylesheet" type="text/css" />
 <script src="@Url.Content("~/Scripts/jquery.dataTables.js")" type="text/javascript" lang="javascript" ></script>
+
+
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function () {
         $('#table').dataTable({
