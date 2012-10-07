@@ -9,6 +9,12 @@
     @Html.ActionLink("Tạo mới", "Create")
 </p>
 
+<link href="@Url.Content("~/Content/TableThemes/table_jui.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/TableThemes/page.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/UI/jquery-ui.js")" type="text/javascript" lang="javascript" ></script>
+<link href="@Url.Content("~/Content/ui-lightness/jquery-ui.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/jquery.dataTables.min.js")" type="text/javascript" lang="javascript" ></script>
+
 @using (Html.BeginForm("Index", "Student", FormMethod.Post, new { @id = "FilterForm" }))
 {
     <p>
@@ -44,6 +50,51 @@
                 });
                 $("#SearchString").empty();
             });
+        });
+
+        $('#table tbody td button#Deletebtn').button({
+            icons: {
+                primary: "ui-icon-trash"
+            }
+        }).live('click', function () {
+            var id = $(this).attr("value");
+            var aDialog = $("#dialog-confirm");
+            aDialog.removeAttr("style");
+            aDialog.dialog({
+                resiable: false,
+                modal: true,
+                buttons: {
+                    "Xóa": function () {
+                        $.post("/Student/Delete", "id= " + id, function (data) {
+                            aler(data);
+                            if (data == "Xóa thành công!")
+                                window.location = "@Url.Action("Index", "Student")";
+                        });
+                        $(this).dialog("close");
+                    },
+                    "Không": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        });
+
+        $('#table tbody td button#Modifybtn').button({
+            icons: {
+                primary: "ui-icon-pencil"
+            }
+        }).live('click', function () {
+            var id = $(this).attr("value");
+            window.location = '@Url.Action("Edit","Student")' + "/" + id;
+        });
+
+        $('#table tbody td button#Detailbtn').button({
+            icons: {
+                primary: "ui-icon-info"
+            }
+        }).live('click', function () {
+            var id = $(this).attr("value");
+            window.location = '@Url.Action("Details","Student")' + "/" + id;
         });
     });
 </script>
@@ -90,21 +141,32 @@
                 </td>
                 
                 <td>
-                    @Html.ActionLink("Sửa", "Edit", new { id=item.MaSinhVien }) |
+                    @*@Html.ActionLink("Sửa", "Edit", new { id=item.MaSinhVien }) |
                     @Html.ActionLink("Xem", "Details", new { id=item.MaSinhVien }) |
                     @Html.ActionLink("Xóa", "Delete", new { id=item.MaSinhVien })
+                    <button id="Detailbtn" value="@item.MaGiaoVien">Xem</button>*@
+                    <button id="Modifybtn" value="@item.MaSinhVien">Sửa</button> | 
+                    <button id="Deletebtn" value="@item.MaSinhVien">Xóa</button>
+
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-<link href="@Url.Content("~/Content/table.css")" rel="stylesheet" type="text/css" />
+<div id="dialog-confirm" title="Xóa dữ liệu?" style="visibility: hidden">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Bạn có muốn xoá dữ liệu này không?</p>
+</div>
+
+<link href="@Url.Content("~/Content/TableThemes/table_jui.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/TableThemes/smoothness/jquery-ui-1.8.4.custom.css")" rel="stylesheet" type="text/css" />
 <script src="@Url.Content("~/Scripts/jquery.dataTables.js")" type="text/javascript" lang="javascript" ></script>
+
+
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function () {
         $('#table').dataTable({
-            "bStateSave": true,
+            "bJQueryUI": true,
             "sPaginationType": "full_numbers",
             "oLanguage": {
                 "sLengthMenu": "Hiển thị _MENU_ kết quả mỗi trang",
