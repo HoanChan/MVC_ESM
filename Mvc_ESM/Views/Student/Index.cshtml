@@ -31,7 +31,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#KhoaList").change(function () {
+        $('#KhoaList').change(function () {
             var id = $(this).val();
             $.getJSON("/Student/LoadClassByFacultyID", { FacultyID: id },
             function (Data) {
@@ -54,12 +54,12 @@
 
         $('#table tbody td button#Deletebtn').button({
             icons: {
-                primary: "ui-icon-trash" 
+                primary: "ui-icon-trash"
             }
         }).live('click', function () {
             var id = $(this).attr("value");
             var aDialog = $("#dialog-confirm");
-            aDialog.removeAttr("style"); 
+            aDialog.removeAttr("style");
             aDialog.dialog({
                 resizable: false,
                 modal: true,
@@ -85,8 +85,8 @@
             }
         }).live('click', function () {
             var id = $(this).attr("value");
-            window.location = '@Url.Action("Edit","Student")' + "/" + id;
-        });
+            window.location = '@Url.Action("Edit", "Student")' + "/" + id;
+    });
 
         $('#table tbody td button#Detailbtn').button({
             icons: {
@@ -94,7 +94,7 @@
             }
         }).live('click', function () {
             var id = $(this).attr("value");
-            window.location = '@Url.Action("Details","Student")' + "/" + id;
+            window.location = '@Url.Action("Details", "Student")' + "/" + id;
         });
     });
 </script>
@@ -133,19 +133,20 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Phai)
                 </td>
-               <td>
+                <td>
                     @Html.DisplayFor(modelItem => item.NgaySinh)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Lop)
                 </td>
-                
+
                 <td>
                     @*@Html.ActionLink("Sửa", "Edit", new { id=item.MaSinhVien }) |
                     @Html.ActionLink("Xem", "Details", new { id=item.MaSinhVien }) |
                     @Html.ActionLink("Xóa", "Delete", new { id=item.MaSinhVien })
                     <button id="Detailbtn" value="@item.MaGiaoVien">Xem</button>*@
-                    <button id="Modifybtn" value="@item.MaSinhVien">Sửa</button> | 
+                    <button id="Modifybtn" value="@item.MaSinhVien">Sửa</button>
+                    | 
                     <button id="Deletebtn" value="@item.MaSinhVien">Xóa</button>
 
                 </td>

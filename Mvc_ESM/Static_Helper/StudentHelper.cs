@@ -10,5 +10,7 @@ namespace Mvc_ESM.Static_Helper
         public static String Khoa = "";
         public static String SearchString = "";
         public static String Lop = "";
+        public static String BoMon = "";
+        public static String MonHoc = "";
     }
 }
