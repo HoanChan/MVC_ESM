@@ -85,7 +85,7 @@ namespace Mvc_ESM.Controllers
         public JsonResult LoadSubjectsByFacultyName(string FacultyName)
         {
             var Data = (from b in db.bomons
-                        where b.khoa.TenKhoa == FacultyName || FacultyName == ""
+                        where b.khoa.TenKhoa.Replace("&", "và") == FacultyName || b.khoa.TenKhoa == FacultyName || FacultyName == ""
                         select new SelectListItem()
                         {
                             Text = b.TenBoMon,

@@ -34,16 +34,16 @@
                 <input type="checkbox" checked="checked" name="SubjectID" value="@item.MaMonHoc">
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MaMonHoc)
+                @item.MaMonHoc
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TenMonHoc)
+                @item.TenMonHoc
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.bomon.TenBoMon)
+                @item.bomon.TenBoMon.Replace("&", "và")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.bomon.khoa.TenKhoa)
+                @item.bomon.khoa.TenKhoa.Replace("&", "và")
             </td>
         </tr>
     }
@@ -62,11 +62,9 @@
     <br />
     <button id="SummitButton" type="button">Lưu</button>
 </form>
-<link href="@Url.Content("~/Content/TableThemes/table_jui.css")" rel="stylesheet" type="text/css" />
-<link href="@Url.Content("~/Content/TableThemes/page.css")" rel="stylesheet" type="text/css" />
-<script src="@Url.Content("~/Scripts/UI/jquery-ui.js")" type="text/javascript" lang="javascript" ></script>
-<link href="@Url.Content("~/Content/ui-lightness/jquery-ui.css")" rel="stylesheet" type="text/css" />
-<script src="@Url.Content("~/Scripts/jquery.dataTables.min.js")" type="text/javascript" lang="javascript" ></script>
+
+@Html.Partial("_DataTable.Lib")
+
 <script type="text/javascript" charset="utf-8">
     (function ($) {
         /*
@@ -143,10 +141,10 @@
 	            $('select', this).change(function () {
 	                var Name = $(this).val();
 	                if (i == 4) {
+                        var select = $("#tb_r_3"); // cột thứ 3
+                        select.empty();
 	                    $.getJSON("/Services/LoadSubjectsByFacultyName", { FacultyName: Name },
                         function (Data) {
-                            var select = $("#tb_r_3"); // cột thứ 3
-                            select.empty();
                             select.append($('<option/>', {
                                 value: "",
                                 text: "Tất cả"
@@ -160,14 +158,14 @@
                         });
 	                    oTable.fnFilter("", 3);
 	                }
-	                if ($(this).val() == "") {
+	                if (Name == "") {
 	                    oTable.fnFilter("", i);
 	                }
 	                else {
 	                    //fnFilter(Giá trị sẽ lọc, cột áp dụng, dùng regex, dùng smart)
 	                    //regex = biểu thức chính quy
 	                    //smart và so khớp không quan tâm vị trí
-	                    oTable.fnFilter("^" + Name + "$", i, true, false);
+	                    oTable.fnFilter(Name, i, false, false);
 	                }
 	            });
 	        }

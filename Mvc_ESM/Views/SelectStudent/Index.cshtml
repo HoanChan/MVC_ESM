@@ -29,10 +29,14 @@
             <th>
                 Khoa
             </th>
+            <th>
+
+            </th>
         </tr>
     </thead>
     <tbody>
         <tr>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -47,6 +51,7 @@
             <th></th>
             <th></th>
             <th></th>
+            <th></th>
         </tr>
     </tfoot>
 </table>
@@ -55,38 +60,57 @@
     <button id="SummitButton" type="button">Lưu</button>
 </form>
 
-<link href="@Url.Content("~/Content/TableThemes/table_jui.css")" rel="stylesheet" type="text/css" />
-<link href="@Url.Content("~/Content/TableThemes/page.css")" rel="stylesheet" type="text/css" />
-<script src="@Url.Content("~/Scripts/UI/jquery-ui.js")" type="text/javascript" lang="javascript" ></script>
-<link href="@Url.Content("~/Content/ui-lightness/jquery-ui.css")" rel="stylesheet" type="text/css" />
-<script src="@Url.Content("~/Scripts/jquery.dataTables.min.js")" type="text/javascript" lang="javascript" ></script>
+@Html.Partial("_DataTable.Lib")
+
 <script type="text/javascript" charset="utf-8">
     var oTable;
 	$(document).ready(function() {
 	    oTable = $('#table').dataTable({
+            "aoColumnDefs": [
+                { "bSortable": false, "aTargets": [5] },
+            ], // không hiện nút sắp xếp!
 	        @Html.Partial("_DataTable")
 	    });
+
 	    $('#AddStudent').button().click(function (e) {
 	        e.preventDefault();
 	        var id = $('#StudentIDTextBox').val();
-	        $.getJSON("/Services/LoadStudentInfo", { StudentID: id },
-                function (Data) {
-                    if (Data[0].MSSV == "false") {
-                        alert("Không tìm thấy sinh viên có mã số: " + id);
-                    }
-                    else {
-                        var label = '<input id="StudentID" type="text" value="' + Data[0].MSSV + '" readonly=true style="border: 0px; background-color:transparent;">';
-                        oTable.fnAddData([label, Data[0].Ho, Data[0].Ten, Data[0].Lop, Data[0].Khoa ]);
-                    }
-            });
+	        if ($('#table tbody td button#Deletebtn[value="' + id + '"]').length !== 0) {
+	            alert("Sinh viên có mã số " + id + " đã được thêm rồi!");
+	        }
+	        else {
+	            $.getJSON("/Services/LoadStudentInfo", { StudentID: id },
+                    function (Data) {
+                        if (Data[0].MSSV == "false") {
+                            alert("Không tìm thấy sinh viên có mã số: " + id);
+                        }
+                        else {
+                            var MSSV = '<input id="StudentID" type="text" value="' + Data[0].MSSV + '" readonly=true style="border: 0px; background-color:transparent; width:100px;">';
+                            var Delete = '<td style ="text-align:center;"> <button id ="Deletebtn" value="' + Data[0].MSSV + '">Xoá</button>';
+
+                            oTable.fnAddData([MSSV, Data[0].Ho, Data[0].Ten, Data[0].Lop, Data[0].Khoa, Delete]);
+
+                            $('#table tbody td button#Deletebtn[value="' + Data[0].MSSV + '"]').button({
+                                icons: {
+                                    primary: "ui-icon-trash" // hình cái thùng rác
+                                }
+                            }).live('click', function () {
+                                var row = $(this).parent().parent(); // this là cái nút, cha của nó là td ông của nó là tr ==> cái hàng cần xoá
+                                if (row.length !== 0) {
+                                    oTable.fnDeleteRow(row[0]);
+                                }
+                            }).parent().attr('align', 'center');
+                        }
+                    });
+	        }
 	    });
+
 	    $('#SummitButton').button().click(function () {
 	        var sData = "";
 	        oTable.$("#StudentID").each(function (index, item) {
 	            sData = sData + (sData==''?'':'&') + 'StudentID=' + item.value;
 	        });
 	        
-	        //http://api.jquery.com/jQuery.post/
 	        $.post("/SelectStudent/SelectSuccess", sData);
 	        alert("Đã lưu xong");
 	        return false; 
