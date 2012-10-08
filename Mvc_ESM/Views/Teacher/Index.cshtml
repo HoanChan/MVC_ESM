@@ -61,12 +61,12 @@
             var aDialog = $("#dialog-confirm");
             aDialog.removeAttr("style");
             aDialog.dialog({
-                resiable: false,
+                resizable: false,
                 modal: true,
                 buttons: {
                     "Xóa": function () {
-                        $.post("/Teacher/Delete", "id= " + id, function (data) {
-                            aler(data);
+                        $.post("/Teacher/Delete", "id=" + id, function (data) {
+                            alert(data);
                             if (data == "Xóa thành công!")
                                 window.location = "@Url.Action("Index", "Teacher")";
                         });
@@ -79,24 +79,24 @@
             });
         });
 
-           $('#table tbody td button#Modifybtn').button({
-               icons: {
-                   primary: "ui-icon-pencil"
-               }
-           }).live('click', function () {
-               var id = $(this).attr("value");
-               window.location = '@Url.Action("Edit","Teacher")' + "/" + id;
+        $('#table tbody td button#Modifybtn').button({
+            icons: {
+                primary: "ui-icon-pencil"
+            }
+        }).live('click', function () {
+            var id = $(this).attr("value");
+            window.location = '@Url.Action("Edit", "Teacher")' + "/" + id;
         });
 
-           $('#table tbody td button#Detailbtn').button({
-               icons: {
-                   primary: "ui-icon-info"
-               }
-           }).live('click', function () {
-               var id = $(this).attr("value");
-               window.location = '@Url.Action("Details","Teacher")' + "/" + id;
+        $('#table tbody td button#Detailbtn').button({
+            icons: {
+                primary: "ui-icon-info"
+            }
+        }).live('click', function () {
+            var id = $(this).attr("value");
+            window.location = '@Url.Action("Details", "Teacher")' + "/" + id;
         });
-       });
+    });
 </script>
 
 <table id="table">
@@ -141,12 +141,13 @@
                     @Html.DisplayFor(modelItem => item.HocVi)
                 </td>
                 <td>
-             
-               @*     @Html.ActionLink("Details", "Details", new { id = item.MaGiaoVien }) |
+
+                    @*     @Html.ActionLink("Details", "Details", new { id = item.MaGiaoVien }) |
                            @Html.ActionLink("Edit", "Edit", new { id = item.MaGiaoVien }) |
                    @Html.ActionLink("Delete", "Delete", new { id = item.MaGiaoVien })
                     <button id="Detailbtn" value="@item.MaGiaoVien">Xem</button>*@
-                    <button id="Modifybtn" value="@item.MaGiaoVien">Sửa</button> | 
+                    <button id="Modifybtn" value="@item.MaGiaoVien">Sửa</button>
+                    | 
                     <button id="Deletebtn" value="@item.MaGiaoVien">Xóa</button>
 
                 </td>

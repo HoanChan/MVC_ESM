@@ -95,6 +95,32 @@ namespace Mvc_ESM.Controllers
             return Json(Data, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult LoadMonHocByBoMon(string SubjectID)
+        {
+            var Data = (from m in db.monhocs
+                        where m.BoMonQL == SubjectID
+                        select new SelectListItem()
+                         {
+                             Text = m.TenMonHoc,
+                             Value = m.MaMonHoc,
+                         });
+            return Json(Data, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult LoadMonHocByFacultyID(string FacultyID)
+        {
+            var Data = (from m in db.monhocs
+                        where m.bomon.KhoaQL == FacultyID
+                        select new SelectListItem()
+                        {
+                            Text = m.TenMonHoc,
+                            Value = m.MaMonHoc,
+                        });
+            return Json(Data, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

@@ -13,5 +13,6 @@ namespace Mvc_ESM.Static_Helper
         /// danh sách sinh viên sẽ bị cấm thi
         /// </summary>
         public static List<String> Student;
+
     }
 }
