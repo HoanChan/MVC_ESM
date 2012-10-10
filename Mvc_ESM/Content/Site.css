@@ -192,14 +192,14 @@ textarea {
     min-height: 75px;
 }
 
-input[type="text"], 
+/*input[type="text"], 
 input[type="password"] {
     border: 1px solid #ccc;
     padding: 2px;
     font-size: 1.2em;
     color: #444;
     width: 200px;
-}
+}*/
 
 select {
     border: 1px solid #ccc;

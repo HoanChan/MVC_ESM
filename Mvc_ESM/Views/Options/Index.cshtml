@@ -1,0 +1,165 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@ViewBag.Title</h2>
+<form id="InputFrom">
+    <table>
+        <tr>
+            <td style="text-align:right;">Ngày bắt đầu:</td>
+            <td><input type="text" id="DateStart" title="Ngày dự kiến bắt đầu kỳ thi" style="position: relative; z-index: 200;"/></td>
+        </tr>
+        <tr>
+            <td style="text-align:right;">Số ngày:</td>
+            <td><input type="text" id="NumDate" title="Số ngày dự kiến sẽ tổ chức thi"/></td>
+        </tr>
+        <tr>
+            <td style="text-align:right;">Khoảng cách:</td>
+            <td><input type="text" id="DateMin" readonly="true" title="Khoảng cách giữa 2 môn thi liên tiếp của 1 thí sinh"/></td>
+        </tr>
+    </table>
+    <p>Thiết lập ca thi của 1 ngày:</p>
+    <p>
+        <input type="text" id="tName" title="Tên ca thi"/>
+        <input type="text" id="tBGTime" title="Thời gian bắt đầu"/>
+        <input type="text" id="tETime" title="Thời gian kết thúc"/>
+        <button id="Addbtn" title="Thêm vào danh sách">Thêm</button>
+    </p>
+    <div style="width:800px; margin:auto;">
+        <table id="table" style="width:800px;">
+            <thead>
+                <tr>
+                    <th>Tên ca</th>
+                    <th>Giờ bắt đầu</th>
+                    <th> Giờ kết thúc</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            
+            </tbody>
+        </table>
+    </div>
+    <button id="SaveBtn" title="Lưu các thiết lập và bắt đầu xếp lịch">Lưu</button>
+</form>
+    
+
+@Html.Partial("_DataTable.Lib")
+<script src="@Url.Content("~/Scripts/UI/globalize.js")" type="text/javascript" lang="javascript" ></script>
+<script src="@Url.Content("~/Scripts/UI/globalize.culture.vi-VI.js")" type="text/javascript" lang="javascript" ></script>
+<script src="@Url.Content("~/Scripts/UI/jquery.mousewheel.js")" type="text/javascript" lang="javascript" ></script>
+<script type="text/javascript" charset="utf-8">
+    $.datepicker.regional['vi'] = {
+        closeText: 'Đóng',
+        prevText: '&#x3C;Trước',
+        nextText: 'Tiếp&#x3E;',
+        currentText: 'Hôm nay',
+        monthNames: ['Tháng Một', 'Tháng Hai', 'Tháng Ba', 'Tháng Tư', 'Tháng Năm', 'Tháng Sáu',
+        'Tháng Bảy', 'Tháng Tám', 'Tháng Chín', 'Tháng Mười', 'Tháng Mười Một', 'Tháng Mười Hai'],
+        monthNamesShort: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6',
+        'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+        dayNames: ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'],
+        dayNamesShort: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
+        dayNamesMin: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
+        weekHeader: 'Tu',
+        dateFormat: 'dd/mm/yy',
+        firstDay: 0,
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: ''
+    };
+    Globalize.culture("vi-VI");
+    $.widget("ui.datespinner", $.ui.spinner, {
+        options: {
+            // seconds
+            step: 60 * 1000 * 60 * 24,
+            // hours
+            page: 60 * 60 *  24
+        },
+
+        _parse: function (value) {
+            if (typeof value === "string") {
+                 //already a timestamp
+                if (Number(value) == value) {
+                    return Number(value);
+                }
+                return +Globalize.parseDate(value);
+            }
+            return value;
+        },
+
+        _format: function (value) {
+            return Globalize.format(new Date(value), "d");
+        }
+    });
+
+    $.widget("ui.timespinner", $.ui.spinner, {
+        options: {
+            // seconds
+            step: 60 * 1000,
+            // hours
+            page: 60
+        },
+
+        _parse: function (value) {
+            if (typeof value === "string") {
+                // already a timestamp
+                if (Number(value) == value) {
+                    return Number(value);
+                }
+                return +Globalize.parseDate(value);
+            }
+            return value;
+        },
+
+        _format: function (value) {
+            return Globalize.format(new Date(value), "t");
+        }
+    });
+    //======================================================================//
+    oTable = $('#table').dataTable({
+        "aoColumnDefs": [
+            { "bSortable": false, "aTargets": [3] },
+        ], // không hiện nút sắp xếp!
+        "bLengthChange": false,
+        "bFilter": false,
+        @Html.Partial("_DataTable")
+    });
+
+    $("#SaveBtn,#Addbtn").button();
+
+    $.datepicker.setDefaults($.datepicker.regional["vi"]);
+
+    $("#DateStart").datepicker().datespinner();
+
+    $("#NumDate").spinner({
+        step: 1,
+        numberFormat: "n",
+        spin: function (event, ui) {
+            if (ui.value > 90) {
+                $(this).spinner("value", 7);
+                return false;
+            } else if (ui.value < 7) {
+                $(this).spinner("value", 90);
+                return false;
+            }
+        }
+    });
+
+    $("#DateMin").spinner({
+        step: 0.5,
+        numberFormat: "n",
+        spin: function (event, ui) {
+            if (ui.value > 5) {
+                $(this).spinner("value", 0);
+                return false;
+            } else if (ui.value < 0) {
+                $(this).spinner("value", 5);
+                return false;
+            }
+        }
+    });
+
+    $("#tBGTime,#tETime").timespinner();
+
+</script>
