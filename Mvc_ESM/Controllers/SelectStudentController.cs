@@ -30,7 +30,14 @@ namespace Mvc_ESM.Controllers
             string paramInfo = "";
             for (int i = 0; i < StudentID.Count(); i++)
             {
-                Static_Helper.InputHelper.Student.Add(SubjectID[i], StudentID[i]);
+                if (Static_Helper.InputHelper.Student.ContainsKey(SubjectID[i]))
+                {
+                    (Static_Helper.InputHelper.Student[SubjectID[i]] as List<String>).Add(StudentID[i]);
+                }
+                else
+                {
+                    Static_Helper.InputHelper.Student.Add(SubjectID[i], new List<String> { StudentID[i] });
+                }
                 paramInfo += "MH:" + SubjectID[i] + " SV: " + StudentID[i] + "<br /><br />";
             }
             return paramInfo;
