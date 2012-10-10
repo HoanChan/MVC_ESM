@@ -98,6 +98,7 @@
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OptionsController.cs" />
+    <Compile Include="Controllers\SelectSinhVienController.cs" />
     <Compile Include="Controllers\SelectStudentController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\StudentController.cs" />

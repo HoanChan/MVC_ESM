@@ -30,8 +30,8 @@ namespace Mvc_ESM.Controllers
         [HttpPost]
         public ViewResult Index(String MonHoc)
         {
-        //    Static_Helper.StudentHelper.Khoa = Khoa;
-          //  Static_Helper.StudentHelper.BoMon = BoMon;
+            //    Static_Helper.StudentHelper.Khoa = Khoa;
+            //  Static_Helper.StudentHelper.BoMon = BoMon;
             Static_Helper.StudentHelper.MonHoc = MonHoc;
 
             var sinhviens = (from s in db.sinhviens
@@ -63,9 +63,13 @@ namespace Mvc_ESM.Controllers
         }
 
         [HttpPost]
-        public String SelectSuccess(List<String> StudentID)
+        public String SelectSuccess(List<String> StudentID, String MonHoc)
         {
-            Static_Helper.InputHelper.Student = StudentID;
+            foreach (var igoresv in Static_Helper.InputHelper.IgoreStudent)
+                foreach (var sv in StudentID)
+                    if (!igoresv.MaMonHoc.Contains(MonHoc) && !igoresv.MaSinhVien.Contains(sv))
+                        Static_Helper.InputHelper.IgoreStudent.Add(new Static_Helper.IgoreSV(MonHoc, sv));
+
             string paramInfo = "";
             foreach (String si in StudentID)
             {

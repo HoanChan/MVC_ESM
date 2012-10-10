@@ -149,7 +149,7 @@ namespace Mvc_ESM.Controllers
         }
 
         [HttpGet]
-        public JsonResult LoadMonHocByBoMon(string SubjectID)
+        public JsonResult LoadSubjectsBySubject(string SubjectID)
         {
             var Data = (from m in db.monhocs
                         where m.BoMonQL == SubjectID
@@ -162,7 +162,7 @@ namespace Mvc_ESM.Controllers
         }
 
         [HttpGet]
-        public JsonResult LoadMonHocByFacultyID(string FacultyID)
+        public JsonResult LoadSubjectByFacultyID(string FacultyID)
         {
             var Data = (from m in db.monhocs
                         where m.bomon.KhoaQL == FacultyID

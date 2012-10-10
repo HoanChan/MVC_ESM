@@ -43,7 +43,7 @@
                     }));
                 });
             });
-            $.getJSON("/Services/LoadMonHocByFacultyID", { FacultyID: id },
+            $.getJSON("/Services/LoadSubjectByFacultyID", { FacultyID: id },
             function (Data) {
                 var select = $("#MonHocList");
                 select.empty();
@@ -62,7 +62,7 @@
         });
         $('#BoMonList').change(function () {
             var id = $(this).val();
-            $.getJSON("/Services/LoadMonHocByBoMon",{SubjectID:id},
+            $.getJSON("/Services/LoadSubjectsBySubject", { SubjectID: id },
                 function (Data) {
                     var select = $("#MonHocList");
                 select.empty();
@@ -126,7 +126,6 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.lop1.MaLop)
                     </td>
-
                 </tr>
             }
         </tbody>
