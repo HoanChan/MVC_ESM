@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Collections;
 namespace Mvc_ESM.Static_Helper
 {
     public class InputHelper
@@ -12,7 +12,7 @@ namespace Mvc_ESM.Static_Helper
         /// <summary>
         /// danh sách sinh viên sẽ bị cấm thi
         /// </summary>
-        public static List<String> Student;
+        public static Hashtable Student;
 
     }
 }

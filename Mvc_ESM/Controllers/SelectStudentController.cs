@@ -1,5 +1,6 @@
 ﻿using Mvc_ESM.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -23,13 +24,14 @@ namespace Mvc_ESM.Controllers
         }
 
         [HttpPost]
-        public String SelectSuccess(List<String> StudentID)
+        public String SelectSuccess(List<String> StudentID, List<String> SubjectID)
         {
-            Static_Helper.InputHelper.Student = StudentID;
+            Static_Helper.InputHelper.Student = new Hashtable();
             string paramInfo = "";
-            foreach (String si in StudentID)
+            for (int i = 0; i < StudentID.Count(); i++)
             {
-                paramInfo += "Value:" + si + "<br /><br />";
+                Static_Helper.InputHelper.Student.Add(SubjectID[i], StudentID[i]);
+                paramInfo += "MH:" + SubjectID[i] + " SV: " + StudentID[i] + "<br /><br />";
             }
             return paramInfo;
         }

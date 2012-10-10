@@ -10,9 +10,9 @@ namespace Mvc_ESM.Controllers
         private DKMHEntities db = new DKMHEntities();
 
         [HttpGet]
-        public JsonResult LoadStudentInfo(string StudentID)
+        public JsonResult LoadStudentAndSubjectInfo(string StudentID, string SubjectID)
         {
-            var Data = from s in db.sinhviens
+            var Student = from s in db.sinhviens
                        where s.MaSinhVien.Equals(StudentID)
                        select new
                        {
@@ -22,21 +22,74 @@ namespace Mvc_ESM.Controllers
                            Lop = s.Lop,
                            Khoa = s.lop1.khoi.khoa.TenKhoa
                        };
-            if (Data.Count() == 0)
+            var Subject = from m in db.monhocs
+                          where m.MaMonHoc.Equals(SubjectID)
+                          select new
+                          {
+                              MSMH = m.MaMonHoc,
+                              TenMH = m.TenMonHoc,
+                              BoMon = m.bomon.TenBoMon
+                          };
+            if (Student.Count() == 0)
             {
                 return Json(new List<object>(){ new 
-                {
-                    MSSV = "false",
-                    Ho = "",
-                    Ten = "",
-                    Lop = "",
-                    Khoa = ""
-                }}, JsonRequestBehavior.AllowGet);
+                        {
+                            OK = "",
+                            MSMH = "",
+                            TenMH = "",
+                            BoMon = "",
+                            MSSV = "false",
+                            Ho = "",
+                            Ten = "",
+                            Lop = "",
+                            Khoa = ""
+                        }}, JsonRequestBehavior.AllowGet);
             }
-            else
+
+            if (Subject.Count() == 0)
             {
-                return Json(Data, JsonRequestBehavior.AllowGet);
+                return Json(new List<object>(){ new 
+                        {
+                            OK = "",
+                            MSMH = "false",
+                            TenMH = "",
+                            BoMon = "",
+                            MSSV = "",
+                            Ho = "",
+                            Ten = "",
+                            Lop = "",
+                            Khoa = ""
+                        }}, JsonRequestBehavior.AllowGet);
             }
+
+            if ((from d in db.pdkmhs where d.MaMonHoc == SubjectID && d.MaSinhVien == StudentID select d).Count() == 0)
+            {
+                return Json(new List<object>(){ new 
+                        {
+                            OK = "false",
+                            MSMH = "",
+                            TenMH = Subject.FirstOrDefault().TenMH,
+                            BoMon = "",
+                            MSSV = "",
+                            Ho = Student.FirstOrDefault().Ho,
+                            Ten = Student.FirstOrDefault().Ten,
+                            Lop = "",
+                            Khoa = ""
+                        }}, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new List<object>(){ new 
+                    {
+                        OK = "",
+                        MSMH = Subject.FirstOrDefault().MSMH,
+                        TenMH = Subject.FirstOrDefault().TenMH,
+                        BoMon = Subject.FirstOrDefault().BoMon,
+                        MSSV = Student.FirstOrDefault().MSSV,
+                        Ho = Student.FirstOrDefault().Ho,
+                        Ten = Student.FirstOrDefault().Ten,
+                        Lop = Student.FirstOrDefault().Lop,
+                        Khoa = Student.FirstOrDefault().Khoa
+                    }}, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
