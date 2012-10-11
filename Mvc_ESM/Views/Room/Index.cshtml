@@ -1,6 +1,6 @@
-﻿@model IEnumerable<Mvc_ESM.Models.giaovien>
+﻿@model IEnumerable<Mvc_ESM.Models.phong>
 @{
-    ViewBag.Title = "Giáo viên";
+    ViewBag.Title = "Phòng học";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -9,21 +9,18 @@
     @Html.ActionLink("Tạo mới", "Create")
 </p>
 
-
 <link href="@Url.Content("~/Content/TableThemes/table_jui.css")" rel="stylesheet" type="text/css" />
 <link href="@Url.Content("~/Content/TableThemes/page.css")" rel="stylesheet" type="text/css" />
 <script src="@Url.Content("~/Scripts/UI/jquery-ui.js")" type="text/javascript" lang="javascript" ></script>
 <link href="@Url.Content("~/Content/ui-lightness/jquery-ui.css")" rel="stylesheet" type="text/css" />
 <script src="@Url.Content("~/Scripts/jquery.dataTables.min.js")" type="text/javascript" lang="javascript" ></script>
 
-
-@using (Html.BeginForm("Index", "Teacher", FormMethod.Post, new { @id = "FilterForm" }))
+@using (Html.BeginForm("Index", "Room", FormMethod.Post, new { @id = "FilterForm" }))
 {
     <p>
         <p>
-            Khoa: @Html.DropDownList("Khoa", ViewBag.Khoa as SelectList, new { id = "KhoaList" })
-            Bộ môn: @Html.DropDownList("BoMon", ViewBag.BoMon as SelectList, "Tất cả", new { id = "BoMonList" })
-            Tên: @Html.TextBox("SearchString", Mvc_ESM.Static_Helper.TeacherHelper.SearchString, new { id = "SearchString" })
+            @*Phòng: @Html.DropDownList("Phong", ViewBag.Phong as SelectList, new { id = "RoomList" })*@
+            Phòng: @Html.TextBox("Phong", Mvc_ESM.Static_Helper.RoomHelper.MaPhong)
             <input type="submit" value="Thực hiện" />
         </p>
 
@@ -32,25 +29,6 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#KhoaList").change(function () {
-            var id = $(this).val();
-            $.getJSON("/Services/LoadSubjectsByFacultyID", { FacultyID: id },
-            function (Data) {
-                var select = $("#BoMonList");
-                select.empty();
-                select.append($('<option/>', {
-                    value: "",
-                    text: "Tất cả"
-                }));
-                $.each(Data, function (index, itemData) {
-                    select.append($('<option/>', {
-                        value: itemData.Value,
-                        text: itemData.Text
-                    }));
-                });
-                $("#SearchString").empty();
-            });
-        });
 
         $('#table tbody td button#Deletebtn').button({
             icons: {
@@ -65,10 +43,10 @@
                 modal: true,
                 buttons: {
                     "Xóa": function () {
-                        $.post("/Teacher/Delete", "id=" + id, function (data) {
+                        $.post("/Room/Delete", "id=" + id, function (data) {
                             alert(data);
-                            if (data == "Xóa thành công!")
-                                window.location = "@Url.Action("Index", "Teacher")";
+                            if (data == "Xoá thành công!")
+                                window.location = "@Url.Action("Index", "Room")";
                         });
                         $(this).dialog("close");
                     },
@@ -79,76 +57,57 @@
             });
         });
 
+
         $('#table tbody td button#Modifybtn').button({
             icons: {
                 primary: "ui-icon-pencil"
             }
         }).live('click', function () {
             var id = $(this).attr("value");
-            window.location = '@Url.Action("Edit", "Teacher")' + "/" + id;
+            window.location = '@Url.Action("Edit","Room")' + "/" + id;
         });
 
-        $('#table tbody td button#Detailbtn').button({
-            icons: {
-                primary: "ui-icon-info"
-            }
-        }).live('click', function () {
-            var id = $(this).attr("value");
-            window.location = '@Url.Action("Details", "Teacher")' + "/" + id;
-            });
+
     });
 </script>
 
 <table id="table">
     <thead>
         <tr>
-            <th>Mã giáo viên
+            <th>Mã phòng
             </th>
-            <th>Họ lót
+            <th>Kích thước
             </th>
-            <th>Tên giáo viên
+            <th>Khoa
             </th>
-            <th>Bộ môn
-            </th>
-            <th>Học hàm
-            </th>
-            <th>Học vị
+            <th>Sức chứa
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
+
         @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.MaGiaoVien)
+                    @Html.DisplayFor(modelItem => item.MaPhong)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.HoLot)
+                    @Html.DisplayFor(modelItem => item.KichThuoc)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TenGiaoVien)
+                    @Html.DisplayFor(modelItem => item.khoa.TenKhoa)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.bomon.TenBoMon)
+                    @Html.DisplayFor(modelItem => item.SucChua)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.HocHam)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.HocVi)
-                </td>
-                <td>
-
-                    @*     @Html.ActionLink("Details", "Details", new { id = item.MaGiaoVien }) |
-                           @Html.ActionLink("Edit", "Edit", new { id = item.MaGiaoVien }) |
-                   @Html.ActionLink("Delete", "Delete", new { id = item.MaGiaoVien })
-                    <button id="Detailbtn" value="@item.MaGiaoVien">Xem</button>*@
-                    <button id="Modifybtn" value="@item.MaGiaoVien">Sửa</button>
-                    | 
-                    <button id="Deletebtn" value="@item.MaGiaoVien">Xóa</button>
+                    @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                    <button id="Modifybtn" value="@item.MaPhong">Sửa</button> | 
+                    <button id="Deletebtn" value="@item.MaPhong">Xóa</button>
 
                 </td>
             </tr>
@@ -187,3 +146,4 @@
         });
     });
 </script>
+

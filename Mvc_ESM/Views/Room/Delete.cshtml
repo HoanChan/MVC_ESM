@@ -1,0 +1,38 @@
+﻿@model Mvc_ESM.Models.phong
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>phong</legend>
+
+    <div class="display-label">MaPhong</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MaPhong)
+    </div>
+
+    <div class="display-label">KichThuoc</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.KichThuoc)
+    </div>
+
+    <div class="display-label">khoa</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.khoa.TenKhoa)
+    </div>
+
+    <div class="display-label">SucChua</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SucChua)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
