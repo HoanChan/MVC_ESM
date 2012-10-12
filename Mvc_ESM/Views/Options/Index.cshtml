@@ -21,8 +21,8 @@
     <p>Thiết lập ca thi của 1 ngày:</p>
     <p>
         <input type="text" id="tName" title="Tên ca thi"/>
-        <input type="text" id="tBGTime" title="Thời gian bắt đầu"/>
-        <input type="text" id="tETime" title="Thời gian kết thúc"/>
+        <input type="text" id="tBGTime" name="value" title="Thời gian bắt đầu"/>
+        <input type="text" id="tETime" name="value" title="Thời gian kết thúc"/>
         <button id="Addbtn" title="Thêm vào danh sách">Thêm</button>
     </p>
     <div style="width:800px; margin:auto;">
@@ -126,7 +126,39 @@
         @Html.Partial("_DataTable")
     });
 
-    $("#SaveBtn,#Addbtn").button();
+    $("#tBGTime,#tETime").timespinner();
+    $("#Addbtn").button().click(function (e) {
+        e.preventDefault(); // không chạy sự kiện mặc định của đối tượng
+        var Name = $("#tName").val();
+        var BGTime = $("#tBGTime").timespinner("value");
+        var ETime = $("#tETime").timespinner("value");
+        if ($('#table tbody td button#Deletebtn[value="' + Name + '"]').length !== 0) {
+            alert("Dữ liệu ca thi có tên " + Name + " đã được thêm rồi!");
+            return false;
+        }
+        var _Name = '<span id="Name" postvalue="' + Name + '">' + Name + '</span>';
+        var _BGTime = '<span id="BGTime" postvalue="' + BGTime + '">' + $("#tBGTime").val() + '</span>';
+        var _ETime = '<span id="ETime" postvalue="' + ETime + '">' + $("#tETime").val() + '</span>';
+        var Delete = '<button id ="Deletebtn" value="' + Name + '">Xoá</button>';
+
+        oTable.fnAddData([_Name, _BGTime, _ETime, Delete]);
+        $('#table tbody td button#Deletebtn[value="' + Name + '"]').button({
+            icons: {
+                primary: "ui-icon-trash" // hình cái thùng rác
+            }
+        }).live('click', function () {
+            var row = $(this).parent().parent(); // this là cái nút, cha của nó là td ông của nó là tr ==> cái hàng cần xoá
+            if (row.length !== 0) {
+                oTable.fnDeleteRow(row[0]);
+            }
+        }).parent().attr('align', 'center');
+
+    });
+
+    $("#SaveBtn").button().click(function () {
+        
+        return false;
+    });
 
     $.datepicker.setDefaults($.datepicker.regional["vi"]);
 
@@ -134,7 +166,6 @@
 
     $("#NumDate").spinner({
         step: 1,
-        numberFormat: "n",
         spin: function (event, ui) {
             if (ui.value > 90) {
                 $(this).spinner("value", 7);
@@ -160,6 +191,5 @@
         }
     });
 
-    $("#tBGTime,#tETime").timespinner();
 
 </script>

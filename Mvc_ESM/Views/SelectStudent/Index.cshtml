@@ -61,7 +61,7 @@
 	    });
 
 	    $('#AddStudent').button().click(function (e) {
-	        e.preventDefault();
+	        e.preventDefault(); // không chạy sự kiện mặc định của đối tượng
 	        var stID = $('#StudentIDTextBox').val();
 	        var suID = $('#SubjectIDTextBox').val();
 	        if ($('#table tbody td button#Deletebtn[value="' + stID + suID + '"]').length !== 0) {
@@ -87,7 +87,7 @@
 
                     var MSMH = '<p id="SubjectID">' + suID + '</p>';
                     var MSSV = '<p id="StudentID">' + stID + '</p>';
-                    var Delete = '<td style ="text-align:center;"> <button id ="Deletebtn" value="' + stID + suID + '">Xoá</button>';
+                    var Delete = '<button id ="Deletebtn" value="' + stID + suID + '">Xoá</button>';
 
                     oTable.fnAddData([MSMH, Data[0].TenMH, Data[0].BoMon, MSSV, Data[0].Ho, Data[0].Ten, Data[0].Lop, Data[0].Khoa, Delete]);
 

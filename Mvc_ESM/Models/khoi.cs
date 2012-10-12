@@ -26,7 +26,6 @@ namespace Mvc_ESM.Models
         public string MaNganh { get; set; }
         public string KhoaQL { get; set; }
     
-        public virtual bachoc bachoc1 { get; set; }
         public virtual khoa khoa { get; set; }
         public virtual ICollection<lop> lops { get; set; }
     }

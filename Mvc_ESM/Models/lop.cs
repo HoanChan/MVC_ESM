@@ -17,7 +17,6 @@ namespace Mvc_ESM.Models
         public lop()
         {
             this.sinhviens = new HashSet<sinhvien>();
-            this.nhoms = new HashSet<nhom>();
         }
     
         public string MaLop { get; set; }
@@ -28,6 +27,5 @@ namespace Mvc_ESM.Models
     
         public virtual khoi khoi { get; set; }
         public virtual ICollection<sinhvien> sinhviens { get; set; }
-        public virtual ICollection<nhom> nhoms { get; set; }
     }
 }

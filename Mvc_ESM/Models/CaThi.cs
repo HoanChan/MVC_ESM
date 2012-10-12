@@ -12,21 +12,20 @@ namespace Mvc_ESM.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class phong
+    public partial class CaThi
     {
-        public phong()
+        public CaThi()
         {
-            this.lichhocvus = new HashSet<lichhocvu>();
             this.This = new HashSet<Thi>();
+            this.giaoviens = new HashSet<giaovien>();
         }
     
-        public string MaPhong { get; set; }
-        public Nullable<short> KichThuoc { get; set; }
-        public string KhoaQL { get; set; }
-        public Nullable<short> SucChua { get; set; }
+        public string MaCa { get; set; }
+        public System.DateTime NgayThi { get; set; }
+        public int TietBD { get; set; }
+        public int SoTiet { get; set; }
     
-        public virtual khoa khoa { get; set; }
-        public virtual ICollection<lichhocvu> lichhocvus { get; set; }
         public virtual ICollection<Thi> This { get; set; }
+        public virtual ICollection<giaovien> giaoviens { get; set; }
     }
 }

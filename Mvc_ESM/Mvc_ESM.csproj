@@ -98,7 +98,6 @@
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OptionsController.cs" />
-    <Compile Include="Controllers\SelectSinhVienController.cs" />
     <Compile Include="Controllers\SelectStudentController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -109,10 +108,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\bachoc.cs">
+    <Compile Include="Models\bomon.cs">
       <DependentUpon>DKMHModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\bomon.cs">
+    <Compile Include="Models\CaThi.cs">
       <DependentUpon>DKMHModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\chuyennganh.cs">
@@ -162,6 +161,9 @@
       <DependentUpon>DKMHModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sinhvien.cs">
+      <DependentUpon>DKMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Thi.cs">
       <DependentUpon>DKMHModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -230,18 +232,8 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\DKMHModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DKMHModel.edmx</DependentUpon>
-      <LastGenOutput>DKMHModel.Context.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\DKMHModel.edmx.diagram">
       <DependentUpon>DKMHModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\DKMHModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DKMHModel.edmx</DependentUpon>
-      <LastGenOutput>DKMHModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -291,9 +283,6 @@
     <Content Include="Views\Shared\_DataTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\SelectSinhVien\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Shared\_DataTable.Lib.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -301,6 +290,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_Jquery-UI.Lib.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\DKMHModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DKMHModel.Context.cs</LastGenOutput>
+      <DependentUpon>DKMHModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\DKMHModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DKMHModel.cs</LastGenOutput>
+      <DependentUpon>DKMHModel.edmx</DependentUpon>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

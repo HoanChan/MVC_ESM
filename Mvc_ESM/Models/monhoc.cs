@@ -12,12 +12,13 @@ namespace Mvc_ESM.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    
     public partial class monhoc
     {
         public monhoc()
         {
             this.nhoms = new HashSet<nhom>();
+            this.This = new HashSet<Thi>();
         }
 
         //Thiếu kiểm tra tính duy nhất
@@ -61,5 +62,6 @@ namespace Mvc_ESM.Models
         public virtual bomon bomon { get; set; }
         public virtual khoa khoa { get; set; }
         public virtual ICollection<nhom> nhoms { get; set; }
+        public virtual ICollection<Thi> This { get; set; }
     }
 }

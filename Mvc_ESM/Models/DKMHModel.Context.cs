@@ -25,8 +25,8 @@ namespace Mvc_ESM.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<bachoc> bachocs { get; set; }
         public DbSet<bomon> bomons { get; set; }
+        public DbSet<CaThi> CaThis { get; set; }
         public DbSet<chuyennganh> chuyennganhs { get; set; }
         public DbSet<giaovien> giaoviens { get; set; }
         public DbSet<khoa> khoas { get; set; }
@@ -38,5 +38,6 @@ namespace Mvc_ESM.Models
         public DbSet<pdkmh> pdkmhs { get; set; }
         public DbSet<phong> phongs { get; set; }
         public DbSet<sinhvien> sinhviens { get; set; }
+        public DbSet<Thi> This { get; set; }
     }
 }

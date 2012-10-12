@@ -18,7 +18,6 @@ namespace Mvc_ESM.Models
         {
             this.lichhocvus = new HashSet<lichhocvu>();
             this.pdkmhs = new HashSet<pdkmh>();
-            this.lops = new HashSet<lop>();
         }
     
         public string MaMonHoc { get; set; }
@@ -29,6 +28,5 @@ namespace Mvc_ESM.Models
         public virtual ICollection<lichhocvu> lichhocvus { get; set; }
         public virtual monhoc monhoc { get; set; }
         public virtual ICollection<pdkmh> pdkmhs { get; set; }
-        public virtual ICollection<lop> lops { get; set; }
     }
 }

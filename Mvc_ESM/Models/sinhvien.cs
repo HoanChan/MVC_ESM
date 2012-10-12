@@ -17,6 +17,7 @@ namespace Mvc_ESM.Models
         public sinhvien()
         {
             this.pdkmhs = new HashSet<pdkmh>();
+            this.This = new HashSet<Thi>();
         }
     
         public string MaSinhVien { get; set; }
@@ -32,5 +33,6 @@ namespace Mvc_ESM.Models
         public virtual chuyennganh chuyennganh1 { get; set; }
         public virtual lop lop1 { get; set; }
         public virtual ICollection<pdkmh> pdkmhs { get; set; }
+        public virtual ICollection<Thi> This { get; set; }
     }
 }

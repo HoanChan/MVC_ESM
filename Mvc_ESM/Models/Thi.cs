@@ -12,16 +12,16 @@ namespace Mvc_ESM.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class bachoc
+    public partial class Thi
     {
-        public bachoc()
-        {
-            this.khois = new HashSet<khoi>();
-        }
+        public string MaSinhVien { get; set; }
+        public string MaMonHoc { get; set; }
+        public string MaPhong { get; set; }
+        public string MaCa { get; set; }
     
-        public string MaBacHoc { get; set; }
-        public string TenBacHoc { get; set; }
-    
-        public virtual ICollection<khoi> khois { get; set; }
+        public virtual CaThi CaThi { get; set; }
+        public virtual monhoc monhoc { get; set; }
+        public virtual phong phong { get; set; }
+        public virtual sinhvien sinhvien { get; set; }
     }
 }
