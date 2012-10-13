@@ -5,6 +5,12 @@
     <title>@ViewBag.Title</title>
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
     <script src="@Url.Content("~/Scripts/jquery.js")" type="text/javascript" lang="javascript" ></script>
+    <script src="@Url.Content("~/Scripts/Menu/jquery.color.js")" type="text/javascript" lang="javascript" ></script>
+    <script src="@Url.Content("~/Scripts/Menu/jquery.easing.js")" type="text/javascript" lang="javascript" ></script>
+    <script src="@Url.Content("~/Scripts/Menu/jquery.lavalamp.js")" type="text/javascript" lang="javascript" ></script>
+    <link href="@Url.Content("~/Content/Menu/menu.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/Menu/menu.js")" type="text/javascript" lang="javascript" ></script>
+
 </head>
 <body>
     <div class="page">
@@ -15,18 +21,33 @@
             <div id="logindisplay">
                 @Html.Partial("_LogOnPartial")
             </div>
-            <nav>
-                <ul id="menu">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Chọn môn học", "Index", "SelectSubject")</li>
-                    <li>@Html.ActionLink("Chọn sinh viên", "Index", "SelectStudent")</li>
-                    <li>@Html.ActionLink("Môn Học", "Index", "Subject")</li>
-                    <li>@Html.ActionLink("Giáo viên", "Index", "Teacher")</li>
-                    <li>@Html.ActionLink("Sinh viên", "Index", "Student")</li>
-                    <li>@Html.ActionLink("Calendar", "Index", "Calendar")</li>
+            <div id="menu">
+                <ul class="menu">
+                    <li><a href ="@Url.Action("Index", "Home")"><span>Home</span></a></li>
+                    <li><a href ="@Url.Action("About", "Home")"><span>About</span></a></li>
+
+                    <li><a href="#" class="parent"><span>Chỉnh sửa CSDL</span></a>
+                        <ul>
+                            <li><a href="@Url.Action("Index", "Subject")"><span>Môn Học</span></a></li>
+                            <li><a href="@Url.Action("Index", "Teacher")"><span>Giáo viên</span></a></li>
+                            <li><a href="@Url.Action("Index", "Student")"><span>Sinh viên</span></a></li>
+                            <li><a href="@Url.Action("Index", "Room")"><span>Phòng học</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="#" class="parent"><span>Thiết lập đầu vào</span></a>
+                        <ul>
+                            <li><a href="@Url.Action("Index", "SelectSubject")"><span>Chọn môn học</span></a></li>
+                            <li><a href="@Url.Action("Index", "SelectStudent")"><span>Chọn sinh viên</span></a></li>
+                            <li><a href="@Url.Action("Index", "Options")"><span>Chọn thông số</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href ="@Url.Action("Index", "Calendar")"><span>Lịch</span></a></li>
+                    <li class="last"><a href="#"><span>@@</span></a></li>
                 </ul>
-            </nav>
+            </div>
+
         </header>
         <section id="main">
             @RenderBody()
