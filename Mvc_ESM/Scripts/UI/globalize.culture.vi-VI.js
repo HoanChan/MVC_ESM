@@ -147,7 +147,7 @@
                     // start: when the era starts in ticks (gregorian, gmt), null if it is the earliest supported era.
                     // offset: offset in years from gregorian calendar
                     {
-                        "name": "S.A.",
+                        "name": "C.E.",
                         "start": null,
                         "offset": 0
                     }

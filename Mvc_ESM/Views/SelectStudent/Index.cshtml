@@ -85,8 +85,8 @@
                         return false;
                     }
 
-                    var MSMH = '<p id="SubjectID">' + suID + '</p>';
-                    var MSSV = '<p id="StudentID">' + stID + '</p>';
+                    var MSMH = '<span id="SubjectID">' + suID + '</span>';
+                    var MSSV = '<span id="StudentID">' + stID + '</span>';
                     var Delete = '<button id ="Deletebtn" value="' + stID + suID + '">Xoá</button>';
 
                     oTable.fnAddData([MSMH, Data[0].TenMH, Data[0].BoMon, MSSV, Data[0].Ho, Data[0].Ten, Data[0].Lop, Data[0].Khoa, Delete]);

@@ -71,10 +71,10 @@
     Globalize.culture("vi-VI");
     $.widget("ui.datespinner", $.ui.spinner, {
         options: {
-            // seconds
+            // 1 ngay
             step: 60 * 1000 * 60 * 24,
-            // hours
-            page: 60 * 60 *  24
+            // 1 tuan
+            page: 60 * 1000 * 60 *  24  * 7
         },
 
         _parse: function (value) {
@@ -90,15 +90,15 @@
 
         _format: function (value) {
             return Globalize.format(new Date(value), "d");
-        }
+        },
     });
 
     $.widget("ui.timespinner", $.ui.spinner, {
         options: {
-            // seconds
-            step: 60 * 1000,
-            // hours
-            page: 60
+            // 5p
+            step: 60 * 1000 * 5,
+            // 1h
+            page: 60 * 60 * 1000
         },
 
         _parse: function (value) {
@@ -130,12 +130,43 @@
     $("#Addbtn").button().click(function (e) {
         e.preventDefault(); // không chạy sự kiện mặc định của đối tượng
         var Name = $("#tName").val();
-        var BGTime = $("#tBGTime").timespinner("value");
-        var ETime = $("#tETime").timespinner("value");
-        if ($('#table tbody td button#Deletebtn[value="' + Name + '"]').length !== 0) {
-            alert("Dữ liệu ca thi có tên " + Name + " đã được thêm rồi!");
+        // Giá trị trả về là số mili giây tính từ lúc 7:00 sáng tới 6:59 sáng hôm sau
+        // 86400000 = 1000 * 60 * 60 * 24
+        var BGTime = $("#tBGTime").timespinner("value") % 86400000; // loại bỏ các thông tin về ngày, chỉ lấy thông tin về giờ
+        var ETime = $("#tETime").timespinner("value") % 86400000;
+
+        //if ($('#table tbody td button#Deletebtn[value="' + Name + '"]').length !== 0) {
+        //    alert("Dữ liệu ca thi có tên " + Name + " đã được thêm rồi!");
+        //    return false;
+        //}
+
+        if (BGTime >= ETime) {
+            alert("Giờ bắt đầu không thể lớn hơn giờ kết thúc");
             return false;
         }
+
+        var Checker = true;
+
+        $("#table tbody tr").each(function (i) {
+            var tN = $("#Name", this).attr("postvalue");
+            var tBG = $("#BGTime", this).attr("postvalue");
+            var tE = $("#ETime", this).attr("postvalue");
+
+            if (tN == Name) {
+                Checker = false;
+                alert("Dữ liệu ca thi có tên " + tN + " đã được thêm rồi!");
+                return false;
+            }
+
+            if ((tBG >= BGTime && tBG <= ETime) || (tE >= BGTime && tE <= ETime) || (BGTime >= tBG && BGTime <= tE) || (ETime >= tBG && ETime <= tE)) {
+                Checker = false;
+                alert("Giờ thi bị trùng với giờ thi của ca có tên: " + tN );
+                return false; // ngắt vòng lặp each
+            }
+        });
+
+        if (Checker == false) { return false; }
+
         var _Name = '<span id="Name" postvalue="' + Name + '">' + Name + '</span>';
         var _BGTime = '<span id="BGTime" postvalue="' + BGTime + '">' + $("#tBGTime").val() + '</span>';
         var _ETime = '<span id="ETime" postvalue="' + ETime + '">' + $("#tETime").val() + '</span>';
@@ -151,12 +182,29 @@
             if (row.length !== 0) {
                 oTable.fnDeleteRow(row[0]);
             }
-        }).parent().attr('align', 'center');
+        }).parent().parent().attr('align', 'center');
 
     });
 
     $("#SaveBtn").button().click(function () {
-        
+        var sData = "DateStart=" + $("#DateStart").datespinner("value");
+        sData += "&NumDate=" + $("#NumDate").spinner("value")
+                + "&DateMin=" + $("#DateMin").spinner("value");
+
+        oTable.$("#Name").each(function (index, item) {
+            sData = sData + '&Name=' + $(this).attr("postvalue");
+        });
+
+        oTable.$("#BGTime").each(function (index, item) {
+            sData = sData + '&BGTime=' + $(this).attr("postvalue");
+        });
+
+        oTable.$("#ETime").each(function (index, item) {
+            sData = sData + '&ETime=' + $(this).attr("postvalue");
+        });
+
+        $.post("/Options/SelectSuccess", sData);
+        alert("Đã lưu xong");
         return false;
     });
 
