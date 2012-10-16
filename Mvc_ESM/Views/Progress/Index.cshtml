@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<style >
+    .Progress {
+      text-align:center;
+      border: 1px solid rgb(0,0,0);
+      border-radius: 5px;
+      margin: 2px;
+      width: 150px;
+      height: 300px;              
+      float: left;
+    }
+
+    .ProgressHolder{
+      overflow: auto;
+      width: 100%;
+    }
+
+</style>
+@Html.Partial("_Jquery-UI.Lib")
+<div class='ProgressHolder'>
+    <div class='Progress'>
+        <h1>Tạo ma trận kề</h1>
+        <br />
+        <span id="CreateMatrixInfo">Thông tin</span>
+        <br />
+        <div id="pbCreateMatrix"></div>
+    </div>
+    <div class='Progress'>
+        Tô màu
+    </div>
+    <div class='Progress'>
+        Chỉnh thời gian
+    </div>
+    <div class='Progress'>
+        Xếp phòng
+    </div>
+    <div class='Progress'>
+        Xếp giáo viên
+    </div>
+    <div class='Progress'>
+        Lưu kết quả
+    </div>
+</div>
+<script>
+    var pbCreateMatrix = $("#pbCreateMatrix").progressbar({
+        value: 0
+    });
+    var CreateMatrixInfo = $("#CreateMatrixInfo");
+    setInterval(function () {
+        $.getJSON("/Services/GetProgressInfo",
+            function (Data) {
+                pbCreateMatrix.progressbar({ value: Data[0].pbCreateMatrix });
+                CreateMatrixInfo.html(Data[0].CreateMatrixInfo);
+            });
+    }, 1000);
+
+</script>

@@ -99,6 +99,7 @@
     <Compile Include="Controllers\CreateMatrixController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OptionsController.cs" />
+    <Compile Include="Controllers\ProgressController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\SelectStudentController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
@@ -170,6 +171,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Static_Helper\GraphColoringAlgorithm.cs" />
+    <Compile Include="Static_Helper\ProgressHelper.cs" />
     <Compile Include="Static_Helper\RoomHelper.cs" />
     <Compile Include="Static_Helper\StudentHelper.cs" />
     <Compile Include="Static_Helper\TeacherHelper.cs" />
@@ -317,6 +319,9 @@
     <Content Include="Views\Room\Details.cshtml" />
     <Content Include="Views\Room\Edit.cshtml" />
     <Content Include="Views\Room\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Progress\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

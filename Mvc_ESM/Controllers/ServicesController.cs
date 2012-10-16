@@ -10,6 +10,18 @@ namespace Mvc_ESM.Controllers
         private DKMHEntities db = new DKMHEntities();
 
         [HttpGet]
+        public JsonResult GetProgressInfo()
+        {
+            return Json(new List<object>(){ new 
+                    {
+                        pbCreateMatrix = Static_Helper.ProgressHelper.pbCreateMatrix == 100 ? 
+                                            Static_Helper.ProgressHelper.pbCreateMatrix = 0 : 
+                                            Static_Helper.ProgressHelper.pbCreateMatrix++,
+                        CreateMatrixInfo = Static_Helper.ProgressHelper.CreateMatrixInfo
+                    }}, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         public JsonResult LoadStudentAndSubjectInfo(string StudentID, string SubjectID)
         {
             var Student = from s in db.sinhviens
