@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Mvc_ESM.Models.phong>
+@{
+    ViewBag.Title = "Chọn phòng sẽ thi";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form>
+    <table id="table">
+        <thead>
+            <tr>
+                <th style="width: 130px">Sẽ tổ chức thi
+                </th>
+                <th>Mã phòng
+                </th>
+                <th>Kích thước
+                </th>
+                <th>Khoa
+                </th>
+                <th>Sức chứa
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" checked="checked" name="RoomID" value="@item.MaPhong">
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaPhong)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.KichThuoc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.khoa.TenKhoa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SucChua)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p></p>
+    <br />
+    <button id="SummitButton" type="button">Lưu</button>
+</form>
+
+@Html.Partial("_DataTable.Lib")
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        var oTable = $('#table').dataTable({
+            @Html.Partial("_DataTable")
+        });
+
+        $('#SummitButton').click(function () {
+            var sData = oTable.$('input').serialize();
+            alert("The following data would have been submitted to the server: \n\n" + sData);
+            //http://api.jquery.com/jQuery.post/
+            $.post("/SelectRoom/SelectSuccess", sData);
+            alert("Đã lưu xong");
+            return false;
+        });
+    });
+</script>

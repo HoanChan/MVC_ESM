@@ -101,6 +101,7 @@
     <Compile Include="Controllers\OptionsController.cs" />
     <Compile Include="Controllers\ProgressController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
+    <Compile Include="Controllers\SelectRoomController.cs" />
     <Compile Include="Controllers\SelectStudentController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -322,6 +323,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Progress\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SelectRoom\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

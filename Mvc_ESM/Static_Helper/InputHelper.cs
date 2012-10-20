@@ -17,6 +17,9 @@ namespace Mvc_ESM.Static_Helper
         /// danh sách môn học sẽ xếp lịch
         /// </summary>
         public static List<String> Subjects;
+
+
+        public static List<String> Rooms;
         /// <summary>
         /// danh sách sinh viên sẽ bị cấm thi
         /// </summary>
