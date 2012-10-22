@@ -40,7 +40,8 @@
             </tbody>
         </table>
     </div>
-    <button id="SaveBtn" title="Lưu các thiết lập và bắt đầu xếp lịch">Lưu</button>
+    <button id="SaveBtn" title="Lưu các thiết lập">Lưu</button>
+    <button id="GoBtn" title="Bắt đầu xếp lịch">Xếp lịch</button>
 </form>
     
 
@@ -205,6 +206,11 @@
 
         $.post("/Options/SelectSuccess", sData);
         alert("Đã lưu xong");
+        return false;
+    });
+
+    $("#GoBtn").button().click(function () {
+        window.location = '@Url.Action("Index", "Progress")';
         return false;
     });
 

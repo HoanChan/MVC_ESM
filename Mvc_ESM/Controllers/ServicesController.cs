@@ -14,9 +14,7 @@ namespace Mvc_ESM.Controllers
         {
             return Json(new List<object>(){ new 
                     {
-                        pbCreateMatrix = Static_Helper.ProgressHelper.pbCreateMatrix == 100 ? 
-                                            Static_Helper.ProgressHelper.pbCreateMatrix = 0 : 
-                                            Static_Helper.ProgressHelper.pbCreateMatrix++,
+                        pbCreateMatrix = Static_Helper.ProgressHelper.pbCreateMatrix,
                         CreateMatrixInfo = Static_Helper.ProgressHelper.CreateMatrixInfo
                     }}, JsonRequestBehavior.AllowGet);
         }
