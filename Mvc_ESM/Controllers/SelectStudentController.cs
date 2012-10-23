@@ -27,6 +27,9 @@ namespace Mvc_ESM.Controllers
         public String SelectSuccess(List<String> StudentID, List<String> SubjectID)
         {
             Static_Helper.InputHelper.Student = new Hashtable();
+            Static_Helper.InputHelper.HastableStudent HastableStudent = new Static_Helper.InputHelper.HastableStudent();
+            HastableStudent.Students = StudentID;
+            HastableStudent.Subjects = SubjectID;
             string paramInfo = "";
             for (int i = 0; i < StudentID.Count(); i++)
             {
@@ -40,6 +43,7 @@ namespace Mvc_ESM.Controllers
                 }
                 paramInfo += "MH:" + SubjectID[i] + " SV: " + StudentID[i] + "<br /><br />";
             }
+            Static_Helper.XML.OBJ2XML(HastableStudent, "C:\\Students.xml");
             return paramInfo;
         }
 

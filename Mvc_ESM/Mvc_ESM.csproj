@@ -179,6 +179,7 @@
     <Compile Include="Static_Helper\TeacherHelper.cs" />
     <Compile Include="Static_Helper\InputHelper.cs" />
     <Compile Include="Static_Helper\SubjectHelper.cs" />
+    <Compile Include="Static_Helper\XML.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />

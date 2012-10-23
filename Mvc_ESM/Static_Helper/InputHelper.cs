@@ -20,6 +20,12 @@ namespace Mvc_ESM.Static_Helper
 
 
         public static List<String> Rooms;
+
+        public class HastableStudent
+        {
+            public List<String> Subjects;
+            public List<String> Students;
+        }
         /// <summary>
         /// danh sách sinh viên sẽ bị cấm thi
         /// </summary>

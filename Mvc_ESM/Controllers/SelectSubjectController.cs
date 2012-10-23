@@ -30,6 +30,7 @@ namespace Mvc_ESM.Controllers
         public String SelectSuccess(List<String> SubjectID)
         {
             Static_Helper.InputHelper.Subjects = SubjectID;
+            Static_Helper.XML.OBJ2XML(SubjectID, "C:\\Subjects.xml");
             string paramInfo = "";
             foreach (String si in SubjectID)
             {
