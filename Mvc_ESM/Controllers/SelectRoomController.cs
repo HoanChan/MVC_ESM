@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using Mvc_ESM.Models;
 
 namespace Mvc_ESM.Controllers
-{ 
+{
     public class SelectRoomController : Controller
     {
         private DKMHEntities db = new DKMHEntities();
@@ -23,13 +23,14 @@ namespace Mvc_ESM.Controllers
         }
 
         [HttpPost]
-        public String SelectSuccess(List<String> RoomID)
+        public String SelectSuccess(List<String> RoomID, List<int> Container)
         {
-            Static_Helper.InputHelper.Rooms = RoomID;
+            Static_Helper.InputHelper.Rooms = new List<Static_Helper.InputHelper.Room>();
             string paramInfo = "";
-            foreach (String si in RoomID)
+            for (int i = 0; i < RoomID.Count; i++)
             {
-                paramInfo += "Value:" + si + "<br /><br />";
+                Static_Helper.InputHelper.Rooms.Add(new Static_Helper.InputHelper.Room(RoomID[i], Container[i]));
+                paramInfo += "MP:" + RoomID[i] + " SC: " + Container[i] + "<br /><br />";
             }
             return paramInfo;
         }
