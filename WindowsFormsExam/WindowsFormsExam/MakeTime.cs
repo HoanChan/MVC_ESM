@@ -49,17 +49,23 @@ namespace Mvc_ESM.Static_Helper
                 // Thời gian các môn thi sau mà cùng màu thì bằng nhau và bằng max[màu],
                 // nên lây max[màu tiếp theo] - max[màu hiện tại]
                 // ta sẽ đươc step
-                int Step = CalcStep(AlgorithmRunner.MaxColorTime[CurrentColor + 1], AlgorithmRunner.MaxColorTime[CurrentColor]);
-                // tăng thời gian các môn thi sau, màu lớn hơn thì thi sau.
-                for (int si = 0; si < AlgorithmRunner.SubjectTime.Count(); si++)
+                // Ví dụ: thời gian môn cần tăng thuộc ca 1, max[màu môn cần tăng] = 2
+                // sau đó tăng lên 3 ca thành thời gian môn cần tăng = 4, max[màu môn cần tăng] = 4
+                // max[màu tiếp theo] = 3 cần tăng 2
+                if (AlgorithmRunner.MaxColorTime[CurrentColor + 1] < AlgorithmRunner.MaxColorTime[CurrentColor])
                 {
-                    if (AlgorithmRunner.Colors[si] > CurrentColor)
+                    int Step = CalcStep(AlgorithmRunner.MaxColorTime[CurrentColor + 1], AlgorithmRunner.MaxColorTime[CurrentColor]) + 1;
+                    // tăng thời gian các môn thi sau, màu lớn hơn thì thi sau.
+                    for (int si = 0; si < AlgorithmRunner.SubjectTime.Count(); si++)
                     {
-                        AlgorithmRunner.SubjectTime[si] = IncTime(AlgorithmRunner.SubjectTime[si], Step);
-                        if (AlgorithmRunner.MaxColorTime[AlgorithmRunner.Colors[si]] < AlgorithmRunner.SubjectTime[si])
+                        if (AlgorithmRunner.Colors[si] > CurrentColor)
                         {
-                            // đổi max
-                            AlgorithmRunner.MaxColorTime[AlgorithmRunner.Colors[si]] = AlgorithmRunner.SubjectTime[si];
+                            AlgorithmRunner.SubjectTime[si] = IncTime(AlgorithmRunner.SubjectTime[si], Step);
+                            if (AlgorithmRunner.MaxColorTime[AlgorithmRunner.Colors[si]] < AlgorithmRunner.SubjectTime[si])
+                            {
+                                // đổi max
+                                AlgorithmRunner.MaxColorTime[AlgorithmRunner.Colors[si]] = AlgorithmRunner.SubjectTime[si];
+                            }
                         }
                     }
                 }
