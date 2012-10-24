@@ -13,13 +13,24 @@ namespace Mvc_ESM.Static_Helper
             public DateTime BGTime;
             public DateTime ETime;
         }
+
+        public class Room
+        {
+            public String RoomID;
+            public int Container;
+            public Room(String RoomID, int Container)
+            {
+                this.RoomID = RoomID;
+                this.Container = Container;
+            }
+        }
         /// <summary>
         /// danh sách môn học sẽ xếp lịch
         /// </summary>
         public static List<String> Subjects;
 
 
-        public static List<String> Rooms;
+        public static List<Room> Rooms;
 
         public class HastableStudent
         {

@@ -29,7 +29,7 @@
                         <input type="checkbox" checked="checked" name="RoomID" value="@item.MaPhong">
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.MaPhong)
+                        <span id="RoomID">@item.MaPhong</span>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.KichThuoc)
@@ -38,7 +38,7 @@
                         @Html.DisplayFor(modelItem => item.khoa.TenKhoa)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.SucChua)
+                        <span id="Container">@item.SucChua</span>
                     </td>
                 </tr>
             }
@@ -58,12 +58,16 @@
         });
 
         $('#SummitButton').click(function () {
-            var sData = oTable.$('input').serialize();
-            alert("The following data would have been submitted to the server: \n\n" + sData);
-            //http://api.jquery.com/jQuery.post/
+            var sData = "";
+            oTable.$("#RoomID").each(function (index, item) {
+                sData = sData + (sData == '' ? '' : '&') + 'RoomID=' + $(this).text();
+            });
+            oTable.$("#Container").each(function (index, item) {
+                sData = sData + '&Container=' + $(this).text();
+            });
             $.post("/SelectRoom/SelectSuccess", sData);
             alert("Đã lưu xong");
-            return false;
+            return false; 
         });
     });
 </script>
