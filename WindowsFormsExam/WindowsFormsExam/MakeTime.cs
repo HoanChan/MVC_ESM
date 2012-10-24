@@ -14,10 +14,13 @@ namespace Mvc_ESM.Static_Helper
         {
             AlgorithmRunner.SubjectTime = new DateTime[InputHelper.Subjects.Count];
             AlgorithmRunner.MaxColorTime = new DateTime[AlgorithmRunner.ColorNumber];
+            // ngày so với ngày bắt đầu kì thi
             int Date = 0;
+            // ca thi
+            int Slot = 0;
             for (int ColorNumber = 0; ColorNumber < AlgorithmRunner.ColorNumber; ColorNumber++)
             {
-                int Slot = 0;
+                // các môn cùng màu sẽ cùng ca, cùng ngày thi
                 for (int i = 0; i < InputHelper.Subjects.Count; i++)
                 {
                     if (AlgorithmRunner.Colors[i] == ColorNumber)
@@ -25,17 +28,13 @@ namespace Mvc_ESM.Static_Helper
                         AlgorithmRunner.SubjectTime[i] = InputHelper.StartDate.AddDays(Date)
                                                                               .AddHours(InputHelper.Times[Slot].BGTime.Hour)
                                                                               .AddMinutes(InputHelper.Times[Slot].BGTime.Minute);
-                        Slot++;
-                        if (Slot == InputHelper.Times.Count)
-                        {
-                            Slot = 0;
-                            Date++;
-                        }
                         AlgorithmRunner.MaxColorTime[ColorNumber] = AlgorithmRunner.SubjectTime[i];
                     }
                 }
-                if (Slot != 0)
+                Slot++;
+                if (Slot == InputHelper.Times.Count)
                 {
+                    Slot = 0;
                     Date++;
                 }
             }
@@ -69,37 +68,35 @@ namespace Mvc_ESM.Static_Helper
         //- B3: tăng thời gian của môn thi sau (Môn M) trong 2 môn đó lên 1 khoảng là X để thoã điều kiện.
         //- B4: nếu thời gian thi của môn M sau khi được tăng > max[màu của môn M] thì 
         //            gán max[màu của môn M] = thời gian thi của môn M rồi qua bước 5
-        private static void IncSubjects(int i, int j)
+        private static void IncSubjects(int Checker, int i, int j)
         {
-            int Checker = CheckTime(i, j);
-            if (Checker != 0)
+
+            int Index;
+            if (Checker == 1)
             {
-                int Index;
-                if (Checker == 1)
-                {
-                    // tăng môn i nhưng phải dựa vào môn j là do ko bít hiện tại khoảng cách giữa 2 môn
-                    // i và j là bao nhiêu, tăng cho vừa khớp với điều kiện cho chắc.
-                    AlgorithmRunner.SubjectTime[i] = IncTime(AlgorithmRunner.SubjectTime[j], InputHelper.DateMin);
-                    Index = i;
-                }
-                else //Checker == 2
-                {
-                    AlgorithmRunner.SubjectTime[j] = IncTime(AlgorithmRunner.SubjectTime[i], InputHelper.DateMin);
-                    Index = j;
-                }
-                int CurrentColor = AlgorithmRunner.Colors[Index];
-                // Kiểm tra và tăng max
-                if (AlgorithmRunner.MaxColorTime[CurrentColor] < AlgorithmRunner.SubjectTime[Index])
-                {
-                    // đổi max
-                    AlgorithmRunner.MaxColorTime[CurrentColor] = AlgorithmRunner.SubjectTime[Index];
-                    IncSubjectAfter(CurrentColor);
-                }
-                //else
-                //{
-                //    // không vượt quá max thì chỉ tăng mình nó mấy môn khác sẽ không bị ảnh hưởng.
-                //}
+                // tăng môn i nhưng phải dựa vào môn j là do ko bít hiện tại khoảng cách giữa 2 môn
+                // i và j là bao nhiêu, tăng cho vừa khớp với điều kiện cho chắc.
+                AlgorithmRunner.SubjectTime[i] = IncTime(AlgorithmRunner.SubjectTime[j], InputHelper.DateMin);
+                Index = i;
             }
+            else //Checker == 2
+            {
+                AlgorithmRunner.SubjectTime[j] = IncTime(AlgorithmRunner.SubjectTime[i], InputHelper.DateMin);
+                Index = j;
+            }
+            int CurrentColor = AlgorithmRunner.Colors[Index];
+            // Kiểm tra và tăng max
+            if (AlgorithmRunner.MaxColorTime[CurrentColor] < AlgorithmRunner.SubjectTime[Index])
+            {
+                // đổi max
+                AlgorithmRunner.MaxColorTime[CurrentColor] = AlgorithmRunner.SubjectTime[Index];
+                IncSubjectAfter(CurrentColor);
+            }
+            //else
+            //{
+            //    // không vượt quá max thì chỉ tăng mình nó mấy môn khác sẽ không bị ảnh hưởng.
+            //}
+            
         }
 
         //- B2: tìm sinh viên có 2 môn thi chưa thoã điều kiện là cách nhau n buổi
@@ -114,7 +111,11 @@ namespace Mvc_ESM.Static_Helper
                 {
                     if (AlgorithmRunner.AdjacencyMatrix[i, j] == 1)
                     {
-                        IncSubjects(i,j);
+                        int Checker = CheckTime(i, j);
+                        if (Checker != 0)
+                        {
+                            IncSubjects(Checker, i, j);
+                        }
                     }
                 }
             }
@@ -146,6 +147,7 @@ namespace Mvc_ESM.Static_Helper
         private static DateTime IncTime(DateTime Time, int Step)
         {
             DateTime Result = Time;
+            // tìm ca thi dựa vào Time
             int CurrentStep = 0;
             for (int i = 0; i < InputHelper.Times.Count; i++)
             {
@@ -155,15 +157,20 @@ namespace Mvc_ESM.Static_Helper
                     break;
                 }
             }
-            int FinalStep = CurrentStep + Step + 1;
+            
+            int FinalStep = CurrentStep + Step;
+            // Ví dụ, currentstep = 1 (thi ca 2), step = 5 (Tăng lên 5 ca) ==> finalstep = 6
+            // nếu mỗi ngày 4 ca thi
+            // thì thời gian kết quả phải là ca thi thứ 3 của ngày hôm sau
+            // 6 % 4 = 2 ==> ca thứ 3
+            // 6 / 4 = 1 ==> ngày cần tăng
             Result = new DateTime(Time.Year, 
                                   Time.Month, 
                                   Time.Day, 
                                   InputHelper.Times[FinalStep % InputHelper.Times.Count].BGTime.Hour, 
                                   InputHelper.Times[FinalStep % InputHelper.Times.Count].BGTime.Minute, 
                                   0);
-            // cách 3, 7, 11 ca là qua 1, 2, 3 ngày nếu 1 ngày có 4 ca
-            Result = Result.AddDays((Step + 1) / InputHelper.Times.Count);
+            Result = Result.AddDays(FinalStep / InputHelper.Times.Count);
             return Result;
         }
 
