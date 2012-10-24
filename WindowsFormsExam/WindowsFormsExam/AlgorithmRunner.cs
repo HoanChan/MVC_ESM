@@ -19,6 +19,7 @@ namespace Mvc_ESM.Static_Helper
         public static int[] Colors;
         public static int ColorNumber;
         public static DateTime[] SubjectTime;
+        public static List<InputHelper.Room>[] SubjectRoom;
         public static DateTime[] MaxColorTime;
         private void ReadAdjacencyMatrix(string DataFilePath)
         {

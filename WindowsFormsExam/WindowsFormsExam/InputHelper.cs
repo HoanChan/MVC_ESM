@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections;
-using Mvc_ESM.Models;
 
 namespace Mvc_ESM.Static_Helper
 {
@@ -24,7 +23,12 @@ namespace Mvc_ESM.Static_Helper
         public static List<String> Subjects;
 
 
-        public static List<String> Rooms;
+        public class Room
+        {
+            public String RoomID;
+            public int Container;
+        }
+        public static List<Room> Rooms;
 
         /// <summary>
         /// danh sách sinh viên sẽ bị cấm thi

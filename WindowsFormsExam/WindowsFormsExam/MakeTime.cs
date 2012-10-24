@@ -150,7 +150,7 @@ namespace Mvc_ESM.Static_Helper
             }
         }
 
-        private static DateTime IncTime(DateTime Time, int Step)
+        public static DateTime IncTime(DateTime Time, int Step)
         {
             DateTime Result = Time;
             // tìm ca thi dựa vào Time
