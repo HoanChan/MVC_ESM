@@ -79,5 +79,12 @@ namespace Mvc_ESM.Static_Helper
             thread.Name = "GraphColoringAlgorithm";
             thread.Start();
         }
+
+        public void RunMakeTime()
+        {
+            Thread thread = new Thread(new ThreadStart(MakeTime.Run));
+            thread.Name = "MakeTime";
+            thread.Start();
+        }
     }
 }
