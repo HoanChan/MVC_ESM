@@ -28,12 +28,12 @@ namespace Mvc_ESM.Static_Helper
         {   
             var StudentLearnSubject1 = from s1 in qrDKMH
                                        where s1.MaMonHoc == Subject1ID 
-                                                && !((List<String>)InputHelper.Student[Subject1ID]).Contains(s1.MaSinhVien)
+                                                && !((List<String>)InputHelper.Students[Subject1ID]).Contains(s1.MaSinhVien)
                                        select s1.MaSinhVien;
             var StudentLearnTowSubject = (from s2 in qrDKMH
                                           where s2.MaMonHoc == Subject2ID 
                                                 && StudentLearnSubject1.Contains(s2.MaSinhVien) 
-                                                && !((List<String>)InputHelper.Student[Subject2ID]).Contains(s2.MaSinhVien)
+                                                && !((List<String>)InputHelper.Students[Subject2ID]).Contains(s2.MaSinhVien)
                                          select s2.MaSinhVien);
             return (StudentLearnTowSubject.Count() > 0) ? 1 : 0;
         }
