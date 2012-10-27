@@ -40,6 +40,9 @@
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="fastJSON">
+      <HintPath>.\fastJSON.dll</HintPath>
+    </Reference>
     <Reference Include="ObjectListView">
       <HintPath>..\..\CHOM CHIA\ObjectListViewDemo\ObjectListView\bin\Debug\ObjectListView.dll</HintPath>
     </Reference>

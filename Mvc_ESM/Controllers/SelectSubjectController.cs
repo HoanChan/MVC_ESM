@@ -8,6 +8,8 @@ using System.Web.Mvc;
 using Mvc_ESM.Models;
 using System.Collections.Specialized;
 using System.Collections;
+using Mvc_ESM.Static_Helper;
+using System.Text;
 
 namespace Mvc_ESM.Controllers
 { 
@@ -29,8 +31,8 @@ namespace Mvc_ESM.Controllers
         [HttpPost]
         public String SelectSuccess(List<String> SubjectID)
         {
-            Static_Helper.InputHelper.Subjects = SubjectID;
-            Static_Helper.XML.OBJ2XML(SubjectID, "C:\\Subjects.xml");
+            InputHelper.Subjects = SubjectID;
+            System.IO.File.WriteAllText("C:\\Subjects.jso", fastJSON.JSON.Instance.ToJSON(InputHelper.Subjects), Encoding.UTF8);
             string paramInfo = "";
             foreach (String si in SubjectID)
             {

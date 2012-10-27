@@ -25,14 +25,14 @@ namespace Mvc_ESM.Static_Helper
                 {
                     if (AlgorithmRunner.Colors[i] == ColorNumber)
                     {
-                        AlgorithmRunner.SubjectTime[i] = InputHelper.StartDate.AddDays(Date)
-                                                                              .AddHours(InputHelper.Times[Slot].BGTime.Hour)
-                                                                              .AddMinutes(InputHelper.Times[Slot].BGTime.Minute);
+                        AlgorithmRunner.SubjectTime[i] = InputHelper.Options.StartDate.AddDays(Date)
+                                                                              .AddHours(InputHelper.Options.Times[Slot].BGTime.Hour)
+                                                                              .AddMinutes(InputHelper.Options.Times[Slot].BGTime.Minute);
                         AlgorithmRunner.MaxColorTime[ColorNumber] = AlgorithmRunner.SubjectTime[i];
                     }
                 }
                 Slot++;
-                if (Slot == InputHelper.Times.Count)
+                if (Slot == InputHelper.Options.Times.Count)
                 {
                     Slot = 0;
                     Date++;
@@ -82,12 +82,12 @@ namespace Mvc_ESM.Static_Helper
             {
                 // tăng môn i nhưng phải dựa vào môn j là do ko bít hiện tại khoảng cách giữa 2 môn
                 // i và j là bao nhiêu, tăng cho vừa khớp với điều kiện cho chắc.
-                AlgorithmRunner.SubjectTime[i] = IncTime(AlgorithmRunner.SubjectTime[j], InputHelper.DateMin);
+                AlgorithmRunner.SubjectTime[i] = IncTime(AlgorithmRunner.SubjectTime[j], InputHelper.Options.DateMin);
                 Index = i;
             }
             else //Checker == 2
             {
-                AlgorithmRunner.SubjectTime[j] = IncTime(AlgorithmRunner.SubjectTime[i], InputHelper.DateMin);
+                AlgorithmRunner.SubjectTime[j] = IncTime(AlgorithmRunner.SubjectTime[i], InputHelper.Options.DateMin);
                 Index = j;
             }
             int CurrentColor = AlgorithmRunner.Colors[Index];
@@ -109,7 +109,7 @@ namespace Mvc_ESM.Static_Helper
         //+ Bước này không duyệt theo sinh viên mà sử dụng ma trận kề để tìm 2 môn có sinh viên thi cùng
         //    như vậy sẽ không cần truy vấn vào cơ sở dữ liệu nữa!
         //+ sau khi tìm được, giãn thời gian
-        private static void MakeTime()
+        private static void CreateTime()
         {
             for (int i = 0; i < AlgorithmRunner.AdjacencyMatrixSize; i++)
             {
@@ -155,9 +155,9 @@ namespace Mvc_ESM.Static_Helper
             DateTime Result = Time;
             // tìm ca thi dựa vào Time
             int CurrentStep = 0;
-            for (int i = 0; i < InputHelper.Times.Count; i++)
+            for (int i = 0; i < InputHelper.Options.Times.Count; i++)
             {
-                if (Time.Hour == InputHelper.Times[i].BGTime.Hour && Time.Minute == InputHelper.Times[i].BGTime.Minute)
+                if (Time.Hour == InputHelper.Options.Times[i].BGTime.Hour && Time.Minute == InputHelper.Options.Times[i].BGTime.Minute)
                 {
                     CurrentStep = i;
                     break;
@@ -172,11 +172,11 @@ namespace Mvc_ESM.Static_Helper
             // 6 / 4 = 1 ==> ngày cần tăng
             Result = new DateTime(Time.Year, 
                                   Time.Month, 
-                                  Time.Day, 
-                                  InputHelper.Times[FinalStep % InputHelper.Times.Count].BGTime.Hour, 
-                                  InputHelper.Times[FinalStep % InputHelper.Times.Count].BGTime.Minute, 
+                                  Time.Day,
+                                  InputHelper.Options.Times[FinalStep % InputHelper.Options.Times.Count].BGTime.Hour,
+                                  InputHelper.Options.Times[FinalStep % InputHelper.Options.Times.Count].BGTime.Minute, 
                                   0);
-            Result = Result.AddDays(FinalStep / InputHelper.Times.Count);
+            Result = Result.AddDays(FinalStep / InputHelper.Options.Times.Count);
             return Result;
         }
 
@@ -187,12 +187,12 @@ namespace Mvc_ESM.Static_Helper
             if (T1 > T2)
             {
                 // t1> t2, và nếu sau khi tăng t2 mà lại lớn hơn t1 == > khoảng cách giữa t1 và t2 chưa đạt yêu cầu
-                if (IncTime(T2, InputHelper.DateMin) > T1)
+                if (IncTime(T2, InputHelper.Options.DateMin) > T1)
                     return 1; // T1 cần giãn
             }
             else
             {
-                if (IncTime(T1, InputHelper.DateMin) > T2)
+                if (IncTime(T1, InputHelper.Options.DateMin) > T2)
                     return 2; // t2 cần giãn
             }
 
@@ -202,7 +202,7 @@ namespace Mvc_ESM.Static_Helper
         public static void Run()
         {
             Init();
-            MakeTime();
+            CreateTime();
         }
     }
 }

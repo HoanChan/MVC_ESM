@@ -27,21 +27,21 @@ namespace Mvc_ESM.Static_Helper
         {
             qrDMKH = (from su in db.monhocs
                      join dk in db.pdkmhs on su.MaMonHoc equals dk.MaMonHoc
-                     where Static_Helper.InputHelper.Subjects.Contains(su.MaMonHoc)
+                     where InputHelper.Subjects.Contains(su.MaMonHoc)
                      select dk).ToList();
-            AdjacencyMatrixSize = Static_Helper.InputHelper.Subjects.Count;
+            AdjacencyMatrixSize = InputHelper.Subjects.Count;
             AdjacencyMatrix = new int[AdjacencyMatrixSize, AdjacencyMatrixSize];
             for( int i = 0; i < AdjacencyMatrixSize; i++)
             {
                 for (int j = i + 1; j < AdjacencyMatrixSize; j++)
                 {
-                    Static_Helper.ProgressHelper.pbCreateMatrix = (j+1)*100/(AdjacencyMatrixSize-i);
-                    Static_Helper.ProgressHelper.CreateMatrixInfo = Static_Helper.InputHelper.Subjects[i] + " - " + Static_Helper.InputHelper.Subjects[j] + " ( " + i + "/" + j + " )";
+                    ProgressHelper.pbCreateMatrix = (j+1)*100/(AdjacencyMatrixSize-i);
+                    ProgressHelper.CreateMatrixInfo = InputHelper.Subjects[i] + " - " + InputHelper.Subjects[j] + " ( " + i + "/" + j + " )";
                     AdjacencyMatrix[i, j] = AdjacencyMatrix[j, i] = 
-                        CheckSubject(Static_Helper.InputHelper.Subjects[i], Static_Helper.InputHelper.Subjects[j]);
+                        CheckSubject(InputHelper.Subjects[i], InputHelper.Subjects[j]);
                 }
             }
         }
-        //IEnumerable<int> _Colors = Static_Helper.GraphColoringAlgorithm.Run(AdjacencyMatrix);
+        //IEnumerable<int> _Colors = GraphColoringAlgorithm.Run(AdjacencyMatrix);
     }
 }

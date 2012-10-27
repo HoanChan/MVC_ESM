@@ -19,7 +19,8 @@ namespace Mvc_ESM.Static_Helper
         public static int[] Colors;
         public static int ColorNumber;
         public static DateTime[] SubjectTime;
-        public static List<InputHelper.Room>[] SubjectRoom;
+        public static List<Room>[] SubjectRoom;
+        public static List<String>[][] SubjectRoomStudents;
         public static DateTime[] MaxColorTime;
         private void ReadAdjacencyMatrix(string DataFilePath)
         {
@@ -35,36 +36,18 @@ namespace Mvc_ESM.Static_Helper
             }
         }
 
+        private static T ReadObj<T>(String ObjectName)
+        {
+            return (T)fastJSON.JSON.Instance.ToObject(File.ReadAllText(Path + ObjectName + ".jso", Encoding.UTF8));
+        }
+
         public void Init()
         {
             ReadAdjacencyMatrix(Path + "AdjacencyMatrix.txt");
             BeginI = 0;
-            List<String> Subjects = (List<String>) Mvc_ESM.Static_Helper.XML.XML2OBJ(Path + "Subjects.txt", typeof(List<String>));
-            HastableStudent Students = (HastableStudent) Mvc_ESM.Static_Helper.XML.XML2OBJ(Path + "Subjects.txt", typeof(HastableStudent));
-            InputHelper.DateMin = 1;
-            InputHelper.StartDate = DateTime.Now.Date;
-            InputHelper.Times = new List<ExamTime>(){   new ExamTime(){
-                                                            BGTime = DateTime.Now.Date.AddHours(7),
-                                                            ETime = DateTime.Now.Date.AddHours(8),
-                                                            Name = "1"
-                                                        },
-                                                        new ExamTime(){
-                                                            BGTime = DateTime.Now.Date.AddHours(9),
-                                                            ETime = DateTime.Now.Date.AddHours(10),
-                                                            Name = "2"
-                                                        },
-                                                        new ExamTime(){
-                                                            BGTime = DateTime.Now.Date.AddHours(13),
-                                                            ETime = DateTime.Now.Date.AddHours(14),
-                                                            Name = "2"
-                                                        },
-                                                        new ExamTime(){
-                                                            BGTime = DateTime.Now.Date.AddHours(15),
-                                                            ETime = DateTime.Now.Date.AddHours(16),
-                                                            Name = "2"
-                                                        }
-                                                    };
-            InputHelper.NumDate = 30;
+            InputHelper.Subjects = ReadObj<List<String>>("Subjects");
+            InputHelper.Students = ReadObj<Hashtable>("Students");
+            InputHelper.Options = ReadObj<Options>("Options");
         }
 
         public void RunCreateAdjacencyMatrix()
@@ -85,6 +68,13 @@ namespace Mvc_ESM.Static_Helper
         {
             Thread thread = new Thread(new ThreadStart(MakeTime.Run));
             thread.Name = "MakeTime";
+            thread.Start();
+        }
+
+        public void RunRoomArrangement()
+        {
+            Thread thread = new Thread(new ThreadStart(RoomArrangement.Run));
+            thread.Name = "RoomArrangement";
             thread.Start();
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Mvc_ESM.Models;
+using Mvc_ESM.Static_Helper;
 using System;
 using System.Data;
 using System.Data.Entity;
@@ -16,13 +17,13 @@ namespace Mvc_ESM.Controllers
         [HttpGet]
         public ViewResult Index()
         {
-            if (Static_Helper.SubjectHelper.Khoa == null || Static_Helper.SubjectHelper.Khoa == "")
+            if (SubjectHelper.Khoa == null || SubjectHelper.Khoa == "")
             {
-                Static_Helper.SubjectHelper.Khoa = (from d in db.khoas
+                SubjectHelper.Khoa = (from d in db.khoas
                                                     orderby d.TenKhoa
                                                     select d).FirstOrDefault().MaKhoa;
-                Static_Helper.SubjectHelper.SearchString = "";
-                Static_Helper.SubjectHelper.BoMon = "";
+                SubjectHelper.SearchString = "";
+                SubjectHelper.BoMon = "";
                 InitViewBag(false);
             }
             else
@@ -30,7 +31,7 @@ namespace Mvc_ESM.Controllers
                 InitViewBag(true);
             }
             var monhocs = (from m in db.monhocs
-                           where m.bomon.KhoaQL.Equals(Static_Helper.SubjectHelper.Khoa)
+                           where m.bomon.KhoaQL.Equals(SubjectHelper.Khoa)
                            select m
                            ).Include(m => m.bomon).Include(m => m.khoa);
             
@@ -40,9 +41,9 @@ namespace Mvc_ESM.Controllers
         [HttpPost]
         public ViewResult Index(String Khoa, String BoMon, String SearchString)
         {
-            Static_Helper.SubjectHelper.Khoa = Khoa;
-            Static_Helper.SubjectHelper.SearchString = SearchString;
-            Static_Helper.SubjectHelper.BoMon = BoMon;
+            SubjectHelper.Khoa = Khoa;
+            SubjectHelper.SearchString = SearchString;
+            SubjectHelper.BoMon = BoMon;
             var monhocs = (from m in db.monhocs 
                            where ((BoMon == "" && m.bomon.KhoaQL.Equals(Khoa)) || (BoMon != "" && m.bomon.MaBoMon.Equals(BoMon))) && (m.TenMonHoc.Contains(SearchString) || SearchString == "")
                            select m
@@ -58,7 +59,7 @@ namespace Mvc_ESM.Controllers
                           select new { MaKhoa = d.MaKhoa, TenKhoa = d.TenKhoa };
             ViewBag.Khoa = new SelectList(KhoaQry.ToArray(), "MaKhoa", "TenKhoa");
             var BoMonQry = from b in db.bomons
-                            where b.khoa.MaKhoa == (IsPost ? Static_Helper.SubjectHelper.Khoa : KhoaQry.FirstOrDefault().MaKhoa)
+                            where b.khoa.MaKhoa == (IsPost ? SubjectHelper.Khoa : KhoaQry.FirstOrDefault().MaKhoa)
                             orderby b.TenBoMon
                             select new { MaBoMon = b.MaBoMon, TenBoMon = b.TenBoMon };
             ViewBag.BoMon = new SelectList(BoMonQry.ToArray(), "MaBoMon", "TenBoMon");

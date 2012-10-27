@@ -1,4 +1,5 @@
 ﻿using Mvc_ESM.Models;
+using Mvc_ESM.Static_Helper;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -14,8 +15,8 @@ namespace Mvc_ESM.Controllers
         {
             return Json(new List<object>(){ new 
                     {
-                        pbCreateMatrix = Static_Helper.ProgressHelper.pbCreateMatrix,
-                        CreateMatrixInfo = Static_Helper.ProgressHelper.CreateMatrixInfo
+                        pbCreateMatrix = ProgressHelper.pbCreateMatrix,
+                        CreateMatrixInfo = ProgressHelper.CreateMatrixInfo
                     }}, JsonRequestBehavior.AllowGet);
         }
 

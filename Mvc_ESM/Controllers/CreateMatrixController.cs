@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mvc_ESM.Models;
+using Mvc_ESM.Static_Helper;
 
 namespace Mvc_ESM.Controllers
 {
@@ -64,6 +65,6 @@ namespace Mvc_ESM.Controllers
                 i++;
             }
         }
-        IEnumerable<int> _Colors = Static_Helper.GraphColoringAlgorithm.Run(AdjacencyMatrix);
+        IEnumerable<int> _Colors = GraphColoringAlgorithm.Run(AdjacencyMatrix);
     }
 }

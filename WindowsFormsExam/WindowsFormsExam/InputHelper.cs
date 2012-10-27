@@ -10,34 +10,38 @@ namespace Mvc_ESM.Static_Helper
         public DateTime BGTime;
         public DateTime ETime;
     }
-    public class HastableStudent
+
+    public class Room
     {
-        public List<String> Subjects;
-        public List<String> Students;
+        public String RoomID;
+        public int Container;
+        public Room(String RoomID, int Container)
+        {
+            this.RoomID = RoomID;
+            this.Container = Container;
+        }
     }
+
+    public class Options
+    {
+        public DateTime StartDate;
+        public int NumDate;
+        public int DateMin;
+        public List<ExamTime> Times = new List<ExamTime>();
+    }
+
     public class InputHelper
     {
         /// <summary>
         /// danh sách môn học sẽ xếp lịch
         /// </summary>
         public static List<String> Subjects;
-
-
-        public class Room
-        {
-            public String RoomID;
-            public int Container;
-        }
         public static List<Room> Rooms;
-
         /// <summary>
         /// danh sách sinh viên sẽ bị cấm thi
         /// </summary>
-        public static Hashtable Student;
+        public static Hashtable Students;
 
-        public static DateTime StartDate;
-        public static int NumDate;
-        public static int DateMin;
-        public static List<ExamTime> Times;
+        public static Options Options = new Options();
     }
 }

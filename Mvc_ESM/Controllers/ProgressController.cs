@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mvc_ESM.Static_Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -14,7 +15,7 @@ namespace Mvc_ESM.Controllers
         
         public ActionResult Index()
         {
-            Thread thread = new Thread(new ThreadStart(Static_Helper.CreateAdjacencyMatrix.Run));
+            Thread thread = new Thread(new ThreadStart(CreateAdjacencyMatrix.Run));
             thread.Name = "CreateAdjacencyMatrix";
             thread.Start();
             return View();

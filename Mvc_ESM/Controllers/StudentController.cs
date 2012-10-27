@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mvc_ESM.Models;
+using Mvc_ESM.Static_Helper;
 
 namespace Mvc_ESM.Controllers
 {
@@ -31,13 +32,13 @@ namespace Mvc_ESM.Controllers
         [HttpGet]
         public ViewResult Index()
         {
-            Static_Helper.StudentHelper.Khoa = (from d in db.khoas
+            StudentHelper.Khoa = (from d in db.khoas
                                                 orderby d.TenKhoa
                                                 select d).FirstOrDefault().MaKhoa;
-            Static_Helper.StudentHelper.SearchString = "";
-            Static_Helper.StudentHelper.Lop = "Tất cả";
+            StudentHelper.SearchString = "";
+            StudentHelper.Lop = "Tất cả";
             var students = (from m in db.sinhviens
-                            where m.lop1.khoi.KhoaQL.Equals(Static_Helper.StudentHelper.Khoa)
+                            where m.lop1.khoi.KhoaQL.Equals(StudentHelper.Khoa)
                             select m
                            ).Include(m => m.lop1);
             InitViewBag(false);
@@ -47,9 +48,9 @@ namespace Mvc_ESM.Controllers
         [HttpPost]
         public ViewResult Index(String Khoa, String Lop, String SearchString)
         {
-            Static_Helper.StudentHelper.Khoa = Khoa;
-            Static_Helper.StudentHelper.SearchString = SearchString;
-            Static_Helper.StudentHelper.Lop = Lop;
+            StudentHelper.Khoa = Khoa;
+            StudentHelper.SearchString = SearchString;
+            StudentHelper.Lop = Lop;
             var sinhviens = (from m in db.sinhviens
                              where (Lop == "" && m.lop1.khoi.KhoaQL.Equals(Khoa)) || (Lop != "" && m.lop1.MaLop.Equals(Lop)) && (m.Ten.Contains(SearchString) || SearchString == "")
                              select m
@@ -65,7 +66,7 @@ namespace Mvc_ESM.Controllers
                           select new { MaKhoa = d.MaKhoa, TenKhoa = d.TenKhoa };
             ViewBag.Khoa = new SelectList(KhoaQry.ToArray(), "MaKhoa", "TenKhoa");
             var ClassQry = from b in db.lops
-                           where b.khoi.KhoaQL == (IsPost ? Static_Helper.StudentHelper.Khoa : KhoaQry.FirstOrDefault().MaKhoa)
+                           where b.khoi.KhoaQL == (IsPost ? StudentHelper.Khoa : KhoaQry.FirstOrDefault().MaKhoa)
                            orderby b.MaLop
                            select new { MaLop = b.MaLop, TenLop = b.MaLop };
             ViewBag.Lop = new SelectList(ClassQry.ToArray(), "MaLop", "TenLop");

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mvc_ESM.Models;
+using Mvc_ESM.Static_Helper;
+using System.Text;
 
 namespace Mvc_ESM.Controllers
 {
@@ -25,13 +27,14 @@ namespace Mvc_ESM.Controllers
         [HttpPost]
         public String SelectSuccess(List<String> RoomID, List<int> Container)
         {
-            Static_Helper.InputHelper.Rooms = new List<Static_Helper.InputHelper.Room>();
+            InputHelper.Rooms = new List<Room>();
             string paramInfo = "";
             for (int i = 0; i < RoomID.Count; i++)
             {
-                Static_Helper.InputHelper.Rooms.Add(new Static_Helper.InputHelper.Room(RoomID[i], Container[i]));
+                InputHelper.Rooms.Add(new Room(RoomID[i], Container[i]));
                 paramInfo += "MP:" + RoomID[i] + " SC: " + Container[i] + "<br /><br />";
             }
+            System.IO.File.WriteAllText("C:\\Rooms.jso", fastJSON.JSON.Instance.ToJSON(InputHelper.Rooms), Encoding.UTF8);
             return paramInfo;
         }
 

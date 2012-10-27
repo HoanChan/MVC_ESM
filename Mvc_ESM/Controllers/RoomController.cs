@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Mvc_ESM.Models;
 using System.Collections;
+using Mvc_ESM.Static_Helper;
 
 namespace Mvc_ESM.Controllers
 {
@@ -20,7 +21,7 @@ namespace Mvc_ESM.Controllers
         public ViewResult Index()
         {
             var phongs = (from r in db.phongs
-                          where (Static_Helper.RoomHelper.MaPhong == "" || (Static_Helper.RoomHelper.MaPhong != "" && r.MaPhong.Equals(Static_Helper.RoomHelper.MaPhong)))
+                          where (RoomHelper.MaPhong == "" || (RoomHelper.MaPhong != "" && r.MaPhong.Equals(RoomHelper.MaPhong)))
                           select r);
             InitViewBag();
             return View(phongs.ToList());
@@ -29,7 +30,7 @@ namespace Mvc_ESM.Controllers
         [HttpPost]
         public ViewResult Index(String Phong)
         {
-            Static_Helper.RoomHelper.MaPhong = Phong;
+            RoomHelper.MaPhong = Phong;
             var phongs = (from r in db.phongs
                           where (Phong == "" || (Phong != "" && r.MaPhong.Equals(Phong)))
                           select r);

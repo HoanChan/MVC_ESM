@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Mvc_ESM.Models;
 using System.Collections;
+using Mvc_ESM.Static_Helper;
 
 namespace Mvc_ESM.Controllers
 {
@@ -34,7 +35,7 @@ namespace Mvc_ESM.Controllers
         public ViewResult Index()
         {
             var giaoviens = (from m in db.giaoviens
-                             where ((Static_Helper.TeacherHelper.BoMon == "" && m.bomon.KhoaQL.Equals(Static_Helper.TeacherHelper.Khoa)) || (Static_Helper.TeacherHelper.BoMon != "" && m.bomon.MaBoMon.Equals(Static_Helper.TeacherHelper.BoMon))) && ((m.HoLot + " " + m.TenGiaoVien).Contains(Static_Helper.TeacherHelper.SearchString) || Static_Helper.TeacherHelper.SearchString == "")
+                             where ((TeacherHelper.BoMon == "" && m.bomon.KhoaQL.Equals(TeacherHelper.Khoa)) || (TeacherHelper.BoMon != "" && m.bomon.MaBoMon.Equals(TeacherHelper.BoMon))) && ((m.HoLot + " " + m.TenGiaoVien).Contains(TeacherHelper.SearchString) || TeacherHelper.SearchString == "")
                              select m
                            ).Include(m => m.bomon);
             InitViewBag(false);
@@ -44,9 +45,9 @@ namespace Mvc_ESM.Controllers
         [HttpPost]
         public ViewResult Index(String Khoa, String BoMon, String SearchString)
         {
-            Static_Helper.TeacherHelper.Khoa = Khoa;
-            Static_Helper.TeacherHelper.SearchString = SearchString;
-            Static_Helper.TeacherHelper.BoMon = BoMon;
+            TeacherHelper.Khoa = Khoa;
+            TeacherHelper.SearchString = SearchString;
+            TeacherHelper.BoMon = BoMon;
             var giaoviens = (from m in db.giaoviens
                              where ((BoMon == "" && m.bomon.KhoaQL.Equals(Khoa)) || (BoMon != "" && m.bomon.MaBoMon.Equals(BoMon))) && ((m.HoLot + " " + m.TenGiaoVien).Contains(SearchString) || SearchString == "")
                              select m
@@ -63,7 +64,7 @@ namespace Mvc_ESM.Controllers
             ViewBag.Khoa = new SelectList(KhoaQry.ToArray(), "MaKhoa", "TenKhoa");
                 
             var BoMonQry = from b in db.bomons
-                           where b.khoa.MaKhoa == (IsPost ? Static_Helper.TeacherHelper.Khoa : KhoaQry.FirstOrDefault().MaKhoa)
+                           where b.khoa.MaKhoa == (IsPost ? TeacherHelper.Khoa : KhoaQry.FirstOrDefault().MaKhoa)
                            select new { MaBoMon = b.MaBoMon, TenBoMon = b.TenBoMon };
             ViewBag.BoMon = new SelectList(BoMonQry.ToArray(), "MaBoMon", "TenBoMon");
             ViewBag.SearchString = "";

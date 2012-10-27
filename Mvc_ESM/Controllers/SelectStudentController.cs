@@ -1,10 +1,11 @@
 ﻿using Mvc_ESM.Models;
+using Mvc_ESM.Static_Helper;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web.Mvc;
-
 namespace Mvc_ESM.Controllers
 {
     public class SelectStudentController : Controller
@@ -26,24 +27,21 @@ namespace Mvc_ESM.Controllers
         [HttpPost]
         public String SelectSuccess(List<String> StudentID, List<String> SubjectID)
         {
-            Static_Helper.InputHelper.Student = new Hashtable();
-            Static_Helper.InputHelper.HastableStudent HastableStudent = new Static_Helper.InputHelper.HastableStudent();
-            HastableStudent.Students = StudentID;
-            HastableStudent.Subjects = SubjectID;
+            InputHelper.Students = new Hashtable();
             string paramInfo = "";
             for (int i = 0; i < StudentID.Count(); i++)
             {
-                if (Static_Helper.InputHelper.Student.ContainsKey(SubjectID[i]))
+                if (InputHelper.Students.ContainsKey(SubjectID[i]))
                 {
-                    (Static_Helper.InputHelper.Student[SubjectID[i]] as List<String>).Add(StudentID[i]);
+                    (InputHelper.Students[SubjectID[i]] as List<String>).Add(StudentID[i]);
                 }
                 else
                 {
-                    Static_Helper.InputHelper.Student.Add(SubjectID[i], new List<String> { StudentID[i] });
+                    InputHelper.Students.Add(SubjectID[i], new List<String> { StudentID[i] });
                 }
                 paramInfo += "MH:" + SubjectID[i] + " SV: " + StudentID[i] + "<br /><br />";
             }
-            Static_Helper.XML.OBJ2XML(HastableStudent, "C:\\Students.xml");
+            System.IO.File.WriteAllText("C:\\Students.jso", fastJSON.JSON.Instance.ToJSON(InputHelper.Students), Encoding.UTF8);
             return paramInfo;
         }
 

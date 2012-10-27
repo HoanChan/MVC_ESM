@@ -22,6 +22,42 @@ namespace Mvc_ESM.Static_Helper
             public String Ho;
             public String Ten;
         }
+
+        public static void Run()
+        {
+            Init();
+            step2();
+        }
+
+        private static void MakeStudentList(int SubjectIndex, int StudentsNumber)
+        {
+            int RoomNumber = AlgorithmRunner.SubjectRoom[SubjectIndex].Count;
+            int StudentsPerRoom = StudentsNumber / RoomNumber;
+            AlgorithmRunner.SubjectRoomStudents[SubjectIndex] = new List<string>[RoomNumber];
+            int Used = 0;
+            int OverLoad = 0;
+            for (int i = 0; i < RoomNumber; i++)
+            {
+                int Use;
+                if (StudentsPerRoom + OverLoad > AlgorithmRunner.SubjectRoom[SubjectIndex][i].Container)
+                {
+                    Use = AlgorithmRunner.SubjectRoom[SubjectIndex][i].Container;
+                    OverLoad = (StudentsPerRoom + OverLoad) - Use;
+                }
+                else
+                {
+                    Use = StudentsPerRoom + OverLoad;
+                    OverLoad = 0;
+                }
+                for (int j = Used; j < Used + Use; j++)
+                {
+                    AlgorithmRunner.SubjectRoomStudents[SubjectIndex][i].Add(((List<Student>)StudentBySubject[InputHelper.Subjects[SubjectIndex]])[j].MSSV);
+
+                }
+                Used += Use;
+            }
+        }
+
         private static void Init()
         {
             StudentBySubject = new Hashtable();
@@ -30,17 +66,19 @@ namespace Mvc_ESM.Static_Helper
             {
                 var Students = from dk in db.pdkmhs
                                where dk.MaMonHoc == InputHelper.Subjects[i]
-                                    && !((List<String>)InputHelper.Student[InputHelper.Subjects[i]]).Contains(dk.MaSinhVien)
+                                    && !((List<String>)InputHelper.Students[InputHelper.Subjects[i]]).Contains(dk.MaSinhVien)
                                select new Student()
                                {
                                    MSSV = dk.sinhvien.MaSinhVien,
                                    Ho = dk.sinhvien.Ho,
                                    Ten = dk.sinhvien.Ten
                                };
-                StudentBySubject.Add(InputHelper.Subjects[i], Students.ToList());
-                Sort(InputHelper.Subjects[i]);
+                StudentBySubject.Add(InputHelper.Subjects[i], Students.OrderBy(s => s.Ten + s.Ho).ToList());
+                //Sort(InputHelper.Subjects[i]);
             }
-            AlgorithmRunner.SubjectRoom = new List<InputHelper.Room>[InputHelper.Subjects.Count];
+            AlgorithmRunner.SubjectRoom = new List<Room>[InputHelper.Subjects.Count];
+            AlgorithmRunner.SubjectRoomStudents = new List<String>[InputHelper.Subjects.Count][];
+            InputHelper.Rooms = InputHelper.Rooms.OrderBy(r => r.Container).ToList<Room>();
         }
 
         // Chia phòng cho từng môn cùng ca
@@ -50,7 +88,7 @@ namespace Mvc_ESM.Static_Helper
             while (SubjectsIndexList.Count() > 0)
             {
                 RoomUsedIndex = -1; // gán bằng -1 để vào xếp phòng nó tăng lên xét coi còn phòng ko
-                foreach(int si in SubjectsIndexList)
+                foreach (int si in SubjectsIndexList)
                 {
                     RoomArrangementForOneSubject(si);
                 }
@@ -61,7 +99,7 @@ namespace Mvc_ESM.Static_Helper
         private static void RoomArrangementForOneSubject(int SubjectIndex)
         {
             int StudentsNumber = ((List<String>)StudentBySubject[InputHelper.Subjects[SubjectIndex]]).Count;
-            AlgorithmRunner.SubjectRoom[SubjectIndex] = new List<InputHelper.Room>();
+            AlgorithmRunner.SubjectRoom[SubjectIndex] = new List<Room>();
             int OldRoomUsedIndex = RoomUsedIndex;
             while (StudentsNumber > 0)
             {
@@ -91,6 +129,7 @@ namespace Mvc_ESM.Static_Helper
                     return; // thoát luôn
                 }
             }
+            MakeStudentList(SubjectIndex, StudentsNumber);
         }
 
         // chuyển các môn màu khác ở ca phía sau đi ra sau 1 ca, tránh tình trạng khác màu mà cùng ca
@@ -134,29 +173,30 @@ namespace Mvc_ESM.Static_Helper
 
         private static void Sort(String SubjectID)
         {
-            List<Student> Student = (List<Student>)InputHelper.Student[SubjectID];
-            for (int i = 0; i < Student.Count - 1; i++)
-            {
-                for (int j = i + 1; j < Student.Count; j++)
-                {
-                    if (Student[i].Ten.CompareTo(Student[j].Ten) > 0)
-                    {
-                        Student temp = Student[i];
-                        Student[i] = Student[j];
-                        Student[j] = temp;
-                    }
-                    else
-                    {
-                        if (Student[i].Ten.CompareTo(Student[j].Ten) == 0 && Student[i].Ho.CompareTo(Student[j].Ho) > 0)
-                        {
-                            Student temp = Student[i];
-                            Student[i] = Student[j];
-                            Student[j] = temp;
-                        }
-                    }
-                }
-            }
-            InputHelper.Student[SubjectID] = Student;
+            //List<Student> Student = (List<Student>)InputHelper.Student[SubjectID];
+            //for (int i = 0; i < Student.Count - 1; i++)
+            //{
+            //    for (int j = i + 1; j < Student.Count; j++)
+            //    {
+            //        if (Student[i].Ten.CompareTo(Student[j].Ten) > 0)
+            //        {
+            //            Student temp = Student[i];
+            //            Student[i] = Student[j];
+            //            Student[j] = temp;
+            //        }
+            //        else
+            //        {
+            //            if (Student[i].Ten.CompareTo(Student[j].Ten) == 0 && Student[i].Ho.CompareTo(Student[j].Ho) > 0)
+            //            {
+            //                Student temp = Student[i];
+            //                Student[i] = Student[j];
+            //                Student[j] = temp;
+            //            }
+            //        }
+            //    }
+            //}
+            //InputHelper.Student[SubjectID] = Student;
+            //InputHelper.Students[SubjectID] = ((List<Student>)InputHelper.Students[SubjectID]).OrderBy(s => s.Ten + s.Ho).ToList<Student>();
         }
 
     }
