@@ -174,7 +174,7 @@
 
 	    $('#SummitButton').click(function () {
 	        var sData = oTable.$('input').serialize();
-	        alert("The following data would have been submitted to the server: \n\n" + sData);
+	        //alert("The following data would have been submitted to the server: \n\n" + sData);
 	        //http://api.jquery.com/jQuery.post/
 	        $.post("/SelectSubject/SelectSuccess", sData);
 	        return false; 

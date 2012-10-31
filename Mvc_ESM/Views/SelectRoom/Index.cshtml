@@ -26,19 +26,19 @@
             {
                 <tr>
                     <td>
-                        <input type="checkbox" checked="checked" name="RoomID" value="@item.MaPhong">
+                        <input type="checkbox" checked="checked" id="CheckBox" value="@item.MaPhong" Container ="@item.SucChua">
                     </td>
                     <td>
-                        <span id="RoomID">@item.MaPhong</span>
+                        @item.MaPhong
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.KichThuoc)
+                        @item.KichThuoc
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.khoa.TenKhoa)
+                        @item.khoa.TenKhoa
                     </td>
                     <td>
-                        <span id="Container">@item.SucChua</span>
+                        @item.SucChua
                     </td>
                 </tr>
             }
@@ -59,11 +59,10 @@
 
         $('#SummitButton').click(function () {
             var sData = "";
-            oTable.$("#RoomID").each(function (index, item) {
-                sData = sData + (sData == '' ? '' : '&') + 'RoomID=' + $(this).text();
-            });
-            oTable.$("#Container").each(function (index, item) {
-                sData = sData + '&Container=' + $(this).text();
+            oTable.$("#CheckBox").each(function (index, item) {
+                if ($(this).attr("checked") == "checked") {
+                    sData += (sData == '' ? '' : '&') + 'RoomID=' + $(this).attr("value") + '&Container=' + $(this).attr("Container");
+                }
             });
             $.post("/SelectRoom/SelectSuccess", sData);
             alert("Đã lưu xong");

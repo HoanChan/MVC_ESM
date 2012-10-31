@@ -20,7 +20,7 @@ namespace Mvc_ESM.Controllers
 
         public ViewResult Index()
         {
-            var phongs = db.phongs.Include(p => p.khoa);
+            var phongs = db.phongs.Where(p => p.SucChua > 0).Include(p => p.khoa);
             return View(phongs.ToList());
         }
 
