@@ -26,8 +26,8 @@ namespace Mvc_ESM.Static_Helper
         {
             string[] Data = File.ReadAllLines(DataFilePath);
             string[] Split; 
-            AdjacencyMatrixSize = Data.Length;
-            AdjacencyMatrix = new int[AdjacencyMatrixSize, AdjacencyMatrixSize];
+            //AdjacencyMatrixSize = Data.Length;
+            //AdjacencyMatrix = new int[AdjacencyMatrixSize, AdjacencyMatrixSize];
             for (int i = 0; i < AdjacencyMatrixSize; i++)
             {
                 Split = Data[i].Trim().Split(new char[] { ' ' });
@@ -140,10 +140,24 @@ namespace Mvc_ESM.Static_Helper
             InputHelper.Students = GetDictionary<String, String>(ReadObj("Students"));
             InputHelper.Rooms = ReadObj<List<Room>>("Rooms");
             InputHelper.Options = (Options)ReadObj("Options");
+            AdjacencyMatrixSize = InputHelper.Subjects.Count;
+            AdjacencyMatrix = new int[AdjacencyMatrixSize, AdjacencyMatrixSize];
         }
 
         public void RunCreateAdjacencyMatrix()
         {
+            if (File.Exists(Path + "AdjacencyMatrix.txt"))
+            {
+                ReadAdjacencyMatrix(Path + "AdjacencyMatrix.txt");
+            }
+            if (File.Exists(Path + "BeginI.jso"))
+            {
+                BeginI = int.Parse(File.ReadAllText(Path + "BeginI.jso"));
+            }
+            else
+            {
+                BeginI = 0;
+            }
             Thread thread = new Thread(new ThreadStart(CreateAdjacencyMatrix.Run));
             thread.Name = "CreateAdjacencyMatrix";
             thread.Start();
@@ -152,7 +166,6 @@ namespace Mvc_ESM.Static_Helper
         public void RunColoring()
         {
             ReadAdjacencyMatrix(Path + "AdjacencyMatrix.txt");
-            BeginI = 0;
             Thread thread = new Thread(new ThreadStart(GraphColoringAlgorithm.Run));
             thread.Name = "GraphColoringAlgorithm";
             thread.Start();
@@ -160,8 +173,9 @@ namespace Mvc_ESM.Static_Helper
 
         public void RunMakeTime()
         {
-            ColorNumber = ReadObj<int>("ColorNumber");
+            ColorNumber = int.Parse(File.ReadAllText(Path + "ColorNumber.jso"));
             Colors = GetIntArray(ReadObj("Colors"));
+            ReadAdjacencyMatrix(Path + "AdjacencyMatrix.txt");
             Thread thread = new Thread(new ThreadStart(MakeTime.Run));
             thread.Name = "MakeTime";
             thread.Start();

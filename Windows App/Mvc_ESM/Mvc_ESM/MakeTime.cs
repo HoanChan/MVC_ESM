@@ -18,7 +18,7 @@ namespace Mvc_ESM.Static_Helper
             int Date = 0;
             // ca thi
             int Slot = 0;
-            for (int ColorNumber = 0; ColorNumber < AlgorithmRunner.ColorNumber; ColorNumber++)
+            for (int ColorNumber = 1; ColorNumber < AlgorithmRunner.ColorNumber; ColorNumber++)
             {
                 // các môn cùng màu sẽ cùng ca, cùng ngày thi
                 for (int i = 0; i < InputHelper.Subjects.Count; i++)
@@ -44,7 +44,7 @@ namespace Mvc_ESM.Static_Helper
         private static void IncSubjectAfter(int CurrentColor)
         {
             //màu max rồi thì hết cái để tăng.
-            if (CurrentColor < AlgorithmRunner.ColorNumber)
+            if (CurrentColor < AlgorithmRunner.ColorNumber - 1)
             {
                 // Thời gian các môn thi sau mà cùng màu thì bằng nhau và bằng max[màu],
                 // nên lây max[màu tiếp theo] - max[màu hiện tại]
@@ -82,12 +82,12 @@ namespace Mvc_ESM.Static_Helper
             {
                 // tăng môn i nhưng phải dựa vào môn j là do ko bít hiện tại khoảng cách giữa 2 môn
                 // i và j là bao nhiêu, tăng cho vừa khớp với điều kiện cho chắc.
-                AlgorithmRunner.SubjectTime[i] = IncTime(AlgorithmRunner.SubjectTime[j], InputHelper.Options.DateMin);
+                AlgorithmRunner.SubjectTime[i] = IncTime(AlgorithmRunner.SubjectTime[j], InputHelper.Options.DateMin + 1);
                 Index = i;
             }
             else //Checker == 2
             {
-                AlgorithmRunner.SubjectTime[j] = IncTime(AlgorithmRunner.SubjectTime[i], InputHelper.Options.DateMin);
+                AlgorithmRunner.SubjectTime[j] = IncTime(AlgorithmRunner.SubjectTime[i], InputHelper.Options.DateMin + 1);
                 Index = j;
             }
             int CurrentColor = AlgorithmRunner.Colors[Index];
@@ -130,7 +130,7 @@ namespace Mvc_ESM.Static_Helper
         public static int CalcStep(DateTime OldTime, DateTime NewTime)
         {
             int Result = 0;
-            if (OldTime > NewTime)
+            if (OldTime < NewTime)
             {
                 while (true)
                 {
@@ -139,7 +139,7 @@ namespace Mvc_ESM.Static_Helper
                         return Result;
                 }
             }
-            else if (OldTime < NewTime)
+            else if (OldTime > NewTime)
             {
                 while (true)
                 {
@@ -190,13 +190,13 @@ namespace Mvc_ESM.Static_Helper
             DateTime T2 = AlgorithmRunner.SubjectTime[j];
             if (T1 > T2)
             {
-                // t1> t2, và nếu sau khi tăng t2 mà lại lớn hơn t1 == > khoảng cách giữa t1 và t2 chưa đạt yêu cầu
-                if (IncTime(T2, InputHelper.Options.DateMin) > T1)
+                // t1> t2, và nếu sau khi tăng t2 mà lại lớn hơn hoặc bằng t1 == > khoảng cách giữa t1 và t2 chưa đạt yêu cầu
+                if (IncTime(T2, InputHelper.Options.DateMin) >= T1)
                     return 1; // T1 cần giãn
             }
-            else
+            else if (T1 < T2)
             {
-                if (IncTime(T1, InputHelper.Options.DateMin) > T2)
+                if (IncTime(T1, InputHelper.Options.DateMin) >= T2)
                     return 2; // t2 cần giãn
             }
 

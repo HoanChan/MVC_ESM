@@ -39,7 +39,7 @@ namespace Mvc_ESM.Static_Helper
             int StudentsPerRoom = StudentsNumber / RoomNumber;
             AlgorithmRunner.SubjectRoomStudents[SubjectIndex] = new List<string>[RoomNumber];
             int Used = 0;
-            int OverLoad = 0;
+            int OverLoad = StudentsNumber - StudentsPerRoom * RoomNumber;
             for (int RoomIndex = 0; RoomIndex < RoomNumber; RoomIndex++)
             {
                 int Use;
@@ -79,6 +79,10 @@ namespace Mvc_ESM.Static_Helper
                                    Ho = dk.sinhvien.Ho,
                                    Ten = dk.sinhvien.Ten
                                }).OrderBy(s => s.Ten + s.Ho).ToList();
+                //if (Students.Count == 0)
+                //{
+                //    int x = 1;
+                //}
                 StudentBySubject.Add(InputHelper.Subjects[SubjectIndex], Students);
                 //Sort(InputHelper.Subjects[i]);
             }
@@ -122,6 +126,7 @@ namespace Mvc_ESM.Static_Helper
                 else // hết phòng == > cần giãn ca
                 {
                     AlgorithmRunner.SubjectRoom[SubjectIndex].Clear(); // xoá mấy phòng lỡ thêm vào
+                    Progressed[SubjectIndex] = false; // cho nó trở lại trạng thái chưa xử lý
                     RoomUsedIndex = OldRoomUsedIndex;
                     // chuyển môn hiện tại qua ca tiếp theo
                     AlgorithmRunner.SubjectTime[SubjectIndex] = MakeTime.IncTime(AlgorithmRunner.SubjectTime[SubjectIndex], 1);

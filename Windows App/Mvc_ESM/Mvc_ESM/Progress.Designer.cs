@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnRunColoring = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,10 +45,17 @@
             this.btnRunSaveToDatabase = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.progressBar4 = new System.Windows.Forms.ProgressBar();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btnCreateAdjacencyMatrix = new System.Windows.Forms.Button();
+            this.lblCreateAdjacencyMatrix = new System.Windows.Forms.Label();
+            this.pbCreateAdjacencyMatrix = new System.Windows.Forms.ProgressBar();
+            this.ProgressUpdater = new System.Windows.Forms.Timer(this.components);
+            this.btnCreateAdjacencyMatrix_Stop = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -55,7 +63,7 @@
             this.groupBox1.Controls.Add(this.btnRunColoring);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.progressBar1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(210, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(192, 123);
             this.groupBox1.TabIndex = 0;
@@ -93,7 +101,7 @@
             this.groupBox2.Controls.Add(this.btnRunMakeTime);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.progressBar2);
-            this.groupBox2.Location = new System.Drawing.Point(210, 12);
+            this.groupBox2.Location = new System.Drawing.Point(408, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(192, 123);
             this.groupBox2.TabIndex = 1;
@@ -131,7 +139,7 @@
             this.groupBox3.Controls.Add(this.btnRunRoomArrangement);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.progressBar3);
-            this.groupBox3.Location = new System.Drawing.Point(408, 12);
+            this.groupBox3.Location = new System.Drawing.Point(12, 141);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(192, 123);
             this.groupBox3.TabIndex = 2;
@@ -202,11 +210,67 @@
             this.progressBar4.Size = new System.Drawing.Size(180, 23);
             this.progressBar4.TabIndex = 0;
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.btnCreateAdjacencyMatrix_Stop);
+            this.groupBox5.Controls.Add(this.btnCreateAdjacencyMatrix);
+            this.groupBox5.Controls.Add(this.lblCreateAdjacencyMatrix);
+            this.groupBox5.Controls.Add(this.pbCreateAdjacencyMatrix);
+            this.groupBox5.Location = new System.Drawing.Point(12, 12);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(192, 123);
+            this.groupBox5.TabIndex = 4;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "CreateAdjacencyMatrix";
+            // 
+            // btnCreateAdjacencyMatrix
+            // 
+            this.btnCreateAdjacencyMatrix.Location = new System.Drawing.Point(6, 94);
+            this.btnCreateAdjacencyMatrix.Name = "btnCreateAdjacencyMatrix";
+            this.btnCreateAdjacencyMatrix.Size = new System.Drawing.Size(75, 23);
+            this.btnCreateAdjacencyMatrix.TabIndex = 2;
+            this.btnCreateAdjacencyMatrix.Text = "Run";
+            this.btnCreateAdjacencyMatrix.UseVisualStyleBackColor = true;
+            this.btnCreateAdjacencyMatrix.Click += new System.EventHandler(this.btnCreateAdjacencyMatrix_Click);
+            // 
+            // lblCreateAdjacencyMatrix
+            // 
+            this.lblCreateAdjacencyMatrix.AutoSize = true;
+            this.lblCreateAdjacencyMatrix.Location = new System.Drawing.Point(6, 31);
+            this.lblCreateAdjacencyMatrix.Name = "lblCreateAdjacencyMatrix";
+            this.lblCreateAdjacencyMatrix.Size = new System.Drawing.Size(35, 13);
+            this.lblCreateAdjacencyMatrix.TabIndex = 1;
+            this.lblCreateAdjacencyMatrix.Text = "label5";
+            // 
+            // pbCreateAdjacencyMatrix
+            // 
+            this.pbCreateAdjacencyMatrix.Location = new System.Drawing.Point(6, 47);
+            this.pbCreateAdjacencyMatrix.Name = "pbCreateAdjacencyMatrix";
+            this.pbCreateAdjacencyMatrix.Size = new System.Drawing.Size(180, 23);
+            this.pbCreateAdjacencyMatrix.TabIndex = 0;
+            // 
+            // ProgressUpdater
+            // 
+            this.ProgressUpdater.Interval = 1000;
+            this.ProgressUpdater.Tick += new System.EventHandler(this.ProgressUpdater_Tick);
+            // 
+            // btnCreateAdjacencyMatrix_Stop
+            // 
+            this.btnCreateAdjacencyMatrix_Stop.Enabled = false;
+            this.btnCreateAdjacencyMatrix_Stop.Location = new System.Drawing.Point(111, 94);
+            this.btnCreateAdjacencyMatrix_Stop.Name = "btnCreateAdjacencyMatrix_Stop";
+            this.btnCreateAdjacencyMatrix_Stop.Size = new System.Drawing.Size(75, 23);
+            this.btnCreateAdjacencyMatrix_Stop.TabIndex = 3;
+            this.btnCreateAdjacencyMatrix_Stop.Text = "Stop";
+            this.btnCreateAdjacencyMatrix_Stop.UseVisualStyleBackColor = true;
+            this.btnCreateAdjacencyMatrix_Stop.Click += new System.EventHandler(this.btnCreateAdjacencyMatrix_Stop_Click);
+            // 
             // Progress
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(615, 276);
+            this.ClientSize = new System.Drawing.Size(609, 276);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -221,6 +285,8 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -243,6 +309,12 @@
         private System.Windows.Forms.Button btnRunSaveToDatabase;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ProgressBar progressBar4;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button btnCreateAdjacencyMatrix;
+        private System.Windows.Forms.Label lblCreateAdjacencyMatrix;
+        private System.Windows.Forms.ProgressBar pbCreateAdjacencyMatrix;
+        private System.Windows.Forms.Timer ProgressUpdater;
+        private System.Windows.Forms.Button btnCreateAdjacencyMatrix_Stop;
     }
 }
 
