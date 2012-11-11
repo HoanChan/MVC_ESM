@@ -95,13 +95,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\CreateMatrixController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OptionsController.cs" />
     <Compile Include="Controllers\ProgressController.cs" />
-    <Compile Include="Controllers\RoomCalendarResultController.cs" />
+    <Compile Include="Controllers\CalendarResultsController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\SelectRoomController.cs" />
     <Compile Include="Controllers\SelectStudentController.cs" />
@@ -173,6 +172,7 @@
       <DependentUpon>DKMHModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Static_Helper\Calendar.cs" />
     <Compile Include="Static_Helper\CreateAdjacencyMatrix.cs" />
     <Compile Include="Static_Helper\GraphColoringAlgorithm.cs" />
     <Compile Include="Static_Helper\ProgressHelper.cs" />
@@ -261,13 +261,6 @@
     <Content Include="Views\Subject\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Calendar\Data.cshtml" />
-    <Content Include="Views\Calendar\Save.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Calendar\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\SelectSubject\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -339,16 +332,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\RoomCalendarResult\Index.cshtml">
+    <Content Include="Views\CalendarResults\RoomsResult.cshtml">
       <SubType>
       </SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\RoomCalendarResult\Data.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\RoomCalendarResult\Save.cshtml" />
+    <Content Include="Views\CalendarResults\StudentsResult.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

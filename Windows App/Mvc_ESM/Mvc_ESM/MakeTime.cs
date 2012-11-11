@@ -52,7 +52,7 @@ namespace Mvc_ESM.Static_Helper
                 // Ví dụ: thời gian môn cần tăng thuộc ca 1, max[màu môn cần tăng] = 2
                 // sau đó tăng lên 3 ca thành thời gian môn cần tăng = 4, max[màu môn cần tăng] = 4
                 // max[màu tiếp theo] = 3 cần tăng 2
-                if (AlgorithmRunner.MaxColorTime[CurrentColor + 1] < AlgorithmRunner.MaxColorTime[CurrentColor])
+                if (AlgorithmRunner.MaxColorTime[CurrentColor + 1] <= AlgorithmRunner.MaxColorTime[CurrentColor])
                 {
                     int Step = CalcStep(AlgorithmRunner.MaxColorTime[CurrentColor + 1], AlgorithmRunner.MaxColorTime[CurrentColor]) + 1;
                     // tăng thời gian các môn thi sau, màu lớn hơn thì thi sau.
@@ -78,16 +78,17 @@ namespace Mvc_ESM.Static_Helper
         {
 
             int Index;
-            if (Checker == 1)
+            int Step = InputHelper.Options.DateMin + 1;
+            if (Checker == 1) // tức là  AlgorithmRunner.SubjectTime[i] >  AlgorithmRunner.SubjectTime[j]
             {
                 // tăng môn i nhưng phải dựa vào môn j là do ko bít hiện tại khoảng cách giữa 2 môn
                 // i và j là bao nhiêu, tăng cho vừa khớp với điều kiện cho chắc.
-                AlgorithmRunner.SubjectTime[i] = IncTime(AlgorithmRunner.SubjectTime[j], InputHelper.Options.DateMin + 1);
+                AlgorithmRunner.SubjectTime[i] = IncTime(AlgorithmRunner.SubjectTime[j], Step);
                 Index = i;
             }
             else //Checker == 2
             {
-                AlgorithmRunner.SubjectTime[j] = IncTime(AlgorithmRunner.SubjectTime[i], InputHelper.Options.DateMin + 1);
+                AlgorithmRunner.SubjectTime[j] = IncTime(AlgorithmRunner.SubjectTime[i], Step);
                 Index = j;
             }
             int CurrentColor = AlgorithmRunner.Colors[Index];
