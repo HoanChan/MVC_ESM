@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc_ESM", "Mvc_ESM\Mvc_ESM.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fastJSON", "fastJSON\fastJSON.csproj", "{207E91B1-C9F8-4913-88E1-3549EF5F3273}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{5386855C-FEDA-4AEC-BA8C-118F9FB0C602}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{207E91B1-C9F8-4913-88E1-3549EF5F3273}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{207E91B1-C9F8-4913-88E1-3549EF5F3273}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{207E91B1-C9F8-4913-88E1-3549EF5F3273}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5386855C-FEDA-4AEC-BA8C-118F9FB0C602}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5386855C-FEDA-4AEC-BA8C-118F9FB0C602}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5386855C-FEDA-4AEC-BA8C-118F9FB0C602}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5386855C-FEDA-4AEC-BA8C-118F9FB0C602}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

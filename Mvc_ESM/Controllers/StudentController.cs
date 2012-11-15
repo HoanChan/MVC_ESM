@@ -5,7 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Mvc_ESM.Models;
+using Model;
 using Mvc_ESM.Static_Helper;
 
 namespace Mvc_ESM.Controllers

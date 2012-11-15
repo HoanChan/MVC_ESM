@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mvc_ESM</RootNamespace>
     <AssemblyName>Mvc_ESM</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -30,6 +30,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -38,6 +39,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -52,9 +54,9 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -113,64 +115,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\bomon.cs">
-      <DependentUpon>DKMHModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CaThi.cs">
-      <DependentUpon>DKMHModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\chuyennganh.cs">
-      <DependentUpon>DKMHModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DKMHModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DKMHModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DKMHModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DKMHModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DKMHModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DKMHModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\giaovien.cs">
-      <DependentUpon>DKMHModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\khoa.cs">
-      <DependentUpon>DKMHModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\khoi.cs">
-      <DependentUpon>DKMHModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\lichhocvu.cs">
-      <DependentUpon>DKMHModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\lop.cs">
-      <DependentUpon>DKMHModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\monhoc.cs">
-      <DependentUpon>DKMHModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\MyEventsDataModel.cs" />
-    <Compile Include="Models\nhom.cs">
-      <DependentUpon>DKMHModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\pdkmh.cs">
-      <DependentUpon>DKMHModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\phong.cs">
-      <DependentUpon>DKMHModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sinhvien.cs">
-      <DependentUpon>DKMHModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Thi.cs">
-      <DependentUpon>DKMHModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Static_Helper\Calendar.cs" />
     <Compile Include="Static_Helper\CreateAdjacencyMatrix.cs" />
@@ -231,22 +176,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="Models\DKMHModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DKMHModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Models\DKMHModel.edmx.diagram">
-      <DependentUpon>DKMHModel.edmx</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -297,18 +229,6 @@
     <Content Include="Views\Shared\_Jquery-UI.Lib.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\DKMHModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DKMHModel.Context.cs</LastGenOutput>
-      <DependentUpon>DKMHModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\DKMHModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DKMHModel.cs</LastGenOutput>
-      <DependentUpon>DKMHModel.edmx</DependentUpon>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Room\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -329,6 +249,10 @@
     <ProjectReference Include="..\fastJSON\fastJSON.csproj">
       <Project>{207e91b1-c9f8-4913-88e1-3549ef5f3273}</Project>
       <Name>fastJSON</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{5386855c-feda-4aec-ba8c-118f9fb0c602}</Project>
+      <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

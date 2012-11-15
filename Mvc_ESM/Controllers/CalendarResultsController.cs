@@ -1,4 +1,4 @@
-﻿using Mvc_ESM.Models;
+﻿using Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mvc_ESM;
+using Mvc_ESM.Models;
 namespace Mvc_ESM.Controllers
 {
     public class CalendarResultsController : Controller

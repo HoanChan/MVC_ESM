@@ -142,15 +142,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DKMH.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DKMH_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>DKMH.mdf</DependentUpon>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <EntityDeploy Include="DKMHModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DKMHModel.Designer.cs</LastGenOutput>
