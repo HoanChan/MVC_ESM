@@ -1,6 +1,6 @@
 ﻿namespace Mvc_ESM
 {
-    partial class Progress
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -46,11 +46,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.progressBar4 = new System.Windows.Forms.ProgressBar();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btnCreateAdjacencyMatrix_Stop = new System.Windows.Forms.Button();
             this.btnCreateAdjacencyMatrix = new System.Windows.Forms.Button();
             this.lblCreateAdjacencyMatrix = new System.Windows.Forms.Label();
             this.pbCreateAdjacencyMatrix = new System.Windows.Forms.ProgressBar();
             this.ProgressUpdater = new System.Windows.Forms.Timer(this.components);
-            this.btnCreateAdjacencyMatrix_Stop = new System.Windows.Forms.Button();
+            this.txtArgs = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -223,6 +224,17 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "CreateAdjacencyMatrix";
             // 
+            // btnCreateAdjacencyMatrix_Stop
+            // 
+            this.btnCreateAdjacencyMatrix_Stop.Enabled = false;
+            this.btnCreateAdjacencyMatrix_Stop.Location = new System.Drawing.Point(111, 94);
+            this.btnCreateAdjacencyMatrix_Stop.Name = "btnCreateAdjacencyMatrix_Stop";
+            this.btnCreateAdjacencyMatrix_Stop.Size = new System.Drawing.Size(75, 23);
+            this.btnCreateAdjacencyMatrix_Stop.TabIndex = 3;
+            this.btnCreateAdjacencyMatrix_Stop.Text = "Stop";
+            this.btnCreateAdjacencyMatrix_Stop.UseVisualStyleBackColor = true;
+            this.btnCreateAdjacencyMatrix_Stop.Click += new System.EventHandler(this.btnCreateAdjacencyMatrix_Stop_Click);
+            // 
             // btnCreateAdjacencyMatrix
             // 
             this.btnCreateAdjacencyMatrix.Location = new System.Drawing.Point(6, 94);
@@ -254,29 +266,29 @@
             this.ProgressUpdater.Interval = 1000;
             this.ProgressUpdater.Tick += new System.EventHandler(this.ProgressUpdater_Tick);
             // 
-            // btnCreateAdjacencyMatrix_Stop
+            // txtArgs
             // 
-            this.btnCreateAdjacencyMatrix_Stop.Enabled = false;
-            this.btnCreateAdjacencyMatrix_Stop.Location = new System.Drawing.Point(111, 94);
-            this.btnCreateAdjacencyMatrix_Stop.Name = "btnCreateAdjacencyMatrix_Stop";
-            this.btnCreateAdjacencyMatrix_Stop.Size = new System.Drawing.Size(75, 23);
-            this.btnCreateAdjacencyMatrix_Stop.TabIndex = 3;
-            this.btnCreateAdjacencyMatrix_Stop.Text = "Stop";
-            this.btnCreateAdjacencyMatrix_Stop.UseVisualStyleBackColor = true;
-            this.btnCreateAdjacencyMatrix_Stop.Click += new System.EventHandler(this.btnCreateAdjacencyMatrix_Stop_Click);
+            this.txtArgs.Location = new System.Drawing.Point(12, 270);
+            this.txtArgs.Multiline = true;
+            this.txtArgs.Name = "txtArgs";
+            this.txtArgs.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtArgs.Size = new System.Drawing.Size(582, 137);
+            this.txtArgs.TabIndex = 5;
             // 
-            // Progress
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(609, 276);
+            this.ClientSize = new System.Drawing.Size(609, 419);
+            this.Controls.Add(this.txtArgs);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Name = "Progress";
+            this.Name = "MainForm";
             this.Text = "Progress";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -288,6 +300,7 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -315,6 +328,7 @@
         private System.Windows.Forms.ProgressBar pbCreateAdjacencyMatrix;
         private System.Windows.Forms.Timer ProgressUpdater;
         private System.Windows.Forms.Button btnCreateAdjacencyMatrix_Stop;
+        private System.Windows.Forms.TextBox txtArgs;
     }
 }
 

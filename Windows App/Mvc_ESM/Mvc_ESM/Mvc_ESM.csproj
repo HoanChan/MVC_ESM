@@ -38,6 +38,7 @@
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -59,18 +60,18 @@
     <Compile Include="InputHelper.cs" />
     <Compile Include="MakeTime.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Progress.cs">
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Progress.Designer.cs">
-      <DependentUpon>Progress.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ProgressHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoomArrangement.cs" />
     <Compile Include="SaveToDatabase.cs" />
-    <EmbeddedResource Include="Progress.resx">
-      <DependentUpon>Progress.cs</DependentUpon>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

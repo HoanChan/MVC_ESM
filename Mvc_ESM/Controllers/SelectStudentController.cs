@@ -41,7 +41,7 @@ namespace Mvc_ESM.Controllers
                 }
                 paramInfo += "MH:" + SubjectID[i] + " SV: " + StudentID[i] + "<br /><br />";
             }
-            System.IO.File.WriteAllText("C:\\Students.jso", fastJSON.JSON.Instance.ToJSON(InputHelper.Students), Encoding.UTF8);
+            InputHelper.SaveOBJ("Students", InputHelper.Students);
             return paramInfo;
         }
 

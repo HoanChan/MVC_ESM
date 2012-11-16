@@ -32,7 +32,7 @@ namespace Mvc_ESM.Controllers
         public String SelectSuccess(List<String> SubjectID)
         {
             InputHelper.Subjects = SubjectID;
-            System.IO.File.WriteAllText("C:\\Subjects.jso", fastJSON.JSON.Instance.ToJSON(InputHelper.Subjects), Encoding.UTF8);
+            InputHelper.SaveOBJ("Subjects", InputHelper.Subjects);
             string paramInfo = "";
             foreach (String si in SubjectID)
             {

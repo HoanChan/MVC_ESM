@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections;
 using Model;
+using System.IO;
+using System.Text;
 
 namespace Mvc_ESM.Static_Helper
 {
@@ -19,5 +21,14 @@ namespace Mvc_ESM.Static_Helper
         public static Hashtable Students;
 
         public static Options Options = new Options();
+
+        public static void SaveOBJ(String Name, Object OBJ)
+        {
+            System.IO.File.WriteAllText(
+                Path.Combine(System.Web.HttpContext.Current.Server.MapPath(@"~/Win_App"), Name + ".jso"), 
+                fastJSON.JSON.Instance.ToJSON(OBJ), 
+                Encoding.UTF8
+            );
+        }
     }
 }

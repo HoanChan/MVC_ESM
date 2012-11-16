@@ -34,7 +34,7 @@ namespace Mvc_ESM.Controllers
                 InputHelper.Rooms.Add(new Room(RoomID[i], Container[i]));
                 paramInfo += "MP:" + RoomID[i] + " SC: " + Container[i] + "<br /><br />";
             }
-            System.IO.File.WriteAllText("C:\\Rooms.jso", fastJSON.JSON.Instance.ToJSON(InputHelper.Rooms), Encoding.UTF8);
+            InputHelper.SaveOBJ("Rooms", InputHelper.Rooms);
             return paramInfo;
         }
 

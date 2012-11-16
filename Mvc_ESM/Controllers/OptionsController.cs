@@ -39,7 +39,7 @@ namespace Mvc_ESM.Controllers
                 InputHelper.Options.Times.Add(ET);
                 paramInfo += "ET[" + i + "]: {Name ='" + ET.Name + "', BGTime = " + ET.BGTime.ToString() + ", ETime=" + ET.ETime.ToString() + "}<br/><br/>";
             }
-            System.IO.File.WriteAllText("C:\\Options.jso", fastJSON.JSON.Instance.ToJSON(InputHelper.Options), Encoding.UTF8);
+            InputHelper.SaveOBJ("Options", InputHelper.Options);
             return paramInfo;
         }
 
