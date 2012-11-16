@@ -21,29 +21,11 @@ namespace Mvc_ESM.Controllers
         {
             return View();
         }
-        public ActionResult RoomsData()
-        {
-            List<Static_Helper.Event> SubjectTime = (from s in db.This
-                                                     where s.MaPhong == "A103"
-                                                     select new Static_Helper.Event(){  id = s.MaMonHoc, 
-                                                                                        text = s.monhoc.TenMonHoc, 
-                                                                                        start_date = s.CaThi.NgayThi,
-                                                                                        end_date = s.CaThi.NgayThi,
-                                                                                        Step = s.CaThi.TietBD}).Distinct().ToList<Static_Helper.Event>();
-            int[] Step = new int[] { 7 * 60, 9 * 60 + 30, 13 * 60, 15 * 60 + 30 };
-            for (int i = 0; i < SubjectTime.Count(); i++)
-            {
-                SubjectTime[i].start_date = SubjectTime[i].start_date.AddMinutes(Step[SubjectTime[i].Step]);
-                SubjectTime[i].end_date = SubjectTime[i].end_date.AddMinutes(Step[SubjectTime[i].Step]).AddHours(2);
-            }
-            
-            return Content(Static_Helper.Calendar.DataFormater(SubjectTime), "text/xml");
-        }
 
-        public ActionResult StudentsData()
+        public ActionResult RoomsData(String id)
         {
             List<Static_Helper.Event> SubjectTime = (from s in db.This
-                                                     where s.MaSinhVien == "09910015"
+                                                     where s.MaPhong == id
                                                      select new Static_Helper.Event()
                                                      {
                                                          id = s.MaMonHoc,
@@ -51,6 +33,29 @@ namespace Mvc_ESM.Controllers
                                                          start_date = s.CaThi.NgayThi,
                                                          end_date = s.CaThi.NgayThi,
                                                          Step = s.CaThi.TietBD
+                                                     }).Distinct().ToList<Static_Helper.Event>();
+            int[] Step = new int[] { 7 * 60, 9 * 60 + 30, 13 * 60, 15 * 60 + 30 };
+            for (int i = 0; i < SubjectTime.Count(); i++)
+            {
+                SubjectTime[i].start_date = SubjectTime[i].start_date.AddMinutes(Step[SubjectTime[i].Step]);
+                SubjectTime[i].end_date = SubjectTime[i].end_date.AddMinutes(Step[SubjectTime[i].Step]).AddHours(2);
+            }
+
+            return Content(Static_Helper.Calendar.DataFormater(SubjectTime, false), "text/xml");
+        }
+
+        public ActionResult StudentsData(String id)
+        {
+            List<Static_Helper.Event> SubjectTime = (from s in db.This
+                                                     where s.MaSinhVien == id
+                                                     select new Static_Helper.Event()
+                                                     {
+                                                         id = s.MaMonHoc,
+                                                         text = s.monhoc.TenMonHoc,
+                                                         start_date = s.CaThi.NgayThi,
+                                                         end_date = s.CaThi.NgayThi,
+                                                         Step = s.CaThi.TietBD,
+                                                         MaPhong = s.MaPhong
                                                      }).ToList<Static_Helper.Event>();
             int[] Step = new int[] { 7 * 60, 9 * 60 + 30, 13 * 60, 15 * 60 + 30 };
             for (int i = 0; i < SubjectTime.Count(); i++)
@@ -59,7 +64,7 @@ namespace Mvc_ESM.Controllers
                 SubjectTime[i].end_date = SubjectTime[i].end_date.AddMinutes(Step[SubjectTime[i].Step]).AddHours(2);
             }
 
-            return Content(Static_Helper.Calendar.DataFormater(SubjectTime), "text/xml");
+            return Content(Static_Helper.Calendar.DataFormater(SubjectTime, true), "text/xml");
         }
 
         public ActionResult Save(Event changedEvent, FormCollection actionValues)

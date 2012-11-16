@@ -8,6 +8,10 @@
 <script src="@Url.Content("~/Scripts/Scheduler/locale_recurring.js")" type="text/javascript" charset="utf-8"></script>
 <script src="@Url.Content("~/Scripts/Scheduler/dhtmlxscheduler_dhx_terrace.js")" type="text/javascript" charset="utf-8"></script>
 <link href="@Url.Content("~/Content/Scheduler/dhtmlxscheduler_dhx_terrace.css")" rel="stylesheet" type="text/css" />
+
+MSSV:<input type="text" id="ID" />
+<button id="Go">Thực hiện</button>
+
 <script type="text/javascript">
     $(document).ready(function () {
         scheduler.config.first_hour = 7;
@@ -16,11 +20,15 @@
 	    scheduler.config.multi_day = true;
 	    scheduler.config.xml_date = "%Y-%m-%d %H:%i";
 	    scheduler.init("scheduler_here", new Date(), "week");
-	    scheduler.load("/CalendarResults/StudentsData");
+	    //scheduler.load("/CalendarResults/StudentsData");
 	    var dp = new dataProcessor("/RoomCalendarResults/Save");
 	    dp.init(scheduler);
 	    dp.setTransactionMode("POST", false);
-	});
+    });
+    $('#Go').click(function () {
+        scheduler.clearAll();
+        scheduler.load("/CalendarResults/StudentsData?id=" + $("#ID").val());
+    });
 </script>
 <div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:580px; margin-left:auto; margin-right:auto; border:solid 1px #CECECE;'>
 	<div class="dhx_cal_navline">

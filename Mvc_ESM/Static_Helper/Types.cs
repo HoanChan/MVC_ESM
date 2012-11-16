@@ -39,5 +39,6 @@ namespace Mvc_ESM.Static_Helper
         public String text { get; set; }
         public String details { get; set; }
         public int Step { get; set; }
+        public String MaPhong { get; set; }
     }
 }

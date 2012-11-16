@@ -8,75 +8,87 @@
 <script src="@Url.Content("~/Scripts/Scheduler/locale_recurring.js")" type="text/javascript" charset="utf-8"></script>
 <script src="@Url.Content("~/Scripts/Scheduler/dhtmlxscheduler_dhx_terrace.js")" type="text/javascript" charset="utf-8"></script>
 <link href="@Url.Content("~/Content/Scheduler/dhtmlxscheduler_dhx_terrace.css")" rel="stylesheet" type="text/css" />
+
+
+Phòng:<input type="text" id="ID" />
+<button id="Go">Thực hiện</button>
+
+
 <script type="text/javascript">
     $(document).ready(function () {
         scheduler.config.first_hour = 7;
         scheduler.config.last_hour = 18;
-	    scheduler.config.multi_day = true;
-	    scheduler.config.xml_date = "%Y-%m-%d %H:%i";
-	    scheduler.init("scheduler_here", new Date(), "week");
-	    scheduler.load("/CalendarResults/RoomsData");
-	    var dp = new dataProcessor("/RoomCalendarResults/Save");
-	    dp.init(scheduler);
-	    dp.setTransactionMode("POST", false);
-	    scheduler.attachEvent("onClick", function (event_id, native_event_object) {
+        scheduler.config.multi_day = true;
+        scheduler.config.xml_date = "%Y-%m-%d %H:%i";
+        scheduler.init("scheduler_here", new Date(), "week");
+        var dp = new dataProcessor("/RoomCalendarResults/Save");
+        dp.init(scheduler);
+        //scheduler.load("/CalendarResults/RoomsData?id=A103");
+        dp.setTransactionMode("POST", false);
+        scheduler.attachEvent("onClick", function (event_id, native_event_object) {
             // không cho hiện thanh công cụ bên cạnh
-	        return false;
-	    });
-	    scheduler.attachEvent("onDblClick", function (event_id, native_event_object) {
+            return false;
+        });
+        scheduler.attachEvent("onDblClick", function (event_id, native_event_object) {
             // không cho sửa đổi
-	        return false;
-	    });
-	    scheduler.attachEvent("onBeforeDrag", function (event_id, mode, native_event_object) {
-	        //mode - can be “move”,”resize”,”create”
+            return false;
+        });
+        scheduler.attachEvent("onBeforeDrag", function (event_id, mode, native_event_object) {
+            //mode - can be “move”,”resize”,”create”
             // không cho thay đổi kích thước
-            if(mode == "resize" || mode == "create")
+            if (mode == "resize" || mode == "create")
                 return false;
             return true;
-	    });
+        });
         // trước khi sự kiện được lưu (drop events)
-	    scheduler.attachEvent("onBeforeEventChanged", function (event_object, native_event, is_new, unmodified_event) {
-	        var CurrentEventBeginTime = new Date(event_object.start_date);
-	        var CurrentEventEndTime = new Date(event_object.end_date);
+        scheduler.attachEvent("onBeforeEventChanged", function (event_object, native_event, is_new, unmodified_event) {
+            var CurrentEventBeginTime = new Date(event_object.start_date);
+            var CurrentEventEndTime = new Date(event_object.end_date);
             // Kiểm tra điều kiện kéo bỏ vào đúng ca thi hay không, cái này sửa lại sau. cần lấy thông tin từ server
-	        if (CurrentEventBeginTime.getMinutes() != 0) {	            
-	            return false;
-	        }
+            if (CurrentEventBeginTime.getMinutes() != 0) {
+                return false;
+            }
             // kiểm tra coi có trùng giờ không, có thì không cho drop ^^
-	        var Events = scheduler.getEvents();
-	        for (var i = 0; i < Events.length; i++) {
-	            if (Events[i] != event_object) { //bỏ qua chính nó
-	                var BeginTime = new Date(Events[i].start_date);
-	                var EndTime = new Date(Events[i].end_date);
+            var Events = scheduler.getEvents();
+            for (var i = 0; i < Events.length; i++) {
+                if (Events[i] != event_object) { //bỏ qua chính nó
+                    var BeginTime = new Date(Events[i].start_date);
+                    var EndTime = new Date(Events[i].end_date);
                     // Coi có cùng ngày không, chỉ xử lý mấy cái cùng ngày
-	                if (BeginTime.getDate() == CurrentEventBeginTime.getDate()) {
-	                    var BG = BeginTime.getHours() * 60 + BeginTime.getMinutes();
-	                    var EN = EndTime.getHours() * 60 + EndTime.getMinutes();
-	                    var CBG = CurrentEventBeginTime.getHours() * 60 + CurrentEventBeginTime.getMinutes();
-	                    var CEN = CurrentEventEndTime.getHours() * 60 + CurrentEventEndTime.getMinutes();
-	                    if ((BG >= CBG && BG <= CEN) || (EN >= CBG && EN <= CEN)) {
-	                        return false;
-	                    }
-	                }
-	            }
-	        }
+                    if (BeginTime.getDate() == CurrentEventBeginTime.getDate()) {
+                        var BG = BeginTime.getHours() * 60 + BeginTime.getMinutes();
+                        var EN = EndTime.getHours() * 60 + EndTime.getMinutes();
+                        var CBG = CurrentEventBeginTime.getHours() * 60 + CurrentEventBeginTime.getMinutes();
+                        var CEN = CurrentEventEndTime.getHours() * 60 + CurrentEventEndTime.getMinutes();
+                        if ((BG >= CBG && BG <= CEN) || (EN >= CBG && EN <= CEN)) {
+                            return false;
+                        }
+                    }
+                }
+            }
             //đúng hết thì cho nó chạy
-	        return true;
-	    })
-	});
+            return true;
+        });
+
+    });
+    $("#Go").click(function () {
+        scheduler.clearAll();
+        var link = "/CalendarResults/RoomsData?id=" + $("#ID").val();
+        scheduler.load(link);
+    });
 </script>
-<div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:580px; margin-left:auto; margin-right:auto; border:solid 1px #CECECE;'>
-	<div class="dhx_cal_navline">
-		<div class="dhx_cal_prev_button">&nbsp;</div>
-		<div class="dhx_cal_next_button">&nbsp;</div>
-		<div class="dhx_cal_today_button"></div>
-		<div class="dhx_cal_date"></div>
-		<div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>
-		<div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>
-		<div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
-	</div>
-	<div class="dhx_cal_header">
-	</div>
-	<div class="dhx_cal_data">
-	</div>
+<div id="scheduler_here" class="dhx_cal_container" style='width: 100%; height: 580px; margin-left: auto; margin-right: auto; border: solid 1px #CECECE;'>
+    <div class="dhx_cal_navline">
+        <div class="dhx_cal_prev_button">&nbsp;</div>
+        <div class="dhx_cal_next_button">&nbsp;</div>
+        <div class="dhx_cal_today_button"></div>
+        <div class="dhx_cal_date"></div>
+        <div class="dhx_cal_tab" name="day_tab" style="right: 204px;"></div>
+        <div class="dhx_cal_tab" name="week_tab" style="right: 140px;"></div>
+        <div class="dhx_cal_tab" name="month_tab" style="right: 76px;"></div>
+    </div>
+    <div class="dhx_cal_header">
+    </div>
+    <div class="dhx_cal_data">
+    </div>
 </div>
