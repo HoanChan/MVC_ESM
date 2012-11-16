@@ -16,22 +16,22 @@
     <div class="page">
         <header>
             <div id="title">
-                <h1>My MVC Application</h1>
+                <h1>Phần mềm xếp lịch thi cho ĐH SPKT</h1>
             </div>
             <div id="logindisplay">
                 @Html.Partial("_LogOnPartial")
             </div>
             <div id="menu">
                 <ul class="menu">
-                    <li><a href ="@Url.Action("Index", "Home")"><span>Home</span></a></li>
-                    <li><a href ="@Url.Action("About", "Home")"><span>About</span></a></li>
+                    <li><a href ="@Url.Action("Index", "Home")"><span>Giới thiệu</span></a></li>
+                    <li><a href ="@Url.Action("About", "Home")"><span>Hướng dẫn</span></a></li>
 
                     <li><a href="#" class="parent"><span>Chỉnh sửa CSDL</span></a>
                         <ul>
                             <li><a href="@Url.Action("Index", "Subject")"><span>Môn Học</span></a></li>
                             <li><a href="@Url.Action("Index", "Teacher")"><span>Giáo viên</span></a></li>
                             <li><a href="@Url.Action("Index", "Student")"><span>Sinh viên</span></a></li>
-                            <li><a href="@Url.Action("Index", "Room")"><span>Phòng học</span></a></li>
+                            <li><a href="@Url.Action("Index", "Room")"><span>Phòng thi</span></a></li>
                         </ul>
                     </li>
 
@@ -40,17 +40,38 @@
                             <li><a href="@Url.Action("Index", "SelectSubject")"><span>Chọn môn học</span></a></li>
                             <li><a href="@Url.Action("Index", "SelectStudent")"><span>Chọn sinh viên</span></a></li>
                             <li><a href="@Url.Action("Index", "SelectRoom")"><span>Chọn phòng thi</span></a></li>
-                            <li><a href="@Url.Action("Index", "Options")"><span>Chọn thông số</span></a></li>
+                            <li><a href="@Url.Action("Index", "Options")"><span>Thiết lập thông số</span></a></li>
                         </ul>
                     </li>
-                    
-                    <li><a href="#" class="parent"><span>Xem kết quả</span></a>
+
+                    <li><a href="#" class="parent"><span>Sửa kết quả</span></a>
                         <ul>
-                            <li><a href="@Url.Action("RoomsResult", "CalendarResults")"><span>Xem phòng học</span></a></li>
-                            <li><a href="@Url.Action("StudentsResult", "CalendarResults")"><span>Xem sinh viên</span></a></li>
+                            <li><a href="#"><span>Giờ thi</span></a></li>
+                            <li><a href="#"><span>Ca thi</span></a></li>
+                            <li><a href="#"><span>Lịch coi thi</span></a></li>
                         </ul>
                     </li>
-                    <li class="last"><a href="#"><span>@@</span></a></li>
+
+                    <li class="last"><a href="#" class="parent"><span>Xem kết quả</span></a>
+                        <ul>
+                            <li><a href="#" class="parent"><span>Dạng lịch</span></a>
+                                <ul>
+                                    <li><a href="@Url.Action("RoomsResult", "CalendarResults")"><span>Phòng Thi</span></a></li>
+                                    <li><a href="@Url.Action("StudentsResult", "CalendarResults")"><span>Sinh viên</span></a></li>
+                                    <li><a href="#"><span>Giáo viên</span></a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#" class="parent"><span>Dạng Danh sách</span></a>
+                                <ul>
+                                    <li><a href="#"><span>Phòng Thi</span></a></li>
+                                    <li><a href="#"><span>Giáo viên coi thi</span></a></li>
+                                    <li><a href="#"><span>Sinh viên theo phòng</span></a></li>
+                                    <li><a href="#"><span>Sinh viên theo môn</span></a></li>
+                                    <li><a href="#"><span>Lịch mở cửa phòng</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>                            
+                    </li>
                 </ul>
             </div>
 
