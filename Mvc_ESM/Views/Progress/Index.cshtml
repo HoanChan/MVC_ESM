@@ -9,7 +9,8 @@
       border: 1px solid rgb(0,0,0);
       border-radius: 5px;
       margin: 2px;
-      width: 150px;
+      padding: 5px;
+      width: 182px;
       height: 300px;              
       float: left;
     }
@@ -23,26 +24,23 @@
 @Html.Partial("_Jquery-UI.Lib")
 <div class='ProgressHolder'>
     <div class='Progress'>
-        <h1>Tạo ma trận kề</h1>
+        <button id="RunCreateAdjacencyMatrix">1. Tạo ma trận kề</button>
         <br />
         <span id="CreateMatrixInfo">Thông tin</span>
         <br />
         <div id="pbCreateMatrix"></div>
     </div>
     <div class='Progress'>
-        Tô màu
+        <button id="RunColoring">2. Tô màu</button>
     </div>
     <div class='Progress'>
-        Chỉnh thời gian
+        <button id="RunMakeTime">3. Giãn thời gian</button>
     </div>
     <div class='Progress'>
-        Xếp phòng
+        <button id="RunRoomArrangement">4. Xếp phòng</button>
     </div>
     <div class='Progress'>
-        Xếp giáo viên
-    </div>
-    <div class='Progress'>
-        Lưu kết quả
+        <button id="RunSaveToDatabase">5. Lưu kết quả</button>
     </div>
 </div>
 <script>
@@ -57,5 +55,19 @@
                 CreateMatrixInfo.html(Data[0].CreateMatrixInfo);
             });
     }, 1000);
-
+    $("#RunCreateAdjacencyMatrix").button().click(function () {
+        $.post("/Progress/Run", "StepNumber=1");
+    });
+    $("#RunColoring").button().click(function () {
+        $.post("/Progress/Run", "StepNumber=2");
+    });
+    $("#RunMakeTime").button().click(function () {
+        $.post("/Progress/Run", "StepNumber=3");
+    });
+    $("#RunRoomArrangement").button().click(function () {
+        $.post("/Progress/Run", "StepNumber=4");
+    });
+    $("#RunSaveToDatabase").button().click(function () {
+        $.post("/Progress/Run", "StepNumber=5");
+    });
 </script>

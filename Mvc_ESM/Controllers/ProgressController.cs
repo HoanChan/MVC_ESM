@@ -15,11 +15,26 @@ namespace Mvc_ESM.Controllers
         
         public ActionResult Index()
         {
-            Thread thread = new Thread(new ThreadStart(CreateAdjacencyMatrix.Run));
-            thread.Name = "CreateAdjacencyMatrix";
-            thread.Start();
             return View();
         }
-
+        [HttpPost]
+        public ActionResult Run(int StepNumber)
+        {
+            switch (StepNumber)
+            {
+                case 1:
+                    return Content("RunCreateAdjacencyMatrix");
+                case 2:
+                    return Content("RunColoring");
+                case 3:
+                    return Content("RunMakeTime");
+                case 4:
+                    return Content("RunRoomArrangement");
+                case 5:
+                    return Content("RunSaveToDatabase");
+                default:
+                    return Content("NotRunAnyThing");
+            }
+        }
     }
 }
