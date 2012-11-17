@@ -24,15 +24,15 @@ namespace Mvc_ESM.Controllers
         public JsonResult LoadStudentAndSubjectInfo(string StudentID, string SubjectID)
         {
             var Student = from s in db.sinhviens
-                       where s.MaSinhVien.Equals(StudentID)
-                       select new
-                       {
-                           MSSV = s.MaSinhVien,
-                           Ho = s.Ho,
-                           Ten = s.Ten,
-                           Lop = s.Lop,
-                           Khoa = s.lop1.khoi.khoa.TenKhoa
-                       };
+                          where s.MaSinhVien.Equals(StudentID)
+                          select new
+                          {
+                              MSSV = s.MaSinhVien,
+                              Ho = s.Ho,
+                              Ten = s.Ten,
+                              Lop = s.Lop,
+                              Khoa = s.lop1.khoi.khoa.TenKhoa
+                          };
             var Subject = from m in db.monhocs
                           where m.MaMonHoc.Equals(SubjectID)
                           select new
@@ -182,6 +182,19 @@ namespace Mvc_ESM.Controllers
                             Text = m.TenMonHoc,
                             Value = m.MaMonHoc,
                         });
+            return Json(Data, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult LoadRoomsBySubjectID(string SubjectID)
+        {
+            var Data = (from b in db.This
+                       where b.MaMonHoc == SubjectID
+                       select new SelectListItem()
+                       {
+                           Text = b.MaPhong,
+                           Value = b.MaPhong,
+                       }).Distinct();
             return Json(Data, JsonRequestBehavior.AllowGet);
         }
 

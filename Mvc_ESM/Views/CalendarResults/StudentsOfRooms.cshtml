@@ -11,7 +11,8 @@
 {
     <p>
         <p>
-            Mã môn học: @Html.TextBox("SearchString", Mvc_ESM.Static_Helper.SubjectHelper.SearchString, new { id = "SearchString" })
+            Môn học: @Html.DropDownList("MonHoc", ViewBag.MonHoc as SelectList, new { id = "MonHocList" })
+            Phòng: @Html.DropDownList("Phong", ViewBag.Phong as SelectList, new { id = "PhongList" })
             <input type="submit" value="Thực hiện" />
         </p>
     </p>
@@ -65,6 +66,24 @@
     $(document).ready(function () {
         $('#table').dataTable({
             @Html.Partial("_DataTable")
+        });
+        $("#MonHocList").change(function () {
+            var id = $(this).val();
+            $.getJSON("/Services/LoadRoomsBySubjectID", { SubjectID: id },
+            function (Data) {
+                var select = $("#PhongList");
+                select.empty();
+                select.append($('<option/>', {
+                    value: "",
+                    text: "Tất cả"
+                }));
+                $.each(Data, function (index, itemData) {
+                    select.append($('<option/>', {
+                        value: itemData.Value,
+                        text: itemData.Text
+                    }));
+                });
+            });
         });
     });
 </script>
