@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Model.sinhvien>
+@{
+    ViewBag.Title = "Danh sách sinh viên thi theo môn học";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@Html.Partial("_DataTable.Lib")
+
+@using (Html.BeginForm("StudentsOfSubjects", "CalendarResults", FormMethod.Post, new { @id = "FilterForm" }))
+{
+    <p>
+        <p>
+            Mã môn học: @Html.TextBox("SearchString", Mvc_ESM.Static_Helper.SubjectHelper.SearchString, new { id = "SearchString" })
+            <input type="submit" value="Thực hiện" />
+        </p>
+    </p>
+}
+
+<table id="table">
+    <thead>
+        <tr>
+            <th>Mã sinh viên
+            </th>
+            <th>Họ
+            </th>
+            <th>Tên
+            </th>
+            <th>Ngày Sinh
+            </th>
+            <th>Lớp
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaSinhVien)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ho)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ten)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgaySinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lop)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<link href="@Url.Content("~/Content/TableThemes/table_jui.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/TableThemes/smoothness/jquery-ui-1.8.4.custom.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/jquery.dataTables.js")" type="text/javascript" lang="javascript" ></script>
+
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        $('#table').dataTable({
+            @Html.Partial("_DataTable")
+        });
+    });
+</script>

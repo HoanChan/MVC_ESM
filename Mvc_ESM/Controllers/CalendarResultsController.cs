@@ -67,6 +67,27 @@ namespace Mvc_ESM.Controllers
             return Content(Static_Helper.Calendar.DataFormater(SubjectTime, true), "text/xml");
         }
 
+
+        [HttpGet]
+        public ActionResult StudentsOfSubjects()
+        {
+            var sv = (from s in db.sinhviens
+                      join m in db.This on s.MaSinhVien equals m.MaSinhVien
+                      where m.MaMonHoc == ""
+                      select s).Distinct();
+            return View(sv.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult StudentsOfSubjects(String SearchString)
+        {
+            var sv = (from s in db.sinhviens
+                      join m in db.This on s.MaSinhVien equals m.MaSinhVien
+                      where m.MaMonHoc == SearchString
+                      select s).Distinct();
+            return View(sv.OrderBy(s => s.Ten + s.Ho).ToList());
+        }
+
         public ActionResult Save(Event changedEvent, FormCollection actionValues)
         {
             String action_type = actionValues["!nativeeditor_status"];
