@@ -1,1 +1,534 @@
-﻿[{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A102","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A103","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A104","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A105","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A106","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A107","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A108","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A109","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A110","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A111","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A112","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A113","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A201","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A202","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A203","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A204","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A205","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A206","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A207","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A209","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A210","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A2-101","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A2-102","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A2-103","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A211","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A2-201","Container":70},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A2-202","Container":70},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A2-203","Container":70},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A2-301","Container":70},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A2-302","Container":70},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A2-303","Container":70},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A2-304","Container":70},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A2-402","Container":70},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A2-403","Container":70},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A2-404","Container":70},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A301","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A302","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A302A","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A303","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A307","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A308","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A3-101","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A311","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A312","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A313","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A314","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A315","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A3-201","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A3-202","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A3-203","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A3-204","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A3-205","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A3-206","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A3-207","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A3-208","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A3-301","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A3-302","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A3-401","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A3-402","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A3-403","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A3-404","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A3-405","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A3-406","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A3-407","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A3-408","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A4-101","Container":48},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A4-102","Container":70},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A4-103","Container":70},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A4-201","Container":70},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A4-202","Container":70},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A4-203","Container":70},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A4-301","Container":70},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A4-304","Container":70},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A4-402","Container":70},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"A4-403","Container":70},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B101","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B102","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B103","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B104","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B105","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B107","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B108","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B109","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B201","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B202","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B203","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B204","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B205","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B206","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B207","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B208","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B209","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B210","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B211","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B212","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B213","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B214","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B301","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B302","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B303","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B304","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B305","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B306","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B307","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B308","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B309","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B310","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B311","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B312","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B313","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B314","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"B315","Container":56},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C101","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C102","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C201","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C202","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C203","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C204","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C205","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C206","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C301","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C302","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C303","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C304","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C305","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C306","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C401","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C402","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C403","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C404","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C405","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C406","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C501","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C502","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C503","Container":64},{"$type":"Mvc_ESM.Static_Helper.Room, Mvc_ESM, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","RoomID":"C504","Container":64}]
+﻿[
+  {
+    "RoomID": "A105",
+    "Container": 48
+  },
+  {
+    "RoomID": "A106",
+    "Container": 48
+  },
+  {
+    "RoomID": "A107",
+    "Container": 48
+  },
+  {
+    "RoomID": "A108",
+    "Container": 48
+  },
+  {
+    "RoomID": "A109",
+    "Container": 48
+  },
+  {
+    "RoomID": "A110",
+    "Container": 48
+  },
+  {
+    "RoomID": "A111",
+    "Container": 48
+  },
+  {
+    "RoomID": "A112",
+    "Container": 48
+  },
+  {
+    "RoomID": "A113",
+    "Container": 48
+  },
+  {
+    "RoomID": "A201",
+    "Container": 48
+  },
+  {
+    "RoomID": "A202",
+    "Container": 48
+  },
+  {
+    "RoomID": "A203",
+    "Container": 48
+  },
+  {
+    "RoomID": "A204",
+    "Container": 48
+  },
+  {
+    "RoomID": "A205",
+    "Container": 48
+  },
+  {
+    "RoomID": "A206",
+    "Container": 48
+  },
+  {
+    "RoomID": "A207",
+    "Container": 48
+  },
+  {
+    "RoomID": "A209",
+    "Container": 48
+  },
+  {
+    "RoomID": "A210",
+    "Container": 48
+  },
+  {
+    "RoomID": "A2-101",
+    "Container": 48
+  },
+  {
+    "RoomID": "A2-102",
+    "Container": 48
+  },
+  {
+    "RoomID": "A2-103",
+    "Container": 48
+  },
+  {
+    "RoomID": "A211",
+    "Container": 48
+  },
+  {
+    "RoomID": "A2-201",
+    "Container": 70
+  },
+  {
+    "RoomID": "A2-202",
+    "Container": 70
+  },
+  {
+    "RoomID": "A2-203",
+    "Container": 70
+  },
+  {
+    "RoomID": "A2-301",
+    "Container": 70
+  },
+  {
+    "RoomID": "A2-302",
+    "Container": 70
+  },
+  {
+    "RoomID": "A2-303",
+    "Container": 70
+  },
+  {
+    "RoomID": "A2-304",
+    "Container": 70
+  },
+  {
+    "RoomID": "A2-402",
+    "Container": 70
+  },
+  {
+    "RoomID": "A2-403",
+    "Container": 70
+  },
+  {
+    "RoomID": "A2-404",
+    "Container": 70
+  },
+  {
+    "RoomID": "A301",
+    "Container": 48
+  },
+  {
+    "RoomID": "A302",
+    "Container": 48
+  },
+  {
+    "RoomID": "A302A",
+    "Container": 48
+  },
+  {
+    "RoomID": "A303",
+    "Container": 48
+  },
+  {
+    "RoomID": "A307",
+    "Container": 48
+  },
+  {
+    "RoomID": "A308",
+    "Container": 48
+  },
+  {
+    "RoomID": "A3-101",
+    "Container": 48
+  },
+  {
+    "RoomID": "A311",
+    "Container": 48
+  },
+  {
+    "RoomID": "A312",
+    "Container": 48
+  },
+  {
+    "RoomID": "A313",
+    "Container": 48
+  },
+  {
+    "RoomID": "A314",
+    "Container": 48
+  },
+  {
+    "RoomID": "A315",
+    "Container": 48
+  },
+  {
+    "RoomID": "A3-201",
+    "Container": 48
+  },
+  {
+    "RoomID": "A3-202",
+    "Container": 48
+  },
+  {
+    "RoomID": "A3-203",
+    "Container": 48
+  },
+  {
+    "RoomID": "A3-204",
+    "Container": 48
+  },
+  {
+    "RoomID": "A3-205",
+    "Container": 48
+  },
+  {
+    "RoomID": "A3-206",
+    "Container": 48
+  },
+  {
+    "RoomID": "A3-207",
+    "Container": 48
+  },
+  {
+    "RoomID": "A3-208",
+    "Container": 48
+  },
+  {
+    "RoomID": "A3-301",
+    "Container": 48
+  },
+  {
+    "RoomID": "A3-302",
+    "Container": 48
+  },
+  {
+    "RoomID": "A3-401",
+    "Container": 48
+  },
+  {
+    "RoomID": "A3-402",
+    "Container": 48
+  },
+  {
+    "RoomID": "A3-403",
+    "Container": 48
+  },
+  {
+    "RoomID": "A3-404",
+    "Container": 48
+  },
+  {
+    "RoomID": "A3-405",
+    "Container": 48
+  },
+  {
+    "RoomID": "A3-406",
+    "Container": 48
+  },
+  {
+    "RoomID": "A3-407",
+    "Container": 48
+  },
+  {
+    "RoomID": "A3-408",
+    "Container": 48
+  },
+  {
+    "RoomID": "A4-101",
+    "Container": 48
+  },
+  {
+    "RoomID": "A4-102",
+    "Container": 70
+  },
+  {
+    "RoomID": "A4-103",
+    "Container": 70
+  },
+  {
+    "RoomID": "A4-201",
+    "Container": 70
+  },
+  {
+    "RoomID": "A4-202",
+    "Container": 70
+  },
+  {
+    "RoomID": "A4-203",
+    "Container": 70
+  },
+  {
+    "RoomID": "A4-301",
+    "Container": 70
+  },
+  {
+    "RoomID": "A4-304",
+    "Container": 70
+  },
+  {
+    "RoomID": "A4-402",
+    "Container": 70
+  },
+  {
+    "RoomID": "A4-403",
+    "Container": 70
+  },
+  {
+    "RoomID": "B101",
+    "Container": 56
+  },
+  {
+    "RoomID": "B102",
+    "Container": 56
+  },
+  {
+    "RoomID": "B103",
+    "Container": 56
+  },
+  {
+    "RoomID": "B104",
+    "Container": 56
+  },
+  {
+    "RoomID": "B105",
+    "Container": 56
+  },
+  {
+    "RoomID": "B107",
+    "Container": 56
+  },
+  {
+    "RoomID": "B108",
+    "Container": 56
+  },
+  {
+    "RoomID": "B109",
+    "Container": 56
+  },
+  {
+    "RoomID": "B201",
+    "Container": 56
+  },
+  {
+    "RoomID": "B202",
+    "Container": 56
+  },
+  {
+    "RoomID": "B203",
+    "Container": 56
+  },
+  {
+    "RoomID": "B204",
+    "Container": 56
+  },
+  {
+    "RoomID": "B205",
+    "Container": 56
+  },
+  {
+    "RoomID": "B206",
+    "Container": 56
+  },
+  {
+    "RoomID": "B207",
+    "Container": 56
+  },
+  {
+    "RoomID": "B208",
+    "Container": 56
+  },
+  {
+    "RoomID": "B209",
+    "Container": 56
+  },
+  {
+    "RoomID": "B210",
+    "Container": 56
+  },
+  {
+    "RoomID": "B211",
+    "Container": 56
+  },
+  {
+    "RoomID": "B212",
+    "Container": 56
+  },
+  {
+    "RoomID": "B213",
+    "Container": 56
+  },
+  {
+    "RoomID": "B214",
+    "Container": 56
+  },
+  {
+    "RoomID": "B301",
+    "Container": 56
+  },
+  {
+    "RoomID": "B302",
+    "Container": 56
+  },
+  {
+    "RoomID": "B303",
+    "Container": 56
+  },
+  {
+    "RoomID": "B304",
+    "Container": 56
+  },
+  {
+    "RoomID": "B305",
+    "Container": 56
+  },
+  {
+    "RoomID": "B306",
+    "Container": 56
+  },
+  {
+    "RoomID": "B307",
+    "Container": 56
+  },
+  {
+    "RoomID": "B308",
+    "Container": 56
+  },
+  {
+    "RoomID": "B309",
+    "Container": 56
+  },
+  {
+    "RoomID": "B310",
+    "Container": 56
+  },
+  {
+    "RoomID": "B311",
+    "Container": 56
+  },
+  {
+    "RoomID": "B312",
+    "Container": 56
+  },
+  {
+    "RoomID": "B313",
+    "Container": 56
+  },
+  {
+    "RoomID": "B314",
+    "Container": 56
+  },
+  {
+    "RoomID": "B315",
+    "Container": 56
+  },
+  {
+    "RoomID": "C101",
+    "Container": 64
+  },
+  {
+    "RoomID": "C102",
+    "Container": 64
+  },
+  {
+    "RoomID": "C201",
+    "Container": 64
+  },
+  {
+    "RoomID": "C202",
+    "Container": 64
+  },
+  {
+    "RoomID": "C203",
+    "Container": 64
+  },
+  {
+    "RoomID": "C204",
+    "Container": 64
+  },
+  {
+    "RoomID": "C205",
+    "Container": 64
+  },
+  {
+    "RoomID": "C206",
+    "Container": 64
+  },
+  {
+    "RoomID": "C301",
+    "Container": 64
+  },
+  {
+    "RoomID": "C302",
+    "Container": 64
+  },
+  {
+    "RoomID": "C303",
+    "Container": 64
+  },
+  {
+    "RoomID": "C304",
+    "Container": 64
+  },
+  {
+    "RoomID": "C305",
+    "Container": 64
+  },
+  {
+    "RoomID": "C306",
+    "Container": 64
+  },
+  {
+    "RoomID": "C401",
+    "Container": 64
+  },
+  {
+    "RoomID": "C402",
+    "Container": 64
+  },
+  {
+    "RoomID": "C403",
+    "Container": 64
+  },
+  {
+    "RoomID": "C404",
+    "Container": 64
+  },
+  {
+    "RoomID": "C405",
+    "Container": 64
+  },
+  {
+    "RoomID": "C406",
+    "Container": 64
+  },
+  {
+    "RoomID": "C501",
+    "Container": 64
+  },
+  {
+    "RoomID": "C502",
+    "Container": 64
+  },
+  {
+    "RoomID": "C503",
+    "Container": 64
+  },
+  {
+    "RoomID": "C504",
+    "Container": 64
+  }
+]

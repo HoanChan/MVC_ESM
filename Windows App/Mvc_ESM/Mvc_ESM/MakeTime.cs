@@ -12,7 +12,7 @@ namespace Mvc_ESM.Static_Helper
         //B1: Gán thời gian tối thiểu cho tất cả các môn dựa vào màu của chúng
         private static void Init()
         {
-            AlgorithmRunner.SubjectTime = new DateTime[InputHelper.Subjects.Count];
+            AlgorithmRunner.GroupsTime = new DateTime[AlgorithmRunner.Groups.Count];
             AlgorithmRunner.MaxColorTime = new DateTime[AlgorithmRunner.ColorNumber];
             // ngày so với ngày bắt đầu kì thi
             int Date = 0;
@@ -21,14 +21,14 @@ namespace Mvc_ESM.Static_Helper
             for (int ColorNumber = 1; ColorNumber < AlgorithmRunner.ColorNumber; ColorNumber++)
             {
                 // các môn cùng màu sẽ cùng ca, cùng ngày thi
-                for (int i = 0; i < InputHelper.Subjects.Count; i++)
+                for (int i = 0; i < AlgorithmRunner.Groups.Count; i++)
                 {
                     if (AlgorithmRunner.Colors[i] == ColorNumber)
                     {
-                        AlgorithmRunner.SubjectTime[i] = InputHelper.Options.StartDate.AddDays(Date)
-                                                                              .AddHours(InputHelper.Options.Times[Slot].BGTime.Hour)
-                                                                              .AddMinutes(InputHelper.Options.Times[Slot].BGTime.Minute);
-                        AlgorithmRunner.MaxColorTime[ColorNumber] = AlgorithmRunner.SubjectTime[i];
+                        AlgorithmRunner.GroupsTime[i] = InputHelper.Options.StartDate.AddDays(Date)
+                                                                              .AddHours(InputHelper.Options.Times[Slot].Hour)
+                                                                              .AddMinutes(InputHelper.Options.Times[Slot].Minute);
+                        AlgorithmRunner.MaxColorTime[ColorNumber] = AlgorithmRunner.GroupsTime[i];
                     }
                 }
                 Slot++;
@@ -56,15 +56,15 @@ namespace Mvc_ESM.Static_Helper
                 {
                     int Step = CalcStep(AlgorithmRunner.MaxColorTime[CurrentColor + 1], AlgorithmRunner.MaxColorTime[CurrentColor]) + 1;
                     // tăng thời gian các môn thi sau, màu lớn hơn thì thi sau.
-                    for (int si = 0; si < AlgorithmRunner.SubjectTime.Count(); si++)
+                    for (int si = 0; si < AlgorithmRunner.GroupsTime.Count(); si++)
                     {
                         if (AlgorithmRunner.Colors[si] > CurrentColor)
                         {
-                            AlgorithmRunner.SubjectTime[si] = IncTime(AlgorithmRunner.SubjectTime[si], Step);
-                            if (AlgorithmRunner.MaxColorTime[AlgorithmRunner.Colors[si]] < AlgorithmRunner.SubjectTime[si])
+                            AlgorithmRunner.GroupsTime[si] = IncTime(AlgorithmRunner.GroupsTime[si], Step);
+                            if (AlgorithmRunner.MaxColorTime[AlgorithmRunner.Colors[si]] < AlgorithmRunner.GroupsTime[si])
                             {
                                 // đổi max
-                                AlgorithmRunner.MaxColorTime[AlgorithmRunner.Colors[si]] = AlgorithmRunner.SubjectTime[si];
+                                AlgorithmRunner.MaxColorTime[AlgorithmRunner.Colors[si]] = AlgorithmRunner.GroupsTime[si];
                             }
                         }
                     }
@@ -79,24 +79,24 @@ namespace Mvc_ESM.Static_Helper
 
             int Index;
             int Step = InputHelper.Options.DateMin + 1;
-            if (Checker == 1) // tức là  AlgorithmRunner.SubjectTime[i] >  AlgorithmRunner.SubjectTime[j]
+            if (Checker == 1) // tức là  AlgorithmRunner.GroupsTime[i] >  AlgorithmRunner.GroupsTime[j]
             {
                 // tăng môn i nhưng phải dựa vào môn j là do ko bít hiện tại khoảng cách giữa 2 môn
                 // i và j là bao nhiêu, tăng cho vừa khớp với điều kiện cho chắc.
-                AlgorithmRunner.SubjectTime[i] = IncTime(AlgorithmRunner.SubjectTime[j], Step);
+                AlgorithmRunner.GroupsTime[i] = IncTime(AlgorithmRunner.GroupsTime[j], Step);
                 Index = i;
             }
             else //Checker == 2
             {
-                AlgorithmRunner.SubjectTime[j] = IncTime(AlgorithmRunner.SubjectTime[i], Step);
+                AlgorithmRunner.GroupsTime[j] = IncTime(AlgorithmRunner.GroupsTime[i], Step);
                 Index = j;
             }
             int CurrentColor = AlgorithmRunner.Colors[Index];
             // Kiểm tra và tăng max
-            if (AlgorithmRunner.MaxColorTime[CurrentColor] < AlgorithmRunner.SubjectTime[Index])
+            if (AlgorithmRunner.MaxColorTime[CurrentColor] < AlgorithmRunner.GroupsTime[Index])
             {
                 // đổi max
-                AlgorithmRunner.MaxColorTime[CurrentColor] = AlgorithmRunner.SubjectTime[Index];
+                AlgorithmRunner.MaxColorTime[CurrentColor] = AlgorithmRunner.GroupsTime[Index];
                 IncSubjectAfter(CurrentColor);
             }
             //else
@@ -162,7 +162,7 @@ namespace Mvc_ESM.Static_Helper
             int CurrentStep = 0;
             for (int i = 0; i < InputHelper.Options.Times.Count; i++)
             {
-                if (Time.Hour == InputHelper.Options.Times[i].BGTime.Hour && Time.Minute == InputHelper.Options.Times[i].BGTime.Minute)
+                if (Time.Hour == InputHelper.Options.Times[i].Hour && Time.Minute == InputHelper.Options.Times[i].Minute)
                 {
                     CurrentStep = i;
                     break;
@@ -178,8 +178,8 @@ namespace Mvc_ESM.Static_Helper
             Result = new DateTime(Time.Year, 
                                   Time.Month, 
                                   Time.Day,
-                                  InputHelper.Options.Times[FinalStep % InputHelper.Options.Times.Count].BGTime.Hour,
-                                  InputHelper.Options.Times[FinalStep % InputHelper.Options.Times.Count].BGTime.Minute, 
+                                  InputHelper.Options.Times[FinalStep % InputHelper.Options.Times.Count].Hour,
+                                  InputHelper.Options.Times[FinalStep % InputHelper.Options.Times.Count].Minute, 
                                   0);
             Result = Result.AddDays(FinalStep / InputHelper.Options.Times.Count);
             return Result;
@@ -187,8 +187,8 @@ namespace Mvc_ESM.Static_Helper
 
         private static int CheckTime(int i, int j)
         {
-            DateTime T1 = AlgorithmRunner.SubjectTime[i];
-            DateTime T2 = AlgorithmRunner.SubjectTime[j];
+            DateTime T1 = AlgorithmRunner.GroupsTime[i];
+            DateTime T2 = AlgorithmRunner.GroupsTime[j];
             if (T1 > T2)
             {
                 // t1> t2, và nếu sau khi tăng t2 mà lại lớn hơn hoặc bằng t1 == > khoảng cách giữa t1 và t2 chưa đạt yêu cầu
@@ -208,8 +208,8 @@ namespace Mvc_ESM.Static_Helper
         {
             Init();
             CreateTime();
-            AlgorithmRunner.WriteObj("SubjectTime", AlgorithmRunner.SubjectTime);
-            AlgorithmRunner.WriteObj("MaxColorTime", AlgorithmRunner.MaxColorTime);
+            AlgorithmRunner.WriteJson("GroupsTime", AlgorithmRunner.GroupsTime);
+            AlgorithmRunner.WriteJson("MaxColorTime", AlgorithmRunner.MaxColorTime);
         }
     }
 }

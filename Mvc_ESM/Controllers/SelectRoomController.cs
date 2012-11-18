@@ -31,10 +31,10 @@ namespace Mvc_ESM.Controllers
             string paramInfo = "";
             for (int i = 0; i < RoomID.Count; i++)
             {
-                InputHelper.Rooms.Add(new Room(RoomID[i], Container[i]));
+                InputHelper.Rooms.Add(new Room(){ RoomID = RoomID[i], Container = Container[i]});
                 paramInfo += "MP:" + RoomID[i] + " SC: " + Container[i] + "<br /><br />";
             }
-            InputHelper.SaveOBJ("Rooms", InputHelper.Rooms);
+            OutputHelper.SaveOBJ("Rooms", InputHelper.Rooms);
             return paramInfo;
         }
 

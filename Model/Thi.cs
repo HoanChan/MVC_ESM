@@ -16,6 +16,7 @@ namespace Model
     {
         public string MaSinhVien { get; set; }
         public string MaMonHoc { get; set; }
+        public string Nhom { get; set; }
         public string MaPhong { get; set; }
         public string MaCa { get; set; }
     

@@ -21,6 +21,36 @@ namespace Mvc_ESM.Controllers
         }
 
         [HttpGet]
+        public JsonResult LoadSubjectByGroupInfo(string SubjectID)
+        {
+            var Groups = from g in db.nhoms
+                          where g.MaMonHoc == SubjectID
+                          select new
+                          {
+                              MSMH = g.MaMonHoc,
+                              TenMH = g.monhoc.TenMonHoc,
+                              BoMon = g.monhoc.bomon.TenBoMon,
+                              Khoa = g.monhoc.bomon.khoa.TenKhoa,
+                              Nhom = g.Nhom1,
+                              SL = g.SoLuongDK
+                          };
+            if (Groups.Count() == 0)
+            {
+                return Json(new List<object>(){ new 
+                        {
+                            MSMH = "false",
+                            TenMH = "",
+                            BoMon = "",
+                            Khoa = "",
+                            Nhom = 0,
+                            Sl = 0
+                        }}, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(Groups, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         public JsonResult LoadStudentAndSubjectInfo(string StudentID, string SubjectID)
         {
             var Student = from s in db.sinhviens

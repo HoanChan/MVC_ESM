@@ -28,17 +28,15 @@ namespace Mvc_ESM.Controllers
                                                      where s.MaPhong == id
                                                      select new Static_Helper.Event()
                                                      {
-                                                         id = s.MaMonHoc,
-                                                         text = s.monhoc.TenMonHoc,
-                                                         start_date = s.CaThi.NgayThi,
-                                                         end_date = s.CaThi.NgayThi,
-                                                         Step = s.CaThi.TietBD
+                                                         id = s.MaMonHoc + s.Nhom,
+                                                         text = s.monhoc.TenMonHoc + s.MaPhong,
+                                                         start_date = s.CaThi.GioThi,
+                                                         end_date = s.CaThi.GioThi,
                                                      }).Distinct().ToList<Static_Helper.Event>();
-            int[] Step = new int[] { 7 * 60, 9 * 60 + 30, 13 * 60, 15 * 60 + 30 };
             for (int i = 0; i < SubjectTime.Count(); i++)
             {
-                SubjectTime[i].start_date = SubjectTime[i].start_date.AddMinutes(Step[SubjectTime[i].Step]);
-                SubjectTime[i].end_date = SubjectTime[i].end_date.AddMinutes(Step[SubjectTime[i].Step]).AddHours(2);
+                SubjectTime[i].start_date = SubjectTime[i].start_date;
+                SubjectTime[i].end_date = SubjectTime[i].end_date.AddHours(2);
             }
 
             return Content(Static_Helper.Calendar.DataFormater(SubjectTime, false), "text/xml");
@@ -50,18 +48,16 @@ namespace Mvc_ESM.Controllers
                                                      where s.MaSinhVien == id
                                                      select new Static_Helper.Event()
                                                      {
-                                                         id = s.MaMonHoc,
-                                                         text = s.monhoc.TenMonHoc,
-                                                         start_date = s.CaThi.NgayThi,
-                                                         end_date = s.CaThi.NgayThi,
-                                                         Step = s.CaThi.TietBD,
+                                                         id = s.MaMonHoc + s.Nhom,
+                                                         text = s.monhoc.TenMonHoc + s.MaPhong,
+                                                         start_date = s.CaThi.GioThi,
+                                                         end_date = s.CaThi.GioThi,
                                                          MaPhong = s.MaPhong
                                                      }).ToList<Static_Helper.Event>();
-            int[] Step = new int[] { 7 * 60, 9 * 60 + 30, 13 * 60, 15 * 60 + 30 };
             for (int i = 0; i < SubjectTime.Count(); i++)
             {
-                SubjectTime[i].start_date = SubjectTime[i].start_date.AddMinutes(Step[SubjectTime[i].Step]);
-                SubjectTime[i].end_date = SubjectTime[i].end_date.AddMinutes(Step[SubjectTime[i].Step]).AddHours(2);
+                SubjectTime[i].start_date = SubjectTime[i].start_date;
+                SubjectTime[i].end_date = SubjectTime[i].end_date.AddHours(2);
             }
 
             return Content(Static_Helper.Calendar.DataFormater(SubjectTime, true), "text/xml");

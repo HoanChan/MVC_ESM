@@ -52,6 +52,7 @@
             this.pbCreateAdjacencyMatrix = new System.Windows.Forms.ProgressBar();
             this.ProgressUpdater = new System.Windows.Forms.Timer(this.components);
             this.txtArgs = new System.Windows.Forms.TextBox();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -275,11 +276,22 @@
             this.txtArgs.Size = new System.Drawing.Size(582, 137);
             this.txtArgs.TabIndex = 5;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(441, 188);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(126, 23);
+            this.btnDelete.TabIndex = 6;
+            this.btnDelete.Text = "Delete Database";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(609, 419);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.txtArgs);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -329,6 +341,7 @@
         private System.Windows.Forms.Timer ProgressUpdater;
         private System.Windows.Forms.Button btnCreateAdjacencyMatrix_Stop;
         private System.Windows.Forms.TextBox txtArgs;
+        private System.Windows.Forms.Button btnDelete;
     }
 }
 

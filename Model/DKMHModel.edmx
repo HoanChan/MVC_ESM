@@ -4,23 +4,23 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DKMHModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DKMHModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="DKMHModelStoreContainer">
-          <EntitySet Name="bomon" EntityType="DKMHModel.Store.bomon" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="CaThi" EntityType="DKMHModel.Store.CaThi" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="chuyennganh" EntityType="DKMHModel.Store.chuyennganh" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="CoiThi" EntityType="DKMHModel.Store.CoiThi" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="giaovien" EntityType="DKMHModel.Store.giaovien" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="khoa" EntityType="DKMHModel.Store.khoa" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="khoi" EntityType="DKMHModel.Store.khoi" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="lichhocvu" EntityType="DKMHModel.Store.lichhocvu" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="lop" EntityType="DKMHModel.Store.lop" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="monhoc" EntityType="DKMHModel.Store.monhoc" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="nhom" EntityType="DKMHModel.Store.nhom" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="pdkmh" EntityType="DKMHModel.Store.pdkmh" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="phong" EntityType="DKMHModel.Store.phong" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="sinhvien" EntityType="DKMHModel.Store.sinhvien" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-          <EntitySet Name="Thi" EntityType="DKMHModel.Store.Thi" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="bomon" EntityType="DKMHModel.Store.bomon" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CaThi" EntityType="DKMHModel.Store.CaThi" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="chuyennganh" EntityType="DKMHModel.Store.chuyennganh" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CoiThi" EntityType="DKMHModel.Store.CoiThi" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="giaovien" EntityType="DKMHModel.Store.giaovien" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="khoa" EntityType="DKMHModel.Store.khoa" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="khoi" EntityType="DKMHModel.Store.khoi" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="lichhocvu" EntityType="DKMHModel.Store.lichhocvu" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="lop" EntityType="DKMHModel.Store.lop" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="monhoc" EntityType="DKMHModel.Store.monhoc" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="nhom" EntityType="DKMHModel.Store.nhom" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="pdkmh" EntityType="DKMHModel.Store.pdkmh" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="phong" EntityType="DKMHModel.Store.phong" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sinhvien" EntityType="DKMHModel.Store.sinhvien" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Thi" EntityType="DKMHModel.Store.Thi" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_bomon_khoa" Association="DKMHModel.Store.FK_bomon_khoa">
             <End Role="khoa" EntitySet="khoa" />
             <End Role="bomon" EntitySet="bomon" />
@@ -119,9 +119,7 @@
             <PropertyRef Name="MaCa" />
           </Key>
           <Property Name="MaCa" Type="nvarchar" Nullable="false" MaxLength="10" />
-          <Property Name="NgayThi" Type="date" Nullable="false" />
-          <Property Name="TietBD" Type="int" Nullable="false" />
-          <Property Name="SoTiet" Type="int" Nullable="false" />
+          <Property Name="GioThi" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="chuyennganh">
           <Key>
@@ -263,6 +261,7 @@
           </Key>
           <Property Name="MaSinhVien" Type="nvarchar" Nullable="false" MaxLength="8" />
           <Property Name="MaMonHoc" Type="nvarchar" Nullable="false" MaxLength="7" />
+          <Property Name="Nhom" Type="varchar(max)" Nullable="false" />
           <Property Name="MaPhong" Type="nvarchar" Nullable="false" MaxLength="10" />
           <Property Name="MaCa" Type="nvarchar" Nullable="false" MaxLength="10" />
         </EntityType>
@@ -540,7 +539,6 @@
           <EntitySet Name="pdkmhs" EntityType="DKMHModel.pdkmh" />
           <EntitySet Name="phongs" EntityType="DKMHModel.phong" />
           <EntitySet Name="sinhviens" EntityType="DKMHModel.sinhvien" />
-          <EntitySet Name="This" EntityType="DKMHModel.Thi" />
           <AssociationSet Name="FK_bomon_khoa" Association="DKMHModel.FK_bomon_khoa">
             <End Role="khoa" EntitySet="khoas" />
             <End Role="bomon" EntitySet="bomons" />
@@ -552,10 +550,6 @@
           <AssociationSet Name="FK_monhoc_bomon" Association="DKMHModel.FK_monhoc_bomon">
             <End Role="bomon" EntitySet="bomons" />
             <End Role="monhoc" EntitySet="monhocs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Thi_CaThi" Association="DKMHModel.FK_Thi_CaThi">
-            <End Role="CaThi" EntitySet="CaThis" />
-            <End Role="Thi" EntitySet="This" />
           </AssociationSet>
           <AssociationSet Name="FK_chuyennganh_khoa" Association="DKMHModel.FK_chuyennganh_khoa">
             <End Role="khoa" EntitySet="khoas" />
@@ -597,10 +591,6 @@
             <End Role="monhoc" EntitySet="monhocs" />
             <End Role="nhom" EntitySet="nhoms" />
           </AssociationSet>
-          <AssociationSet Name="FK_Thi_MonHoc" Association="DKMHModel.FK_Thi_MonHoc">
-            <End Role="monhoc" EntitySet="monhocs" />
-            <End Role="Thi" EntitySet="This" />
-          </AssociationSet>
           <AssociationSet Name="FK_pdkmh_nhom" Association="DKMHModel.FK_pdkmh_nhom">
             <End Role="nhom" EntitySet="nhoms" />
             <End Role="pdkmh" EntitySet="pdkmhs" />
@@ -609,6 +599,19 @@
             <End Role="sinhvien" EntitySet="sinhviens" />
             <End Role="pdkmh" EntitySet="pdkmhs" />
           </AssociationSet>
+          <AssociationSet Name="CoiThi" Association="DKMHModel.CoiThi">
+            <End Role="CaThi" EntitySet="CaThis" />
+            <End Role="giaovien" EntitySet="giaoviens" />
+          </AssociationSet>
+          <EntitySet Name="This" EntityType="DKMHModel.Thi" />
+          <AssociationSet Name="FK_Thi_CaThi" Association="DKMHModel.FK_Thi_CaThi">
+            <End Role="CaThi" EntitySet="CaThis" />
+            <End Role="Thi" EntitySet="This" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Thi_MonHoc" Association="DKMHModel.FK_Thi_MonHoc">
+            <End Role="monhoc" EntitySet="monhocs" />
+            <End Role="Thi" EntitySet="This" />
+          </AssociationSet>
           <AssociationSet Name="FK_Thi_Phong" Association="DKMHModel.FK_Thi_Phong">
             <End Role="phong" EntitySet="phongs" />
             <End Role="Thi" EntitySet="This" />
@@ -616,10 +619,6 @@
           <AssociationSet Name="FK_Thi_SinhVien" Association="DKMHModel.FK_Thi_SinhVien">
             <End Role="sinhvien" EntitySet="sinhviens" />
             <End Role="Thi" EntitySet="This" />
-          </AssociationSet>
-          <AssociationSet Name="CoiThi" Association="DKMHModel.CoiThi">
-            <End Role="CaThi" EntitySet="CaThis" />
-            <End Role="giaovien" EntitySet="giaoviens" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="bomon">
@@ -638,11 +637,9 @@
             <PropertyRef Name="MaCa" />
           </Key>
           <Property Type="String" Name="MaCa" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="NgayThi" Nullable="false" Precision="0" />
-          <Property Type="Int32" Name="TietBD" Nullable="false" />
-          <Property Type="Int32" Name="SoTiet" Nullable="false" />
-          <NavigationProperty Name="This" Relationship="DKMHModel.FK_Thi_CaThi" FromRole="CaThi" ToRole="Thi" />
+          <Property Type="DateTime" Name="GioThi" Nullable="false" Precision="3" />
           <NavigationProperty Name="giaoviens" Relationship="DKMHModel.CoiThi" FromRole="CaThi" ToRole="giaovien" />
+          <NavigationProperty Name="This" Relationship="DKMHModel.FK_Thi_CaThi" FromRole="CaThi" ToRole="Thi" />
         </EntityType>
         <EntityType Name="chuyennganh">
           <Key>
@@ -800,20 +797,6 @@
           <NavigationProperty Name="pdkmhs" Relationship="DKMHModel.FK_pdkmh_sinhvien" FromRole="sinhvien" ToRole="pdkmh" />
           <NavigationProperty Name="This" Relationship="DKMHModel.FK_Thi_SinhVien" FromRole="sinhvien" ToRole="Thi" />
         </EntityType>
-        <EntityType Name="Thi">
-          <Key>
-            <PropertyRef Name="MaSinhVien" />
-            <PropertyRef Name="MaMonHoc" />
-          </Key>
-          <Property Type="String" Name="MaSinhVien" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="MaMonHoc" Nullable="false" MaxLength="7" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="MaPhong" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="MaCa" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CaThi" Relationship="DKMHModel.FK_Thi_CaThi" FromRole="Thi" ToRole="CaThi" />
-          <NavigationProperty Name="monhoc" Relationship="DKMHModel.FK_Thi_MonHoc" FromRole="Thi" ToRole="monhoc" />
-          <NavigationProperty Name="phong" Relationship="DKMHModel.FK_Thi_Phong" FromRole="Thi" ToRole="phong" />
-          <NavigationProperty Name="sinhvien" Relationship="DKMHModel.FK_Thi_SinhVien" FromRole="Thi" ToRole="sinhvien" />
-        </EntityType>
         <Association Name="FK_bomon_khoa">
           <End Type="DKMHModel.khoa" Role="khoa" Multiplicity="1" />
           <End Type="DKMHModel.bomon" Role="bomon" Multiplicity="*" />
@@ -847,18 +830,6 @@
             </Principal>
             <Dependent Role="monhoc">
               <PropertyRef Name="BoMonQL" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Thi_CaThi">
-          <End Type="DKMHModel.CaThi" Role="CaThi" Multiplicity="1" />
-          <End Type="DKMHModel.Thi" Role="Thi" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CaThi">
-              <PropertyRef Name="MaCa" />
-            </Principal>
-            <Dependent Role="Thi">
-              <PropertyRef Name="MaCa" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -984,18 +955,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Thi_MonHoc">
-          <End Type="DKMHModel.monhoc" Role="monhoc" Multiplicity="1" />
-          <End Type="DKMHModel.Thi" Role="Thi" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="monhoc">
-              <PropertyRef Name="MaMonHoc" />
-            </Principal>
-            <Dependent Role="Thi">
-              <PropertyRef Name="MaMonHoc" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_pdkmh_nhom">
           <End Type="DKMHModel.nhom" Role="nhom" Multiplicity="1" />
           <End Type="DKMHModel.pdkmh" Role="pdkmh" Multiplicity="*" />
@@ -1019,6 +978,49 @@
             </Principal>
             <Dependent Role="pdkmh">
               <PropertyRef Name="MaSinhVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CoiThi">
+          <End Type="DKMHModel.CaThi" Role="CaThi" Multiplicity="*" />
+          <End Type="DKMHModel.giaovien" Role="giaovien" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Thi">
+          <Key>
+            <PropertyRef Name="MaSinhVien" />
+            <PropertyRef Name="MaMonHoc" />
+          </Key>
+          <Property Type="String" Name="MaSinhVien" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MaMonHoc" Nullable="false" MaxLength="7" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Nhom" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MaPhong" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MaCa" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CaThi" Relationship="DKMHModel.FK_Thi_CaThi" FromRole="Thi" ToRole="CaThi" />
+          <NavigationProperty Name="monhoc" Relationship="DKMHModel.FK_Thi_MonHoc" FromRole="Thi" ToRole="monhoc" />
+          <NavigationProperty Name="phong" Relationship="DKMHModel.FK_Thi_Phong" FromRole="Thi" ToRole="phong" />
+          <NavigationProperty Name="sinhvien" Relationship="DKMHModel.FK_Thi_SinhVien" FromRole="Thi" ToRole="sinhvien" />
+        </EntityType>
+        <Association Name="FK_Thi_CaThi">
+          <End Type="DKMHModel.CaThi" Role="CaThi" Multiplicity="1" />
+          <End Type="DKMHModel.Thi" Role="Thi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CaThi">
+              <PropertyRef Name="MaCa" />
+            </Principal>
+            <Dependent Role="Thi">
+              <PropertyRef Name="MaCa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Thi_MonHoc">
+          <End Type="DKMHModel.monhoc" Role="monhoc" Multiplicity="1" />
+          <End Type="DKMHModel.Thi" Role="Thi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="monhoc">
+              <PropertyRef Name="MaMonHoc" />
+            </Principal>
+            <Dependent Role="Thi">
+              <PropertyRef Name="MaMonHoc" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1046,10 +1048,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="CoiThi">
-          <End Type="DKMHModel.CaThi" Role="CaThi" Multiplicity="*" />
-          <End Type="DKMHModel.giaovien" Role="giaovien" Multiplicity="*" />
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1068,9 +1066,7 @@
           <EntitySetMapping Name="CaThis">
             <EntityTypeMapping TypeName="DKMHModel.CaThi">
               <MappingFragment StoreEntitySet="CaThi">
-                <ScalarProperty Name="SoTiet" ColumnName="SoTiet" />
-                <ScalarProperty Name="TietBD" ColumnName="TietBD" />
-                <ScalarProperty Name="NgayThi" ColumnName="NgayThi" />
+                <ScalarProperty Name="GioThi" ColumnName="GioThi" />
                 <ScalarProperty Name="MaCa" ColumnName="MaCa" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1201,16 +1197,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="This">
-            <EntityTypeMapping TypeName="DKMHModel.Thi">
-              <MappingFragment StoreEntitySet="Thi">
-                <ScalarProperty Name="MaCa" ColumnName="MaCa" />
-                <ScalarProperty Name="MaPhong" ColumnName="MaPhong" />
-                <ScalarProperty Name="MaMonHoc" ColumnName="MaMonHoc" />
-                <ScalarProperty Name="MaSinhVien" ColumnName="MaSinhVien" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <AssociationSetMapping Name="CoiThi" TypeName="DKMHModel.CoiThi" StoreEntitySet="CoiThi">
             <EndProperty Name="giaovien">
               <ScalarProperty Name="MaGiaoVien" ColumnName="MaGiaoVien" />
@@ -1219,6 +1205,17 @@
               <ScalarProperty Name="MaCa" ColumnName="MaCa" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="This">
+            <EntityTypeMapping TypeName="DKMHModel.Thi">
+              <MappingFragment StoreEntitySet="Thi">
+                <ScalarProperty Name="MaCa" ColumnName="MaCa" />
+                <ScalarProperty Name="MaPhong" ColumnName="MaPhong" />
+                <ScalarProperty Name="Nhom" ColumnName="Nhom" />
+                <ScalarProperty Name="MaMonHoc" ColumnName="MaMonHoc" />
+                <ScalarProperty Name="MaSinhVien" ColumnName="MaSinhVien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

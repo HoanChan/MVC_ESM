@@ -16,16 +16,14 @@ namespace Model
     {
         public CaThi()
         {
-            this.This = new HashSet<Thi>();
             this.giaoviens = new HashSet<giaovien>();
+            this.This = new HashSet<Thi>();
         }
     
         public string MaCa { get; set; }
-        public System.DateTime NgayThi { get; set; }
-        public int TietBD { get; set; }
-        public int SoTiet { get; set; }
+        public System.DateTime GioThi { get; set; }
     
-        public virtual ICollection<Thi> This { get; set; }
         public virtual ICollection<giaovien> giaoviens { get; set; }
+        public virtual ICollection<Thi> This { get; set; }
     }
 }

@@ -18,28 +18,26 @@ namespace Mvc_ESM.Controllers
         }
 
         [HttpPost]
-        public String SelectSuccess(List<String> Name, List<long> BGTime, List<long> ETime, int DateMin, long DateStart, int NumDate)
+        public String SelectSuccess(List<long> BGTime, int DateMin, long DateStart, int NumDate, int StepTime)
         {
             //DateStart được tính bằng mili giây
             InputHelper.Options.StartDate = (new DateTime(1970, 1, 1, 0, 0, 0, 0)).AddMilliseconds(DateStart - DateStart % 86400000).AddDays(1);
             InputHelper.Options.NumDate = NumDate;
             InputHelper.Options.DateMin = DateMin;
+            InputHelper.Options.StepTime = StepTime;
             string paramInfo = "date:" + InputHelper.Options.StartDate.ToString() + "<br/><br/>";
             paramInfo += "DateMin:" + InputHelper.Options.DateMin + "<br/><br/>";
             paramInfo += "NumDate:" + InputHelper.Options.NumDate + "<br/><br/>";
-            InputHelper.Options.DateMin = DateMin;
-            InputHelper.Options.NumDate = NumDate;
-            InputHelper.Options.Times = new List<ExamTime>();
-            for (int i = 0; i < Name.Count(); i++)
+            paramInfo += "StepTime:" + InputHelper.Options.StepTime + "<br/><br/>";
+            InputHelper.Options.Times = new List<DateTime>();
+            for (int i = 0; i < BGTime.Count(); i++)
             {
-                ExamTime ET = new ExamTime();
-                ET.Name = Name[i];
-                ET.BGTime = InputHelper.Options.StartDate.AddMilliseconds(BGTime[i]).AddHours(7);
-                ET.ETime = InputHelper.Options.StartDate.AddMilliseconds(ETime[i]).AddHours(7);
-                InputHelper.Options.Times.Add(ET);
-                paramInfo += "ET[" + i + "]: {Name ='" + ET.Name + "', BGTime = " + ET.BGTime.ToString() + ", ETime=" + ET.ETime.ToString() + "}<br/><br/>";
+                DateTime Time = InputHelper.Options.StartDate.AddMilliseconds(BGTime[i]);
+                InputHelper.Options.Times.Add(Time);
+                paramInfo += " BGTime = " + Time.ToString() + "<br/><br/>";
             }
-            InputHelper.SaveOBJ("Options", InputHelper.Options);
+            InputHelper.Options.Times.Sort();
+            OutputHelper.SaveOBJ("Options", InputHelper.Options);
             return paramInfo;
         }
 

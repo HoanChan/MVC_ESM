@@ -15,33 +15,29 @@
         </tr>
         <tr>
             <td style="text-align:right;">Khoảng cách:</td>
-            <td><input type="text" id="DateMin" readonly="true" title="Khoảng cách giữa 2 môn thi liên tiếp của 1 thí sinh"/></td>
+            <td><input type="text" id="DateMin" readonly="true" title="Khoảng cách giữa 2 môn thi liên tiếp của 1 thí sinh, đơn vị tính là ca"/></td>
         </tr>
     </table>
     <p>Thiết lập ca thi của 1 ngày:</p>
+    <p>Thời gian 1 ca <input type="text" id="StepTime" readonly="true" title="Thời gian tổ chức 1 ca thi, đơn vị tính là phút"/></p>
     <p>
-        <input type="text" id="tName" title="Tên ca thi"/>
-        <input type="text" id="tBGTime" name="value" title="Thời gian bắt đầu"/>
-        <input type="text" id="tETime" name="value" title="Thời gian kết thúc"/>
+        Thêm ca thi: <input type="text" id="tBGTime" name="value" title="Thời gian bắt đầu"/>
         <button id="Addbtn" title="Thêm vào danh sách">Thêm</button>
     </p>
     <div style="width:800px; margin:auto;">
         <table id="table" style="width:800px;">
             <thead>
                 <tr>
-                    <th>Tên ca</th>
-                    <th>Giờ bắt đầu</th>
-                    <th> Giờ kết thúc</th>
+                    <th>Ca thi</th>
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
-            
+            <tbody>            
             </tbody>
         </table>
     </div>
+    <br />
     <button id="SaveBtn" title="Lưu các thiết lập">Lưu</button>
-    <button id="GoBtn" title="Bắt đầu xếp lịch">Xếp lịch</button>
 </form>
     
 
@@ -120,7 +116,25 @@
     //======================================================================//
     oTable = $('#table').dataTable({
         "aoColumnDefs": [
-            { "bSortable": false, "aTargets": [3] },
+                {
+                    "bSortable": false, "aTargets": [1],
+                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                        var b = $('<button>' + sData + '</button>');
+                        b.button({
+                            icons: {
+                                primary: "ui-icon-trash" // hình cái thùng rác
+                            }
+                        }).click(function (e) {
+                            e.preventDefault();
+                            var row = $(this).parent().parent(); // this là cái nút, cha của nó là td ông của nó là tr ==> cái hàng cần xoá
+                            if (row.length !== 0) {
+                                oTable.fnDeleteRow(row[0]);
+                            }
+                        });
+                        $(nTd).empty();
+                        $(nTd).prepend(b).attr('align', 'center');
+                    }
+                },
         ], // không hiện nút sắp xếp!
         "bLengthChange": false,
         "bFilter": false,
@@ -133,47 +147,26 @@
         var Name = $("#tName").val();
         // Giá trị trả về là số mili giây tính từ lúc 7:00 sáng tới 6:59 sáng hôm sau
         // 86400000 = 1000 * 60 * 60 * 24
-        var BGTime = $("#tBGTime").timespinner("value") % 86400000; // loại bỏ các thông tin về ngày, chỉ lấy thông tin về giờ
-        var ETime = $("#tETime").timespinner("value") % 86400000;
-
-        //if ($('#table tbody td button#Deletebtn[value="' + Name + '"]').length !== 0) {
-        //    alert("Dữ liệu ca thi có tên " + Name + " đã được thêm rồi!");
-        //    return false;
-        //}
-
-        if (BGTime >= ETime) {
-            alert("Giờ bắt đầu không thể lớn hơn giờ kết thúc");
-            return false;
-        }
+        // 25200000 la 7h dc cong bu
+        var BGTime = ($("#tBGTime").timespinner("value") + 25200000) % 86400000; // loại bỏ các thông tin về ngày, chỉ lấy thông tin về giờ
+        var ETime = BGTime + $('#StepTime').spinner("value") * 60 * 1000;
 
         var Checker = true;
 
         $("#table tbody tr").each(function (i) {
-            var tN = $("#Name", this).attr("postvalue");
-            var tBG = $("#BGTime", this).attr("postvalue");
-            var tE = $("#ETime", this).attr("postvalue");
-
-            if (tN == Name) {
-                Checker = false;
-                alert("Dữ liệu ca thi có tên " + tN + " đã được thêm rồi!");
-                return false;
-            }
+            var tBG = $("#BGTime", this).attr("postvalue") * 1;
+            var tE = tBG + $('#StepTime').spinner("value") * 60 * 1000;
 
             if ((tBG >= BGTime && tBG <= ETime) || (tE >= BGTime && tE <= ETime) || (BGTime >= tBG && BGTime <= tE) || (ETime >= tBG && ETime <= tE)) {
                 Checker = false;
-                alert("Giờ thi bị trùng với giờ thi của ca có tên: " + tN );
+                alert("Giờ thi bị trùng!");
                 return false; // ngắt vòng lặp each
             }
         });
 
         if (Checker == false) { return false; }
 
-        var _Name = '<span id="Name" postvalue="' + Name + '">' + Name + '</span>';
-        var _BGTime = '<span id="BGTime" postvalue="' + BGTime + '">' + $("#tBGTime").val() + '</span>';
-        var _ETime = '<span id="ETime" postvalue="' + ETime + '">' + $("#tETime").val() + '</span>';
-        var Delete = '<button id ="Deletebtn" value="' + Name + '">Xoá</button>';
-
-        oTable.fnAddData([_Name, _BGTime, _ETime, Delete]);
+        oTable.fnAddData(['<span id="BGTime" postvalue="' + BGTime + '">' + $("#tBGTime").val() + '</span>', "Xoá"]);
         $('#table tbody td button#Deletebtn[value="' + Name + '"]').button({
             icons: {
                 primary: "ui-icon-trash" // hình cái thùng rác
@@ -184,14 +177,14 @@
                 oTable.fnDeleteRow(row[0]);
             }
         }).parent().parent().attr('align', 'center');
-
     });
 
     $("#SaveBtn").button().click(function () {
-        var sData = "DateStart=" + $("#DateStart").datespinner("value");
-        sData += "&NumDate=" + $("#NumDate").spinner("value")
-                + "&DateMin=" + $("#DateMin").spinner("value");
-
+        var sData = "DateStart=" + $("#DateStart").datespinner("value")
+                    + "&NumDate=" + $("#NumDate").spinner("value")
+                    + "&DateMin=" + $("#DateMin").spinner("value")
+                    + "&StepTime=" + $("#StepTime").spinner("value");
+                
         oTable.$("#Name").each(function (index, item) {
             sData = sData + '&Name=' + $(this).attr("postvalue");
         });
@@ -199,18 +192,9 @@
         oTable.$("#BGTime").each(function (index, item) {
             sData = sData + '&BGTime=' + $(this).attr("postvalue");
         });
-
-        oTable.$("#ETime").each(function (index, item) {
-            sData = sData + '&ETime=' + $(this).attr("postvalue");
-        });
-
+        
         $.post("/Options/SelectSuccess", sData);
         alert("Đã lưu xong");
-        return false;
-    });
-
-    $("#GoBtn").button().click(function () {
-        window.location = '@Url.Action("Index", "Progress")';
         return false;
     });
 
@@ -232,8 +216,7 @@
     });
 
     $("#DateMin").spinner({
-        step: 0.5,
-        numberFormat: "n",
+        step: 1,
         spin: function (event, ui) {
             if (ui.value > 5) {
                 $(this).spinner("value", 0);
@@ -245,5 +228,18 @@
         }
     });
 
+    $("#StepTime").spinner({
+        step: 5,
+        spin: function (event, ui) {
+            if (ui.value > 360) {
+                $(this).spinner("value", 60);
+                return false;
+            } else if (ui.value < 60) {
+                $(this).spinner("value", 360);
+                return false;
+            }
+        }
+    });
+    
 
 </script>

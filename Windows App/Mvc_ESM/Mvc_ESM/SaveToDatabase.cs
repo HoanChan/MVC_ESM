@@ -1,5 +1,6 @@
 ﻿using Model;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.Objects;
@@ -12,64 +13,49 @@ namespace Mvc_ESM.Static_Helper
     {   
         public static void Run()
         {
-            DeleteOld();
+            //DeleteOld();
             Save();
         }
-
-        private static void DeleteOld()
-        {
-            DKMHEntities db = new DKMHEntities();
-            db.Database.ExecuteSqlCommand("DELETE FROM Thi");
-            db.Database.ExecuteSqlCommand("DELETE FROM CaThi");           
-        }
-
         private static void Save()
         {
-            DKMHEntities db = new DKMHEntities();            
-            for (int SubjectIndex = 0; SubjectIndex < InputHelper.Subjects.Count; SubjectIndex++)
+            DKMHEntities db = new DKMHEntities();
+            for (int GroupIndex = 0; GroupIndex < AlgorithmRunner.Groups.Count; GroupIndex++)
             {
                 Thi aRecord = new Thi();
-                aRecord.MaMonHoc = InputHelper.Subjects[SubjectIndex];
-
-                DateTime FirstStepTime = InputHelper.Options.StartDate.AddHours(InputHelper.Options.Times[0].BGTime.Hour)
-                                                                      .AddMinutes(InputHelper.Options.Times[0].BGTime.Minute);
-                String StepID = MakeTime.CalcStep(FirstStepTime, AlgorithmRunner.SubjectTime[SubjectIndex]).ToString();
+                aRecord.MaMonHoc = AlgorithmRunner.GetSubjectID(AlgorithmRunner.Groups[GroupIndex]);
+                aRecord.Nhom = AlgorithmRunner.GetClassList(AlgorithmRunner.Groups[GroupIndex]);
+                DateTime FirstStepTime = InputHelper.Options.StartDate.AddHours(InputHelper.Options.Times[0].Hour)
+                                                                      .AddMinutes(InputHelper.Options.Times[0].Minute);
+                String StepID = InputHelper.Options.StartDate.Year + "" + InputHelper.Options.StartDate.Month + "" + InputHelper.Options.StartDate.Day;
+                StepID += MakeTime.CalcStep(FirstStepTime, AlgorithmRunner.GroupsTime[GroupIndex]).ToString();
                 if ((from ct in db.CaThis where ct.MaCa == StepID select ct).Count() == 0)
                 {
-                    int BeginTime = 0;
-                    for (int i = 0; i < InputHelper.Options.Times.Count; i++)
-                    {
-                        if (AlgorithmRunner.SubjectTime[SubjectIndex].TimeOfDay == InputHelper.Options.Times[i].BGTime.TimeOfDay)
-                        {
-                            BeginTime = i;
-                            break;
-                        }
-                    }
-                    db.CaThis.Add(new CaThi() { MaCa = StepID, 
-                                                NgayThi = AlgorithmRunner.SubjectTime[SubjectIndex].Date,
-                                                SoTiet = 3,
-                                                TietBD = BeginTime});
-                    db.SaveChanges();
+                    var pa = new SqlParameter[] 
+                        { 
+                            new SqlParameter("@MaCa", SqlDbType.NVarChar) { Value = StepID },
+                            new SqlParameter("@GioThi", SqlDbType.DateTime) { Value = AlgorithmRunner.GroupsTime[GroupIndex] },
+                        };
+                    db.Database.ExecuteSqlCommand("INSERT INTO CaThi (MaCa, GioThi) VALUES (@MaCa, @GioThi)", pa);
                 }
                 aRecord.MaCa = StepID;
-                for (int RoomIndex = 0; RoomIndex < AlgorithmRunner.SubjectRoom[SubjectIndex].Count; RoomIndex++)
+                List<SqlParameter> Param = new List<SqlParameter>();
+                String SQLQuery = "";
+                for (int RoomIndex = 0; RoomIndex < AlgorithmRunner.GroupsRoom[GroupIndex].Count; RoomIndex++)
                 {
-                    aRecord.MaPhong = AlgorithmRunner.SubjectRoom[SubjectIndex][RoomIndex].RoomID;
-                    for (int StudentIndex = 0; StudentIndex < AlgorithmRunner.SubjectRoomStudents[SubjectIndex][RoomIndex].Count; StudentIndex++)
+                    aRecord.MaPhong = AlgorithmRunner.GroupsRoom[GroupIndex][RoomIndex].RoomID;
+                    for (int StudentIndex = 0; StudentIndex < AlgorithmRunner.GroupsRoomStudents[GroupIndex][RoomIndex].Count; StudentIndex++)
                     {
-                        aRecord.MaSinhVien = AlgorithmRunner.SubjectRoomStudents[SubjectIndex][RoomIndex][StudentIndex];
-                        //Thi item = new Thi() { MaCa = aRecord.MaCa, MaMonHoc = aRecord.MaMonHoc, MaPhong = aRecord.MaPhong, MaSinhVien = aRecord.MaSinhVien };
-                        //db.This.Add(item);
-                        var pa = new SqlParameter[] 
-                        { 
-                            new SqlParameter("@MaCa", SqlDbType.NVarChar) { Value = aRecord.MaCa },
-                            new SqlParameter("@MaMonHoc", SqlDbType.NVarChar) { Value = aRecord.MaMonHoc },
-                            new SqlParameter("@MaPhong", SqlDbType.NVarChar) { Value = aRecord.MaPhong },
-                            new SqlParameter("@MaSinhVien", SqlDbType.NVarChar) { Value = aRecord.MaSinhVien }
-                        };
-                        db.Database.ExecuteSqlCommand("INSERT INTO Thi (MaCa, MaMonHoc, MaPhong, MaSinhVien) VALUES (@MaCa, @MaMonHoc, @MaPhong, @MaSinhVien)", pa);    
+                        aRecord.MaSinhVien = AlgorithmRunner.GroupsRoomStudents[GroupIndex][RoomIndex][StudentIndex];
+                        SQLQuery += String.Format("INSERT INTO Thi (MaCa, MaMonHoc, Nhom, MaPhong, MaSinhVien) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')\r\n", 
+                                                    aRecord.MaCa, 
+                                                    aRecord.MaMonHoc, 
+                                                    aRecord.Nhom, 
+                                                    aRecord.MaPhong, 
+                                                    aRecord.MaSinhVien
+                                                );
                     } // sinh viên
                 } // phòng
+                db.Database.ExecuteSqlCommand(SQLQuery);  
                 //db.SaveChanges();
             }// môn
         }

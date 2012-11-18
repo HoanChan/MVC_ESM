@@ -1,36 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections;
+using Model;
+using System.IO;
+using System.Text;
 
 namespace Mvc_ESM.Static_Helper
 {
-    public class ExamTime
-    {
-        public String Name { get; set; }
-        public DateTime BGTime { get; set; }
-        public DateTime ETime { get; set; }
-    }
-
-    public class Room
-    {
-        public String RoomID { get; set; }
-        public int Container { get; set; }
-    }
-
-    public class Options
-    {
-        public DateTime StartDate { get; set; }
-        public int NumDate { get; set; }
-        public int DateMin { get; set; }
-        public List<ExamTime> Times { get; set; }
-    }
-
+    
     public class InputHelper
     {
         /// <summary>
         /// danh sách môn học sẽ xếp lịch
         /// </summary>
-        public static List<String> Subjects;
+        public static Dictionary<String, List<Class>> Subjects;
         public static List<Room> Rooms;
         /// <summary>
         /// danh sách sinh viên sẽ bị cấm thi
@@ -38,5 +21,14 @@ namespace Mvc_ESM.Static_Helper
         public static Dictionary<String, List<String>> Students;
 
         public static Options Options = new Options();
+
+        //public static void SaveOBJ(String Name, Object OBJ)
+        //{
+        //    System.IO.File.WriteAllText(
+        //        Path.Combine(System.Web.HttpContext.Current.Server.MapPath(@"~/Win_App"), Name + ".jso"), 
+        //        fastJSON.JSON.Instance.ToJSON(OBJ), 
+        //        Encoding.UTF8
+        //    );
+        //}
     }
 }

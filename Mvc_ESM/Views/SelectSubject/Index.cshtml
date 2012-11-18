@@ -1,55 +1,36 @@
-﻿@model IEnumerable<Model.monhoc>
-
+﻿
 @{
-    ViewBag.Title = "Chọn Môn Học sẽ thi";
+    ViewBag.Title = "Lập danh sách các môn phân đợt thi";
 }
-
 <h2>@ViewBag.Title</h2>
+<form id="InputForm">
+    <p>
+        Mã số môn học:
+        <input type="text" id ="SubjectIDTextBox" /> 
+        <button id ="AddSubject">Thêm</button>
+    </p>
+</form>
 <form>
 <table id="table">
     <thead>
         <tr>
-            <th>
-                Sẽ tổ chức thi
-            </th>
-            <th>
-                Mã môn học
-            </th>
-            <th>
-                Tên môn học
-            </th>
-            <th>
-                Bộ môn
-            </th>
-            <th>
-                Khoa
-            </th>
+            <th>MSMH</th>
+            <th>Tên Môn Học</th>
+            <th>Bộ Môn</th>
+            <th>Khoa</th>
+            <th>Nhóm</th>
+            <th>SL SV</th>
+            <th>Đợt</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                <input type="checkbox" checked="checked" name="SubjectID" value="@item.MaMonHoc">
-            </td>
-            <td>
-                @item.MaMonHoc
-            </td>
-            <td>
-                @item.TenMonHoc
-            </td>
-            <td>
-                @item.bomon.TenBoMon.Replace("&", "và")
-            </td>
-            <td>
-                @item.bomon.khoa.TenKhoa.Replace("&", "và")
-            </td>
-        </tr>
-    }
     </tbody>
     <tfoot>
         <tr>
+            <th></th>
+            <th></th>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -65,118 +46,89 @@
 
 @Html.Partial("_DataTable.Lib")
 
+<script src="@Url.Content("~/Scripts/UI/jquery.mousewheel.js")" type="text/javascript" lang="javascript" ></script>
 <script type="text/javascript" charset="utf-8">
-    (function ($) {
-        /*
-         * Function: fnGetColumnData
-         * Purpose:  Return an array of table values from a particular column.
-         * Returns:  array string: 1d data array
-         * Inputs:   object:oSettings - dataTable settings object. This is always the last argument past to the function
-         *           int:iColumn - the id of the column to extract the data from
-         *           bool:bUnique - optional - if set to false duplicated values are not filtered out
-         *           bool:bFiltered - optional - if set to false all the table data is used (not only the filtered)
-         *           bool:bIgnoreEmpty - optional - if set to false empty values are not filtered from the result array
-         * Author:   Benedikt Forchhammer <b.forchhammer /AT\ mind2.de>
-         */
-        $.fn.dataTableExt.oApi.fnGetColumnData = function (oSettings, iColumn, bUnique, bFiltered, bIgnoreEmpty) {
-            // check that we have a column id
-            if (typeof iColumn == "undefined") return new Array();
-
-            // by default we only want unique data
-            if (typeof bUnique == "undefined") bUnique = true;
-
-            // by default we do want to only look at filtered data
-            if (typeof bFiltered == "undefined") bFiltered = true;
-
-            // by default we do not want to include empty values
-            if (typeof bIgnoreEmpty == "undefined") bIgnoreEmpty = true;
-
-            // list of rows which we're going to loop through
-            var aiRows;
-
-            // use only filtered rows
-            if (bFiltered == true) aiRows = oSettings.aiDisplay;
-                // use all rows
-            else aiRows = oSettings.aiDisplayMaster; // all row numbers
-
-            // set up data array   
-            var asResultData = new Array();
-
-            for (var i = 0, c = aiRows.length; i < c; i++) {
-                iRow = aiRows[i];
-                var aData = this.fnGetData(iRow);
-                var sValue = aData[iColumn];
-
-                // ignore empty values?
-                if (bIgnoreEmpty == true && sValue.length == 0) continue;
-
-                    // ignore unique values?
-                else if (bUnique == true && jQuery.inArray(sValue, asResultData) > -1) continue;
-
-                    // else push the value onto the result data array
-                else asResultData.push(sValue);
-            }
-
-            return asResultData;
-        }
-    }(jQuery));
-
-    function fnCreateSelect(aData, index) {
-        var r = '<select id="tb_r_' + index + '"><option value="">Tất cả</option>', i, iLen = aData.length;
-        for (i = 0 ; i < iLen ; i++) {
-            r += '<option value="' + aData[i] + '">' + aData[i] + '</option>';
-        }
-        return r + '</select>';
-    }
     var oTable;
 	$(document).ready(function() {
 	    oTable = $('#table').dataTable({
-	         @Html.Partial("_DataTable")
-	    });
-
-	    /* Add a select menu for each TH element in the table footer */
-	    $("tfoot th").each(function (i) {
-	        if (i == 3 || i == 4) {
-	            this.innerHTML = fnCreateSelect(oTable.fnGetColumnData(i),i);
-	            $('select', this).change(function () {
-	                var Name = $(this).val();
-	                if (i == 4) {
-                        var select = $("#tb_r_3"); // cột thứ 3
-                        select.empty();
-	                    $.getJSON("/Services/LoadSubjectsByFacultyName", { FacultyName: Name },
-                        function (Data) {
-                            select.append($('<option/>', {
-                                value: "",
-                                text: "Tất cả"
-                            }));
-                            $.each(Data, function (index, itemData) {
-                                select.append($('<option/>', {
-                                    value: itemData.Text,
-                                    text: itemData.Text
-                                }));
-                            });
+            "aoColumnDefs": [
+                {
+                    "bSortable": false, "aTargets": [7],
+                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                        var b = $('<button>' + sData + '</button>');
+                        b.button({
+                            icons: {
+                                primary: "ui-icon-trash" // hình cái thùng rác
+                            }
+                        }).click(function (e) {
+                            e.preventDefault();
+                            var row = $(this).parent().parent(); // this là cái nút, cha của nó là td ông của nó là tr ==> cái hàng cần xoá
+                            if (row.length !== 0) {
+                                oTable.fnDeleteRow(row[0]);
+                            }
                         });
-	                    oTable.fnFilter("", 3);
-	                }
-	                if (Name == "") {
-	                    oTable.fnFilter("", i);
-	                }
-	                else {
-	                    //fnFilter(Giá trị sẽ lọc, cột áp dụng, dùng regex, dùng smart)
-	                    //regex = biểu thức chính quy
-	                    //smart và so khớp không quan tâm vị trí
-	                    oTable.fnFilter(Name, i, false, false);
-	                }
-	            });
-	        }
-
+                        $(nTd).empty();
+                        $(nTd).prepend(b).attr('align', 'center');
+                    }
+                },
+                {
+                    "bSortable": false, "aTargets": [6],
+                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                        var b = $('<input type="text" id ="Group" size=2 readonly="true" value="' + sData + '" />');
+                        b.spinner({
+                            step: 1,
+                            spin: function (event, ui) {
+                                if (ui.value > 10) {
+                                    $(this).spinner("value", 1);
+                                    return false;
+                                } else if (ui.value < 1) {
+                                    $(this).spinner("value", 10);
+                                    return false;
+                                }
+                            }
+                        });
+                        $(nTd).empty();
+                        $(nTd).prepend(b.parent()).attr('align', 'center');
+                    }
+                },
+            ], // không hiện nút sắp xếp!
+	        @Html.Partial("_DataTable")
 	    });
 
-	    $('#SummitButton').click(function () {
-	        var sData = oTable.$('input').serialize();
-	        //alert("The following data would have been submitted to the server: \n\n" + sData);
-	        //http://api.jquery.com/jQuery.post/
+	    $('#AddSubject').button().click(function (e) {
+	        e.preventDefault(); // không chạy sự kiện mặc định của đối tượng
+	        var suID = $('#SubjectIDTextBox').val();
+	        if ($('#table tbody td span#SubjectID[value="' + suID + '"]').length !== 0) {
+	            alert("Dữ liệu môn học có mã số " + suID + " đã được thêm rồi!");
+	            return false;
+	        }
+	        $.getJSON("/Services/LoadSubjectByGroupInfo", { SubjectID: suID },
+                function (Data) {
+                    if (Data[0].MSMH == "false") {
+                        alert("Không tìm thấy môn học có mã số: " + suID);
+                        return false;
+                    }
+                    var MSMH = '<span id="SubjectID" value=' + suID + '>' + suID + '</span>';
+                    $.each(Data, function (index, itemData) {
+                        var Class = '<span id="Class">' + itemData.Nhom + '</span>';
+                        oTable.fnAddData([MSMH, itemData.TenMH, itemData.BoMon, itemData.Khoa, Class, itemData.SL, 1, "Xoá"]);
+                    });
+            });
+	    });
+
+	    $('#SummitButton').button().click(function () {
+	        var sData = "";
+	        oTable.$("#SubjectID").each(function (index, item) {
+	            sData = sData + (sData == '' ? '' : '&') + 'SubjectID=' + $(this).text();
+	        });
+	        oTable.$("#Class").each(function (index, item) {
+	            sData = sData + '&Class=' + $(this).text();
+	        });
+	        oTable.$("#Group").each(function (index, item) {
+	            sData = sData + '&Group=' + $(this).spinner("value");
+	        });
 	        $.post("/SelectSubject/SelectSuccess", sData);
+	        alert("Đã lưu xong");
 	        return false; 
 	    });
 	} );

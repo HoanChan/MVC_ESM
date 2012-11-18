@@ -1,4 +1,5 @@
-﻿using Mvc_ESM.Static_Helper;
+﻿using Model;
+using Mvc_ESM.Static_Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,7 @@ namespace Mvc_ESM
     public partial class MainForm : Form
     {
         public string[] Args;
+        DKMHEntities db = new DKMHEntities();
 
         public delegate void ProcessParametersDelegate(object sender, string[] args);
         public void ProcessParameters(object sender, string[] args)
@@ -32,6 +34,11 @@ namespace Mvc_ESM
 
                 switch (args[0])
                 {
+                    case "0":                        
+                        db.Database.ExecuteSqlCommand("DELETE FROM Thi");
+                        db.Database.ExecuteSqlCommand("DELETE FROM CaThi");
+                        txtArgs.Text += DateTime.Now.ToString() + " DeleteOldData\r\n";
+                        break;
                     case "1":
                         Program.AlgorithmRunner.RunCreateAdjacencyMatrix();
                         txtArgs.Text += DateTime.Now.ToString() + " RunCreateAdjacencyMatrix\r\n";
@@ -100,7 +107,7 @@ namespace Mvc_ESM
         private void ProgressUpdater_Tick(object sender, EventArgs e)
         {
             lblCreateAdjacencyMatrix.Text = ProgressHelper.CreateMatrixInfo;
-            pbCreateAdjacencyMatrix.Value = ProgressHelper.pbCreateMatrix % 101;
+            pbCreateAdjacencyMatrix.Value = ProgressHelper.pbCreateMatrix;
         }
 
         private void btnCreateAdjacencyMatrix_Stop_Click(object sender, EventArgs e)
@@ -123,6 +130,12 @@ namespace Mvc_ESM
                 ProcessParameters(null, this.Args);
                 this.Args = null;
             }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            db.Database.ExecuteSqlCommand("DELETE FROM Thi");
+            db.Database.ExecuteSqlCommand("DELETE FROM CaThi");
         }
 
     }

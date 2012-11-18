@@ -27,21 +27,24 @@ namespace Mvc_ESM.Controllers
         [HttpPost]
         public String SelectSuccess(List<String> StudentID, List<String> SubjectID)
         {
-            InputHelper.Students = new Hashtable();
+            InputHelper.Students = new Dictionary<String,List<String>>();
             string paramInfo = "";
-            for (int i = 0; i < StudentID.Count(); i++)
+            if (StudentID != null)
             {
-                if (InputHelper.Students.ContainsKey(SubjectID[i]))
+                for (int i = 0; i < StudentID.Count(); i++)
                 {
-                    (InputHelper.Students[SubjectID[i]] as List<String>).Add(StudentID[i]);
+                    if (InputHelper.Students.ContainsKey(SubjectID[i]))
+                    {
+                        InputHelper.Students[SubjectID[i]].Add(StudentID[i]);
+                    }
+                    else
+                    {
+                        InputHelper.Students.Add(SubjectID[i], new List<String> { StudentID[i] });
+                    }
+                    paramInfo += "MH:" + SubjectID[i] + " SV: " + StudentID[i] + "<br /><br />";
                 }
-                else
-                {
-                    InputHelper.Students.Add(SubjectID[i], new List<String> { StudentID[i] });
-                }
-                paramInfo += "MH:" + SubjectID[i] + " SV: " + StudentID[i] + "<br /><br />";
             }
-            InputHelper.SaveOBJ("Students", InputHelper.Students);
+            OutputHelper.SaveOBJ("Students", InputHelper.Students);
             return paramInfo;
         }
 

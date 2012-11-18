@@ -159,8 +159,8 @@
     </None>
     <None Include="DKMHModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DKMHModel.edmx</DependentUpon>
       <LastGenOutput>DKMHModel.cs</LastGenOutput>
+      <DependentUpon>DKMHModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
