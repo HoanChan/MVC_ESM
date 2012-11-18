@@ -63,6 +63,64 @@ namespace Mvc_ESM.Controllers
             return Content(Static_Helper.Calendar.DataFormater(SubjectTime, true), "text/xml");
         }
 
+
+        [HttpGet]
+        public ActionResult StudentsOfSubjects()
+        {
+            var sv = (from s in db.sinhviens
+                      join m in db.This on s.MaSinhVien equals m.MaSinhVien
+                      where m.MaMonHoc == ""
+                      select s).Distinct();
+            return View(sv.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult StudentsOfSubjects(String SearchString)
+        {
+            var sv = (from s in db.sinhviens
+                      join m in db.This on s.MaSinhVien equals m.MaSinhVien
+                      where m.MaMonHoc == SearchString
+                      select s).Distinct();
+            return View(sv.OrderBy(s => s.Ten + s.Ho).ToList());
+        }
+
+        [HttpGet]
+        public ActionResult StudentsOfRooms()
+        {
+            var sv = (from s in db.sinhviens
+                      join m in db.This on s.MaSinhVien equals m.MaSinhVien
+                      where m.MaMonHoc == ""
+                      select s).Distinct();
+            InitViewBag(false);
+            return View(sv.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult StudentsOfRooms(String MonHoc, String Phong)
+        {
+            Static_Helper.SubjectHelper.SearchString = MonHoc;
+            var sv = (from s in db.sinhviens
+                      join m in db.This on s.MaSinhVien equals m.MaSinhVien
+                      where m.MaMonHoc == MonHoc && (m.MaPhong == Phong || Phong == "")
+                      select s).Distinct();
+            InitViewBag(true);
+            return View(sv.OrderBy(s => s.Ten + s.Ho).ToList());
+        }
+
+
+        private void InitViewBag(Boolean IsPost)
+        {
+            var MonQry = (from d in db.This
+                          select new { MaMH = d.MaMonHoc, TenMH = (from m in db.monhocs where m.MaMonHoc == d.MaMonHoc select m.TenMonHoc).FirstOrDefault() }).Distinct().OrderBy(d => d.TenMH);
+            ViewBag.MonHoc = new SelectList(MonQry.ToArray(), "MaMH", "TenMH");
+
+            var PhongQry = (from b in db.This
+                            where b.MaMonHoc == (IsPost ? Static_Helper.SubjectHelper.SearchString : MonQry.FirstOrDefault().MaMH)
+                            select new { MaPhong = b.MaPhong, TenPhong = b.MaPhong }).Distinct();
+            ViewBag.Phong = new SelectList(PhongQry.ToArray(), "MaPhong", "TenPhong");
+        }
+
+
         public ActionResult Save(Event changedEvent, FormCollection actionValues)
         {
             String action_type = actionValues["!nativeeditor_status"];
