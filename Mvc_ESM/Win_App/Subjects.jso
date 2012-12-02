@@ -1,5 +1,93 @@
 ﻿{
-  "1001011": [
+  "1004130": [
+    {
+      "ClassID": "1",
+      "Group": 3
+    }
+  ],
+  "1104161": [
+    {
+      "ClassID": "1",
+      "Group": 2
+    }
+  ],
+  "1251250": [
+    {
+      "ClassID": "1",
+      "Group": 4
+    },
+    {
+      "ClassID": "2",
+      "Group": 4
+    }
+  ],
+  "1145070": [
+    {
+      "ClassID": "3",
+      "Group": 3
+    },
+    {
+      "ClassID": "4",
+      "Group": 3
+    },
+    {
+      "ClassID": "5",
+      "Group": 1
+    },
+    {
+      "ClassID": "6",
+      "Group": 1
+    },
+    {
+      "ClassID": "7",
+      "Group": 1
+    },
+    {
+      "ClassID": "8",
+      "Group": 1
+    }
+  ],
+  "1145071": [
+    {
+      "ClassID": "1",
+      "Group": 1
+    }
+  ],
+  "1125100": [
+    {
+      "ClassID": "1",
+      "Group": 1
+    }
+  ],
+  "1125090": [
+    {
+      "ClassID": "5",
+      "Group": 1
+    },
+    {
+      "ClassID": "6",
+      "Group": 1
+    },
+    {
+      "ClassID": "7",
+      "Group": 1
+    },
+    {
+      "ClassID": "8",
+      "Group": 1
+    },
+    {
+      "ClassID": "9",
+      "Group": 1
+    }
+  ],
+  "1210430": [
+    {
+      "ClassID": "1",
+      "Group": 1
+    }
+  ],
+  "1004010": [
     {
       "ClassID": "1",
       "Group": 1
@@ -19,9 +107,21 @@
     {
       "ClassID": "5",
       "Group": 1
+    },
+    {
+      "ClassID": "6",
+      "Group": 1
+    },
+    {
+      "ClassID": "7",
+      "Group": 1
+    },
+    {
+      "ClassID": "8",
+      "Group": 1
     }
   ],
-  "1001012": [
+  "1004052": [
     {
       "ClassID": "1",
       "Group": 1
@@ -41,13 +141,29 @@
     {
       "ClassID": "5",
       "Group": 1
-    }
-  ],
-  "1001013": [
+    },
     {
-      "ClassID": "19",
+      "ClassID": "6",
       "Group": 1
     },
+    {
+      "ClassID": "7",
+      "Group": 1
+    },
+    {
+      "ClassID": "8",
+      "Group": 1
+    },
+    {
+      "ClassID": "9",
+      "Group": 1
+    },
+    {
+      "ClassID": "10",
+      "Group": 1
+    }
+  ],
+  "1004020": [
     {
       "ClassID": "20",
       "Group": 1
@@ -66,92 +182,246 @@
     },
     {
       "ClassID": "24",
-      "Group": 2
+      "Group": 1
     },
     {
       "ClassID": "25",
-      "Group": 2
+      "Group": 1
     },
     {
       "ClassID": "26",
-      "Group": 2
+      "Group": 1
     },
     {
       "ClassID": "27",
-      "Group": 2
+      "Group": 1
     },
     {
       "ClassID": "28",
-      "Group": 2
+      "Group": 1
     },
     {
       "ClassID": "29",
-      "Group": 3
+      "Group": 1
     },
     {
       "ClassID": "30",
-      "Group": 3
+      "Group": 1
     },
     {
       "ClassID": "31",
-      "Group": 3
+      "Group": 1
     },
     {
       "ClassID": "32",
-      "Group": 3
+      "Group": 1
     },
     {
       "ClassID": "33",
-      "Group": 3
+      "Group": 1
     },
     {
       "ClassID": "34",
-      "Group": 3
+      "Group": 1
     },
     {
       "ClassID": "35",
-      "Group": 4
+      "Group": 1
     },
     {
       "ClassID": "36",
-      "Group": 4
+      "Group": 1
     },
     {
       "ClassID": "37",
-      "Group": 4
+      "Group": 1
     },
     {
       "ClassID": "38",
-      "Group": 4
+      "Group": 1
     },
     {
       "ClassID": "39",
-      "Group": 4
+      "Group": 1
     },
     {
       "ClassID": "40",
-      "Group": 4
+      "Group": 1
     },
     {
       "ClassID": "41",
-      "Group": 4
+      "Group": 1
     },
     {
       "ClassID": "42",
-      "Group": 4
+      "Group": 1
     },
     {
       "ClassID": "43",
-      "Group": 4
+      "Group": 1
+    },
+    {
+      "ClassID": "44",
+      "Group": 1
+    },
+    {
+      "ClassID": "45",
+      "Group": 1
+    },
+    {
+      "ClassID": "46",
+      "Group": 1
+    },
+    {
+      "ClassID": "47",
+      "Group": 1
+    },
+    {
+      "ClassID": "48",
+      "Group": 1
+    },
+    {
+      "ClassID": "49",
+      "Group": 1
+    },
+    {
+      "ClassID": "50",
+      "Group": 1
+    },
+    {
+      "ClassID": "51",
+      "Group": 1
+    },
+    {
+      "ClassID": "52",
+      "Group": 1
+    },
+    {
+      "ClassID": "53",
+      "Group": 1
+    },
+    {
+      "ClassID": "54",
+      "Group": 1
+    },
+    {
+      "ClassID": "55",
+      "Group": 1
+    },
+    {
+      "ClassID": "56",
+      "Group": 1
+    },
+    {
+      "ClassID": "57",
+      "Group": 1
+    },
+    {
+      "ClassID": "58",
+      "Group": 1
+    },
+    {
+      "ClassID": "59",
+      "Group": 1
+    },
+    {
+      "ClassID": "60",
+      "Group": 1
+    },
+    {
+      "ClassID": "61",
+      "Group": 1
+    },
+    {
+      "ClassID": "62",
+      "Group": 1
+    },
+    {
+      "ClassID": "63",
+      "Group": 1
+    },
+    {
+      "ClassID": "64",
+      "Group": 1
+    },
+    {
+      "ClassID": "65",
+      "Group": 1
+    },
+    {
+      "ClassID": "66",
+      "Group": 1
+    },
+    {
+      "ClassID": "67",
+      "Group": 1
+    },
+    {
+      "ClassID": "68",
+      "Group": 1
+    },
+    {
+      "ClassID": "69",
+      "Group": 1
+    },
+    {
+      "ClassID": "70",
+      "Group": 1
+    },
+    {
+      "ClassID": "71",
+      "Group": 1
+    },
+    {
+      "ClassID": "72",
+      "Group": 1
     }
   ],
-  "1001014": [
+  "1004042": [
+    {
+      "ClassID": "1",
+      "Group": 1
+    },
+    {
+      "ClassID": "3",
+      "Group": 1
+    },
+    {
+      "ClassID": "4",
+      "Group": 1
+    },
+    {
+      "ClassID": "5",
+      "Group": 1
+    },
+    {
+      "ClassID": "6",
+      "Group": 1
+    }
+  ],
+  "0004072": [
     {
       "ClassID": "1",
       "Group": 1
     },
     {
       "ClassID": "2",
+      "Group": 1
+    },
+    {
+      "ClassID": "3",
+      "Group": 1
+    },
+    {
+      "ClassID": "4",
+      "Group": 1
+    },
+    {
+      "ClassID": "5",
+      "Group": 1
+    },
+    {
+      "ClassID": "6",
       "Group": 1
     }
   ]

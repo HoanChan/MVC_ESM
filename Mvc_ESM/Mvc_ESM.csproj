@@ -120,6 +120,7 @@
     <Compile Include="Models\MyEventsDataModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Static_Helper\Calendar.cs" />
+    <Compile Include="Static_Helper\Data.cs" />
     <Compile Include="Static_Helper\OutputHelper.cs" />
     <Compile Include="Static_Helper\ProgressHelper.cs" />
     <Compile Include="Static_Helper\RoomHelper.cs" />
@@ -146,6 +147,11 @@
     <Content Include="Content\ui-lightness\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\ui-lightness\jquery-ui.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\ColReorderWithResize.js" />
+    <Content Include="Scripts\jquery.dataTables.js" />
+    <Content Include="Scripts\jquery.dataTables.TableTools.js" />
+    <Content Include="Scripts\jquery.dataTables.ZeroClipboard.js" />
+    <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -259,6 +265,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\CalendarResults\StudentsResult.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_DataTable.Lang.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_DataTable.Func.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.Printer.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_DataTable.Printer.Lib.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
