@@ -278,6 +278,12 @@
   <ItemGroup>
     <Content Include="Views\Shared\_DataTable.Printer.Lib.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SelectSubject\IgnoreList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery.dataTable.FixedHeader.js" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

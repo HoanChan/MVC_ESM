@@ -9,108 +9,15 @@ namespace Mvc_ESM.Controllers
 {
     public class ServicesController : Controller
     {
-        public class jQueryDataTableParamModel
-        {
-            /// <summary>
-            /// Request sequence number sent by DataTable,
-            /// same value must be returned in response
-            /// </summary>       
-            public string sEcho { get; set; }
-
-            /// <summary>
-            /// Text used for filtering
-            /// </summary>
-            public string sSearch { get; set; }
-
-            /// <summary>
-            /// Number of records that should be shown in table
-            /// </summary>
-            public int iDisplayLength { get; set; }
-
-            /// <summary>
-            /// First record that should be shown(used for paging)
-            /// </summary>
-            public int iDisplayStart { get; set; }
-
-            /// <summary>
-            /// Number of columns in table
-            /// </summary>
-            public int iColumns { get; set; }
-
-            /// <summary>
-            /// Number of columns that are used in sorting
-            /// </summary>
-            public int iSortingCols { get; set; }
-
-            /// <summary>
-            /// Comma separated list of column names
-            /// </summary>
-            public string sColumns { get; set; }
-
-            public List<string> Class { get; set; }
-
-            public List<int> Group { get; set; }
-
-            public List<string> SubjectID { get; set; }
-        }
-
-        public static String SaveGroups(List<String> SubjectID, List<String> Class, List<int> Group)
-        {
-            InputHelper.Subjects = new Dictionary<String, List<Class>>();
-            string paramInfo = "";
-            for (int i = 0; i < SubjectID.Count; i++)
-            {
-                Class aClass = new Class() { ClassID = Class[i], Group = Group[i] };
-                if (InputHelper.Subjects.ContainsKey(SubjectID[i]))
-                {
-                    if (!InputHelper.Subjects[SubjectID[i]].Contains(aClass))
-                    {
-                        InputHelper.Subjects[SubjectID[i]].Add(aClass);
-                    }
-                }
-                else
-                {
-                    InputHelper.Subjects.Add(SubjectID[i], new List<Class>() { aClass });
-                }
-                paramInfo += "MH:" + SubjectID[i] + " Class: " + Class[i] + " Group: " + Group[i] + "<br /><br />";
-            }
-            OutputHelper.SaveOBJ("Subjects", InputHelper.Subjects);
-            List<String> Groups = new List<String>();
-            foreach (String Subject in InputHelper.Subjects.Keys)
-            {
-                Boolean[] Progressed = new Boolean[InputHelper.Subjects[Subject].Count];
-                for (int i = 0; i < InputHelper.Subjects[Subject].Count; i++)
-                {
-                    if (!Progressed[i])
-                    {
-                        String GroupItem = Subject;
-                        for (int j = 0; j < InputHelper.Subjects[Subject].Count; j++)
-                        {
-                            if (InputHelper.Subjects[Subject][i].Group == InputHelper.Subjects[Subject][j].Group)
-                            {
-                                Progressed[j] = true;
-                                GroupItem += "_" + InputHelper.Subjects[Subject][j].ClassID;
-                            }
-                        }
-                        if (!Groups.Contains(GroupItem))
-                        {
-                            Groups.Add(GroupItem);
-                        }
-                    }
-                }
-            }
-            OutputHelper.SaveOBJ("Groups", Groups);
-            return paramInfo;
-        }
 
         [HttpPost]
-        public JsonResult DataTable_SelectSubjects(jQueryDataTableParamModel param)
+        public JsonResult DataTable_SelectSubjects(jQueryDataTableParamModel param, List<String> SubjectID = null, List<String> Class = null, List<int> Group = null)
         {
 
             var Subjects = (from m in Data.Subjects
                             where param.sSearch == null || param.sSearch == "" || m.MaMonHoc.Contains(param.sSearch) || m.TenMonHoc.Contains(param.sSearch)
                             select m
-                           ).OrderBy(m=>m.TenMonHoc);
+                           ).OrderBy(m => m.TenMonHoc);
             var Result = new List<string[]>();
 
             foreach (var su in Subjects.Skip(param.iDisplayStart).Take(param.iDisplayLength))
@@ -123,15 +30,55 @@ namespace Mvc_ESM.Controllers
                                             su.Nhom.ToString(),
                                             su.SoLuongDK.ToString(),
                                             "1",
-                                            "Xoá"
+                                            //"Xoá"
                                         }
                             );
             }
-            if (param.SubjectID != null && param.Class != null && param.Group != null)
+            if (SubjectID != null && Class != null && Group != null)
             {
-                SaveGroups(param.SubjectID, param.Class, param.Group);
+                InputHelper.SaveGroups(SubjectID, Class, Group);
             }
             return Json(new{
+                                sEcho = param.sEcho,
+                                iTotalRecords = Data.Subjects.Count(),
+                                iTotalDisplayRecords = Subjects.Count(),
+                                //iTotalDisplayedRecords = Subjects.Count(),
+                                aaData = Result
+                            },
+                            JsonRequestBehavior.AllowGet
+                        );
+        }
+        
+        [HttpPost]
+        public JsonResult DataTable_IgnoreSubjects(jQueryDataTableParamModel param, List<String> SubjectID = null, List<String> Class = null, List<String> Check = null)
+        {
+
+            var Subjects = (from m in Data.Subjects
+                            where param.sSearch == null || param.sSearch == "" || m.MaMonHoc.Contains(param.sSearch) || m.TenMonHoc.Contains(param.sSearch)
+                            select m
+                           ).OrderBy(m => m.TenMonHoc);
+            var Result = new List<string[]>();
+
+            foreach (var su in Subjects.Skip(param.iDisplayStart).Take(param.iDisplayLength))
+            {
+                Result.Add(new string[] {
+                                            su.MaMonHoc,
+                                            su.TenMonHoc,
+                                            su.TenBoMon,
+                                            su.TenKhoa,
+                                            su.Nhom.ToString(),
+                                            su.SoLuongDK.ToString(),
+                                            "checked",
+                                            //"Xoá"
+                                        }
+                            );
+            }
+            if (SubjectID != null && Class != null && Check != null)
+            {
+                InputHelper.SaveIgnoreSubject(SubjectID, Class, Check);
+            }
+            return Json(new
+                            {
                                 sEcho = param.sEcho,
                                 iTotalRecords = Data.Subjects.Count(),
                                 iTotalDisplayRecords = Subjects.Count(),

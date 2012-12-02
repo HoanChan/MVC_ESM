@@ -3,3 +3,4 @@
 /// <reference path="jquery.dataTables.js" />
 /// <reference path="Scheduler/dhtmlxscheduler.js" />
 /// <reference path="jquery.dataTables.TableTools.js" />
+/// <reference path="jquery.dataTable.FixedHeader.js" />

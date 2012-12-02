@@ -1,7 +1,7 @@
-﻿
-@{
-    ViewBag.Title = "Lập danh sách các môn phân đợt thi";
+﻿@{
+    ViewBag.Title = "Chọn danh sách các nhóm không tổ chức thi";
 }
+
 <h2>@ViewBag.Title</h2>
 <table id="table">
     <thead>
@@ -12,7 +12,7 @@
             <th>Khoa</th>
             <th>Nhóm</th>
             <th>SL SV</th>
-            <th>Đợt</th>
+            <th>Chọn</th>
            @* <th></th>*@
         </tr>
     </thead>
@@ -30,7 +30,7 @@
     var oTable;
     oTable = $('#table').dataTable({
         "bServerSide": true,
-        "sAjaxSource": "/Services/DataTable_SelectSubjects",
+        "sAjaxSource": "/Services/DataTable_IgnoreSubjects",
         "bProcessing": true,
         "bFilter": false,
         "fnServerData": function (sSource, aoData, fnCallback) {
@@ -46,7 +46,7 @@
             {
                 "bSortable": false, "aTargets": [0],
                 "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                    var b = $('<span id="SubjectID">' + sData + '</span>');
+                    var b = $('<span id="SubjectID" >' + sData + '</span>');
                     $(nTd).empty();
                     $(nTd).prepend(b);
                 }
@@ -75,42 +75,11 @@
             {
                 "bSortable": false, "aTargets": [6],
                 "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                    var b = $('<input type="text" id ="Group" size=2 readonly="true" value="' + sData + '" />');
-                    b.spinner({
-                        step: 1,
-                        spin: function (event, ui) {
-                            if (ui.value > 10) {
-                                $(this).spinner("value", 1);
-                                return false;
-                            } else if (ui.value < 1) {
-                                $(this).spinner("value", 10);
-                                return false;
-                            }
-                        }
-                    });
+                    var b = $('<input id="Check" type="checkbox" ' + sData + '/>');
                     $(nTd).empty();
-                    $(nTd).prepend(b.parent()).attr('align', 'center');
+                    $(nTd).prepend(b).attr('align', 'center');
                 }
             },
-            //{
-            //    "bSortable": false, "aTargets": [7],
-            //    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-            //        var b = $('<button>' + sData + '</button>');
-            //        b.button({
-            //            icons: {
-            //                primary: "ui-icon-trash" // hình cái thùng rác
-            //            }
-            //        }).click(function (e) {
-            //            e.preventDefault();
-            //            var row = $(this).parent().parent(); // this là cái nút, cha của nó là td ông của nó là tr ==> cái hàng cần xoá
-            //            if (row.length !== 0) {
-            //                oTable.fnDeleteRow(row[0]);
-            //            }
-            //        });
-            //        $(nTd).empty();
-            //        $(nTd).prepend(b).attr('align', 'center');
-            //    }
-            //},
 	    ], // không hiện nút sắp xếp!
         
 	    @Html.Partial("_DataTable")
@@ -131,28 +100,30 @@
                         "value": $(this).text()
                     });
                 });
-                oTable.$("#Group").each(function (index, item) {
+                oTable.$("#Check").each(function (index, item) {
                     aoData.push({
-                        "name": "Group",
-                        "value": $(this).spinner("value")
+                        "name": "Check",
+                        "value": $(this).attr('checked')
                     });
                 });
                 
         }
     });
 
+    new FixedHeader(oTable);
+
 	$('#SummitButton').button().click(function () {
 	    var sData = "";
 	    oTable.$("#SubjectID").each(function (index, item) {
-	        sData = sData + (sData == '' ? '' : '&') + 'SubjectID=' + $(this).text();
+	        sData += (sData == '' ? '' : '&') + 'SubjectID=' + $(this).text();
 	    });
 	    oTable.$("#Class").each(function (index, item) {
-	        sData = sData + '&Class=' + $(this).text();
+	        sData += '&Class=' + $(this).text();
 	    });
-	    oTable.$("#Group").each(function (index, item) {
-	        sData = sData + '&Group=' + $(this).spinner("value");
+	    oTable.$("#Check").each(function (index, item) {
+	        sData += '&Check=' + $(this).attr('checked');
 	    });
-	    $.post("/SelectSubject/SelectSuccess", sData);
+	    $.post("/SelectSubject/IgnoreSuccess", sData);
 	    alert("Đã lưu xong");
 	    return false; 
 	});

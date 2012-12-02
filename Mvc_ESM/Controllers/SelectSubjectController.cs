@@ -25,10 +25,22 @@ namespace Mvc_ESM.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ViewResult IgnoreList()
+        {
+            return View();
+        }
+
         [HttpPost]
         public String SelectSuccess(List<String> SubjectID, List<String> Class, List<int> Group)
         {
-            return ServicesController.SaveGroups(SubjectID, Class, Group);
+            return InputHelper.SaveGroups(SubjectID, Class, Group);
+        }
+
+        [HttpPost]
+        public String SelectSuccess(List<String> SubjectID, List<String> Class, List<Boolean> Check)
+        {
+            return "";
         }
 
         protected override void Dispose(bool disposing)

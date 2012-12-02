@@ -19,5 +19,11 @@ namespace Mvc_ESM.Static_Helper
                 Encoding.UTF8
             );            
         }
+        public static void DeleteOBJ(String Name)
+        {
+            System.IO.File.Delete(
+                Path.Combine(System.Web.HttpContext.Current.Server.MapPath(@"~/Win_App"), Name + ".jso")
+            );
+        }
     }
 }
