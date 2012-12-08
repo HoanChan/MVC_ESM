@@ -283,6 +283,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery.dataTable.FixedHeader.js" />
+    <Content Include="Views\CalendarResults\StudentsOfSubjects.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\CalendarResults\StudentsOfRooms.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\CalendarResults\RoomList.cshtml">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

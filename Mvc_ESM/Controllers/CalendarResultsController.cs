@@ -1,4 +1,5 @@
-﻿using Model;
+﻿
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Mvc_ESM;
 using Mvc_ESM.Models;
+using Newtonsoft.Json;
 namespace Mvc_ESM.Controllers
 {
     public class CalendarResultsController : Controller
@@ -71,16 +73,18 @@ namespace Mvc_ESM.Controllers
                       join m in db.This on s.MaSinhVien equals m.MaSinhVien
                       where m.MaMonHoc == ""
                       select s).Distinct();
+            InitViewBag(false, 0);
             return View(sv.ToList());
         }
 
         [HttpPost]
-        public ActionResult StudentsOfSubjects(String SearchString)
+        public ActionResult StudentsOfSubjects(String MonHoc)
         {
             var sv = (from s in db.sinhviens
                       join m in db.This on s.MaSinhVien equals m.MaSinhVien
-                      where m.MaMonHoc == SearchString
+                      where m.MaMonHoc == MonHoc
                       select s).Distinct();
+            InitViewBag(false, 0);
             return View(sv.OrderBy(s => s.Ten + s.Ho).ToList());
         }
 
@@ -91,7 +95,7 @@ namespace Mvc_ESM.Controllers
                       join m in db.This on s.MaSinhVien equals m.MaSinhVien
                       where m.MaMonHoc == ""
                       select s).Distinct();
-            InitViewBag(false);
+            InitViewBag(false, 1);
             return View(sv.ToList());
         }
 
@@ -103,23 +107,57 @@ namespace Mvc_ESM.Controllers
                       join m in db.This on s.MaSinhVien equals m.MaSinhVien
                       where m.MaMonHoc == MonHoc && (m.MaPhong == Phong || Phong == "")
                       select s).Distinct();
-            InitViewBag(true);
-            return View(sv.OrderBy(s => s.Ten + s.Ho).ToList());
+            InitViewBag(true, 1);
+            return View(sv.ToList());
         }
 
 
-        private void InitViewBag(Boolean IsPost)
+        private void InitViewBag(Boolean IsPost, int k)
         {
             var MonQry = (from d in db.This
                           select new { MaMH = d.MaMonHoc, TenMH = (from m in db.monhocs where m.MaMonHoc == d.MaMonHoc select m.TenMonHoc).FirstOrDefault() }).Distinct().OrderBy(d => d.TenMH);
             ViewBag.MonHoc = new SelectList(MonQry.ToArray(), "MaMH", "TenMH");
-
-            var PhongQry = (from b in db.This
-                            where b.MaMonHoc == (IsPost ? Static_Helper.SubjectHelper.SearchString : MonQry.FirstOrDefault().MaMH)
-                            select new { MaPhong = b.MaPhong, TenPhong = b.MaPhong }).Distinct();
-            ViewBag.Phong = new SelectList(PhongQry.ToArray(), "MaPhong", "TenPhong");
+            if (k == 1)
+            {
+                var PhongQry = (from b in db.This
+                                where b.MaMonHoc == (IsPost ? Static_Helper.SubjectHelper.SearchString : MonQry.FirstOrDefault().MaMH)
+                                select new { MaPhong = b.MaPhong, TenPhong = b.MaPhong }).Distinct();
+                ViewBag.Phong = new SelectList(PhongQry.ToArray(), "MaPhong", "TenPhong");
+            }
         }
 
+
+        public ActionResult RoomList()
+        {
+            //STT	Phòng	Mã môn thi	Tên môn thi	SLSV	Ngày thi	Tiết bắt đầu	Số tiết
+            var rooms = (from m in db.This
+                         select new
+                         {
+                             m.MaPhong,
+                             m.MaMonHoc,
+                             m.monhoc.TenMonHoc,
+                             m.CaThi.GioThi,
+                             m.Nhom
+                         }).Distinct();
+            List<string[]> Result = new List<string[]>();
+            int stt = 0;
+            foreach (var r in rooms)
+            {
+                string[] s = new string[7];
+                s[0] = ++stt + "";
+                s[1] = r.MaPhong;
+                s[2] = r.MaMonHoc;
+                s[3] = r.TenMonHoc;
+
+                s[4] = (from t in db.This
+                        where t.MaMonHoc == r.MaMonHoc && t.MaPhong == r.MaPhong && t.Nhom == r.Nhom
+                        select t.MaSinhVien).Count() + "";
+                s[5] = r.GioThi.Date.ToShortDateString();
+                s[6] = r.GioThi.TimeOfDay.Hours + "h" + r.GioThi.TimeOfDay.Minutes;
+                Result.Add(s);
+            }
+            return View(Result);
+        }
 
         public ActionResult Save(Event changedEvent, FormCollection actionValues)
         {

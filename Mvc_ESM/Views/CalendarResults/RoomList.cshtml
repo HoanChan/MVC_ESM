@@ -1,0 +1,44 @@
+﻿@model  IEnumerable<string[]>
+@{
+    ViewBag.Title = "Danh sách phòng";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@Html.Partial("_DataTable.Lib")
+
+<table id="table">
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Phòng</th>
+            <th>Mã môn học</th>
+            <th>Tên môn học</th>
+            <th>SLSV</th>
+            <th>Ngày thi</th>
+            <th>Giờ thi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td>@m[0]</td>
+                <td>@m[1]</td>
+                <td>@m[2]</td>
+                <td>@m[3]</td>
+                <td>@m[4]</td>
+                <td>@m[5]</td>
+                <td>@m[6]</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        $('#table').dataTable({
+            @Html.Partial("_DataTable")
+        });
+    });
+</script>
