@@ -11,7 +11,7 @@
 {
     <p>
         <p>
-            Mã môn học: @Html.TextBox("SearchString", Mvc_ESM.Static_Helper.SubjectHelper.SearchString, new { id = "SearchString" })
+            Mã môn học: @Html.TextBox("MonHoc", Mvc_ESM.Static_Helper.SubjectHelper.SearchString, new { id = "SearchString" })
             <input type="submit" value="Thực hiện" />
         </p>
     </p>
@@ -63,7 +63,16 @@
 
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function () {
-        $('#table').dataTable({
+        var oTable = $('#table').dataTable({
+            "aoColumnDefs": [
+                { "bSortable": false, "aTargets": [0] },
+                { "bSortable": false, "aTargets": [1] },
+                { "bSortable": false, "aTargets": [2] },
+                { "bSortable": false, "aTargets": [3] },
+                { "bSortable": false, "aTargets": [4] }
+            ], // không hiện nút sắp xếp!
+            "aaSorting": [[2, 'asc']], //Xếp cột thứ 3
+            "bStateSave": true,
             @Html.Partial("_DataTable")
         });
     });

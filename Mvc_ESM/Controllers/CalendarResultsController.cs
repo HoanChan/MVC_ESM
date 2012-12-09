@@ -96,7 +96,7 @@ namespace Mvc_ESM.Controllers
                       where m.MaMonHoc == ""
                       select s).Distinct();
             InitViewBag(false, 1);
-            return View(sv.ToList());
+            return View(sv.OrderBy(s => s.Ten + s.Ho).ToList());
         }
 
         [HttpPost]
@@ -108,9 +108,8 @@ namespace Mvc_ESM.Controllers
                       where m.MaMonHoc == MonHoc && (m.MaPhong == Phong || Phong == "")
                       select s).Distinct();
             InitViewBag(true, 1);
-            return View(sv.ToList());
+            return View(sv.OrderBy(s => s.Ten + s.Ho).ToList());
         }
-
 
         private void InitViewBag(Boolean IsPost, int k)
         {
@@ -154,6 +153,28 @@ namespace Mvc_ESM.Controllers
                         select t.MaSinhVien).Count() + "";
                 s[5] = r.GioThi.Date.ToShortDateString();
                 s[6] = r.GioThi.TimeOfDay.Hours + "h" + r.GioThi.TimeOfDay.Minutes;
+                Result.Add(s);
+            }
+            return View(Result);
+        }
+
+        public ActionResult OpenRooms()
+        {
+            var rooms = (from r in db.This
+                         select new
+                         {
+                             r.MaPhong,
+                             r.CaThi.GioThi
+                         });
+            List<string[]> Result = new List<string[]>();
+            int stt = 0;
+            foreach (var r in rooms)
+            {
+                string[] s = new string[4];
+                s[0] = ++stt + "";
+                s[1] = r.GioThi.Date.ToShortDateString();
+                s[2] = r.GioThi.TimeOfDay.Hours + "h" + r.GioThi.TimeOfDay.Minutes;
+                s[3] = r.MaPhong;
                 Result.Add(s);
             }
             return View(Result);
