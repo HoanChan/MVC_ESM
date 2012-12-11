@@ -20,6 +20,11 @@
  */
 
 /* menu::base */
+div#menu *{
+    position: relative; 
+    z-index: 500;
+}
+
 div#menu {
     height:41px;
     background:url(images/main-bg.png) repeat-x;
@@ -92,7 +97,7 @@ div#menu ul ul {
     position: absolute;
     top: 38px;
     left: -999em;
-    width: 163px;
+    width: 193px;
     padding: 5px 0 0 0;
     background: rgb(45,45,45);
     margin-top:1px;
@@ -122,8 +127,8 @@ div#menu ul ul li {
 /* menu::level3 */
 div#menu ul ul ul {
     padding: 0;
-    margin: -38px 0 0 163px !important;
-    margin-left:172px;
+    margin: -38px 0 0 193px !important;
+    margin-left:202px;
 }
 
 /* colors */

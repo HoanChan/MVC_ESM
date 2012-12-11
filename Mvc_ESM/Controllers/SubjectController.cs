@@ -10,7 +10,6 @@ namespace Mvc_ESM.Controllers
 { 
     public class SubjectController : Controller
     {
-        private DKMHEntities db = new DKMHEntities();
 
         //
         // GET: /MonHoc/
@@ -19,7 +18,7 @@ namespace Mvc_ESM.Controllers
         {
             if (SubjectHelper.Khoa == null || SubjectHelper.Khoa == "")
             {
-                SubjectHelper.Khoa = (from d in db.khoas
+                SubjectHelper.Khoa = (from d in Data.db.khoas
                                                     orderby d.TenKhoa
                                                     select d).FirstOrDefault().MaKhoa;
                 SubjectHelper.SearchString = "";
@@ -30,7 +29,7 @@ namespace Mvc_ESM.Controllers
             {
                 InitViewBag(true);
             }
-            var monhocs = (from m in db.monhocs
+            var monhocs = (from m in Data.db.monhocs
                            where m.bomon.KhoaQL.Equals(SubjectHelper.Khoa)
                            select m
                            ).Include(m => m.bomon).Include(m => m.khoa);
@@ -44,7 +43,7 @@ namespace Mvc_ESM.Controllers
             SubjectHelper.Khoa = Khoa;
             SubjectHelper.SearchString = SearchString;
             SubjectHelper.BoMon = BoMon;
-            var monhocs = (from m in db.monhocs 
+            var monhocs = (from m in Data.db.monhocs 
                            where ((BoMon == "" && m.bomon.KhoaQL.Equals(Khoa)) || (BoMon != "" && m.bomon.MaBoMon.Equals(BoMon))) && (m.TenMonHoc.Contains(SearchString) || SearchString == "")
                            select m
                            ).Include(m => m.bomon).Include(m => m.khoa);
@@ -54,11 +53,11 @@ namespace Mvc_ESM.Controllers
 
         private void InitViewBag(Boolean IsPost)
         {
-            var KhoaQry = from d in db.khoas
+            var KhoaQry = from d in Data.db.khoas
                           orderby d.TenKhoa
                           select new { MaKhoa = d.MaKhoa, TenKhoa = d.TenKhoa };
             ViewBag.Khoa = new SelectList(KhoaQry.ToArray(), "MaKhoa", "TenKhoa");
-            var BoMonQry = from b in db.bomons
+            var BoMonQry = from b in Data.db.bomons
                             where b.khoa.MaKhoa == (IsPost ? SubjectHelper.Khoa : KhoaQry.FirstOrDefault().MaKhoa)
                             orderby b.TenBoMon
                             select new { MaBoMon = b.MaBoMon, TenBoMon = b.TenBoMon };
@@ -71,8 +70,8 @@ namespace Mvc_ESM.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.BoMonQL = new SelectList(db.bomons, "MaBoMon", "TenBoMon");
-            ViewBag.KhoaXepLich = new SelectList(db.khoas, "MaKhoa", "TenKhoa");
+            ViewBag.BoMonQL = new SelectList(Data.db.bomons, "MaBoMon", "TenBoMon");
+            ViewBag.KhoaXepLich = new SelectList(Data.db.khoas, "MaKhoa", "TenKhoa");
             return View();
         } 
 
@@ -84,13 +83,13 @@ namespace Mvc_ESM.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.monhocs.Add(monhoc);
-                db.SaveChanges();
+                Data.db.monhocs.Add(monhoc);
+                Data.db.SaveChanges();
                 return RedirectToAction("Index");  
             }
 
-            ViewBag.BoMonQL = new SelectList(db.bomons, "MaBoMon", "TenBoMon", monhoc.BoMonQL);
-            ViewBag.KhoaXepLich = new SelectList(db.khoas, "MaKhoa", "TenKhoa", monhoc.KhoaXepLich);
+            ViewBag.BoMonQL = new SelectList(Data.db.bomons, "MaBoMon", "TenBoMon", monhoc.BoMonQL);
+            ViewBag.KhoaXepLich = new SelectList(Data.db.khoas, "MaKhoa", "TenKhoa", monhoc.KhoaXepLich);
             return View(monhoc);
         }
         
@@ -99,9 +98,9 @@ namespace Mvc_ESM.Controllers
  
         public ActionResult Edit(string id)
         {
-            monhoc monhoc = db.monhocs.Find(id);
-            ViewBag.BoMonQL = new SelectList(db.bomons, "MaBoMon", "TenBoMon", monhoc.BoMonQL);
-            ViewBag.KhoaXepLich = new SelectList(db.khoas, "MaKhoa", "TenKhoa", monhoc.KhoaXepLich);
+            monhoc monhoc = Data.db.monhocs.Find(id);
+            ViewBag.BoMonQL = new SelectList(Data.db.bomons, "MaBoMon", "TenBoMon", monhoc.BoMonQL);
+            ViewBag.KhoaXepLich = new SelectList(Data.db.khoas, "MaKhoa", "TenKhoa", monhoc.KhoaXepLich);
             return View(monhoc);
         }
 
@@ -113,12 +112,12 @@ namespace Mvc_ESM.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(monhoc).State = EntityState.Modified;
-                db.SaveChanges();
+                Data.db.Entry(monhoc).State = EntityState.Modified;
+                Data.db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.BoMonQL = new SelectList(db.bomons, "MaBoMon", "TenBoMon", monhoc.BoMonQL);
-            ViewBag.KhoaXepLich = new SelectList(db.khoas, "MaKhoa", "TenKhoa", monhoc.KhoaXepLich);
+            ViewBag.BoMonQL = new SelectList(Data.db.bomons, "MaBoMon", "TenBoMon", monhoc.BoMonQL);
+            ViewBag.KhoaXepLich = new SelectList(Data.db.khoas, "MaKhoa", "TenKhoa", monhoc.KhoaXepLich);
             return View(monhoc);
         }
 
@@ -130,9 +129,9 @@ namespace Mvc_ESM.Controllers
         {
             try
             {
-                monhoc monhoc = db.monhocs.Find(id);
-                db.monhocs.Remove(monhoc);
-                db.SaveChanges();
+                monhoc monhoc = Data.db.monhocs.Find(id);
+                Data.db.monhocs.Remove(monhoc);
+                Data.db.SaveChanges();
                 return "Xoá thành công!";
             }
             catch (Exception e)
@@ -144,7 +143,7 @@ namespace Mvc_ESM.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            //Data.db.Dispose();
             base.Dispose(disposing);
         }
     }

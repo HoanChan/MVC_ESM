@@ -9,12 +9,19 @@ namespace Mvc_ESM.Static_Helper
     {
         public String ClassID { get; set; }
         public int Group { get; set; }
+        public Boolean IsIgnored { get; set; }
     }
 
     public class Room
     {
         public String RoomID { get; set; }
         public int Container { get; set; }
+    }
+
+    public class Shift
+    {
+        public DateTime Time { get; set; }
+        public Boolean IsBusy { get; set; }
     }
 
     public class Options

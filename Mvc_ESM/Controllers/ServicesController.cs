@@ -11,16 +11,16 @@ namespace Mvc_ESM.Controllers
     {
 
         [HttpPost]
-        public JsonResult DataTable_SelectSubjects(jQueryDataTableParamModel param, List<String> SubjectID = null, List<String> Class = null, List<int> Group = null)
+        public JsonResult DataTable_SelectGroups(jQueryDataTableParamModel param, List<String> SubjectID = null, List<String> Class = null, List<int> Group = null)
         {
 
-            var Subjects = (from m in Data.Subjects
+            var Groups = (from m in Data.Groups.Values.Where(g=>!g.IsIgnored)
                             where param.sSearch == null || param.sSearch == "" || m.MaMonHoc.Contains(param.sSearch) || m.TenMonHoc.Contains(param.sSearch)
                             select m
                            ).OrderBy(m => m.TenMonHoc);
             var Result = new List<string[]>();
 
-            foreach (var su in Subjects.Skip(param.iDisplayStart).Take(param.iDisplayLength))
+            foreach (var su in Groups.Skip(param.iDisplayStart).Take(param.iDisplayLength))
             {
                 Result.Add(new string[] {
                                             su.MaMonHoc,
@@ -40,8 +40,8 @@ namespace Mvc_ESM.Controllers
             }
             return Json(new{
                                 sEcho = param.sEcho,
-                                iTotalRecords = Data.Subjects.Count(),
-                                iTotalDisplayRecords = Subjects.Count(),
+                                iTotalRecords = Data.Groups.Count(),
+                                iTotalDisplayRecords = Groups.Count(),
                                 //iTotalDisplayedRecords = Subjects.Count(),
                                 aaData = Result
                             },
@@ -50,16 +50,16 @@ namespace Mvc_ESM.Controllers
         }
         
         [HttpPost]
-        public JsonResult DataTable_IgnoreSubjects(jQueryDataTableParamModel param, List<String> SubjectID = null, List<String> Class = null, List<String> Check = null)
+        public JsonResult DataTable_IgnoreGroups(jQueryDataTableParamModel param, List<String> SubjectID = null, List<String> Class = null, List<String> Check = null)
         {
 
-            var Subjects = (from m in Data.Subjects
+            var Groups = (from m in Data.Groups.Values
                             where param.sSearch == null || param.sSearch == "" || m.MaMonHoc.Contains(param.sSearch) || m.TenMonHoc.Contains(param.sSearch)
                             select m
                            ).OrderBy(m => m.TenMonHoc);
             var Result = new List<string[]>();
 
-            foreach (var su in Subjects.Skip(param.iDisplayStart).Take(param.iDisplayLength))
+            foreach (var su in Groups.Skip(param.iDisplayStart).Take(param.iDisplayLength))
             {
                 Result.Add(new string[] {
                                             su.MaMonHoc,
@@ -68,20 +68,20 @@ namespace Mvc_ESM.Controllers
                                             su.TenKhoa,
                                             su.Nhom.ToString(),
                                             su.SoLuongDK.ToString(),
-                                            "checked",
+                                            su.IsIgnored?"checked":"",
                                             //"Xoá"
                                         }
                             );
             }
             if (SubjectID != null && Class != null && Check != null)
             {
-                InputHelper.SaveIgnoreSubject(SubjectID, Class, Check);
+                InputHelper.SaveIgnoreGroups(SubjectID, Class, Check);
             }
             return Json(new
                             {
                                 sEcho = param.sEcho,
-                                iTotalRecords = Data.Subjects.Count(),
-                                iTotalDisplayRecords = Subjects.Count(),
+                                iTotalRecords = Data.Groups.Count(),
+                                iTotalDisplayRecords = Groups.Count(),
                                 //iTotalDisplayedRecords = Subjects.Count(),
                                 aaData = Result
                             },

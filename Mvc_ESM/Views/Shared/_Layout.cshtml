@@ -37,13 +37,21 @@
 
                     <li><a href="#" class="parent"><span>Thiết lập đầu vào</span></a>
                         <ul>
-                            <li><a href="@Url.Action("Index", "SelectSubject")"><span>Chọn môn học</span></a></li>
-                            <li><a href="@Url.Action("Index", "SelectStudent")"><span>Chọn sinh viên</span></a></li>
-                            <li><a href="@Url.Action("Index", "SelectRoom")"><span>Chọn phòng thi</span></a></li>
-                            <li><a href="@Url.Action("Index", "Options")"><span>Thiết lập thông số</span></a></li>
+                            <li><a href="@Url.Action("IgnoreList", "SelectGroup")"><span>1.Chọn nhóm không thi</span></a></li>
+                            <li><a href="@Url.Action("Index", "SelectGroup")"><span>2.Ghép nhóm thi</span></a></li>
+                            <li><a href="@Url.Action("Index", "SelectStudent")"><span>3.Danh sách cấm thi</span></a></li>
+                            <li><a href="@Url.Action("Index", "SelectRoom")"><span>4.Chọn phòng thi</span></a></li>
+                            <li><a href="@Url.Action("Index", "Options")"><span>5.Thiết lập thông số</span></a></li>
+                            <li><a href="@Url.Action("Index", "BusyShift")"><span>6.Chọn ca không thi</span></a></li>
                         </ul>
                     </li>
-                    <li><a href="@Url.Action("Index", "Progress")"><span>Xếp lịch thi</span></a></li>
+                    <li><a href="#" class="parent"><span>Xếp lịch thi</span></a>
+                        <ul>
+                            <li><a href="@Url.Action("Index", "Progress")"><span>Xếp tự động</span></a></li>
+                            <li><a href="@Url.Action("Index", "Handmade")"><span>Xếp thủ công</span></a></li>
+                        </ul>
+                    </li>
+                    
                     <li><a href="#" class="parent"><span>Sửa kết quả</span></a>
                         <ul>
                             <li><a href="#"><span>Giờ thi</span></a></li>

@@ -4,6 +4,7 @@ using System.Collections;
 using Model;
 using System.IO;
 using System.Text;
+using System.Linq;
 
 namespace Mvc_ESM.Static_Helper
 {
@@ -13,79 +14,65 @@ namespace Mvc_ESM.Static_Helper
         /// <summary>
         /// danh sách môn học sẽ xếp lịch
         /// </summary>
-        public static Dictionary<String, List<Class>> Subjects;
-        public static Dictionary<String, List<String>> IgnoreSubjects;
+        public static Dictionary<String, List<Class>> Subjects = new Dictionary<String, List<Class>>();
         public static List<Room> Rooms;
         /// <summary>
         /// danh sách sinh viên sẽ bị cấm thi
         /// </summary>
         public static Dictionary<String, List<String>> Students;
 
+        public static List<Shift> BusyShift;
+
         public static Options Options = new Options();
 
-
-        public static String SaveIgnoreSubject(List<String> SubjectID, List<String> Class, List<String> Check)
+        public static String SaveIgnoreGroups(List<String> SubjectID, List<String> Class, List<String> Check)
         {
-            InputHelper.IgnoreSubjects = new Dictionary<String, List<String>>();
             string paramInfo = "";
             for (int i = 0; i < SubjectID.Count; i++)
             {
-                if (Check[i].Length > 0) // Check[i] == "checked"
+                String aKey = SubjectID[i] + "_" + Class[i];
+                if (Data.Groups.ContainsKey(aKey))
                 {
-                    if (InputHelper.IgnoreSubjects.ContainsKey(SubjectID[i]))
-                    {
-                        if (!InputHelper.IgnoreSubjects[SubjectID[i]].Contains(Class[i]))
-                        {
-                            InputHelper.IgnoreSubjects[SubjectID[i]].Add(Class[i]);
-                        }
-                    }
-                    else
-                    {
-                        InputHelper.IgnoreSubjects.Add(SubjectID[i], new List<String>() { Class[i] });
-                    }
-                    paramInfo += "MH:" + SubjectID[i] + " Class: " + Class[i] + " Group: " + Check[i] + "<br /><br />";
+                    Data.Groups[aKey].IsIgnored = (Check[i] == "checked"); // Check[i] != "undefined"
                 }
+                paramInfo += "MH:" + SubjectID[i] + " Class: " + Class[i] + " Check: " + Check[i] + "<br />";
             }
-            Data.Subjects = Data.initSubjects();
-            OutputHelper.SaveOBJ("IgnoreSubjects", InputHelper.IgnoreSubjects);
+            OutputHelper.SaveOBJ("Groups", Data.Groups);
             return paramInfo;
         }
+
         public static String SaveGroups(List<String> SubjectID, List<String> Class, List<int> Group)
         {
-            InputHelper.Subjects = new Dictionary<String, List<Class>>();
             string paramInfo = "";
             for (int i = 0; i < SubjectID.Count; i++)
             {
-                Class aClass = new Class() { ClassID = Class[i], Group = Group[i] };
-                if (InputHelper.Subjects.ContainsKey(SubjectID[i]))
+                String aKey = SubjectID[i] + "_" + Class[i];
+                if (Data.Groups.ContainsKey(aKey)) // bo cung dc
                 {
-                    if (!InputHelper.Subjects[SubjectID[i]].Contains(aClass))
-                    {
-                        InputHelper.Subjects[SubjectID[i]].Add(aClass);
-                    }
+                    Data.Groups[aKey].GroupID = Group[i];
                 }
-                else
-                {
-                    InputHelper.Subjects.Add(SubjectID[i], new List<Class>() { aClass });
-                }
-                paramInfo += "MH:" + SubjectID[i] + " Class: " + Class[i] + " Group: " + Group[i] + "<br /><br />";
+
+                paramInfo += "MH:" + SubjectID[i] + " Class: " + Class[i] + " Group: " + Group[i] + "<br />";
             }
-            OutputHelper.SaveOBJ("Subjects", InputHelper.Subjects);
-            List<String> Groups = new List<String>();
-            foreach (String Subject in InputHelper.Subjects.Keys)
+            var Groups = new List<String>(); // Mamonhoc_nhom1_nhom2_nhom3...
+            SubjectID = SubjectID.Distinct().ToList();
+            for (int Index = 0; Index < SubjectID.Count(); Index++)
             {
-                Boolean[] Progressed = new Boolean[InputHelper.Subjects[Subject].Count];
-                for (int i = 0; i < InputHelper.Subjects[Subject].Count; i++)
+                List<String> data = Data.Groups.Where(g=>g.Key.Contains(SubjectID[Index]))
+                                                .Select(g=>g.Value.GroupID.ToString())
+                                                .ToList();
+                Boolean[] Progressed = new Boolean[data.Count()];
+                for (int i = 0; i < data.Count(); i++)
                 {
                     if (!Progressed[i])
                     {
-                        String GroupItem = Subject;
-                        for (int j = 0; j < InputHelper.Subjects[Subject].Count; j++)
+                        String GroupItem = SubjectID[Index];
+                        for (int j = 0; j < data.Count(); j++)
                         {
-                            if (InputHelper.Subjects[Subject][i].Group == InputHelper.Subjects[Subject][j].Group)
+                            if (data[i] == data[j])
                             {
                                 Progressed[j] = true;
-                                GroupItem += "_" + InputHelper.Subjects[Subject][j].ClassID;
+                                GroupItem += "_" + data[j];
                             }
                         }
                         if (!Groups.Contains(GroupItem))

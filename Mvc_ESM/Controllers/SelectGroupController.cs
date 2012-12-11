@@ -13,7 +13,7 @@ using System.Text;
 
 namespace Mvc_ESM.Controllers
 { 
-    public class SelectSubjectController : Controller
+    public class SelectGroupController : Controller
     {
         private DKMHEntities db = new DKMHEntities();
 
@@ -32,15 +32,15 @@ namespace Mvc_ESM.Controllers
         }
 
         [HttpPost]
-        public String SelectSuccess(List<String> SubjectID, List<String> Class, List<int> Group)
+        public String IgnoreSuccess(List<String> SubjectID, List<String> Class, List<String> Check)
         {
-            return InputHelper.SaveGroups(SubjectID, Class, Group);
+            return InputHelper.SaveIgnoreGroups(SubjectID, Class, Check);
         }
 
         [HttpPost]
-        public String SelectSuccess(List<String> SubjectID, List<String> Class, List<Boolean> Check)
+        public String SelectSuccess(List<String> SubjectID, List<String> Class, List<int> Group)
         {
-            return "";
+            return InputHelper.SaveGroups(SubjectID, Class, Group);
         }
 
         protected override void Dispose(bool disposing)

@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Chọn ca không thi";
+}
+
+<h2>@ViewBag.Title</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Ngày</th>
+            <th>Thứ Hai</th>
+            <th>Thứ Ba</th>
+            <th>Thứ Tư</th>
+            <th>Thứ Năm</th>
+            <th>Thứ Sáu</th>
+            <th>Thứ Bảy</th>
+            <th>Chủ nhật</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < 15; i++)
+        {
+            <tr>
+                <td>@(i+1)</td>
+                @for (int j = 0; j < 7; j++)
+                {
+                    <td>
+                        @for(int k=0;k<4;k++)
+                        {
+                            <input type="checkbox" id="day" @(j<6?"":"checked") title="Ca Thi thứ @(k+1)" />
+                        }
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

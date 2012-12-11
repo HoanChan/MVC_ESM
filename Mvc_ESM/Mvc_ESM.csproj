@@ -100,7 +100,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BusyShiftController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
+    <Compile Include="Controllers\HandmadeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OptionsController.cs" />
     <Compile Include="Controllers\ProgressController.cs" />
@@ -111,7 +113,7 @@
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
-    <Compile Include="Controllers\SelectSubjectController.cs" />
+    <Compile Include="Controllers\SelectGroupController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -184,7 +186,7 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\SelectSubject\Index.cshtml" />
+    <Content Include="Views\SelectGroup\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -279,10 +281,16 @@
     <Content Include="Views\Shared\_DataTable.Printer.Lib.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\SelectSubject\IgnoreList.cshtml" />
+    <Content Include="Views\SelectGroup\IgnoreList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery.dataTable.FixedHeader.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Handmade\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\BusyShift\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

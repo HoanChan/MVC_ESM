@@ -11,10 +11,14 @@ namespace Mvc_ESM.Static_Helper
 {
     public class OutputHelper
     {
+        public static String RealPath(String Name)
+        {
+            return Path.Combine(System.Web.HttpContext.Current.Server.MapPath(@"~/Win_App"), Name + ".jso");
+        }
         public static void SaveOBJ(String Name, Object OBJ)
         {
             System.IO.File.WriteAllText(
-                Path.Combine(System.Web.HttpContext.Current.Server.MapPath(@"~/Win_App"), Name + ".jso"),
+                RealPath( Name ),
                 JsonConvert.SerializeObject(OBJ, Formatting.Indented),
                 Encoding.UTF8
             );            
@@ -22,7 +26,7 @@ namespace Mvc_ESM.Static_Helper
         public static void DeleteOBJ(String Name)
         {
             System.IO.File.Delete(
-                Path.Combine(System.Web.HttpContext.Current.Server.MapPath(@"~/Win_App"), Name + ".jso")
+                RealPath(Name)
             );
         }
     }

@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "Làm thủ công";
+}
+
+<h2>@ViewBag.Title</h2>
+<script src="@Url.Content("~/Scripts/SlidingForm/sliding.form.js")" type="text/javascript" lang="javascript" ></script>
+<link href="@Url.Content("~/Content/SlidingForm/css/style.css")" rel="stylesheet" type="text/css" />
+
+        @*<div id="content">
+            <h1>Fancy Sliding Form with jQuery</h1>*@
+            <div id="wrapper">
+                <div id="steps">
+                    <form id="formElem" name="formElem" action="" method="post">
+                        <fieldset class="step">
+                            <legend>Lựa chọn môn học</legend>
+                            <p>
+                                <label for="SubjectID">Mã số môn học</label>
+                                <input id="SubjectID" placeholder="Nhập mã số môn học vào đây!"/>
+                            </p>
+                            <p class="submit"> 
+                                <button id="btnCheckSubject">Kiểm tra</button>
+                            </p>
+                            <p>
+                                <span id ="SubjectName"></span>
+                            </p>
+                        </fieldset>
+                        <fieldset class="step">
+                            <legend>Lựa chọn nhóm</legend>
+                            <table style="margin:auto">
+                                <thead>
+                                    <tr>
+                                        <th>Nhóm</th>
+                                        <th>SLSV</th>
+                                        <th>Chọn</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </fieldset>
+                        <fieldset class="step">
+                            <legend>Chọn ngày thi và ca thi</legend>
+                            <p>
+                                <label for="cardtype">Card</label>
+                                <select id="cardtype" name="cardtype">
+                                    <option>Visa</option>
+                                    <option>Mastercard</option>
+                                    <option>American Express</option>
+                                </select>
+                            </p>
+                            <p>
+                                <label for="cardnumber">Card number</label>
+                                <input id="cardnumber" name="cardnumber" type="number" AUTOCOMPLETE=OFF />
+                            </p>
+                            <p>
+                                <label for="secure">Security code</label>
+                                <input id="secure" name="secure" type="number" AUTOCOMPLETE=OFF />
+                            </p>
+                            <p>
+                                <label for="namecard">Name on Card</label>
+                                <input id="namecard" name="namecard" type="text" AUTOCOMPLETE=OFF />
+                            </p>
+                        </fieldset>
+                        <fieldset class="step">
+                            <legend>Chọn phòng thi</legend>
+                            <p>
+                                <label for="newsletter">Newsletter</label>
+                                <select id="newsletter" name="newsletter">
+                                    <option value="Daily" selected>Daily</option>
+                                    <option value="Weekly">Weekly</option>
+                                    <option value="Monthly">Monthly</option>
+                                    <option value="Never">Never</option>
+                                </select>
+                            </p>
+                            <p>
+                                <label for="updates">Updates</label>
+                                <select id="updates" name="updates">
+                                    <option value="1" selected>Package 1</option>
+                                    <option value="2">Package 2</option>
+                                    <option value="0">Don't send updates</option>
+                                </select>
+                            </p>
+							<p>
+                                <label for="tagname">Newsletter Tag</label>
+                                <input id="tagname" name="tagname" type="text" AUTOCOMPLETE=OFF />
+                            </p>
+                        </fieldset>
+						<fieldset class="step">
+                            <legend>Lưu</legend>
+							<p>
+								Everything in the form was correctly filled 
+								if all the steps have a green checkmark icon.
+								A red checkmark icon indicates that some field 
+								is missing or filled out with invalid data. In this
+								last step the user can confirm the submission of
+								the form.
+							</p>
+                            <p class="submit">
+                                <button id="registerButton" type="submit">Register</button>
+                            </p>
+                        </fieldset>
+                    </form>
+                </div>
+                <div id="navigation" style="display:none;">
+                    <ul>
+                        <li class="selected">
+                            <a href="#">Môn Thi</a>
+                        </li>
+                        <li>
+                            <a href="#">Nhóm Thi</a>
+                        </li>
+                        <li>
+                            <a href="#">Thời gian</a>
+                        </li>
+                        <li>
+                            <a href="#">Phòng thi</a>
+                        </li>
+						<li>
+                            <a href="#">Lưu</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+@*        </div>*@
