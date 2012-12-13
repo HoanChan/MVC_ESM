@@ -5,6 +5,7 @@ using Model;
 using System.IO;
 using System.Text;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Mvc_ESM.Static_Helper
 {
@@ -23,7 +24,20 @@ namespace Mvc_ESM.Static_Helper
 
         public static List<Shift> BusyShift;
 
-        public static Options Options = new Options();
+        public static Options Options = InitOptions();
+
+        public static Options InitOptions()
+        {
+            String OptionsPath = OutputHelper.RealPath("Options");
+            if (File.Exists(OptionsPath))
+            {
+                return JsonConvert.DeserializeObject<Options>(File.ReadAllText(OptionsPath));
+            }
+            else
+            {
+                return new Options();
+            }
+        }
 
         public static String SaveIgnoreGroups(List<String> SubjectID, List<String> Class, List<String> Check)
         {

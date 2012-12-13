@@ -29,5 +29,20 @@ namespace Mvc_ESM.Static_Helper
                 RealPath(Name)
             );
         }
+
+        public static String DayOffWeekVN(DateTime aDate)
+        {
+            switch (aDate.DayOfWeek.ToString())
+            {
+                case "Sunday": return "Chủ Nhật";
+                case "Monday": return "Thứ Hai";
+                case "Tuesday": return "Thứ Ba";
+                case "Wednesday": return "Thứ Tư";
+                case "Thursday": return "Thứ Năm";
+                case "Friday": return "Thứ Sáu";
+                case "Saturday": return "Thứ Bảy";
+            }
+            return "xx";
+        }
     }
 }

@@ -159,7 +159,7 @@ span.error{
     text-shadow:1px 1px 1px #fff;
     font-weight:bold;
 }
-#steps form input:not([type=radio]),
+#steps form input:not([type=radio]):not([type=checkbox]):not(.hasDatepicker),
 #steps form textarea,
 #steps form select{
     background: #ffffff;

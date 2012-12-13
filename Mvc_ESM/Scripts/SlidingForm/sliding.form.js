@@ -102,34 +102,34 @@ $(function() {
 	validates one fieldset
 	and returns -1 if errors found, or 1 if not
 	*/
-	function validateStep(step){
-		if(step == fieldsetCount) return;
+	//function validateStep(step){
+	//	if(step == fieldsetCount) return;
 		
-		var error = 1;
-		var hasError = false;
-		$('#formElem').children(':nth-child('+ parseInt(step) +')').find(':input:not(button)').each(function(){
-			var $this 		= $(this);
-			var valueLength = jQuery.trim($this.val()).length;
+	//	var error = 1;
+	//	var hasError = false;
+	//	$('#formElem').children(':nth-child('+ parseInt(step) +')').find(':input:not(button)').each(function(){
+	//		var $this 		= $(this);
+	//		var valueLength = jQuery.trim($this.val()).length;
 			
-			if(valueLength == ''){
-				hasError = true;
-				$this.css('background-color','#FFEDEF');
-			}
-			else
-				$this.css('background-color','#FFFFFF');	
-		});
-		var $link = $('#navigation li:nth-child(' + parseInt(step) + ') a');
-		$link.parent().find('.error,.checked').remove();
+	//		if(valueLength == ''){
+	//			hasError = true;
+	//			$this.css('background-color','#FFEDEF');
+	//		}
+	//		else
+	//			$this.css('background-color','#FFFFFF');	
+	//	});
+	//	var $link = $('#navigation li:nth-child(' + parseInt(step) + ') a');
+	//	$link.parent().find('.error,.checked').remove();
 		
-		var valclass = 'checked';
-		if(hasError){
-			error = -1;
-			valclass = 'error';
-		}
-		$('<span class="'+valclass+'"></span>').insertAfter($link);
+	//	var valclass = 'checked';
+	//	if(hasError){
+	//		error = -1;
+	//		valclass = 'error';
+	//	}
+	//	$('<span class="'+valclass+'"></span>').insertAfter($link);
 		
-		return error;
-	}
+	//	return error;
+	//}
 	
 	/*
 	if there are errors don't allow the user to submit

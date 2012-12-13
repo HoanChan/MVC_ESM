@@ -6,117 +6,182 @@
 <script src="@Url.Content("~/Scripts/SlidingForm/sliding.form.js")" type="text/javascript" lang="javascript" ></script>
 <link href="@Url.Content("~/Content/SlidingForm/css/style.css")" rel="stylesheet" type="text/css" />
 
-        @*<div id="content">
-            <h1>Fancy Sliding Form with jQuery</h1>*@
-            <div id="wrapper">
-                <div id="steps">
-                    <form id="formElem" name="formElem" action="" method="post">
-                        <fieldset class="step">
-                            <legend>Lựa chọn môn học</legend>
-                            <p>
-                                <label for="SubjectID">Mã số môn học</label>
-                                <input id="SubjectID" placeholder="Nhập mã số môn học vào đây!"/>
-                            </p>
-                            <p class="submit"> 
-                                <button id="btnCheckSubject">Kiểm tra</button>
-                            </p>
-                            <p>
-                                <span id ="SubjectName"></span>
-                            </p>
-                        </fieldset>
-                        <fieldset class="step">
-                            <legend>Lựa chọn nhóm</legend>
-                            <table style="margin:auto">
-                                <thead>
-                                    <tr>
-                                        <th>Nhóm</th>
-                                        <th>SLSV</th>
-                                        <th>Chọn</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </fieldset>
-                        <fieldset class="step">
-                            <legend>Chọn ngày thi và ca thi</legend>
-                            <p>
-                                <label for="cardtype">Card</label>
-                                <select id="cardtype" name="cardtype">
-                                    <option>Visa</option>
-                                    <option>Mastercard</option>
-                                    <option>American Express</option>
-                                </select>
-                            </p>
-                            <p>
-                                <label for="cardnumber">Card number</label>
-                                <input id="cardnumber" name="cardnumber" type="number" AUTOCOMPLETE=OFF />
-                            </p>
-                            <p>
-                                <label for="secure">Security code</label>
-                                <input id="secure" name="secure" type="number" AUTOCOMPLETE=OFF />
-                            </p>
-                            <p>
-                                <label for="namecard">Name on Card</label>
-                                <input id="namecard" name="namecard" type="text" AUTOCOMPLETE=OFF />
-                            </p>
-                        </fieldset>
-                        <fieldset class="step">
-                            <legend>Chọn phòng thi</legend>
-                            <p>
-                                <label for="newsletter">Newsletter</label>
-                                <select id="newsletter" name="newsletter">
-                                    <option value="Daily" selected>Daily</option>
-                                    <option value="Weekly">Weekly</option>
-                                    <option value="Monthly">Monthly</option>
-                                    <option value="Never">Never</option>
-                                </select>
-                            </p>
-                            <p>
-                                <label for="updates">Updates</label>
-                                <select id="updates" name="updates">
-                                    <option value="1" selected>Package 1</option>
-                                    <option value="2">Package 2</option>
-                                    <option value="0">Don't send updates</option>
-                                </select>
-                            </p>
-							<p>
-                                <label for="tagname">Newsletter Tag</label>
-                                <input id="tagname" name="tagname" type="text" AUTOCOMPLETE=OFF />
-                            </p>
-                        </fieldset>
-						<fieldset class="step">
-                            <legend>Lưu</legend>
-							<p>
-								Everything in the form was correctly filled 
-								if all the steps have a green checkmark icon.
-								A red checkmark icon indicates that some field 
-								is missing or filled out with invalid data. In this
-								last step the user can confirm the submission of
-								the form.
-							</p>
-                            <p class="submit">
-                                <button id="registerButton" type="submit">Register</button>
-                            </p>
-                        </fieldset>
-                    </form>
-                </div>
-                <div id="navigation" style="display:none;">
-                    <ul>
-                        <li class="selected">
-                            <a href="#">Môn Thi</a>
-                        </li>
-                        <li>
-                            <a href="#">Nhóm Thi</a>
-                        </li>
-                        <li>
-                            <a href="#">Thời gian</a>
-                        </li>
-                        <li>
-                            <a href="#">Phòng thi</a>
-                        </li>
-						<li>
-                            <a href="#">Lưu</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-@*        </div>*@
+<div id="wrapper">
+    <div id="steps">
+        <form id="formElem" name="formElem" action="" method="post">
+            <fieldset class="step">
+                <legend>Lựa chọn môn học</legend>
+                <p>
+                    <label for="SubjectID">Mã số môn học</label>
+                    <input id="SubjectID" placeholder="Nhập mã số môn học vào đây!"/>
+                </p>
+                <p class="submit"> 
+                    <button id="btnCheckSubject">Kiểm tra</button>
+                </p>
+                <div id ="SubjectInfo"></div>
+            </fieldset>
+            <fieldset class="step">
+                <legend>Lựa chọn nhóm</legend>
+                <table id="table">
+                    <thead>
+                        <tr>
+                            <th>Nhóm</th>
+                            <th>Số lượng SV đăng ký</th>
+                            <th>Chọn</th>
+                        </tr>
+                    </thead>
+                </table>
+                <div id="step2err"></div>
+            </fieldset>
+            <fieldset class="step">
+                <legend>Chọn ngày thi và ca thi</legend>
+                <p>
+                    <label for="datepicker">Ngày tổ chức thi</label>
+                    <input type="text" id="datepicker" />
+                </p>
+                <button id="btnLoadTimes">OK</button>
+                <div id="Times"></div>
+                <button id="btnLoadRooms">OK</button>
+            </fieldset>
+            <fieldset class="step">
+                <legend>Chọn phòng thi</legend>
+                <p>
+                    <label for="newsletter">Newsletter</label>
+                    <select id="newsletter" name="newsletter">
+                        <option value="Daily" selected>Daily</option>
+                        <option value="Weekly">Weekly</option>
+                        <option value="Monthly">Monthly</option>
+                        <option value="Never">Never</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="updates">Updates</label>
+                    <select id="updates" name="updates">
+                        <option value="1" selected>Package 1</option>
+                        <option value="2">Package 2</option>
+                        <option value="0">Don't send updates</option>
+                    </select>
+                </p>
+				<p>
+                    <label for="tagname">Newsletter Tag</label>
+                    <input id="tagname" name="tagname" type="text" AUTOCOMPLETE=OFF />
+                </p>
+            </fieldset>
+			<fieldset class="step">
+                <legend>Lưu</legend>
+				<p>
+					Tất cả các bước cần được hoàn thiện đề có thể thực hiện xếp lịch
+					(Nếu tất cả các bước đều có dấu kiểm màu xanh).
+					Nếu một bước nào đó có dấu kiểm màu đỏ, thì bước đó bị sai cần chỉnh sửa.
+                    Nhấn nút bên dưới để thực hiện lưu vào cơ sở dữ liệu.
+				</p>
+                <p class="submit">
+                    <button id="registerButton" type="submit">Lưu vào CSDL</button>
+                </p>
+            </fieldset>
+        </form>
+    </div>
+    <div id="navigation" style="display:none;">
+        <ul>
+            <li class="selected">
+                <a href="#">Môn Thi</a>
+            </li>
+            <li>
+                <a href="#">Nhóm Thi</a>
+            </li>
+            <li>
+                <a href="#">Thời gian</a>
+            </li>
+            <li>
+                <a href="#">Phòng thi</a>
+            </li>
+			<li>
+                <a href="#">Lưu</a>
+            </li>
+        </ul>
+    </div>
+</div>
+@Html.Partial("_DataTable.Lib")
+@Html.Partial("_Jquery-UI.regional.lib")
+<script src="@Url.Content("~/Scripts/UI/jquery.mousewheel.js")" type="text/javascript" lang="javascript" ></script>
+<script type="text/javascript" charset="utf-8">
+    @Html.Partial("_Jquery-UI.regional")
+    @Html.Partial("_Jquery-UI.Widget.datespinner")
+    $.datepicker.setDefaults($.datepicker.regional["vi"]);
+
+    $("#datepicker").datepicker({
+        changeMonth: true,
+        changeYear: true
+    }).datespinner();
+
+    oTable = $('#table').dataTable({
+        "bLengthChange": false,
+        "bFilter": false,
+        @Html.Partial("_DataTable")
+    });
+
+    $("#btnCheckSubject").click(function () {
+        var suID = $('#SubjectID').val();
+        if (suID == "") {
+            alert("Chưa nhập mã môn học!");
+            return false;
+        }
+        $.getJSON("/Services/LoadGroupsBySubjectID", { SubjectID: suID },
+            function (Data) {
+                if (Data.MSMH == "false") {
+                    alert("Không tìm thấy môn học có mã số: " + suID);
+                    return false;
+                }
+                $("#SubjectInfo").html("<p>Tên môn học: " + Data.TenMH + "</p><p>Thuộc bộ môn: " + Data.TenBM + "</p><p>Thuộc Khoa: " + Data.TenKhoa + "</p>");
+                $.each(Data.Groups, function (index, itemData) {
+                    var Class = '<span id="Class">' + itemData.Nhom + '</span>';
+                    var CheckBox = '<input type="checkbox" id="Check" checked />';
+                    oTable.fnAddData([Class, itemData.SoLuongDK, CheckBox]);
+                });
+            });
+        return false;
+    });
+
+    function validateStep(step) {
+        var fieldsetCount = $('#formElem').children().length;
+        if (step == fieldsetCount) return;
+
+        var error = 1;
+        var hasError = false;
+        var intStep = parseInt(step);
+        var $CurrentEl = $('#formElem').children(':nth-child(' + intStep + ')');
+        switch(intStep)
+        {
+            case 1:
+                if ($("#SubjectInfo").html().length == 0){
+                    hasError = true;
+                    $('#SubjectID').css('background-color', '#FFEDEF');
+                }
+                else
+                    $('#SubjectID').css('background-color', '#FFFFFF');
+                break;
+            case 2:
+                var NumCheckedBox = $CurrentEl.find('input:checked').length;
+                if (NumCheckedBox == 0) {
+                    hasError = true;
+                    $("#step2err").html("<p>Phải chọn ít nhất 1 nhóm</p>");
+                }
+                else
+                    $("#step2err").html("");
+                break;
+            default:
+        }
+
+        var $link = $('#navigation li:nth-child(' + intStep + ') a');
+        $link.parent().find('.error,.checked').remove();
+
+        var valclass = 'checked';
+        if (hasError) {
+            error = -1;
+            valclass = 'error';
+        }
+        $('<span class="' + valclass + '"></span>').insertAfter($link);
+
+        return error;
+    }
+</script>

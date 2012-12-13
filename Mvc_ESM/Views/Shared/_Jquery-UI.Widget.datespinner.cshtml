@@ -1,0 +1,23 @@
+﻿$.widget("ui.datespinner", $.ui.spinner, {
+    options: {
+        // 1 ngay
+        step: 60 * 1000 * 60 * 24,
+        // 1 tuan
+        page: 60 * 1000 * 60 *  24  * 7
+    },
+
+    _parse: function (value) {
+        if (typeof value === "string") {
+                //already a timestamp
+            if (Number(value) == value) {
+                return Number(value);
+            }
+            return +Globalize.parseDate(value);
+        }
+        return value;
+    },
+
+    _format: function (value) {
+        return Globalize.format(new Date(value), "d");
+    },
+});

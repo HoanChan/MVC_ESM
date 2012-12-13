@@ -9,7 +9,32 @@ namespace Mvc_ESM.Controllers
 {
     public class ServicesController : Controller
     {
-
+        [HttpGet]
+        public JsonResult LoadGroupsBySubjectID(string SubjectID)
+        {
+            var Groups = (from m in Data.Groups.Values
+                         where m.MaMonHoc == SubjectID && m.IsIgnored
+                         select new
+                         {
+                             m.Nhom,
+                             m.SoLuongDK
+                         }).ToList();
+            if (Groups.Count() > 0)
+            {
+                var Subject = Data.Groups[SubjectID + "_" + Groups[0].Nhom];
+                return Json(new { 
+                                    MSMH = SubjectID,
+                                    TenMH = Subject.TenMonHoc,
+                                    TenKhoa = Subject.TenKhoa,
+                                    TenBM = Subject.TenBoMon,
+                                    Groups = Groups 
+                                }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { MSMH = "false" }, JsonRequestBehavior.AllowGet);
+            }
+        }
         [HttpPost]
         public JsonResult DataTable_SelectGroups(jQueryDataTableParamModel param, List<String> SubjectID = null, List<String> Class = null, List<int> Group = null)
         {
@@ -149,15 +174,7 @@ namespace Mvc_ESM.Controllers
             {
                 return Json(new List<object>(){ new 
                         {
-                            OK = "",
-                            MSMH = "",
-                            TenMH = "",
-                            BoMon = "",
-                            MSSV = "false",
-                            Ho = "",
-                            Ten = "",
-                            Lop = "",
-                            Khoa = ""
+                            MSSV = "false"
                         }}, JsonRequestBehavior.AllowGet);
             }
 
@@ -165,15 +182,7 @@ namespace Mvc_ESM.Controllers
             {
                 return Json(new List<object>(){ new 
                         {
-                            OK = "",
-                            MSMH = "false",
-                            TenMH = "",
-                            BoMon = "",
-                            MSSV = "",
-                            Ho = "",
-                            Ten = "",
-                            Lop = "",
-                            Khoa = ""
+                            MSMH = "false"
                         }}, JsonRequestBehavior.AllowGet);
             }
 
@@ -182,14 +191,9 @@ namespace Mvc_ESM.Controllers
                 return Json(new List<object>(){ new 
                         {
                             OK = "false",
-                            MSMH = "",
                             TenMH = Subject.FirstOrDefault().TenMH,
-                            BoMon = "",
-                            MSSV = "",
                             Ho = Student.FirstOrDefault().Ho,
-                            Ten = Student.FirstOrDefault().Ten,
-                            Lop = "",
-                            Khoa = ""
+                            Ten = Student.FirstOrDefault().Ten
                         }}, JsonRequestBehavior.AllowGet);
             }
 
