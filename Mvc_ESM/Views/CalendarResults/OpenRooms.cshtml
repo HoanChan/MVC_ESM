@@ -10,31 +10,33 @@
 <table id="table">
     <thead>
         <tr>
-            @*<th>STT</th>
-            <th>Ngày</th>
+            <th>STT</th>
+            <th>Tuần</th>
             <th>Mã phòng</th>
             <th>Thứ 2</th>
             <th>Thứ 3</th>
             <th>Thứ 4</th>
             <th>Thứ 5</th>
             <th>Thứ 6</th>
-            <th>Thứ 7</th>*@
-            <th>STT</th>
+            <th>Thứ 7</th>
+            @* <th>STT</th>
             <th>Ngay thi</th>
             <th>Gio thi</th>
-            <th>Ma phong</th>
+            <th>Ma phong</th>*@
         </tr>
     </thead>
     <tbody>
-        @*<tr></tr>
-        <tr></tr>
-        <tr></tr>
-        <tr>123456789012</tr>
-        <tr>123456789012</tr>
-        <tr>123456789012</tr>
-        <tr>123456789012</tr>
-        <tr>123456789012</tr>
-        <tr>123456789012</tr>*@
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>12345678901</td>
+            <td>12345678901</td>
+            <td>12345678901</td>
+            <td>12345678901</td>
+            <td>12345678901</td>
+            <td>12345678901</td>
+        </tr>
         @foreach (var m in Model)
         {
             <tr>
@@ -42,21 +44,32 @@
                 <td>@m[1]</td>
                 <td>@m[2]</td>
                 <td>@m[3]</td>
+                <td>@m[4]</td>
+                <td>@m[5]</td>
+                <td>@m[6]</td>
+                <td>@m[7]</td>
+                <td>@m[8]</td>
             </tr>
         }
+
     </tbody>
 </table>
 
 <script type="text/javascript" charset="utf-8">
     var oTable = $('#table').dataTable({
         "aoColumnDefs": [
-            @*{ "bSortable": false, "aTargets": [0] },*@
+            { "bSortable": false, "aTargets": [0] },
             { "bSortable": false, "aTargets": [1] },
             { "bSortable": false, "aTargets": [2] },
-            { "bSortable": false, "aTargets": [3] }
+            { "bSortable": false, "aTargets": [3] },
+            { "bSortable": false, "aTargets": [4] },
+            { "bSortable": false, "aTargets": [5] },
+            { "bSortable": false, "aTargets": [6] },
+             { "bSortable": false, "aTargets": [7] },
+            { "bSortable": false, "aTargets": [8] }
         ], // không hiện nút sắp xếp!
-        "aaSorting": [[1, 'asc']], //Xếp cột thứ 2
-        "bStateSave": true,
+        "aaSorting": [[2, 'asc']], 
+        
         @Html.Partial("_DataTable")
     });
 </script>

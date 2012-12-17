@@ -10,8 +10,6 @@
 namespace Model
 {
     using System;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
@@ -26,8 +24,7 @@ namespace Model
         {
             throw new UnintentionalCodeFirstException();
         }
-
-       
+    
         public DbSet<bomon> bomons { get; set; }
         public DbSet<CaThi> CaThis { get; set; }
         public DbSet<chuyennganh> chuyennganhs { get; set; }
