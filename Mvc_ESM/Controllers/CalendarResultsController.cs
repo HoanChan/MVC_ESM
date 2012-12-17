@@ -168,6 +168,13 @@ namespace Mvc_ESM.Controllers
                          });
             List<string[]> Result = new List<string[]>();
             int stt = 0;
+            String Thu2 = "oooooooooooo";
+            String Thu3 = "oooooooooooo";
+            String Thu4 = "oooooooooooo";
+            String Thu5 = "oooooooooooo";
+            String Thu6 = "oooooooooooo";
+            String Thu7 = "oooooooooooo";
+
             foreach (var r in rooms)
             {
                 string[] s = new string[4];

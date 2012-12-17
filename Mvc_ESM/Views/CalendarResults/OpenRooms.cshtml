@@ -10,13 +10,31 @@
 <table id="table">
     <thead>
         <tr>
-            <th>STT</th>
-            <th>Ngày thi</th>
-            <th>Giờ thi</th>
+            @*<th>STT</th>
+            <th>Ngày</th>
             <th>Mã phòng</th>
+            <th>Thứ 2</th>
+            <th>Thứ 3</th>
+            <th>Thứ 4</th>
+            <th>Thứ 5</th>
+            <th>Thứ 6</th>
+            <th>Thứ 7</th>*@
+            <th>STT</th>
+            <th>Ngay thi</th>
+            <th>Gio thi</th>
+            <th>Ma phong</th>
         </tr>
     </thead>
     <tbody>
+        @*<tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr>123456789012</tr>
+        <tr>123456789012</tr>
+        <tr>123456789012</tr>
+        <tr>123456789012</tr>
+        <tr>123456789012</tr>
+        <tr>123456789012</tr>*@
         @foreach (var m in Model)
         {
             <tr>
@@ -32,7 +50,7 @@
 <script type="text/javascript" charset="utf-8">
     var oTable = $('#table').dataTable({
         "aoColumnDefs": [
-            { "bSortable": false, "aTargets": [0] },
+            @*{ "bSortable": false, "aTargets": [0] },*@
             { "bSortable": false, "aTargets": [1] },
             { "bSortable": false, "aTargets": [2] },
             { "bSortable": false, "aTargets": [3] }

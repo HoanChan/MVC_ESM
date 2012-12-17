@@ -1,7 +1,7 @@
 ﻿@model Model.monhoc
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "môn học";
 }
 
 <h2>Sửa @ViewBag.Title</h2>
@@ -63,7 +63,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.BoMonQL, "bomon")
+            @Html.LabelFor(model => model.BoMonQL, "Bộ môn")
         </div>
         <div class="editor-field">
             @Html.DropDownList("BoMonQL", String.Empty)
