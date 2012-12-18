@@ -8,15 +8,12 @@ namespace Mvc_ESM
 {
     static class Program
     {
-        public static AlgorithmRunner AlgorithmRunner;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main(string[] args)
         {
-            AlgorithmRunner = new AlgorithmRunner();
-            AlgorithmRunner.Init();
             App myApp = new App();
             myApp.Run(args);
         }

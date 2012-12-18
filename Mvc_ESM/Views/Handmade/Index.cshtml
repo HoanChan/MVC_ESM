@@ -10,10 +10,10 @@
     <div id="steps">
         <form id="formElem" name="formElem" action="" method="post">
             <fieldset class="step">
-                <legend>Lựa chọn môn học</legend>
+                <legend>1. Lựa chọn môn học</legend>
                 <p>
                     <label for="SubjectID">Mã số môn học</label>
-                    <input id="SubjectID" placeholder="Nhập mã số môn học vào đây!"/>
+                    <input type="text" id="SubjectID" placeholder="Nhập mã số môn học vào đây!"/>
                 </p>
                 <p class="submit"> 
                     <button id="btnCheckSubject">Kiểm tra</button>
@@ -21,8 +21,8 @@
                 <div id ="SubjectInfo"></div>
             </fieldset>
             <fieldset class="step">
-                <legend>Lựa chọn nhóm</legend>
-                <table id="table">
+                <legend>2. Lựa chọn nhóm</legend>
+                <table id="tableGroup">
                     <thead>
                         <tr>
                             <th>Nhóm</th>
@@ -34,41 +34,59 @@
                 <div id="step2err"></div>
             </fieldset>
             <fieldset class="step">
-                <legend>Chọn ngày thi và ca thi</legend>
+                <legend>3. Chọn ngày thi và ca thi</legend>
                 <p>
                     <label for="datepicker">Ngày tổ chức thi</label>
                     <input type="text" id="datepicker" />
                 </p>
-                <button id="btnLoadTimes">OK</button>
-                <div id="Times"></div>
-                <button id="btnLoadRooms">OK</button>
+                <p class="submit">
+                    <button id="btnLoadTimes">Lấy danh sách ca thi</button>
+                </p>
+                <table id="tableTime">
+                    <thead>
+                        <tr>
+                            <th>Thời gian</th>
+                            <th>Chọn</th>
+                        </tr>
+                    </thead>
+                </table>
+                <p class="submit"> 
+                    <button id="btnLoadRooms">Lấy danh sách phòng</button>
+                </p>
+                <div id="step3err"></div>
             </fieldset>
             <fieldset class="step">
-                <legend>Chọn phòng thi</legend>
-                <p>
-                    <label for="newsletter">Newsletter</label>
-                    <select id="newsletter" name="newsletter">
-                        <option value="Daily" selected>Daily</option>
-                        <option value="Weekly">Weekly</option>
-                        <option value="Monthly">Monthly</option>
-                        <option value="Never">Never</option>
-                    </select>
+                <legend>4. Chọn phòng thi</legend>
+                <table id="tableRoom">
+                    <thead>
+                        <tr>
+                            <th>Tên phòng</th>
+                            <th>Sức chứa</th>
+                            <td>Chọn</td>
+                        </tr>
+                    </thead>
+                </table>
+                <p class="submit"> 
+                    <button id="btnRoomCalc">Lập danh sách phòng</button>
                 </p>
-                <p>
-                    <label for="updates">Updates</label>
-                    <select id="updates" name="updates">
-                        <option value="1" selected>Package 1</option>
-                        <option value="2">Package 2</option>
-                        <option value="0">Don't send updates</option>
-                    </select>
+                <div id="NumStudent"></div>
+                <table id="tableRoomNum">
+                    <thead>
+                        <tr>
+                            <th>Phòng</th>
+                            <th>Sức chứa</th>
+                            <th>SLSV</th>
+                        </tr>
+                    </thead>
+                </table>
+                <p class="submit"> 
+                    <button id="btnCheckRooms">Kiểm tra</button>
                 </p>
-				<p>
-                    <label for="tagname">Newsletter Tag</label>
-                    <input id="tagname" name="tagname" type="text" AUTOCOMPLETE=OFF />
-                </p>
+                <div id="RoomCheckStatus"></div>
+                <div id="step4err"></div>
             </fieldset>
 			<fieldset class="step">
-                <legend>Lưu</legend>
+                <legend>5. Lưu vào cơ sở dữ liệu</legend>
 				<p>
 					Tất cả các bước cần được hoàn thiện đề có thể thực hiện xếp lịch
 					(Nếu tất cả các bước đều có dấu kiểm màu xanh).
@@ -76,7 +94,7 @@
                     Nhấn nút bên dưới để thực hiện lưu vào cơ sở dữ liệu.
 				</p>
                 <p class="submit">
-                    <button id="registerButton" type="submit">Lưu vào CSDL</button>
+                    <button id="btnSave">Lưu vào CSDL</button>
                 </p>
             </fieldset>
         </form>
@@ -96,7 +114,7 @@
                 <a href="#">Phòng thi</a>
             </li>
 			<li>
-                <a href="#">Lưu</a>
+                <a href="#">Lưu CSDL</a>
             </li>
         </ul>
     </div>
@@ -114,7 +132,25 @@
         changeYear: true
     }).datespinner();
 
-    oTable = $('#table').dataTable({
+    oTableGroup = $('#tableGroup').dataTable({
+        "bLengthChange": false,
+        "bFilter": false,
+        @Html.Partial("_DataTable")
+    });
+
+    oTableTime = $('#tableTime').dataTable({
+        "bLengthChange": false,
+        "bFilter": false,
+        @Html.Partial("_DataTable")
+    });
+
+    oTableRoom = $('#tableRoom').dataTable({
+        "bFilter": false,
+        @Html.Partial("_DataTable")
+        iDisplayLength: 10,
+    });
+
+    oTableRoomNum = $('#tableRoomNum').dataTable({
         "bLengthChange": false,
         "bFilter": false,
         @Html.Partial("_DataTable")
@@ -128,6 +164,7 @@
         }
         $.getJSON("/Services/LoadGroupsBySubjectID", { SubjectID: suID },
             function (Data) {
+                oTableGroup.fnClearTable(true);
                 if (Data.MSMH == "false") {
                     alert("Không tìm thấy môn học có mã số: " + suID);
                     return false;
@@ -135,10 +172,118 @@
                 $("#SubjectInfo").html("<p>Tên môn học: " + Data.TenMH + "</p><p>Thuộc bộ môn: " + Data.TenBM + "</p><p>Thuộc Khoa: " + Data.TenKhoa + "</p>");
                 $.each(Data.Groups, function (index, itemData) {
                     var Class = '<span id="Class">' + itemData.Nhom + '</span>';
-                    var CheckBox = '<input type="checkbox" id="Check" checked />';
-                    oTable.fnAddData([Class, itemData.SoLuongDK, CheckBox]);
+                    var Num = '<span id="ClassNum">' + itemData.SoLuongDK + '</span>';
+                    var CheckBox = '<input type="checkbox" id="ClassCheck" checked />';
+                    oTableGroup.fnAddData([Class, Num, CheckBox]);
                 });
             });
+        return false;
+    });
+
+    $("#btnLoadTimes").click(function () {
+        var date = $('#datepicker').datespinner("value") + 25200000; // bù 7h
+        $.getJSON("/Services/LoadTimesByDate", { DateMilisecond: date },
+            function (Data) {
+                oTableTime.fnClearTable(true);
+                if (Data.Ok == "false") {
+                    alert("Không tìm thấy ca thi nào còn trống!");
+                    return false;
+                }
+                $.each(Data.Times, function (index, itemData) {
+                    var Time = '<span id="Time">' + itemData + '</span>';
+                    var CheckBox = '<input type="radio" id="TimeCheck" name="TimeCheck" ' + (index == 0 ? "checked" : "") + ' />';
+                    oTableTime.fnAddData([Time, CheckBox]);
+                });
+            });
+        return false;
+    });
+
+    $("#btnLoadRooms").click(function () {
+        var date = $('#datepicker').datespinner("value") + 25200000; // bù 7h
+        $.getJSON("/Services/LoadRoomsByDate", { DateMilisecond: date },
+            function (Data) {
+                oTableRoom.fnClearTable(true);
+                if (Data.Ok == "false") {
+                    alert("Không tìm thấy phòng nào!");
+                    return false;
+                }
+                $.each(Data.Rooms, function (index, itemData) {
+                    var Room = '<span id="Room">' + itemData.RoomID + '</span>';
+                    var Container = '<span id="RoomContainer">' + itemData.Container + '</span>';
+                    var CheckBox = '<input type="checkbox" id="RoomCheck" />';
+                    oTableRoom.fnAddData([Room, Container, CheckBox]);
+                });
+            });
+        return false;
+    });
+
+    $("#btnRoomCalc").click(function () {
+        var NumStudent = 0;
+        oTableGroup.$("#ClassNum").each(function (index, itemData) {
+            if($(itemData).parent().parent().find("#ClassCheck:checked").length == 1)
+                NumStudent += parseInt($(itemData).html());
+        });
+        $("#NumStudent").html('<p id="pNumStudent" value="' + NumStudent + '">Số lượng sinh viên: ' + NumStudent + '</p>');
+        oTableRoomNum.fnClearTable(true);
+        oTableRoom.$("#Room").each(function (index, itemData) {
+            if($(itemData).parent().parent().find("#RoomCheck:checked").length == 1)
+            {
+                var RoomNum = '<span id="RoomNum">' + $(itemData).html() + '</span>';
+                var Container = $(itemData).parent().parent().find("#RoomContainer").html();
+                var TextBox = '<input type="text" id="RoomNumText" placeholder="?" size="3"/>';
+                oTableRoomNum.fnAddData([RoomNum, Container, TextBox]);
+            }
+        });
+        return false;
+    });
+
+    $("#btnCheckRooms").click(function () {
+        var num = 0;
+        oTableRoomNum.$("#RoomNumText").each(function(index, itemData) {
+            num += parseInt($(itemData).val());
+        });
+        var numStudent = parseInt($("#pNumStudent").attr("value"));
+        if(num != numStudent)
+        {
+            if(num < numStudent)
+            {
+                alert("Phân sinh viên vào phòng thiếu " + (numStudent - num) + " sinh viên!");
+            }
+            else
+            {
+                alert("Phân sinh viên vào phòng bị dư " + (num - numStudent) + " sinh viên!");
+            }
+        }
+        else
+        {
+            $("#RoomCheckStatus").html("<p>Kiểm tra thành công</p>");
+        }
+        return false;
+    });
+
+    $('#btnSave').click(function () {
+        if ($('#formElem').data('errors'))
+        {
+            alert('Cần hoàn thiện tất cả các bước để có thể lưu!');
+        }
+        else
+        {
+            var MSMH = $('#SubjectID').val();
+            var Class = new Array();
+            oTableGroup.$("#Class").each(function (index, itemData) {
+                if ($(itemData).parent().parent().find("#ClassCheck:checked").length == 1)
+                    Class.push($(itemData).html());
+            });            
+            var Time = oTableTime.$("#TimeCheck:checked").parent().parent().find("#Time").html();
+            var Room = new Array();
+            var Num = new Array();
+            oTableRoomNum.$("#RoomNum").each(function (index, itemData) {
+                Room.push($(itemData).html());
+                Num.push($(itemData).parent().parent().find("#RoomNumText").val());
+            });
+            $.post("/Handmade/SelectSuccess", $.param({ MSMH: MSMH, Class: Class, Time: Time, Room: Room, Num: Num }, true));
+            alert("Đã lưu xong");
+        }
         return false;
     });
 
@@ -168,6 +313,38 @@
                 }
                 else
                     $("#step2err").html("");
+                break;
+            case 3:
+                if(oTableTime.$("#Time").length == 0)
+                {
+                    $("#step3err").html("<p>Chưa lấy danh sách ca thi!</p>");
+                    hasError = true;
+                }
+                else if(oTableRoom.$("#Room").length == 0)
+                {
+                    $("#step3err").html("<p>Chưa lấy danh sách phòng thi!</p>");
+                    hasError = true;
+                }
+                else 
+                {
+                    $("#step3err").html("");
+                }
+                break;
+            case 4:
+                if($("#NumStudent").html().length == 0)
+                {
+                    $("#step4err").html("<p>Cần lập danh sách phòng!</p>");
+                    hasError = true;
+                }
+                else if($("#RoomCheckStatus").html().length == 0)
+                {
+                    $("#step4err").html("<p>Số lượng sinh viên được gán phải đúng!</p>");
+                    hasError = true;
+                }
+                else
+                {
+                    $("#step4err").html("");
+                }
                 break;
             default:
         }

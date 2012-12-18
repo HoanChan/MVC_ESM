@@ -11,6 +11,7 @@ namespace Mvc_ESM.Static_Helper
 {
     public class OutputHelper
     {
+        public static String WinAppExe = Path.Combine(System.Web.HttpContext.Current.Server.MapPath(@"~/Win_App"), "Mvc_ESM.exe");
         public static String RealPath(String Name)
         {
             return Path.Combine(System.Web.HttpContext.Current.Server.MapPath(@"~/Win_App"), Name + ".jso");

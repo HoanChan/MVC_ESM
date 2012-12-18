@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnRunColoring = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -53,11 +54,17 @@
             this.ProgressUpdater = new System.Windows.Forms.Timer(this.components);
             this.txtArgs = new System.Windows.Forms.TextBox();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btnRunHandmade = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.progressBar5 = new System.Windows.Forms.ProgressBar();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -269,7 +276,7 @@
             // 
             // txtArgs
             // 
-            this.txtArgs.Location = new System.Drawing.Point(12, 270);
+            this.txtArgs.Location = new System.Drawing.Point(15, 306);
             this.txtArgs.Multiline = true;
             this.txtArgs.Name = "txtArgs";
             this.txtArgs.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -278,7 +285,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(441, 188);
+            this.btnDelete.Location = new System.Drawing.Point(248, 270);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(126, 23);
             this.btnDelete.TabIndex = 6;
@@ -286,11 +293,57 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.btnRunHandmade);
+            this.groupBox6.Controls.Add(this.label5);
+            this.groupBox6.Controls.Add(this.progressBar5);
+            this.groupBox6.Location = new System.Drawing.Point(414, 141);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(192, 123);
+            this.groupBox6.TabIndex = 7;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Handmade";
+            // 
+            // btnRunHandmade
+            // 
+            this.btnRunHandmade.Location = new System.Drawing.Point(59, 76);
+            this.btnRunHandmade.Name = "btnRunHandmade";
+            this.btnRunHandmade.Size = new System.Drawing.Size(75, 23);
+            this.btnRunHandmade.TabIndex = 2;
+            this.btnRunHandmade.Text = "Run";
+            this.btnRunHandmade.UseVisualStyleBackColor = true;
+            this.btnRunHandmade.Click += new System.EventHandler(this.btnRunHandmade_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 31);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "label5";
+            // 
+            // progressBar5
+            // 
+            this.progressBar5.Location = new System.Drawing.Point(6, 47);
+            this.progressBar5.Name = "progressBar5";
+            this.progressBar5.Size = new System.Drawing.Size(180, 23);
+            this.progressBar5.TabIndex = 0;
+            // 
+            // notifyIcon
+            // 
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "Mvc_ESM Server Win App";
+            this.notifyIcon.Visible = true;
+            this.notifyIcon.DoubleClick += new System.EventHandler(this.notifyIcon_DoubleClick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(609, 419);
+            this.ClientSize = new System.Drawing.Size(609, 455);
+            this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.txtArgs);
             this.Controls.Add(this.groupBox5);
@@ -299,8 +352,11 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "MainForm";
+            this.ShowInTaskbar = false;
             this.Text = "Progress";
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -311,6 +367,8 @@
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -342,6 +400,11 @@
         private System.Windows.Forms.Button btnCreateAdjacencyMatrix_Stop;
         private System.Windows.Forms.TextBox txtArgs;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Button btnRunHandmade;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ProgressBar progressBar5;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
     }
 }
 

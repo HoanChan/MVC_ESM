@@ -134,10 +134,10 @@ $(function() {
 	/*
 	if there are errors don't allow the user to submit
 	*/
-	$('#registerButton').bind('click',function(){
-		if($('#formElem').data('errors')){
-			alert('Please correct the errors in the Form');
-			return false;
-		}	
-	});
+	//$('#registerButton').bind('click',function(){
+	//	if($('#formElem').data('errors')){
+	//		alert('Please correct the errors in the Form');
+	//		return false;
+	//	}	
+	//});
 });

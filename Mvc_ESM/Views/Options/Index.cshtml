@@ -3,25 +3,35 @@
 }
 
 <h2>@ViewBag.Title</h2>
+<style>
+    label {
+        width: 120px;
+        float: left;
+        text-align: right;
+        margin-right: 15px;
+    }
+</style>
 <form id="InputFrom">
-    <table>
-        <tr>
-            <td style="text-align:right;">Ngày bắt đầu:</td>
-            <td><input type="text" id="DateStart" title="Ngày dự kiến bắt đầu kỳ thi" style="position: relative; z-index: 200;"/></td>
-        </tr>
-        <tr>
-            <td style="text-align:right;">Số ngày:</td>
-            <td><input type="text" id="NumDate" title="Số ngày dự kiến sẽ tổ chức thi"/></td>
-        </tr>
-        <tr>
-            <td style="text-align:right;">Khoảng cách:</td>
-            <td><input type="text" id="DateMin" readonly="true" title="Khoảng cách giữa 2 môn thi liên tiếp của 1 thí sinh, đơn vị tính là ca"/></td>
-        </tr>
-    </table>
-    <p>Thiết lập ca thi của 1 ngày:</p>
-    <p>Thời gian 1 ca <input type="text" id="StepTime" readonly="true" title="Thời gian tổ chức 1 ca thi, đơn vị tính là phút"/></p>
     <p>
-        Thêm ca thi: <input type="text" id="tBGTime" name="value" title="Thời gian bắt đầu"/>
+        <label for="DateStart">Ngày bắt đầu:</label>
+        <input type="text" id="DateStart" value="@(Mvc_ESM.Static_Helper.InputHelper.Options.StartDate.AddYears(-1969).AddDays(1).Ticks/10000)" title="Ngày dự kiến bắt đầu kỳ thi" style="position: relative; z-index: 200;"/>
+    </p>
+    <p>
+        <label for="NumDate">Số ngày:</label>
+        <input type="text" id="NumDate" value="@Mvc_ESM.Static_Helper.InputHelper.Options.NumDate" title="Số ngày dự kiến sẽ tổ chức thi"/>
+    </p>
+    <p>
+        <label for="DateMin">Khoảng cách:</label>
+        <input type="text" id="DateMin" value="@Mvc_ESM.Static_Helper.InputHelper.Options.DateMin" readonly="true" title="Khoảng cách giữa 2 môn thi liên tiếp của 1 thí sinh, đơn vị tính là ca"/>
+    </p>
+    <p>Thiết lập ca thi của 1 ngày:</p>
+    <p>
+        <label for="StepTime">Thời gian 1 ca:</label>
+        <input type="text" id="StepTime" value="@Mvc_ESM.Static_Helper.InputHelper.Options.StepTime" readonly="true" title="Thời gian tổ chức 1 ca thi, đơn vị tính là phút"/>
+    </p>
+    <p>
+        <label for="tBGTime">Thêm ca thi:</label>
+        <input type="text" id="tBGTime" name="value" title="Thời gian bắt đầu"/>
         <button id="Addbtn" title="Thêm vào danh sách">Thêm</button>
     </p>
     <div style="width:800px; margin:auto;">
@@ -32,7 +42,7 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>            
+            <tbody>
             </tbody>
         </table>
     </div>
@@ -113,9 +123,16 @@
             }
         }).parent().parent().attr('align', 'center');
     });
-
+    $(document).ready(function () {
+        @for(int i = 0; i < @Mvc_ESM.Static_Helper.InputHelper.Options.Times.Count; i++)
+        {
+            <text>
+                oTable.fnAddData(['<span id="BGTime" postvalue="@(Mvc_ESM.Static_Helper.InputHelper.Options.Times[i].AddYears(-1969).AddDays(1).Ticks/10000)">@Mvc_ESM.Static_Helper.InputHelper.Options.Times[i].ToString("HH:mm")</span>', "Xoá"]);
+            </text>
+        }
+    });
     $("#SaveBtn").button().click(function () {
-        var sData = "DateStart=" + $("#DateStart").datespinner("value")
+        var sData = "DateStart=" + (parseInt($("#DateStart").datespinner("value")) + 25200000) // bù 7h
                     + "&NumDate=" + $("#NumDate").spinner("value")
                     + "&DateMin=" + $("#DateMin").spinner("value")
                     + "&StepTime=" + $("#StepTime").spinner("value");

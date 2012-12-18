@@ -14,21 +14,24 @@ namespace Mvc_ESM.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.BeginDay = InputHelper.Options.StartDate;
-            ViewBag.NumDay = InputHelper.Options.NumDate;
-            ViewBag.NumShift = InputHelper.Options.Times.Count();
             return View();
         }
 
         [HttpPost]
         public ActionResult SelectSuccess(List<String> Shift)
         {
-            var IsBusyShifts = new List<bool>();
+            InputHelper.BusyShifts = new List<Shift>();
+            
             for (int i = 0; i < Shift.Count; i++)
             {
-                IsBusyShifts.Add(Shift[i] == "checked");
+                int days = i / InputHelper.Options.Times.Count;
+                int time = i % InputHelper.Options.Times.Count;
+                DateTime ShiftTime = InputHelper.Options.StartDate.AddDays(days)
+                                                                  .AddHours(InputHelper.Options.Times[time].Hour)
+                                                                  .AddMinutes(InputHelper.Options.Times[time].Minute);
+                InputHelper.BusyShifts.Add(new Shift() { IsBusy = Shift[i] == "checked", Time = ShiftTime });
             }
-            OutputHelper.SaveOBJ("BusyShifts", IsBusyShifts);
+            OutputHelper.SaveOBJ("BusyShift", InputHelper.BusyShifts);
             return Content("OK");
 
         }

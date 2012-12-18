@@ -6,24 +6,26 @@
 <table>
     <thead>
         <tr>
+            <th>STT</th>
             <th>Thứ</th>
             <th>Ngày</th>
-            @for (int i = 0; i < ViewBag.NumShift; i++) 
+            @for (int i = 0; i < Mvc_ESM.Static_Helper.InputHelper.Options.Times.Count; i++) 
             { 
-                <th>Ca thi thứ @(i+1)</th>
+                <th>Ca @(i+1)</th>
             }            
         </tr>
     </thead>
     <tbody>
-        @for (int i = 0; i < ViewBag.NumDay; i++)
+        @for (int i = 0; i < Mvc_ESM.Static_Helper.InputHelper.Options.NumDate; i++)
         {
             <tr>
-                <td>@Mvc_ESM.Static_Helper.OutputHelper.DayOffWeekVN(ViewBag.BeginDay.AddDays(i))</td>
-                <td>@ViewBag.BeginDay.AddDays(i).ToShortDateString()</td> 
-                @for (int j = 0; j < ViewBag.NumShift; j++)
+                <td>@(i+1)</td>
+                <td>@Mvc_ESM.Static_Helper.OutputHelper.DayOffWeekVN(Mvc_ESM.Static_Helper.InputHelper.Options.StartDate.AddDays(i))</td>
+                <td>@Mvc_ESM.Static_Helper.InputHelper.Options.StartDate.AddDays(i).ToShortDateString()</td> 
+                @for (int j = 0; j < Mvc_ESM.Static_Helper.InputHelper.Options.Times.Count; j++)
                 {
                     <td>
-                        <input type="checkbox" id="Check" @(Mvc_ESM.Static_Helper.OutputHelper.DayOffWeekVN(ViewBag.BeginDay.AddDays(i)) == "Chủ Nhật" ?"checked":"") title="Ca Thi thứ @(j + 1)" />
+                        <input type="checkbox" id="Check" @(Mvc_ESM.Static_Helper.InputHelper.BusyShift[i * Mvc_ESM.Static_Helper.InputHelper.Options.Times.Count + j].IsBusy ?"checked":"") title="Ca Thi thứ @(j + 1)" />
                     </td>
                 }
             </tr>

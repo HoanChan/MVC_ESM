@@ -10,6 +10,49 @@ namespace Mvc_ESM.Controllers
     public class ServicesController : Controller
     {
         [HttpGet]
+        public JsonResult LoadRoomsByDate(long DateMilisecond)
+        {
+            DateTime realDate = (new DateTime(1970, 1, 1, 0, 0, 0, 0)).AddMilliseconds(DateMilisecond);
+            var aData = (from m in InputHelper.BusyRooms
+                         where m.Time.Date == realDate.Date
+                         select m.Rooms
+                        ).ToList();
+            if (aData.Count() > 0)
+            {
+                return Json(new
+                {
+                    Ok = "true",
+                    Rooms = aData[0]
+                }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { Ok = "false" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpGet]
+        public JsonResult LoadTimesByDate(long DateMilisecond)
+        {
+            DateTime realDate = (new DateTime(1970, 1, 1, 0, 0, 0, 0)).AddMilliseconds(DateMilisecond);
+            var aData = (from m in InputHelper.BusyShifts
+                         where !m.IsBusy && m.Time.Date == realDate.Date
+                         select m.Time.ToString("dd/MM/yyy HH:mm")
+                        ).ToList();
+            if (aData.Count() > 0)
+            {
+                return Json(new
+                {
+                    Ok = "true",
+                    Times = aData
+                }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { Ok = "false" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpGet]
         public JsonResult LoadGroupsBySubjectID(string SubjectID)
         {
             var Groups = (from m in Data.Groups.Values

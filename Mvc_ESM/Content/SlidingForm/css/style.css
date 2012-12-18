@@ -169,7 +169,7 @@ span.error{
     border-radius: 3px;
     outline: none;
     padding: 5px;
-    width: 200px;
+    /*width: 200px;*/
     float:left;
 }
 #steps form input:focus{

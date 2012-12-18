@@ -11,10 +11,24 @@ namespace Mvc_ESM.Static_Helper
         public int Group { get; set; }
     }
 
+
     public class Room
     {
         public String RoomID { get; set; }
         public int Container { get; set; }
+        public Boolean IsBusy { get; set; }
+    }
+
+    public class RoomList
+    {
+        public DateTime Time { get; set; }
+        public List<Room> Rooms { get; set; }
+    }
+
+    public class Shift
+    {
+        public DateTime Time { get; set; }
+        public Boolean IsBusy { get; set; }
     }
 
     public class Options
@@ -22,7 +36,7 @@ namespace Mvc_ESM.Static_Helper
         public DateTime StartDate { get; set; }
         public int NumDate { get; set; }
         public int DateMin { get; set; }
-        public int StepTime { get; set; }
+        public int ShiftTime { get; set; }
         public List<DateTime> Times { get; set; }
     }
 

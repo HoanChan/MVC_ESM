@@ -60,6 +60,7 @@
     <Compile Include="AlgorithmRunner.cs" />
     <Compile Include="CreateAdjacencyMatrix.cs" />
     <Compile Include="GraphColoringAlgorithm.cs" />
+    <Compile Include="Handmade.cs" />
     <Compile Include="InputHelper.cs" />
     <Compile Include="MakeTime.cs" />
     <Compile Include="Program.cs" />

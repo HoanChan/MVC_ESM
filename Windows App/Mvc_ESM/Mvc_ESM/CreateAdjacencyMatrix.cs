@@ -60,7 +60,7 @@ namespace Mvc_ESM.Static_Helper
                             new SqlParameter("@S1ID", SqlDbType.NVarChar) { Value = Subject1ID },
                             new SqlParameter("@S2ID", SqlDbType.NVarChar) { Value = Subject2ID }
                         };
-            IEnumerable<String> Result = db.Database.SqlQuery<String>("select s1.MaSinhVien from pdkmh as s1 "
+            int Result = db.Database.SqlQuery<int>("select count(s1.MaSinhVien) from pdkmh as s1 "
                                                                     + "where s1.MaSinhVien in (select s2.MaSinhVien from pdkmh as s2 "
                                                                                              + "where s2.MaMonHoc = @S2ID "
                                                                                              + (StudentsList2.Length > 0 ? "and not(s2.MaSinhVien in (" + StudentsList2 + "))" : "")
@@ -68,8 +68,8 @@ namespace Mvc_ESM.Static_Helper
                                                                                              + ") "
                                                                     + (StudentsList1.Length > 0 ? "and not(s1.MaSinhVien in (" + StudentsList1 + "))" : "")
                                                                     + "and s1.MaMonHoc = @S1ID "
-                                                                    + "and s1.Nhom in(" + Group1 + ")", pa);
-            return Result.Count() > 0 ? 1 : 0;
+                                                                    + "and s1.Nhom in(" + Group1 + ")", pa).ElementAt(0);
+            return Result == 0 ? 0 : 1;
         }
 
         public static void Run()
@@ -88,22 +88,42 @@ namespace Mvc_ESM.Static_Helper
             {
                 for (j = i + 1; j < AdjacencyMatrixSize; j++)
                 {
-                    ProgressHelper.CreateMatrixInfo = 1 + i + "/" + 1 + j;
-                    ProgressHelper.pbCreateMatrix = 100 * (i * AdjacencyMatrixSize + j - i) / (AdjacencyMatrixSize * AdjacencyMatrixSize);
+                    ProgressHelper.CreateMatrixInfo = (1 + i) + "/" + (1 + j);
+                    ProgressHelper.pbCreateMatrix = 100 * (i * AdjacencyMatrixSize + j) / (AdjacencyMatrixSize * AdjacencyMatrixSize);
                     AdjacencyMatrix[i, j] = AdjacencyMatrix[j, i] = CheckGroups(AlgorithmRunner.Groups[i], AlgorithmRunner.Groups[j]);
                 }
                 if (Stop)
                 {
-                    AlgorithmRunner.WriteJson("AdjacencyMatrix", AdjacencyMatrix);
-                    AlgorithmRunner.WriteJson("BeginI", i + 1);
+                    //AlgorithmRunner.SaveOBJ("AdjacencyMatrix", AdjacencyMatrix);
+                    WriteAdjacencyMatrix(AdjacencyMatrix, AlgorithmRunner.RealPath("AdjacencyMatrix"));
+                    AlgorithmRunner.SaveOBJ("BeginI", i + 1);
                     Stoped = true;
                     return;
                 }
             }
             ProgressHelper.CreateMatrixInfo = AdjacencyMatrixSize + "/" + AdjacencyMatrixSize;
             ProgressHelper.pbCreateMatrix = 100;
-            AlgorithmRunner.WriteJson("AdjacencyMatrix", AdjacencyMatrix);
-            AlgorithmRunner.WriteJson("BeginI", 0);
+            //AlgorithmRunner.SaveOBJ("AdjacencyMatrix", AdjacencyMatrix);
+            WriteAdjacencyMatrix(AdjacencyMatrix, AlgorithmRunner.RealPath("AdjacencyMatrix"));
+            AlgorithmRunner.SaveOBJ("BeginI", 0);
+        }
+        private static void WriteAdjacencyMatrix(int[,] Matrix, string DataFilePath)
+        {
+            StreamWriter file = new System.IO.StreamWriter(DataFilePath);
+            for (int i = 0; i <= Matrix.GetUpperBound(0); i++)
+            {
+                string Text = "";
+                for (int j = 0; j <= Matrix.GetUpperBound(1); j++)
+                {
+                    Text += Matrix[i, j].ToString();
+                    if (j != Matrix.GetUpperBound(1))
+                        Text += " ";
+                }
+                file.WriteLine(Text);
+            }
+            Matrix = null;
+            file.Close();
+            file.Dispose();
         }
     }
 }

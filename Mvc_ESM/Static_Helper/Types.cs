@@ -16,6 +16,13 @@ namespace Mvc_ESM.Static_Helper
     {
         public String RoomID { get; set; }
         public int Container { get; set; }
+        public Boolean IsBusy { get; set; }
+    }
+    
+    public class RoomList
+    {
+        public DateTime Time { get; set; }
+        public List<Room> Rooms { get; set; }
     }
 
     public class Shift

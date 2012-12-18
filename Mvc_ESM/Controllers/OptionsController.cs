@@ -21,7 +21,7 @@ namespace Mvc_ESM.Controllers
         public String SelectSuccess(List<long> BGTime, int DateMin, long DateStart, int NumDate, int StepTime)
         {
             //DateStart được tính bằng mili giây
-            InputHelper.Options.StartDate = (new DateTime(1970, 1, 1, 0, 0, 0, 0)).AddMilliseconds(DateStart - DateStart % 86400000).AddDays(1);
+            InputHelper.Options.StartDate = (new DateTime(1970, 1, 1, 0, 0, 0, 0)).AddMilliseconds(DateStart).Date;
             InputHelper.Options.NumDate = NumDate;
             InputHelper.Options.DateMin = DateMin;
             InputHelper.Options.StepTime = StepTime;

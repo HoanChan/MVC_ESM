@@ -6,39 +6,48 @@ using System.Data.Common;
 using System.Data.Objects;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Mvc_ESM.Static_Helper
 {
     class SaveToDatabase
-    {   
+    {
+        private static DKMHEntities db = new DKMHEntities();
         public static void Run()
         {
-            //DeleteOld();
+            DeleteOld();
             Save();
+        }
+
+        public static void DeleteOld()
+        {
+            db.Database.ExecuteSqlCommand("DELETE FROM Thi");
+            db.Database.ExecuteSqlCommand("DELETE FROM CaThi");
+            var DbName = Regex.Match(db.Database.Connection.ConnectionString, "initial\\scatalog=([^;]+)").Groups[1].Value;
+            db.Database.ExecuteSqlCommand("DBCC SHRINKFILE (" + DbName + ", 1) ");
+            db.Database.ExecuteSqlCommand("DBCC SHRINKFILE (" + DbName + "_log, 1) ");
         }
         private static void Save()
         {
-            DKMHEntities db = new DKMHEntities();
             for (int GroupIndex = 0; GroupIndex < AlgorithmRunner.Groups.Count; GroupIndex++)
             {
                 Thi aRecord = new Thi();
                 aRecord.MaMonHoc = AlgorithmRunner.GetSubjectID(AlgorithmRunner.Groups[GroupIndex]);
                 aRecord.Nhom = AlgorithmRunner.GetClassList(AlgorithmRunner.Groups[GroupIndex]);
-                DateTime FirstStepTime = InputHelper.Options.StartDate.AddHours(InputHelper.Options.Times[0].Hour)
+                DateTime FirstShiftTime = InputHelper.Options.StartDate.AddHours(InputHelper.Options.Times[0].Hour)
                                                                       .AddMinutes(InputHelper.Options.Times[0].Minute);
-                String StepID = InputHelper.Options.StartDate.Year + "" + InputHelper.Options.StartDate.Month + "" + InputHelper.Options.StartDate.Day;
-                StepID += MakeTime.CalcStep(FirstStepTime, AlgorithmRunner.GroupsTime[GroupIndex]).ToString();
-                if ((from ct in db.CaThis where ct.MaCa == StepID select ct).Count() == 0)
+                String ShiftID = "";// InputHelper.Options.StartDate.Year + "" + InputHelper.Options.StartDate.Month + "" + InputHelper.Options.StartDate.Day;
+                ShiftID += MakeTime.CalcShift(FirstShiftTime, AlgorithmRunner.GroupsTime[GroupIndex]).ToString();
+                if ((from ct in db.CaThis where ct.MaCa == ShiftID select ct).Count() == 0)
                 {
                     var pa = new SqlParameter[] 
                         { 
-                            new SqlParameter("@MaCa", SqlDbType.NVarChar) { Value = StepID },
+                            new SqlParameter("@MaCa", SqlDbType.NVarChar) { Value = ShiftID },
                             new SqlParameter("@GioThi", SqlDbType.DateTime) { Value = AlgorithmRunner.GroupsTime[GroupIndex] },
                         };
                     db.Database.ExecuteSqlCommand("INSERT INTO CaThi (MaCa, GioThi) VALUES (@MaCa, @GioThi)", pa);
                 }
-                aRecord.MaCa = StepID;
-                List<SqlParameter> Param = new List<SqlParameter>();
+                aRecord.MaCa = ShiftID;
                 String SQLQuery = "";
                 for (int RoomIndex = 0; RoomIndex < AlgorithmRunner.GroupsRoom[GroupIndex].Count; RoomIndex++)
                 {

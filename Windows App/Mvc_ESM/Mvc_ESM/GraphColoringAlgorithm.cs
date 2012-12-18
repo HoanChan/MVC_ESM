@@ -168,7 +168,7 @@ namespace Mvc_ESM.Static_Helper
                 }
             }
             //AlgorithmRunner.ColorNumber = ColorNumber;
-            AlgorithmRunner.WriteJson("ColorNumber", ColorNumber + 1);
+            AlgorithmRunner.SaveOBJ("ColorNumber", ColorNumber + 1);
         }
 
         public static void Run()
@@ -178,7 +178,7 @@ namespace Mvc_ESM.Static_Helper
             Init();
             Coloring();
             //AlgorithmRunner.Colors = color;
-            AlgorithmRunner.WriteJson("Colors", color);
+            AlgorithmRunner.SaveOBJ("Colors", color);
             
         }
     }
