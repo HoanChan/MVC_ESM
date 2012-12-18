@@ -152,10 +152,56 @@ namespace Mvc_ESM.Controllers
                         where t.MaMonHoc == r.MaMonHoc && t.MaPhong == r.MaPhong && t.Nhom == r.Nhom
                         select t.MaSinhVien).Count() + "";
                 s[5] = r.GioThi.Date.ToShortDateString();
-                s[6] = r.GioThi.TimeOfDay.Hours + "h" + r.GioThi.TimeOfDay.Minutes;
+                // s[6] = r.GioThi.TimeOfDay.Hours + "h" + r.GioThi.TimeOfDay.Minutes;
+                s[6] = r.GioThi.ToString("HH:mm");
                 Result.Add(s);
             }
             return View(Result);
+        }
+
+        static string Thu2, Thu3, Thu4, Thu5, Thu6, Thu7;
+
+        static void Init()
+        {
+            Thu2 = "ooooooooooo";
+            Thu3 = "ooooooooooo";
+            Thu4 = "ooooooooooo";
+            Thu5 = "ooooooooooo";
+            Thu6 = "ooooooooooo";
+            Thu7 = "ooooooooooo";
+        }
+
+        static String Check(DateTime time)
+        {
+            String s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11;
+            s1 = s2 = s3 = s4 = s5 = s6 = s7 = s8 = s9 = s10 = s11 = "o";
+            if (time.Hour >= 7 && time.Hour <= 9)
+            {
+                s1 = "x";
+                s2 = "x";
+                s3 = "x";
+            }
+            else
+                if (time.Hour > 9 && time.Hour < 12)
+                {
+                    s4 = "x";
+                    s5 = "x";
+                    s6 = "x";
+                }
+                else
+                    if (time.Hour > 12 && time.Hour <= 15)
+                    {
+                        s7 = "x";
+                        s8 = "x";
+                        s9 = "x";
+                    }
+                    else
+                    {
+                        s10 = "x";
+                        s11 = "x";
+                    }
+
+            return s1 + s2 + s3 + s4 + s5 + s6 + s7 + s8 + s9 + s10 + s11;
         }
 
         public ActionResult OpenRooms()
@@ -165,17 +211,70 @@ namespace Mvc_ESM.Controllers
                          {
                              r.MaPhong,
                              r.CaThi.GioThi
-                         });
+                         }).ToList();
+
             List<string[]> Result = new List<string[]>();
             int stt = 0;
-            foreach (var r in rooms)
+            DateTime StartWeek, EndWeek;
+            EndWeek = new DateTime(2012, 1, 1);
+            for (int k = 0; k < (Static_Helper.InputHelper.Options.NumDate / 7); k++)
             {
-                string[] s = new string[4];
-                s[0] = ++stt + "";
-                s[1] = r.GioThi.Date.ToShortDateString();
-                s[2] = r.GioThi.TimeOfDay.Hours + "h" + r.GioThi.TimeOfDay.Minutes;
-                s[3] = r.MaPhong;
-                Result.Add(s);
+                if (stt == 0)
+                    StartWeek = Static_Helper.InputHelper.Options.StartDate;
+                else
+                    StartWeek = EndWeek.AddDays(2);
+                EndWeek = StartWeek.AddDays((Static_Helper.OutputHelper.DayOffWeekVN(StartWeek) == "Thứ Hai") ? 5 : (Static_Helper.OutputHelper.DayOffWeekVN(StartWeek) == "Thứ Ba") ? 4 : (Static_Helper.OutputHelper.DayOffWeekVN(StartWeek) == "Thứ Tư") ? 3 : (Static_Helper.OutputHelper.DayOffWeekVN(StartWeek) == "Thứ Năm") ? 2 : (Static_Helper.OutputHelper.DayOffWeekVN(StartWeek) == "Thứ Sáu") ? 1 : 0);
+
+                //lọc theo tuần
+                var w1 = (from w in rooms
+                          where w.GioThi.Date >= StartWeek && w.GioThi.Date <= EndWeek
+                          select w).ToList();
+                List<string> deny = new List<string>();
+                foreach (var r1 in w1)
+                    if (!deny.Contains(r1.MaPhong))
+                    {
+                        deny.Add(r1.MaPhong);
+                        Init();
+                        string[] s = new string[10];
+                        s[0] = ++stt + "";
+                        s[1] = StartWeek.ToString("dd/MM/yy") + "-" + EndWeek.ToString("dd/MM/yy");
+                        s[2] = r1.MaPhong;
+
+                        foreach (var r2 in w1)
+                            if (r2.MaPhong == r1.MaPhong)
+                            {
+                                DateTime time = r2.GioThi;
+                                switch (Static_Helper.OutputHelper.DayOffWeekVN(time.Date))
+                                {
+                                    case "Thứ Hai":
+                                        Thu2 = Check(time);
+                                        break;
+                                    case "Thứ Ba":
+                                        Thu3 = Check(time);
+                                        break;
+                                    case "Thứ Tư":
+                                        Thu4 = Check(time);
+                                        break;
+                                    case "Thứ Năm":
+                                        Thu5 = Check(time);
+                                        break;
+                                    case "Thứ Sáu":
+                                        Thu6 = Check(time);
+                                        break;
+                                    case "Thứ Bảy":
+                                        Thu7 = Check(time);
+                                        break;
+                                }
+                            }
+                        s[3] = Thu2;
+                        s[4] = Thu3;
+                        s[5] = Thu4;
+                        s[6] = Thu5;
+                        s[7] = Thu6;
+                        s[8] = Thu7;
+
+                        Result.Add(s);
+                    }
             }
             return View(Result);
         }
