@@ -6,6 +6,7 @@
 <h2>@ViewBag.Title</h2>
 
 @Html.Partial("_DataTable.Lib")
+@Html.Partial("_DataTable.Printer.Lib")
 
 @using (Html.BeginForm("StudentsOfSubjects", "CalendarResults", FormMethod.Post, new { @id = "FilterForm" }))
 {
@@ -73,6 +74,11 @@
             ], // không hiện nút sắp xếp!
             "aaSorting": [[2, 'asc']], //Xếp cột thứ 3
             "bStateSave": true,
+            "sDom": 'T<"clear"><"fg-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"lfr>t<"fg-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"ip>',
+            "oTableTools": {
+                "sSwfPath": "@Url.Content("~/Content/copy_csv_xls.swf")",
+                "aButtons": ["copy", "xls", "PrintBtn"]
+            },
             @Html.Partial("_DataTable")
         });
     });

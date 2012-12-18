@@ -6,6 +6,7 @@
 <h2>@ViewBag.Title</h2>
 
 @Html.Partial("_DataTable.Lib")
+@Html.Partial("_DataTable.Printer.Lib")
 
 <table id="table">
     <thead>
@@ -19,10 +20,6 @@
             <th>Thứ 5</th>
             <th>Thứ 6</th>
             <th>Thứ 7</th>
-            @* <th>STT</th>
-            <th>Ngay thi</th>
-            <th>Gio thi</th>
-            <th>Ma phong</th>*@
         </tr>
     </thead>
     <tbody>
@@ -56,8 +53,14 @@
 </table>
 
 <script type="text/javascript" charset="utf-8">
-    var oTable = $('#table').dataTable({
-        "aoColumnDefs": [
+    $(document).ready(function () {
+        $('#table').dataTable({
+            "sDom": 'T<"clear"><"fg-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"lfr>t<"fg-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"ip>',
+            "oTableTools": {
+                "sSwfPath": "@Url.Content("~/Content/copy_csv_xls.swf")",
+                "aButtons": ["copy", "xls", "PrintBtn"]
+            },
+            "aoColumnDefs": [
             { "bSortable": false, "aTargets": [0] },
             { "bSortable": false, "aTargets": [1] },
             { "bSortable": false, "aTargets": [2] },
@@ -67,10 +70,9 @@
             { "bSortable": false, "aTargets": [6] },
              { "bSortable": false, "aTargets": [7] },
             { "bSortable": false, "aTargets": [8] }
-        ], // không hiện nút sắp xếp!
-        "aaSorting": [[2, 'asc']], 
-        
-        @Html.Partial("_DataTable")
+            ],
+            @Html.Partial("_DataTable")
+        });
     });
 </script>
 

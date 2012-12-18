@@ -159,49 +159,40 @@ namespace Mvc_ESM.Controllers
             return View(Result);
         }
 
-        static string Thu2, Thu3, Thu4, Thu5, Thu6, Thu7;
+        static char[,] Thu;
 
         static void Init()
         {
-            Thu2 = "ooooooooooo";
-            Thu3 = "ooooooooooo";
-            Thu4 = "ooooooooooo";
-            Thu5 = "ooooooooooo";
-            Thu6 = "ooooooooooo";
-            Thu7 = "ooooooooooo";
+            Thu = new char[8, 13];
+            for (int i = 0; i < 7; i++)
+                for (int j = 0; j < 12; j++)
+                    Thu[i, j] = 'o';
+
         }
 
-        static String Check(DateTime time)
+        static void Check(DateTime time, int i)
         {
-            String s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11;
-            s1 = s2 = s3 = s4 = s5 = s6 = s7 = s8 = s9 = s10 = s11 = "o";
+            //  String s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11;
+            //  s1 = s2 = s3 = s4 = s5 = s6 = s7 = s8 = s9 = s10 = s11 = "o";
             if (time.Hour >= 7 && time.Hour <= 9)
             {
-                s1 = "x";
-                s2 = "x";
-                s3 = "x";
+                Thu[i, 0] = Thu[i, 1] = Thu[i, 2] = 'x';
             }
             else
                 if (time.Hour > 9 && time.Hour < 12)
                 {
-                    s4 = "x";
-                    s5 = "x";
-                    s6 = "x";
+                    Thu[i, 3] = Thu[i, 4] = Thu[i, 5] = 'x';
                 }
                 else
                     if (time.Hour > 12 && time.Hour <= 15)
                     {
-                        s7 = "x";
-                        s8 = "x";
-                        s9 = "x";
+                        Thu[i, 6] = Thu[i, 7] = Thu[i, 8] = 'x';
                     }
                     else
                     {
-                        s10 = "x";
-                        s11 = "x";
+                        Thu[i, 9] = Thu[i, 10] = 'x';
                     }
 
-            return s1 + s2 + s3 + s4 + s5 + s6 + s7 + s8 + s9 + s10 + s11;
         }
 
         public ActionResult OpenRooms()
@@ -219,7 +210,7 @@ namespace Mvc_ESM.Controllers
             EndWeek = new DateTime(2012, 1, 1);
             for (int k = 0; k < (Static_Helper.InputHelper.Options.NumDate / 7); k++)
             {
-                if (stt == 0)
+                if (k == 0)
                     StartWeek = Static_Helper.InputHelper.Options.StartDate;
                 else
                     StartWeek = EndWeek.AddDays(2);
@@ -229,6 +220,7 @@ namespace Mvc_ESM.Controllers
                 var w1 = (from w in rooms
                           where w.GioThi.Date >= StartWeek && w.GioThi.Date <= EndWeek
                           select w).ToList();
+
                 List<string> deny = new List<string>();
                 foreach (var r1 in w1)
                     if (!deny.Contains(r1.MaPhong))
@@ -247,32 +239,31 @@ namespace Mvc_ESM.Controllers
                                 switch (Static_Helper.OutputHelper.DayOffWeekVN(time.Date))
                                 {
                                     case "Thứ Hai":
-                                        Thu2 = Check(time);
+                                        Check(time, 0);
                                         break;
                                     case "Thứ Ba":
-                                        Thu3 = Check(time);
+                                        Check(time, 1);
                                         break;
                                     case "Thứ Tư":
-                                        Thu4 = Check(time);
+                                        Check(time, 2);
                                         break;
                                     case "Thứ Năm":
-                                        Thu5 = Check(time);
+                                        Check(time, 3);
                                         break;
                                     case "Thứ Sáu":
-                                        Thu6 = Check(time);
+                                        Check(time, 4);
                                         break;
                                     case "Thứ Bảy":
-                                        Thu7 = Check(time);
+                                        Check(time, 5);
                                         break;
                                 }
                             }
-                        s[3] = Thu2;
-                        s[4] = Thu3;
-                        s[5] = Thu4;
-                        s[6] = Thu5;
-                        s[7] = Thu6;
-                        s[8] = Thu7;
-
+                        s[3] = Thu[0, 0].ToString() + Thu[0, 1].ToString() + Thu[0, 2].ToString() + Thu[0, 3].ToString() + Thu[0, 4].ToString() + Thu[0, 5].ToString() + Thu[0, 6].ToString() + Thu[0, 7].ToString() + Thu[0, 8].ToString() + Thu[0, 9].ToString() + Thu[0, 10].ToString() + "";
+                        s[4] = Thu[1, 0].ToString() + Thu[1, 1].ToString() + Thu[1, 2].ToString() + Thu[1, 3].ToString() + Thu[1, 4].ToString() + Thu[1, 5].ToString() + Thu[1, 6].ToString() + Thu[1, 7].ToString() + Thu[1, 8].ToString() + Thu[1, 9].ToString() + Thu[1, 10].ToString() + "";
+                        s[5] = Thu[2, 0].ToString() + Thu[2, 1].ToString() + Thu[2, 2].ToString() + Thu[2, 3].ToString() + Thu[2, 4].ToString() + Thu[2, 5].ToString() + Thu[2, 6].ToString() + Thu[2, 7].ToString() + Thu[2, 8].ToString() + Thu[2, 9].ToString() + Thu[2, 10].ToString() + "";
+                        s[6] = Thu[3, 0].ToString() + Thu[3, 1].ToString() + Thu[3, 2].ToString() + Thu[3, 3].ToString() + Thu[3, 4].ToString() + Thu[3, 5].ToString() + Thu[3, 6].ToString() + Thu[3, 7].ToString() + Thu[3, 8].ToString() + Thu[3, 9].ToString() + Thu[3, 10].ToString() + "";
+                        s[7] = Thu[4, 0].ToString() + Thu[4, 1].ToString() + Thu[4, 2].ToString() + Thu[4, 3].ToString() + Thu[4, 4].ToString() + Thu[4, 5].ToString() + Thu[4, 6].ToString() + Thu[4, 7].ToString() + Thu[4, 8].ToString() + Thu[4, 9].ToString() + Thu[4, 10].ToString() + "";
+                        s[8] = Thu[5, 0].ToString() + Thu[5, 1].ToString() + Thu[5, 2].ToString() + Thu[5, 3].ToString() + Thu[5, 4].ToString() + Thu[5, 5].ToString() + Thu[5, 6].ToString() + Thu[5, 7].ToString() + Thu[5, 8].ToString() + Thu[5, 9].ToString() + Thu[5, 10].ToString() + "";
                         Result.Add(s);
                     }
             }
