@@ -8,19 +8,24 @@ namespace Mvc_ESM.Controllers
 {
     public class ErrorsController : Controller
     {
-        public ActionResult General(Exception exception)
-        {
-            return Content("General failure", "text/plain");
-        }
-
         public ActionResult Http404()
         {
-            return Content("Not found", "text/plain");
+            return View();
         }
 
         public ActionResult Http403()
         {
-            return Content("Forbidden", "text/plain");
+            return View();
+        }
+
+        public ActionResult Http401()
+        {
+            return View();
+        }
+
+        public ActionResult Index()
+        {
+            return View();
         }
     }
 }

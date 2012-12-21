@@ -38,7 +38,7 @@
 
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function () {
-        $('#table').dataTable({
+        var oTable = $('#table').dataTable({
             "sDom": 'T<"clear"><"fg-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"lfr>t<"fg-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"ip>',
             "oTableTools": {
                         "sSwfPath": "@Url.Content("~/Content/copy_csv_xls.swf")",
@@ -46,5 +46,6 @@
                     },
             @Html.Partial("_DataTable")
         });
+        new FixedHeader(oTable);
     });
 </script>

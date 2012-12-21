@@ -11,6 +11,7 @@ using System.Text;
 
 namespace Mvc_ESM.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class SelectRoomController : Controller
     {
         private DKMHEntities db = new DKMHEntities();

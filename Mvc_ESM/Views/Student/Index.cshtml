@@ -162,8 +162,9 @@
 
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function () {
-        $('#table').dataTable({
+        var oTable = $('#table').dataTable({
             @Html.Partial("_DataTable")
         });
+        new FixedHeader(oTable);
     });
 </script>

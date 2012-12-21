@@ -7,6 +7,7 @@ using Mvc_ESM.Static_Helper;
 using System.Text;
 namespace Mvc_ESM.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class OptionsController : Controller
     {
         //

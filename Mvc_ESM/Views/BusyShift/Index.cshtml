@@ -25,7 +25,7 @@
                 @for (int j = 0; j < Mvc_ESM.Static_Helper.InputHelper.Options.Times.Count; j++)
                 {
                     <td>
-                        <input type="checkbox" id="Check" @(Mvc_ESM.Static_Helper.InputHelper.BusyShift[i * Mvc_ESM.Static_Helper.InputHelper.Options.Times.Count + j].IsBusy ?"checked":"") title="Ca Thi thứ @(j + 1)" />
+                        <input type="checkbox" id="Check" @(Mvc_ESM.Static_Helper.InputHelper.BusyShifts[i * Mvc_ESM.Static_Helper.InputHelper.Options.Times.Count + j].IsBusy ?"checked":"") title="Ca Thi thứ @(j + 1)" />
                     </td>
                 }
             </tr>

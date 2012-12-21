@@ -59,7 +59,7 @@
             ], // không hiện nút sắp xếp!
 	        @Html.Partial("_DataTable")
 	    });
-
+	    new FixedHeader(oTable);
 	    $('#AddStudent').button().click(function (e) {
 	        e.preventDefault(); // không chạy sự kiện mặc định của đối tượng
 	        var stID = $('#StudentIDTextBox').val();

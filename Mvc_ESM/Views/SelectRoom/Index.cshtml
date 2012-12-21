@@ -56,7 +56,7 @@
         var oTable = $('#table').dataTable({
             @Html.Partial("_DataTable")
         });
-
+        new FixedHeader(oTable);
         $('#SummitButton').click(function () {
             var sData = "";
             oTable.$("#CheckBox").each(function (index, item) {

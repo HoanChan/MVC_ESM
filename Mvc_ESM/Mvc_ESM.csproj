@@ -121,6 +121,8 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\MyEventsDataModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provider\CustomMembershipProvider.cs" />
+    <Compile Include="Provider\CustomRoleProvider.cs" />
     <Compile Include="Static_Helper\Calendar.cs" />
     <Compile Include="Static_Helper\Data.cs" />
     <Compile Include="Static_Helper\OutputHelper.cs" />
@@ -319,6 +321,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_Jquery-UI.Widget.timespinner.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Errors\Http404.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Errors\Http403.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Errors\Http401.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Errors\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

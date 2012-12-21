@@ -11,6 +11,7 @@ using Mvc_ESM.Static_Helper;
 
 namespace Mvc_ESM.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class TeacherController : Controller
     {
         private DKMHEntities db = new DKMHEntities();

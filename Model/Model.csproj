@@ -114,11 +114,35 @@
       <DependentUpon>DKMHModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provider.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Provider.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Provider.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Provider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Provider.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Provider.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Role.cs">
+      <DependentUpon>Provider.tt</DependentUpon>
+    </Compile>
     <Compile Include="sinhvien.cs">
       <DependentUpon>DKMHModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Thi.cs">
       <DependentUpon>DKMHModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>Provider.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersRoles.cs">
+      <DependentUpon>Provider.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +187,23 @@
       <DependentUpon>DKMHModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <EntityDeploy Include="Provider.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Provider.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Provider.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Provider.Context.cs</LastGenOutput>
+      <DependentUpon>Provider.edmx</DependentUpon>
+    </None>
+    <None Include="Provider.edmx.diagram">
+      <DependentUpon>Provider.edmx</DependentUpon>
+    </None>
+    <None Include="Provider.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Provider.cs</LastGenOutput>
+      <DependentUpon>Provider.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

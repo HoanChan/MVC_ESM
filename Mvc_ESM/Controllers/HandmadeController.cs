@@ -10,6 +10,7 @@ using System.Diagnostics;
 
 namespace Mvc_ESM.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class HandmadeController : Controller
     {
         //

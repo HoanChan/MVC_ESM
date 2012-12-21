@@ -52,7 +52,21 @@
                 @Html.PasswordFor(m => m.ConfirmPassword)
                 @Html.ValidationMessageFor(m => m.ConfirmPassword)
             </div>
-
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Roles)
+            </div>
+            <div class="editor-field">
+                @foreach (string role in Roles.GetAllRoles()) 
+                { 
+                    <input type="checkbox" value="@role" name="Roles" /> @role
+                }
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(m => m.RolePass)
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(m => m.RolePass)
+            </div>
             <p>
                 <input type="submit" value="Register" />
             </p>

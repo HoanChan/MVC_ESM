@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Mvc_ESM.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class BusyShiftController : Controller
     {
         //

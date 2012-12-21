@@ -10,6 +10,7 @@ using Mvc_ESM.Static_Helper;
 
 namespace Mvc_ESM.Controllers
 {
+    [Authorize]
     public class StudentController : Controller
     {
         private DKMHEntities db = new DKMHEntities();

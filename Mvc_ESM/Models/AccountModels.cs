@@ -63,5 +63,12 @@ namespace Mvc_ESM.Models
         [Display(Name = "Mật khẩu xác nhận")]
         [System.Web.Mvc.Compare("Password", ErrorMessage = "Mật khẩu xác nhận không khớp với mật khẩu mới.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Quyền hạn")]
+        public string[] Roles { get; set; }
+
+        [Display(Name = "Mã xác nhận quyền")]
+        public string RolePass { get; set; }
     }
 }

@@ -11,14 +11,17 @@ using Mvc_ESM.Models;
 using Newtonsoft.Json;
 namespace Mvc_ESM.Controllers
 {
+    [Authorize]
     public class CalendarResultsController : Controller
     {
         private DKMHEntities db = new DKMHEntities();
 
+        [Authorize(Roles = "Admin, GiaoVien")]
         public ActionResult RoomsResult()
         {
             return View();
         }
+
         public ActionResult StudentsResult()
         {
             return View();
@@ -31,9 +34,10 @@ namespace Mvc_ESM.Controllers
                                                      select new Static_Helper.Event()
                                                      {
                                                          id = s.MaMonHoc + s.Nhom,
-                                                         text = s.monhoc.TenMonHoc + s.MaPhong,
+                                                         text = s.monhoc.TenMonHoc,
                                                          start_date = s.CaThi.GioThi,
                                                          end_date = s.CaThi.GioThi,
+                                                         MaPhong = ""
                                                      }).Distinct().ToList<Static_Helper.Event>();
             for (int i = 0; i < SubjectTime.Count(); i++)
             {
@@ -51,7 +55,7 @@ namespace Mvc_ESM.Controllers
                                                      select new Static_Helper.Event()
                                                      {
                                                          id = s.MaMonHoc + s.Nhom,
-                                                         text = s.monhoc.TenMonHoc + s.MaPhong,
+                                                         text = s.monhoc.TenMonHoc,
                                                          start_date = s.CaThi.GioThi,
                                                          end_date = s.CaThi.GioThi,
                                                          MaPhong = s.MaPhong
@@ -194,7 +198,7 @@ namespace Mvc_ESM.Controllers
                     }
 
         }
-
+        [Authorize(Roles = "Admin, GiaoVien")]
         public ActionResult OpenRooms()
         {
             var rooms = (from r in db.This
@@ -270,6 +274,7 @@ namespace Mvc_ESM.Controllers
             return View(Result);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Save(Event changedEvent, FormCollection actionValues)
         {
             String action_type = actionValues["!nativeeditor_status"];

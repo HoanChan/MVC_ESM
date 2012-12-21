@@ -81,7 +81,8 @@
                 "aButtons": ["copy", "xls", "PrintBtn"]
             },
            @Html.Partial("_DataTable")
-       });
+        });
+        new FixedHeader(oTable);
         $("#MonHocList").change(function () {
             var id = $(this).val();
             $.getJSON("/Services/LoadRoomsBySubjectID", { SubjectID: id },

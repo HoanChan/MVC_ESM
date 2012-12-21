@@ -24,6 +24,9 @@
             <div id="menu">
                 <ul class="menu">
                     <li><a href ="@Url.Action("Index", "Home")"><span>Giới thiệu</span></a></li>
+@if(Request.IsAuthenticated) {
+    if (Context.User.IsInRole("Admin"))
+    {
                     <li><a href ="@Url.Action("About", "Home")"><span>Hướng dẫn</span></a></li>
 
                     <li><a href="#" class="parent"><span>Chỉnh sửa CSDL</span></a>
@@ -59,16 +62,24 @@
                             <li><a href="#"><span>Lịch coi thi</span></a></li>
                         </ul>
                     </li>
-
+    }
                     <li class="last"><a href="#" class="parent"><span>Xem kết quả</span></a>
                         <ul>
                             <li><a href="#" class="parent"><span>Dạng lịch</span></a>
                                 <ul>
+                                @if (Context.User.IsInRole("GiaoVien") || Context.User.IsInRole("Admin"))
+                                {
                                     <li><a href="@Url.Action("RoomsResult", "CalendarResults")"><span>Phòng Thi</span></a></li>
+                                }
                                     <li><a href="@Url.Action("StudentsResult", "CalendarResults")"><span>Sinh viên</span></a></li>
+                                @if (Context.User.IsInRole("GiaoVien") || Context.User.IsInRole("Admin"))
+                                {
                                     <li><a href="#"><span>Giáo viên</span></a></li>
+                                }
                                 </ul>
                             </li>
+                        @if (Context.User.IsInRole("GiaoVien") || Context.User.IsInRole("Admin"))
+                        {
                             <li><a href="#" class="parent"><span>Dạng Danh sách</span></a>
                                 <ul>
                                     <li><a href="@Url.Action("RoomList","CalendarResults")"><span>Phòng Thi</span></a></li>
@@ -78,8 +89,10 @@
                                     <li><a href="@Url.Action("OpenRooms","CalendarResults")"><span>Lịch mở cửa phòng</span></a></li>
                                 </ul>
                             </li>
+                        }
                         </ul>                            
                     </li>
+}
                 </ul>
             </div>
 
