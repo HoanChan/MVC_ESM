@@ -1,6 +1,6 @@
 ﻿@model  IEnumerable<string[]>
 @{
-    ViewBag.Title = "Lịch mở cửa phòng";
+    ViewBag.Title = "Lịch thi của sinh viên";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -8,26 +8,23 @@
 @Html.Partial("_DataTable.Lib")
 @Html.Partial("_DataTable.Printer.Lib")
 
+@using (Html.BeginForm("StudentSchedule", "CalendarResults", FormMethod.Post, new { @id = "FilterForm" }))
+{
+    <p>
+        Tên: @Html.TextBox("SearchString", Mvc_ESM.Static_Helper.StudentHelper.SearchString, new { id = "SearchString" })
+            <input type="submit" value="Thực hiện" />
+    </p>
+}
+
 <table id="table">
     <thead>
         <tr>
-            <th rowspan="2">STT</th>
-            <th rowspan="2">Tuần</th>
-            <th rowspan="2">Mã phòng</th>
-            <th>Thứ 2</th>
-            <th>Thứ 3</th>
-            <th>Thứ 4</th>
-            <th>Thứ 5</th>
-            <th>Thứ 6</th>
-            <th>Thứ 7</th>
-        </tr>
-        <tr>
-            <th>12345678901</th>
-            <th>12345678901</th>
-            <th>12345678901</th>
-            <th>12345678901</th>
-            <th>12345678901</th>
-            <th>12345678901</th>
+            <th>STT</th>
+            <th>Mã môn học</th>
+            <th>Tên môn học</th>
+            <th>Ngày thi</th>
+            <th>Phòng thi</th>
+            <th>Giờ thi</th>
         </tr>
     </thead>
     <tbody>
@@ -40,12 +37,8 @@
                 <td>@m[3]</td>
                 <td>@m[4]</td>
                 <td>@m[5]</td>
-                <td>@m[6]</td>
-                <td>@m[7]</td>
-                <td>@m[8]</td>
             </tr>
         }
-
     </tbody>
 </table>
 
@@ -64,14 +57,10 @@
             { "bSortable": false, "aTargets": [3] },
             { "bSortable": false, "aTargets": [4] },
             { "bSortable": false, "aTargets": [5] },
-            { "bSortable": false, "aTargets": [6] },
-             { "bSortable": false, "aTargets": [7] },
-            { "bSortable": false, "aTargets": [8] }
             ],
             @Html.Partial("_DataTable")
         });
         new FixedHeader(oTable);
     });
 </script>
-
 

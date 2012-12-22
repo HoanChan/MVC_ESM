@@ -274,6 +274,43 @@ namespace Mvc_ESM.Controllers
             return View(Result);
         }
 
+        [HttpGet]
+        public ActionResult StudentSchedule()
+        {
+            List<String[]> Results = new List<string[]>();
+            return View(Results);
+        }
+
+        [HttpPost]
+        public ActionResult StudentSchedule(String SearchString)
+        {
+            var sinhviens = (from mh in db.This
+                             where mh.MaSinhVien == SearchString
+                             select new
+                             {
+                                 MaMonHoc = mh.MaMonHoc,
+                                 MaPhong = mh.MaPhong,
+                                 GioThi = mh.CaThi.GioThi
+                             }).OrderBy(m => m.GioThi);
+            List<String[]> Results = new List<string[]>();
+            int stt = 0;
+            foreach (var sv in sinhviens)
+            {
+                string[] s = new string[6];
+                s[0] = ++stt + "";
+                s[1] = sv.MaMonHoc;
+                s[2] = (from mh in db.monhocs
+                          where mh.MaMonHoc == sv.MaMonHoc
+                          select mh.TenMonHoc).FirstOrDefault();
+                 //= s1.ToString();
+                s[3] = sv.GioThi.Date.ToString("dd/MM/yyyy");
+                s[4] = sv.MaPhong;
+                s[5] = sv.GioThi.ToString("HH:mm");
+                Results.Add(s);
+            }
+            return View(Results);
+        }
+
         [Authorize(Roles = "Admin")]
         public ActionResult Save(Event changedEvent, FormCollection actionValues)
         {
