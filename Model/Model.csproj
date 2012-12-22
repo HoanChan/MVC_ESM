@@ -175,8 +175,8 @@
     <None Include="App.Config" />
     <None Include="DKMHModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DKMHModel.edmx</DependentUpon>
       <LastGenOutput>DKMHModel.Context.cs</LastGenOutput>
+      <DependentUpon>DKMHModel.edmx</DependentUpon>
     </None>
     <None Include="DKMHModel.edmx.diagram">
       <DependentUpon>DKMHModel.edmx</DependentUpon>

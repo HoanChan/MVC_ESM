@@ -95,13 +95,14 @@ namespace Mvc_ESM.Static_Helper
             var SubjectsList = aGroupList.Select(m => m.Key.Substring(0, m.Key.IndexOf('_'))).Distinct();
             foreach (var subject in SubjectsList)
             {
-                var GroupsInOneSubject = aGroupList.Where(m => m.Value.MaMonHoc == subject);
-                for (int i = 1; i <= GroupsInOneSubject.Max(m => m.Value.GroupID); i++)
+                var GroupsInOneSubject = aGroupList.Where(m => m.Value.MaMonHoc == subject).Select(m => m.Value);
+                var GroupsIDList = GroupsInOneSubject.Select(m => m.GroupID).Distinct();
+                foreach (var aID in GroupsIDList)
                 {
                     var aGroupItem = subject;
-                    foreach (var gi in GroupsInOneSubject.Where(m => m.Value.GroupID == i))
+                    foreach (var gi in GroupsInOneSubject.Where(m => m.GroupID == aID))
                     {
-                        aGroupItem += "_" + gi.Value.Nhom;
+                        aGroupItem += "_" + gi.Nhom;
                     }
                     Groups.Add(aGroupItem);
                 }

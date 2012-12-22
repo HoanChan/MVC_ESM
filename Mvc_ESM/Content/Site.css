@@ -101,15 +101,24 @@ footer,
 /* TABLE
 ----------------------------------------------------------*/
 
-table {
+table:not(#itemDetail) {
     border: solid 1px rgb(204, 204, 204);
     border-collapse: collapse;
 }
 
-table>tbody>tr>td, table>thead>tr>th {
+table:not(#itemDetail)>tbody>tr>td, table:not(#itemDetail)>thead>tr>th {
     border: solid 1px rgb(204, 204, 204);
 }
-    
+
+#itemDetail{
+    border: solid 1px #111;
+    border-collapse: collapse;
+    background-color:#e6e2ff;
+    margin:auto;
+}
+#itemDetail>tbody>tr>td, #itemDetail>thead>tr>th {
+    border: solid 1px #111;
+}
 /* MISC  
 ----------------------------------------------------------*/
 .clear {

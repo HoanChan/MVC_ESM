@@ -204,25 +204,11 @@
     <Content Include="Views\Subject\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Subject\Create.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Subject\Edit.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Teacher\Create.cshtml" />
-    <Content Include="Views\Teacher\Delete.cshtml" />
-    <Content Include="Views\Teacher\Details.cshtml" />
-    <Content Include="Views\Teacher\Edit.cshtml" />
     <Content Include="Views\Teacher\Index.cshtml">
       <SubType>Code</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Student\Create.cshtml" />
-    <Content Include="Views\Student\Delete.cshtml" />
-    <Content Include="Views\Student\Details.cshtml" />
-    <Content Include="Views\Student\Edit.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -243,14 +229,6 @@
     <Content Include="Views\Shared\_Jquery-UI.Lib.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Room\Delete.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Room\Create.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Room\Details.cshtml" />
-    <Content Include="Views\Room\Edit.cshtml" />
     <Content Include="Views\Room\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

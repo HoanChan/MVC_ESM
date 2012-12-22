@@ -25,92 +25,15 @@
     </p>
 }
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#KhoaList').change(function () {
-            var id = $(this).val();
-            $.getJSON("/Student/LoadClassByFacultyID", { FacultyID: id },
-            function (Data) {
-                var select = $("#LopList");
-                select.empty();
-                select.append($('<option/>', {
-                    value: "",
-                    text: "Tất cả"
-                }));
-
-                $.each(Data, function (index, itemData) {
-                    select.append($('<option/>', {
-                        value: itemData.Value,
-                        text: itemData.Text
-                    }));
-                });
-                $("#SearchString").empty();
-            });
-        });
-
-        $('#table tbody td button#Deletebtn').button({
-            icons: {
-                primary: "ui-icon-trash"
-            }
-        }).live('click', function () {
-            var id = $(this).attr("value");
-            var aDialog = $("#dialog-confirm");
-            aDialog.removeAttr("style");
-            aDialog.dialog({
-                resizable: false,
-                modal: true,
-                buttons: {
-                    "Xoá": function () {
-                        $.post("/Student/Delete", "id=" + id, function (data) {
-                            alert(data);
-                            if (data == "Xoá thành công!")
-                                window.location = "@Url.Action("Index", "Student")";
-                        });
-                        $(this).dialog("close");
-                    },
-                    "Không": function () {
-                        $(this).dialog("close");
-                    }
-                }
-            });
-        });
-
-        $('#table tbody td button#Modifybtn').button({
-            icons: {
-                primary: "ui-icon-pencil"
-            }
-        }).live('click', function () {
-            var id = $(this).attr("value");
-            window.location = '@Url.Action("Edit", "Student")' + "/" + id;
-    });
-
-        $('#table tbody td button#Detailbtn').button({
-            icons: {
-                primary: "ui-icon-info"
-            }
-        }).live('click', function () {
-            var id = $(this).attr("value");
-            window.location = '@Url.Action("Details", "Student")' + "/" + id;
-        });
-    });
-</script>
-
 <table id="table">
     <thead>
         <tr>
-            <th>Mã sinh viên
-            </th>
-            <th>Họ
-            </th>
-            <th>Tên
-            </th>
-            <th>Phái
-            </th>
-            <th>NgàySinh
-            </th>
-            <th>Lớp
-            </th>
-            <th></th>
+            <th>Mã sinh viên</th>
+            <th>Họ</th>
+            <th>Tên</th>
+            <th>Phái</th>
+            <th>NgàySinh</th>
+            <th>Lớp</th>
         </tr>
     </thead>
     <tbody>
@@ -118,53 +41,128 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.MaSinhVien)
+                    @item.MaSinhVien
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Ho)
+                    @item.Ho
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Ten)
+                    @item.Ten
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Phai)
+                    @item.Phai
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NgaySinh)
+                    @item.NgaySinh
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Lop)
-                </td>
-
-                <td>
-                    @*@Html.ActionLink("Sửa", "Edit", new { id=item.MaSinhVien }) |
-                    @Html.ActionLink("Xem", "Details", new { id=item.MaSinhVien }) |
-                    @Html.ActionLink("Xóa", "Delete", new { id=item.MaSinhVien })
-                    <button id="Detailbtn" value="@item.MaGiaoVien">Xem</button>*@
-                    <button id="Modifybtn" value="@item.MaSinhVien">Sửa</button>
-                    | 
-                    <button id="Deletebtn" value="@item.MaSinhVien">Xóa</button>
-
+                    @item.Lop
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-<div id="dialog-confirm" title="Xóa dữ liệu?" style="visibility: hidden">
-    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Bạn có muốn xoá dữ liệu này không?</p>
-</div>
-
-<link href="@Url.Content("~/Content/TableThemes/table_jui.css")" rel="stylesheet" type="text/css" />
-<link href="@Url.Content("~/Content/TableThemes/smoothness/jquery-ui-1.8.4.custom.css")" rel="stylesheet" type="text/css" />
-<script src="@Url.Content("~/Scripts/jquery.dataTables.js")" type="text/javascript" lang="javascript" ></script>
-
+@Html.Partial("_DataTable.Lib")
 
 <script type="text/javascript" charset="utf-8">
-    $(document).ready(function () {
-        var oTable = $('#table').dataTable({
-            @Html.Partial("_DataTable")
+
+    function fnFormatDetails(oTable, nTr) {
+        var aData = oTable.fnGetData(nTr);
+        var sOut = '<table id="itemDetail">';
+        $.ajax({
+            url: "/Services/LoadStudentTimetable",
+            dataType: 'json',
+            data: "StudentID=" + aData[1],
+            async: false,
+            success: function (Data) {
+                if (Data.Ok == "false") {
+                    //alert("Không tìm thấy!");
+                    return "";
+                }
+                sOut += '<tr><td>STT</td><td>Mã MH</td><td>Tên MH</td><td>Nhóm</td><td>Số TC</td><td>Giáo Viên</td><td>Thứ</td><td>Tiết BĐ</td><td>Số tiết</td><td>Phòng</td><td>Tuần BĐ</td><td>Số tuần</tr>';
+                for (var i = 0; i < Data.Data.length; i++) {
+                    var MaMonHoc = Data.Data[i].MaMonHoc;
+                    var TenMonHoc = Data.Data[i].TenMonHoc;
+                    var Nhom = Data.Data[i].Nhom;
+                    var SoTC = Data.Data[i].SoTC;
+                    var TenGiaoVien = Data.Data[i].TenGiaoVien;
+                    var Thu = Data.Data[i].Thu;
+                    var TietBD = Data.Data[i].TietBD;
+                    var SoTiet = Data.Data[i].SoTiet;
+                    var MaPhong = Data.Data[i].MaPhong;
+                    var TuanBD = Data.Data[i].TuanBD;
+                    var SoTuan = Data.Data[i].SoTuan;
+                    sOut += '<tr><td>' + (i + 1) + '</td><td>' + MaMonHoc + '</td><td>' + TenMonHoc + '</td><td>' + Nhom + '</td><td>' + SoTC + '</td><td>' + TenGiaoVien + '</td><td>' + Thu + '</td><td>' + TietBD + '</td><td>' + SoTiet + '</td><td>' + MaPhong + '</td><td>' + TuanBD + '</td><td>' + SoTuan + '</tr>';
+                }
+                sOut += '</table>';
+            }
         });
-        new FixedHeader(oTable);
+        return sOut;
+    }
+
+
+    $('#KhoaList').change(function () {
+        var id = $(this).val();
+        $.getJSON("/Student/LoadClassByFacultyID", { FacultyID: id },
+        function (Data) {
+            var select = $("#LopList");
+            select.empty();
+            select.append($('<option/>', {
+                value: "",
+                text: "Tất cả"
+            }));
+
+            $.each(Data, function (index, itemData) {
+                select.append($('<option/>', {
+                    value: itemData.Value,
+                    text: itemData.Text
+                }));
+            });
+            $("#SearchString").empty();
+        });
     });
+
+
+    //thêm nút detail ở cột đầu tiên
+    var nCloneTh = document.createElement('th');
+    var nCloneTd = document.createElement('td');
+    nCloneTd.innerHTML = '<img id="details" src="@Url.Content("~/Content/TableThemes/details_open.png")">';
+    nCloneTd.setAttribute("style", "text-align:center;");
+    $('#table thead tr').each(function () {
+        this.insertBefore(nCloneTh, this.childNodes[0]);
+    });
+
+    $('#table tbody tr').each(function () {
+        this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
+    });
+    // cài đặt sự kiện nút detail được click
+    $('#table tbody td img#details').live('click', function () {
+        var nTr = $(this).parents('tr')[0];
+        if (oTable.fnIsOpen(nTr)) {
+            this.src = "@Url.Content("~/Content/TableThemes/details_open.png")";
+            oTable.fnClose(nTr);
+        }
+        else {
+            this.src = "@Url.Content("~/Content/TableThemes/details_close.png")";
+            oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr), 'details');
+        }
+    });
+    //cài đặt bảng
+    var oTable = $('#table').dataTable({
+        //"aoColumnDefs": [
+        //    { "bSortable": false, "aTargets": [0] },
+        //    { "bSortable": false, "aTargets": [1] },
+        //    { "bSortable": false, "aTargets": [3] },
+        //    { "bSortable": false, "aTargets": [4] },
+        //    { "bSortable": false, "aTargets": [5] },
+        //    { "bSortable": false, "aTargets": [6] },
+        //    { "bSortable": false, "aTargets": [8] }
+        //], // không hiện nút sắp xếp!
+        //"aaSorting": [[2, 'asc']], //Xếp cột thứ 3
+        "bStateSave": true,
+        @Html.Partial("_DataTable")
+    });
+    new FixedHeader(oTable);
+
 </script>

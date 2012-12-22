@@ -16,11 +16,12 @@ namespace Mvc_ESM.Static_Helper
         private static Dictionary<String, List<String>> StudentByGroup;
         private static Boolean[] Progressed = new Boolean[AlgorithmRunner.Groups.Count];
         private static int RoomUsedIndex;
-
         public static void Run()
         {
             Init();
             step2();
+            AlgorithmRunner.SaveOBJ("GroupsTime", AlgorithmRunner.GroupsTime);
+            AlgorithmRunner.SaveOBJ("MaxColorTime", AlgorithmRunner.MaxColorTime);
             AlgorithmRunner.SaveOBJ("SubjectTime", AlgorithmRunner.GroupsTime);
             AlgorithmRunner.SaveOBJ("GroupsRoom", AlgorithmRunner.GroupsRoom);
             AlgorithmRunner.SaveOBJ("GroupsRoomStudents", AlgorithmRunner.GroupsRoomStudents);
@@ -107,9 +108,11 @@ namespace Mvc_ESM.Static_Helper
             {
                 RoomUsedIndex++;
                 if (RoomUsedIndex < RoomList.Count) // còn phòng
-                {
+                {                    
+                    
                     AlgorithmRunner.GroupsRoom[GroupIndex].Add(RoomList[RoomUsedIndex]);
                     StudentsNumber -= RoomList[RoomUsedIndex].Container;
+                    
                     // đáng lẽ code phân trực tiếp sv vào phòng ở đây, nhưng như vậy phòng ít phòng nhiều
                     // để đó sau này truy vấn lại môn này thi mấy phòng rồi chia sau!
                 }

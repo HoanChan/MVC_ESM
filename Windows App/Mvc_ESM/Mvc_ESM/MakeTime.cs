@@ -20,15 +20,15 @@ namespace Mvc_ESM.Static_Helper
             for (int ColorNumber = 1; ColorNumber < AlgorithmRunner.ColorNumber; ColorNumber++)
             {
                 // các môn cùng màu sẽ cùng ca, cùng ngày thi
-                for (int i = 0; i < AlgorithmRunner.Groups.Count; i++)
+                for (int GroupIndex = 0; GroupIndex < AlgorithmRunner.Groups.Count; GroupIndex++)
                 {
-                    if (AlgorithmRunner.Colors[i] == ColorNumber)
+                    if (AlgorithmRunner.Colors[GroupIndex] == ColorNumber)
                     {
-                        AlgorithmRunner.GroupsTime[i] = ShiftList[ShiftIndex].Time;
-                        AlgorithmRunner.MaxColorTime[ColorNumber] = AlgorithmRunner.GroupsTime[i];
+                        AlgorithmRunner.GroupsTime[GroupIndex] = ShiftList[ShiftIndex].Time;
+                        AlgorithmRunner.MaxColorTime[ColorNumber] = AlgorithmRunner.GroupsTime[GroupIndex];
                     }
                 }
-                ShiftIndex++;
+                ShiftIndex+= InputHelper.Options.DateMin + 1;
             }
         }
 
@@ -45,9 +45,10 @@ namespace Mvc_ESM.Static_Helper
                 // sau đó tăng lên 3 ca thành thời gian môn cần tăng = 4, max[màu môn cần tăng] = 4
                 // max[màu tiếp theo] = 3 cần tăng 2
                 DateTime MinNextColorTime = AlgorithmRunner.MaxColorTime[CurrentColor + 1];
+
                 for (int si = 0; si < AlgorithmRunner.GroupsTime.Count(); si++)
                 {
-                    if (AlgorithmRunner.Colors[si] == CurrentColor + 1)
+                    if (AlgorithmRunner.Colors[si] >= CurrentColor)
                     {
                         if (MinNextColorTime > AlgorithmRunner.GroupsTime[si])
                         {
@@ -56,6 +57,7 @@ namespace Mvc_ESM.Static_Helper
                         }
                     }
                 }
+
                 // min đã lớn hơn rồi thì thôi !
                 if (MinNextColorTime > AlgorithmRunner.MaxColorTime[CurrentColor])
                 {
@@ -82,23 +84,25 @@ namespace Mvc_ESM.Static_Helper
         //- B3: tăng thời gian của môn thi sau (Môn M) trong 2 môn đó lên 1 khoảng là X để thoã điều kiện.
         //- B4: nếu thời gian thi của môn M sau khi được tăng > max[màu của môn M] thì 
         //            gán max[màu của môn M] = thời gian thi của môn M rồi qua bước 5
-        private static void IncSubjects(int Checker, int i, int j)
+        private static void IncSubjects(int i, int j)
         {
 
             int Index;
             int Shift = InputHelper.Options.DateMin + 1;
-            if (Checker == 1) // tức là  AlgorithmRunner.GroupsTime[i] >  AlgorithmRunner.GroupsTime[j]
+            //màu thằng nào lớn hơn thì giãn thằng đó
+            if (AlgorithmRunner.Colors[i] > AlgorithmRunner.Colors[j])
             {
                 // tăng môn i nhưng phải dựa vào môn j là do ko bít hiện tại khoảng cách giữa 2 môn
                 // i và j là bao nhiêu, tăng cho vừa khớp với điều kiện cho chắc.
                 AlgorithmRunner.GroupsTime[i] = IncTime(AlgorithmRunner.GroupsTime[j], Shift);
                 Index = i;
             }
-            else //Checker == 2
+            else 
             {
                 AlgorithmRunner.GroupsTime[j] = IncTime(AlgorithmRunner.GroupsTime[i], Shift);
                 Index = j;
             }
+            
             int CurrentColor = AlgorithmRunner.Colors[Index];
             // Kiểm tra và tăng max
             if (AlgorithmRunner.MaxColorTime[CurrentColor] < AlgorithmRunner.GroupsTime[Index])
@@ -126,10 +130,9 @@ namespace Mvc_ESM.Static_Helper
                 {
                     if (AlgorithmRunner.AdjacencyMatrix[i, j] == 1)
                     {
-                        int Checker = CheckTime(i, j);
-                        if (Checker != 0)
+                        if (CheckTime(i, j))
                         {
-                            IncSubjects(Checker, i, j);
+                            IncSubjects(i, j);
                         }
                     }
                 }
@@ -146,39 +149,33 @@ namespace Mvc_ESM.Static_Helper
         public static DateTime IncTime(DateTime Time, int Shift)
         {
             int CurrentShiftIndex = ShiftList.FindIndex(m => m.Time == Time);
+            if (CurrentShiftIndex + Shift > ShiftList.Count - 1)
+            {
+                AlgorithmRunner.SaveOBJ("IsNotEnoughShift", CurrentShiftIndex + Shift);
+                Environment.Exit(0);
+            }
             return ShiftList[CurrentShiftIndex + Shift].Time;
         }
 
-        private static int CheckTime(int i, int j)
+        private static Boolean CheckTime(int i, int j)
         {
             DateTime T1 = AlgorithmRunner.GroupsTime[i];
             DateTime T2 = AlgorithmRunner.GroupsTime[j];
-            //if (T1 > T2)
-            //{
-            //    // t1> t2, và nếu sau khi tăng t2 mà lại lớn hơn hoặc bằng t1 == > khoảng cách giữa t1 và t2 chưa đạt yêu cầu
-            //    if (IncTime(T2, InputHelper.Options.DateMin) >= T1)
-            //        return 1; // T1 cần giãn
-            //}
-            //else if (T1 < T2)
-            //{
-            //    if (IncTime(T1, InputHelper.Options.DateMin) >= T2)
-            //        return 2; // t2 cần giãn
-            //}
             int Shift1Index = InputHelper.BusyShifts.FindIndex(m => m.Time == T1);
             int Shift2Index = InputHelper.BusyShifts.FindIndex(m => m.Time == T2);
             //Đã đạt yêu cầu, trả về 0 không tăng cái nào lên làm gì
             if (Math.Abs(Shift1Index - Shift2Index) > InputHelper.Options.DateMin)
             {
-                return 0;
+                return false;
             }
             // mặc định do j > i nên nếu Shift1Index > Shift2Index thì tăng t1 không thì tăng t2
-            return Shift1Index > Shift2Index ? 1 : 2;
+            return true;
         }
 
         public static void Run()
         {
             Init();
-            CreateTime();
+            //CreateTime();
             AlgorithmRunner.SaveOBJ("GroupsTime", AlgorithmRunner.GroupsTime);
             AlgorithmRunner.SaveOBJ("MaxColorTime", AlgorithmRunner.MaxColorTime);
 

@@ -1,534 +1,252 @@
 ﻿[
   {
+    "RoomID": "A101",
+    "Container": 48,
+    "IsBusy": false
+  },
+  {
+    "RoomID": "A102",
+    "Container": 48,
+    "IsBusy": false
+  },
+  {
+    "RoomID": "A103",
+    "Container": 48,
+    "IsBusy": false
+  },
+  {
+    "RoomID": "A104",
+    "Container": 48,
+    "IsBusy": false
+  },
+  {
     "RoomID": "A105",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A106",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A107",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A108",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A109",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A110",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A111",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A112",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A113",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A201",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A202",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A203",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A204",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A205",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A206",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A207",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A209",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A210",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A2-101",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A2-102",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A2-103",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A211",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A2-201",
-    "Container": 70
+    "Container": 70,
+    "IsBusy": false
   },
   {
     "RoomID": "A2-202",
-    "Container": 70
+    "Container": 70,
+    "IsBusy": false
   },
   {
     "RoomID": "A2-203",
-    "Container": 70
+    "Container": 70,
+    "IsBusy": false
   },
   {
     "RoomID": "A2-301",
-    "Container": 70
+    "Container": 70,
+    "IsBusy": false
   },
   {
     "RoomID": "A2-302",
-    "Container": 70
+    "Container": 70,
+    "IsBusy": false
   },
   {
     "RoomID": "A2-303",
-    "Container": 70
+    "Container": 70,
+    "IsBusy": false
   },
   {
     "RoomID": "A2-304",
-    "Container": 70
+    "Container": 70,
+    "IsBusy": false
   },
   {
     "RoomID": "A2-402",
-    "Container": 70
+    "Container": 70,
+    "IsBusy": false
   },
   {
     "RoomID": "A2-403",
-    "Container": 70
+    "Container": 70,
+    "IsBusy": false
   },
   {
     "RoomID": "A2-404",
-    "Container": 70
+    "Container": 70,
+    "IsBusy": false
   },
   {
     "RoomID": "A301",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A302",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A302A",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A303",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A307",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A308",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A3-101",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A311",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A312",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A313",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A314",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A315",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A3-201",
-    "Container": 48
+    "Container": 48,
+    "IsBusy": false
   },
   {
     "RoomID": "A3-202",
-    "Container": 48
-  },
-  {
-    "RoomID": "A3-203",
-    "Container": 48
-  },
-  {
-    "RoomID": "A3-204",
-    "Container": 48
-  },
-  {
-    "RoomID": "A3-205",
-    "Container": 48
-  },
-  {
-    "RoomID": "A3-206",
-    "Container": 48
-  },
-  {
-    "RoomID": "A3-207",
-    "Container": 48
-  },
-  {
-    "RoomID": "A3-208",
-    "Container": 48
-  },
-  {
-    "RoomID": "A3-301",
-    "Container": 48
-  },
-  {
-    "RoomID": "A3-302",
-    "Container": 48
-  },
-  {
-    "RoomID": "A3-401",
-    "Container": 48
-  },
-  {
-    "RoomID": "A3-402",
-    "Container": 48
-  },
-  {
-    "RoomID": "A3-403",
-    "Container": 48
-  },
-  {
-    "RoomID": "A3-404",
-    "Container": 48
-  },
-  {
-    "RoomID": "A3-405",
-    "Container": 48
-  },
-  {
-    "RoomID": "A3-406",
-    "Container": 48
-  },
-  {
-    "RoomID": "A3-407",
-    "Container": 48
-  },
-  {
-    "RoomID": "A3-408",
-    "Container": 48
-  },
-  {
-    "RoomID": "A4-101",
-    "Container": 48
-  },
-  {
-    "RoomID": "A4-102",
-    "Container": 70
-  },
-  {
-    "RoomID": "A4-103",
-    "Container": 70
-  },
-  {
-    "RoomID": "A4-201",
-    "Container": 70
-  },
-  {
-    "RoomID": "A4-202",
-    "Container": 70
-  },
-  {
-    "RoomID": "A4-203",
-    "Container": 70
-  },
-  {
-    "RoomID": "A4-301",
-    "Container": 70
-  },
-  {
-    "RoomID": "A4-304",
-    "Container": 70
-  },
-  {
-    "RoomID": "A4-402",
-    "Container": 70
-  },
-  {
-    "RoomID": "A4-403",
-    "Container": 70
-  },
-  {
-    "RoomID": "B101",
-    "Container": 56
-  },
-  {
-    "RoomID": "B102",
-    "Container": 56
-  },
-  {
-    "RoomID": "B103",
-    "Container": 56
-  },
-  {
-    "RoomID": "B104",
-    "Container": 56
-  },
-  {
-    "RoomID": "B105",
-    "Container": 56
-  },
-  {
-    "RoomID": "B107",
-    "Container": 56
-  },
-  {
-    "RoomID": "B108",
-    "Container": 56
-  },
-  {
-    "RoomID": "B109",
-    "Container": 56
-  },
-  {
-    "RoomID": "B201",
-    "Container": 56
-  },
-  {
-    "RoomID": "B202",
-    "Container": 56
-  },
-  {
-    "RoomID": "B203",
-    "Container": 56
-  },
-  {
-    "RoomID": "B204",
-    "Container": 56
-  },
-  {
-    "RoomID": "B205",
-    "Container": 56
-  },
-  {
-    "RoomID": "B206",
-    "Container": 56
-  },
-  {
-    "RoomID": "B207",
-    "Container": 56
-  },
-  {
-    "RoomID": "B208",
-    "Container": 56
-  },
-  {
-    "RoomID": "B209",
-    "Container": 56
-  },
-  {
-    "RoomID": "B210",
-    "Container": 56
-  },
-  {
-    "RoomID": "B211",
-    "Container": 56
-  },
-  {
-    "RoomID": "B212",
-    "Container": 56
-  },
-  {
-    "RoomID": "B213",
-    "Container": 56
-  },
-  {
-    "RoomID": "B214",
-    "Container": 56
-  },
-  {
-    "RoomID": "B301",
-    "Container": 56
-  },
-  {
-    "RoomID": "B302",
-    "Container": 56
-  },
-  {
-    "RoomID": "B303",
-    "Container": 56
-  },
-  {
-    "RoomID": "B304",
-    "Container": 56
-  },
-  {
-    "RoomID": "B305",
-    "Container": 56
-  },
-  {
-    "RoomID": "B306",
-    "Container": 56
-  },
-  {
-    "RoomID": "B307",
-    "Container": 56
-  },
-  {
-    "RoomID": "B308",
-    "Container": 56
-  },
-  {
-    "RoomID": "B309",
-    "Container": 56
-  },
-  {
-    "RoomID": "B310",
-    "Container": 56
-  },
-  {
-    "RoomID": "B311",
-    "Container": 56
-  },
-  {
-    "RoomID": "B312",
-    "Container": 56
-  },
-  {
-    "RoomID": "B313",
-    "Container": 56
-  },
-  {
-    "RoomID": "B314",
-    "Container": 56
-  },
-  {
-    "RoomID": "B315",
-    "Container": 56
-  },
-  {
-    "RoomID": "C101",
-    "Container": 64
-  },
-  {
-    "RoomID": "C102",
-    "Container": 64
-  },
-  {
-    "RoomID": "C201",
-    "Container": 64
-  },
-  {
-    "RoomID": "C202",
-    "Container": 64
-  },
-  {
-    "RoomID": "C203",
-    "Container": 64
-  },
-  {
-    "RoomID": "C204",
-    "Container": 64
-  },
-  {
-    "RoomID": "C205",
-    "Container": 64
-  },
-  {
-    "RoomID": "C206",
-    "Container": 64
-  },
-  {
-    "RoomID": "C301",
-    "Container": 64
-  },
-  {
-    "RoomID": "C302",
-    "Container": 64
-  },
-  {
-    "RoomID": "C303",
-    "Container": 64
-  },
-  {
-    "RoomID": "C304",
-    "Container": 64
-  },
-  {
-    "RoomID": "C305",
-    "Container": 64
-  },
-  {
-    "RoomID": "C306",
-    "Container": 64
-  },
-  {
-    "RoomID": "C401",
-    "Container": 64
-  },
-  {
-    "RoomID": "C402",
-    "Container": 64
-  },
-  {
-    "RoomID": "C403",
-    "Container": 64
-  },
-  {
-    "RoomID": "C404",
-    "Container": 64
-  },
-  {
-    "RoomID": "C405",
-    "Container": 64
-  },
-  {
-    "RoomID": "C406",
-    "Container": 64
-  },
-  {
-    "RoomID": "C501",
-    "Container": 64
-  },
-  {
-    "RoomID": "C502",
-    "Container": 64
-  },
-  {
-    "RoomID": "C503",
-    "Container": 64
-  },
-  {
-    "RoomID": "C504",
-    "Container": 64
+    "Container": 48,
+    "IsBusy": false
   }
 ]

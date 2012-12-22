@@ -36,7 +36,8 @@ namespace Mvc_ESM.Static_Helper
         public DateTime StartDate { get; set; }
         public int NumDate { get; set; }
         public int DateMin { get; set; }
-        public int StepTime { get; set; }
+        public int ShiftTime { get; set; }
+        public int MinStudent { get; set; }
         public List<DateTime> Times { get; set; }
     }
 

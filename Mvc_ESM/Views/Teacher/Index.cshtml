@@ -5,18 +5,6 @@
 
 <h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Tạo mới", "Create")
-</p>
-
-
-<link href="@Url.Content("~/Content/TableThemes/table_jui.css")" rel="stylesheet" type="text/css" />
-<link href="@Url.Content("~/Content/TableThemes/page.css")" rel="stylesheet" type="text/css" />
-<script src="@Url.Content("~/Scripts/UI/jquery-ui.js")" type="text/javascript" lang="javascript" ></script>
-<link href="@Url.Content("~/Content/ui-lightness/jquery-ui.css")" rel="stylesheet" type="text/css" />
-<script src="@Url.Content("~/Scripts/jquery.dataTables.min.js")" type="text/javascript" lang="javascript" ></script>
-
-
 @using (Html.BeginForm("Index", "Teacher", FormMethod.Post, new { @id = "FilterForm" }))
 {
     <p>
@@ -29,75 +17,6 @@
 
     </p>
 }
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#KhoaList").change(function () {
-            var id = $(this).val();
-            $.getJSON("/Services/LoadSubjectsByFacultyID", { FacultyID: id },
-            function (Data) {
-                var select = $("#BoMonList");
-                select.empty();
-                select.append($('<option/>', {
-                    value: "",
-                    text: "Tất cả"
-                }));
-                $.each(Data, function (index, itemData) {
-                    select.append($('<option/>', {
-                        value: itemData.Value,
-                        text: itemData.Text
-                    }));
-                });
-                $("#SearchString").empty();
-            });
-        });
-
-        $('#table tbody td button#Deletebtn').button({
-            icons: {
-                primary: "ui-icon-trash"
-            }
-        }).live('click', function () {
-            var id = $(this).attr("value");
-            var aDialog = $("#dialog-confirm");
-            aDialog.removeAttr("style");
-            aDialog.dialog({
-                resizable: false,
-                modal: true,
-                buttons: {
-                    "Xóa": function () {
-                        $.post("/Teacher/Delete", "id=" + id, function (data) {
-                            alert(data);
-                            if (data == "Xóa thành công!")
-                                window.location = "@Url.Action("Index", "Teacher")";
-                        });
-                        $(this).dialog("close");
-                    },
-                    "Không": function () {
-                        $(this).dialog("close");
-                    }
-                }
-            });
-        });
-
-        $('#table tbody td button#Modifybtn').button({
-            icons: {
-                primary: "ui-icon-pencil"
-            }
-        }).live('click', function () {
-            var id = $(this).attr("value");
-            window.location = '@Url.Action("Edit", "Teacher")' + "/" + id;
-        });
-
-        $('#table tbody td button#Detailbtn').button({
-            icons: {
-                primary: "ui-icon-info"
-            }
-        }).live('click', function () {
-            var id = $(this).attr("value");
-            window.location = '@Url.Action("Details", "Teacher")' + "/" + id;
-            });
-    });
-</script>
 
 <table id="table">
     <thead>
@@ -114,7 +33,6 @@
             </th>
             <th>Học vị
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -140,50 +58,38 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.HocVi)
                 </td>
-                <td>
-
-                    @*     @Html.ActionLink("Details", "Details", new { id = item.MaGiaoVien }) |
-                           @Html.ActionLink("Edit", "Edit", new { id = item.MaGiaoVien }) |
-                   @Html.ActionLink("Delete", "Delete", new { id = item.MaGiaoVien })
-                    <button id="Detailbtn" value="@item.MaGiaoVien">Xem</button>*@
-                    <button id="Modifybtn" value="@item.MaGiaoVien">Sửa</button>
-                    | 
-                    <button id="Deletebtn" value="@item.MaGiaoVien">Xóa</button>
-
-                </td>
             </tr>
         }
     </tbody>
 </table>
 
-<div id="dialog-confirm" title="Xóa dữ liệu?" style="visibility: hidden">
-    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Bạn có muốn xoá dữ liệu này không?</p>
-</div>
-
-<link href="@Url.Content("~/Content/TableThemes/table_jui.css")" rel="stylesheet" type="text/css" />
-<link href="@Url.Content("~/Content/TableThemes/smoothness/jquery-ui-1.8.4.custom.css")" rel="stylesheet" type="text/css" />
-<script src="@Url.Content("~/Scripts/jquery.dataTables.js")" type="text/javascript" lang="javascript" ></script>
-
+@Html.Partial("_DataTable.Lib")
 
 <script type="text/javascript" charset="utf-8">
-    $(document).ready(function () {
-        $('#table').dataTable({
-            "bJQueryUI": true,
-            "sPaginationType": "full_numbers",
-            "oLanguage": {
-                "sLengthMenu": "Hiển thị _MENU_ kết quả mỗi trang",
-                "sZeroRecords": "Không tìm thấy dữ liệu",
-                "sInfo": "Đang hiển thị kết quả thứ _START_ đến _END_ của _TOTAL_ kết quả",
-                "sInfoEmpty": "Đang hiển thị kết quả thứ 0 đến 0 của 0 kết quả",
-                "sInfoFiltered": "(Lọc từ _MAX_ kết quả)",
-                "sSearch": "Tìm:",
-                "oPaginate": {
-                    "sFirst": "<<Đầu tiên",
-                    "sLast": "Cuối cùng>>",
-                    "sPrevious": "&lt;Trước",
-                    "sNext": "Sau>",
-                }
-            }
+    $("#KhoaList").change(function () {
+        var id = $(this).val();
+        $.getJSON("/Services/LoadSubjectsByFacultyID", { FacultyID: id },
+        function (Data) {
+            var select = $("#BoMonList");
+            select.empty();
+            select.append($('<option/>', {
+                value: "",
+                text: "Tất cả"
+            }));
+            $.each(Data, function (index, itemData) {
+                select.append($('<option/>', {
+                    value: itemData.Value,
+                    text: itemData.Text
+                }));
+            });
+            $("#SearchString").empty();
         });
     });
+
+    var oTable = $('#table').dataTable({
+        @Html.Partial("_DataTable")
+    });
+
+    new FixedHeader(oTable);
+
 </script>

@@ -15,7 +15,7 @@ namespace Mvc_ESM.Static_Helper
         /// danh sách môn học sẽ xếp lịch
         /// </summary>
         public static Dictionary<String, List<Class>> Subjects;
-        public static List<Room> Rooms;
+        public static List<Room> Rooms = InitListRoom();
         /// <summary>
         /// danh sách sinh viên sẽ bị cấm thi
         /// </summary>
@@ -25,24 +25,43 @@ namespace Mvc_ESM.Static_Helper
 
         public static List<Shift> BusyShifts = InitBusyShift();
 
-        public static List<RoomList> BusyRooms = InitListRoom();
+        public static List<RoomList> BusyRooms = InitListBusyRooms();
 
-        public static List<RoomList> InitListRoom()
+        public static List<Room> InitListRoom()
         {
-            if (AlgorithmRunner.JsoExits("BusyRooms"))
+            if (AlgorithmRunner.JsoExits("Rooms"))
             {
-                return AlgorithmRunner.ReadOBJ<List<RoomList>>("BusyRoom");
+                return AlgorithmRunner.ReadOBJ<List<Room>>("Rooms");
             }
             else
             {
                 DKMHEntities db = new DKMHEntities();
-                List<RoomList> aRoomList = new List<RoomList>();
                 List<Room> Rooms = db.phongs.Where(p => p.SucChua > 0).OrderBy(m => m.MaPhong).Select(m => new Room()
                 {
                     RoomID = m.MaPhong,
                     Container = (int)m.SucChua,
                     IsBusy = false
                 }).ToList();
+                return Rooms;
+            }
+        }
+
+        public static List<RoomList> InitListBusyRooms()
+        {
+            if (AlgorithmRunner.JsoExits("BusyRooms"))
+            {
+                return AlgorithmRunner.ReadOBJ<List<RoomList>>("BusyRooms");
+            }
+            else
+            {
+                DKMHEntities db = new DKMHEntities();
+                List<RoomList> aRoomList = new List<RoomList>();
+                //List<Room> Rooms = db.phongs.Where(p => p.SucChua > 0).OrderBy(m => m.MaPhong).Select(m => new Room()
+                //{
+                //    RoomID = m.MaPhong,
+                //    Container = (int)m.SucChua,
+                //    IsBusy = false
+                //}).ToList();
                 for (int i = 0; i < InputHelper.Options.NumDate; i++)
                 {
                     DateTime ShiftTime = InputHelper.Options.StartDate.AddDays(i);
@@ -90,6 +109,7 @@ namespace Mvc_ESM.Static_Helper
                     NumDate = 100,
                     DateMin = 1,
                     ShiftTime = 120,
+                    MinStudent = 10,
                     Times = new List<DateTime>()
                     {
                         DateTime.Now.Date.AddHours(7).AddMinutes(15),

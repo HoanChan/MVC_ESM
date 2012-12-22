@@ -10,6 +10,42 @@ namespace Mvc_ESM.Controllers
     public class ServicesController : Controller
     {
         [HttpGet]
+        public JsonResult LoadStudentTimetable(String StudentID)
+        {
+            IEnumerable<pdkmh> dkmhs = Data.db.pdkmhs.Where(m => m.MaSinhVien == StudentID);
+            var aData = (from dk in dkmhs
+                         join lh in Data.db.lichhocvus on (dk.MaMonHoc + dk.Nhom) equals (lh.MaMonHoc + lh.Nhom)
+                         select new
+                         {
+                             dk.MaMonHoc,
+                             dk.nhom1.monhoc.TenMonHoc,
+                             SoTC = dk.nhom1.monhoc.TCLyThuyet,
+                             dk.Nhom,
+                             lh.MaPhong,
+                             lh.SoTiet,
+                             lh.SoTuan,
+                             lh.TietBD,
+                             lh.TuanBD,
+                             lh.Thu,
+                             lh.nhom1.giaovien.TenGiaoVien
+                         }
+                         ).ToList();
+                        
+            if (aData.Count() > 0)
+            {
+                return Json(new
+                {
+                    Ok = "true",
+                    Data = aData
+                }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { Ok = "false" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpGet]
         public JsonResult LoadRoomsByDate(long DateMilisecond)
         {
             DateTime realDate = (new DateTime(1970, 1, 1, 0, 0, 0, 0)).AddMilliseconds(DateMilisecond);
@@ -97,14 +133,14 @@ namespace Mvc_ESM.Controllers
                                             su.TenKhoa,
                                             su.Nhom.ToString(),
                                             su.SoLuongDK.ToString(),
-                                            "1",
+                                            Data.Groups[su.MaMonHoc + "_" + su.Nhom].GroupID.ToString(),
                                             //"Xoá"
                                         }
                             );
             }
             if (SubjectID != null && Class != null && Group != null)
             {
-                InputHelper.SaveGroups(SubjectID, Class, Group);
+                OutputHelper.SaveGroups(SubjectID, Class, Group);
             }
             return Json(new{
                                 sEcho = param.sEcho,
@@ -143,7 +179,7 @@ namespace Mvc_ESM.Controllers
             }
             if (SubjectID != null && Class != null && Check != null)
             {
-                InputHelper.SaveIgnoreGroups(SubjectID, Class, Check);
+                OutputHelper.SaveIgnoreGroups(SubjectID, Class, Check);
             }
             return Json(new
                             {

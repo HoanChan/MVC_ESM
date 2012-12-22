@@ -28,5 +28,6 @@ namespace Model
         public virtual ICollection<lichhocvu> lichhocvus { get; set; }
         public virtual monhoc monhoc { get; set; }
         public virtual ICollection<pdkmh> pdkmhs { get; set; }
+        public virtual giaovien giaovien { get; set; }
     }
 }

@@ -25,11 +25,11 @@ namespace Mvc_ESM.Controllers
             InputHelper.Options.StartDate = (new DateTime(1970, 1, 1, 0, 0, 0, 0)).AddMilliseconds(DateStart).Date;
             InputHelper.Options.NumDate = NumDate;
             InputHelper.Options.DateMin = DateMin;
-            InputHelper.Options.StepTime = StepTime;
+            InputHelper.Options.ShiftTime = StepTime;
             string paramInfo = "date:" + InputHelper.Options.StartDate.ToString() + "<br/><br/>";
             paramInfo += "DateMin:" + InputHelper.Options.DateMin + "<br/><br/>";
             paramInfo += "NumDate:" + InputHelper.Options.NumDate + "<br/><br/>";
-            paramInfo += "StepTime:" + InputHelper.Options.StepTime + "<br/><br/>";
+            paramInfo += "StepTime:" + InputHelper.Options.ShiftTime + "<br/><br/>";
             InputHelper.Options.Times = new List<DateTime>();
             for (int i = 0; i < BGTime.Count(); i++)
             {

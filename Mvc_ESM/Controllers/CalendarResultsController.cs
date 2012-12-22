@@ -37,7 +37,7 @@ namespace Mvc_ESM.Controllers
                                                          text = s.monhoc.TenMonHoc,
                                                          start_date = s.CaThi.GioThi,
                                                          end_date = s.CaThi.GioThi,
-                                                         MaPhong = ""
+                                                         MaPhong = s.Nhom
                                                      }).Distinct().ToList<Static_Helper.Event>();
             for (int i = 0; i < SubjectTime.Count(); i++)
             {
@@ -45,7 +45,7 @@ namespace Mvc_ESM.Controllers
                 SubjectTime[i].end_date = SubjectTime[i].end_date.AddHours(2);
             }
 
-            return Content(Static_Helper.Calendar.DataFormater(SubjectTime, false), "text/xml");
+            return Content(Static_Helper.Calendar.DataFormater(SubjectTime, true), "text/xml");
         }
 
         public ActionResult StudentsData(String id)

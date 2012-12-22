@@ -35,13 +35,13 @@ namespace Mvc_ESM.Controllers
         [HttpPost]
         public String IgnoreSuccess(List<String> SubjectID, List<String> Class, List<String> Check)
         {
-            return InputHelper.SaveIgnoreGroups(SubjectID, Class, Check);
+            return OutputHelper.SaveIgnoreGroups(SubjectID, Class, Check);
         }
 
         [HttpPost]
         public String SelectSuccess(List<String> SubjectID, List<String> Class, List<int> Group)
         {
-            return InputHelper.SaveGroups(SubjectID, Class, Group);
+            return OutputHelper.SaveGroups(SubjectID, Class, Group);
         }
 
         protected override void Dispose(bool disposing)

@@ -29,7 +29,7 @@
     {
                     <li><a href ="@Url.Action("About", "Home")"><span>Hướng dẫn</span></a></li>
 
-                    <li><a href="#" class="parent"><span>Chỉnh sửa CSDL</span></a>
+                    <li><a href="#" class="parent"><span>Xem CSDL</span></a>
                         <ul>
                             <li><a href="@Url.Action("Index", "Subject")"><span>Môn Học</span></a></li>
                             <li><a href="@Url.Action("Index", "Teacher")"><span>Giáo viên</span></a></li>
@@ -46,12 +46,13 @@
                             <li><a href="@Url.Action("Index", "SelectRoom")"><span>4.Chọn phòng thi</span></a></li>
                             <li><a href="@Url.Action("Index", "Options")"><span>5.Thiết lập thông số</span></a></li>
                             <li><a href="@Url.Action("Index", "BusyShift")"><span>6.Chọn ca không thi</span></a></li>
+                            <li><a href="@Url.Action("Index", "BusyRoom")"><span>7.Chọn phòng không thi</span></a></li>
                         </ul>
                     </li>
                     <li><a href="#" class="parent"><span>Xếp lịch thi</span></a>
                         <ul>
-                            <li><a href="@Url.Action("Index", "Progress")"><span>Xếp tự động</span></a></li>
-                            <li><a href="@Url.Action("Index", "Handmade")"><span>Xếp thủ công</span></a></li>
+                            <li><a href="@Url.Action("Index", "Progress")"><span>1.Xếp tự động</span></a></li>
+                            <li><a href="@Url.Action("Index", "Handmade")"><span>2.Xếp thủ công</span></a></li>
                         </ul>
                     </li>
                     
@@ -78,18 +79,19 @@
                                 }
                                 </ul>
                             </li>
-                        @if (Context.User.IsInRole("GiaoVien") || Context.User.IsInRole("Admin"))
-                        {
                             <li><a href="#" class="parent"><span>Dạng Danh sách</span></a>
                                 <ul>
+                                    <li><a href="#"><span>Lịch thi mỗi Sinh viên</span></a></li>
+                                @if (Context.User.IsInRole("GiaoVien") || Context.User.IsInRole("Admin"))
+                                {
                                     <li><a href="@Url.Action("RoomList","CalendarResults")"><span>Phòng Thi</span></a></li>
                                     <li><a href="#"><span>Giáo viên coi thi</span></a></li>
                                     <li><a href="@Url.Action("StudentsOfRooms", "CalendarResults")"><span>Sinh viên theo phòng</span></a></li>
                                     <li><a href="@Url.Action("StudentsOfSubjects","CalendarResults")"><span>Sinh viên theo môn</span></a></li>
                                     <li><a href="@Url.Action("OpenRooms","CalendarResults")"><span>Lịch mở cửa phòng</span></a></li>
+                                }
                                 </ul>
                             </li>
-                        }
                         </ul>                            
                     </li>
 }
