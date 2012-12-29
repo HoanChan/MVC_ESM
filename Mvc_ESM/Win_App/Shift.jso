@@ -1,0 +1,3042 @@
+﻿[
+  {
+    "Time": "2012-11-20T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-20T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-20T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-20T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-21T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-21T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-21T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-21T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-22T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-22T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-22T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-22T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-23T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-23T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-23T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-23T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-24T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-24T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-24T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-24T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-25T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-11-25T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-11-25T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-11-25T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-11-26T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-26T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-26T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-26T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-27T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-27T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-27T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-27T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-28T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-28T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-28T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-28T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-29T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-29T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-29T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-29T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-30T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-30T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-30T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-11-30T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-01T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-01T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-01T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-01T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-02T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-12-02T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-12-02T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-12-02T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-12-03T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-03T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-03T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-03T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-04T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-04T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-04T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-04T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-05T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-05T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-05T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-05T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-06T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-06T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-06T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-06T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-07T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-07T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-07T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-07T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-08T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-08T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-08T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-08T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-09T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-12-09T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-12-09T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-12-09T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-12-10T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-10T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-10T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-10T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-11T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-11T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-11T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-11T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-12T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-12T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-12T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-12T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-13T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-13T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-13T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-13T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-14T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-14T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-14T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-14T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-15T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-15T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-15T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-15T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-16T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-12-16T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-12-16T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-12-16T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-12-17T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-17T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-17T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-17T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-18T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-18T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-18T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-18T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-19T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-19T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-19T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-19T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-20T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-20T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-20T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-20T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-21T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-21T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-21T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-21T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-22T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-22T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-22T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-22T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-23T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-12-23T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-12-23T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-12-23T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-12-24T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-24T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-24T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-24T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-25T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-25T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-25T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-25T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-26T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-26T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-26T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-26T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-27T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-27T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-27T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-27T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-28T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-28T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-28T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-28T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-29T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-29T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-29T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-29T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-30T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-12-30T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-12-30T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-12-30T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2012-12-31T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-31T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-31T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2012-12-31T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-01T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-01T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-01T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-01T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-02T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-02T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-02T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-02T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-03T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-03T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-03T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-03T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-04T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-04T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-04T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-04T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-05T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-05T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-05T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-05T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-06T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-01-06T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-01-06T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-01-06T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-01-07T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-07T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-07T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-07T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-08T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-08T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-08T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-08T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-09T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-09T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-09T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-09T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-10T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-10T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-10T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-10T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-11T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-11T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-11T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-11T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-12T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-12T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-12T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-12T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-13T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-01-13T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-01-13T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-01-13T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-01-14T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-14T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-14T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-14T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-15T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-15T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-15T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-15T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-16T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-16T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-16T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-16T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-17T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-17T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-17T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-17T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-18T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-18T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-18T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-18T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-19T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-19T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-19T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-19T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-20T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-01-20T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-01-20T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-01-20T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-01-21T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-21T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-21T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-21T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-22T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-22T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-22T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-22T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-23T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-23T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-23T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-23T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-24T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-24T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-24T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-24T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-25T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-25T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-25T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-25T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-26T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-26T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-26T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-26T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-27T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-01-27T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-01-27T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-01-27T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-01-28T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-28T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-28T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-28T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-29T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-29T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-29T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-29T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-30T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-30T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-30T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-30T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-31T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-31T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-31T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-01-31T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-01T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-01T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-01T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-01T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-02T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-02T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-02T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-02T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-03T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-02-03T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-02-03T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-02-03T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-02-04T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-04T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-04T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-04T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-05T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-05T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-05T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-05T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-06T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-06T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-06T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-06T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-07T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-07T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-07T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-07T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-08T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-08T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-08T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-08T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-09T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-09T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-09T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-09T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-10T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-02-10T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-02-10T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-02-10T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-02-11T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-11T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-11T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-11T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-12T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-12T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-12T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-12T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-13T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-13T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-13T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-13T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-14T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-14T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-14T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-14T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-15T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-15T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-15T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-15T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-16T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-16T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-16T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-16T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-17T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-02-17T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-02-17T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-02-17T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-02-18T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-18T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-18T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-18T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-19T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-19T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-19T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-19T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-20T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-20T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-20T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-20T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-21T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-21T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-21T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-21T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-22T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-22T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-22T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-22T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-23T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-23T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-23T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-23T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-24T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-02-24T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-02-24T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-02-24T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-02-25T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-25T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-25T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-25T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-26T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-26T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-26T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-26T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-27T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-27T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-27T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-27T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-28T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-28T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-28T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-02-28T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-01T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-01T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-01T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-01T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-02T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-02T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-02T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-02T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-03T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-03-03T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-03-03T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-03-03T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-03-04T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-04T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-04T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-04T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-05T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-05T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-05T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-05T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-06T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-06T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-06T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-06T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-07T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-07T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-07T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-07T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-08T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-08T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-08T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-08T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-09T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-09T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-09T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-09T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-10T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-03-10T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-03-10T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-03-10T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-03-11T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-11T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-11T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-11T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-12T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-12T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-12T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-12T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-13T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-13T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-13T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-13T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-14T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-14T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-14T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-14T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-15T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-15T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-15T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-15T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-16T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-16T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-16T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-16T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-17T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-03-17T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-03-17T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-03-17T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-03-18T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-18T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-18T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-18T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-19T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-19T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-19T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-19T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-20T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-20T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-20T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-20T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-21T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-21T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-21T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-21T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-22T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-22T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-22T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-22T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-23T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-23T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-23T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-23T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-24T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-03-24T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-03-24T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-03-24T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-03-25T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-25T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-25T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-25T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-26T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-26T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-26T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-26T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-27T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-27T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-27T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-27T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-28T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-28T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-28T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-28T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-29T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-29T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-29T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-29T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-30T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-30T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-30T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-30T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-03-31T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-03-31T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-03-31T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-03-31T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-04-01T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-01T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-01T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-01T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-02T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-02T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-02T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-02T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-03T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-03T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-03T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-03T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-04T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-04T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-04T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-04T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-05T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-05T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-05T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-05T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-06T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-06T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-06T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-06T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-07T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-04-07T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-04-07T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-04-07T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-04-08T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-08T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-08T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-08T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-09T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-09T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-09T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-09T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-10T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-10T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-10T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-10T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-11T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-11T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-11T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-11T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-12T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-12T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-12T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-12T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-13T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-13T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-13T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-13T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-14T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-04-14T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-04-14T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-04-14T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-04-15T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-15T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-15T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-15T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-16T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-16T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-16T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-16T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-17T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-17T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-17T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-17T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-18T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-18T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-18T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-18T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-19T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-19T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-19T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-19T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-20T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-20T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-20T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-20T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-21T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-04-21T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-04-21T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-04-21T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-04-22T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-22T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-22T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-22T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-23T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-23T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-23T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-23T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-24T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-24T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-24T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-24T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-25T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-25T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-25T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-25T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-26T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-26T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-26T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-26T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-27T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-27T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-27T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-27T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-28T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-04-28T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-04-28T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-04-28T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-04-29T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-29T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-29T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-29T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-30T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-30T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-30T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-04-30T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-01T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-01T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-01T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-01T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-02T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-02T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-02T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-02T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-03T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-03T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-03T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-03T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-04T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-04T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-04T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-04T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-05T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-05-05T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-05-05T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-05-05T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-05-06T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-06T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-06T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-06T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-07T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-07T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-07T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-07T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-08T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-08T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-08T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-08T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-09T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-09T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-09T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-09T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-10T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-10T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-10T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-10T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-11T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-11T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-11T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-11T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-12T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-05-12T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-05-12T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-05-12T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-05-13T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-13T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-13T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-13T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-14T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-14T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-14T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-14T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-15T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-15T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-15T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-15T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-16T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-16T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-16T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-16T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-17T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-17T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-17T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-17T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-18T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-18T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-18T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-18T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-19T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-05-19T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-05-19T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-05-19T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-05-20T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-20T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-20T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-20T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-21T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-21T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-21T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-21T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-22T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-22T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-22T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-22T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-23T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-23T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-23T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-23T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-24T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-24T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-24T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-24T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-25T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-25T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-25T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-25T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-26T07:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-05-26T09:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-05-26T13:00:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-05-26T15:40:00",
+    "IsBusy": true
+  },
+  {
+    "Time": "2013-05-27T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-27T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-27T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-27T15:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-28T07:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-28T09:40:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-28T13:00:00",
+    "IsBusy": false
+  },
+  {
+    "Time": "2013-05-28T15:40:00",
+    "IsBusy": false
+  }
+]

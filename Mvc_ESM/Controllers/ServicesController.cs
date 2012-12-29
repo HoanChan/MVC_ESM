@@ -12,9 +12,9 @@ namespace Mvc_ESM.Controllers
         [HttpGet]
         public JsonResult LoadStudentTimetable(String StudentID)
         {
-            IEnumerable<pdkmh> dkmhs = Data.db.pdkmhs.Where(m => m.MaSinhVien == StudentID);
+            IEnumerable<pdkmh> dkmhs = InputHelper.db.pdkmhs.Where(m => m.MaSinhVien == StudentID);
             var aData = (from dk in dkmhs
-                         join lh in Data.db.lichhocvus on (dk.MaMonHoc + dk.Nhom) equals (lh.MaMonHoc + lh.Nhom)
+                         join lh in InputHelper.db.lichhocvus on (dk.MaMonHoc + dk.Nhom) equals (lh.MaMonHoc + lh.Nhom)
                          select new
                          {
                              dk.MaMonHoc,
@@ -46,19 +46,16 @@ namespace Mvc_ESM.Controllers
         }
 
         [HttpGet]
-        public JsonResult LoadRoomsByDate(long DateMilisecond)
+        public JsonResult LoadRoomsByDateAndShift(long DateMilisecond, int Shift)
         {
-            DateTime realDate = (new DateTime(1970, 1, 1, 0, 0, 0, 0)).AddMilliseconds(DateMilisecond);
-            var aData = (from m in InputHelper.BusyRooms
-                         where m.Time.Date == realDate.Date
-                         select m.Rooms
-                        ).ToList();
-            if (aData.Count() > 0)
+            DateTime realDate = (new DateTime(1970, 1, 1, 0, 0, 0, 0)).AddMilliseconds(DateMilisecond).Date + InputHelper.Options.Times[Shift].TimeOfDay;
+            var aData = InputHelper.BusyRooms.FirstOrDefault(m=>m.Time == realDate);
+            if (aData != null)
             {
                 return Json(new
                 {
                     Ok = "true",
-                    Rooms = aData[0]
+                    Rooms = aData.Rooms
                 }, JsonRequestBehavior.AllowGet);
             }
             else
@@ -71,7 +68,7 @@ namespace Mvc_ESM.Controllers
         public JsonResult LoadTimesByDate(long DateMilisecond)
         {
             DateTime realDate = (new DateTime(1970, 1, 1, 0, 0, 0, 0)).AddMilliseconds(DateMilisecond);
-            var aData = (from m in InputHelper.BusyShifts
+            var aData = (from m in InputHelper.Shifts
                          where !m.IsBusy && m.Time.Date == realDate.Date
                          select m.Time.ToString("dd/MM/yyy HH:mm")
                         ).ToList();
@@ -88,10 +85,11 @@ namespace Mvc_ESM.Controllers
                 return Json(new { Ok = "false" }, JsonRequestBehavior.AllowGet);
             }
         }
+
         [HttpGet]
         public JsonResult LoadGroupsBySubjectID(string SubjectID)
         {
-            var Groups = (from m in Data.Groups.Values
+            var Groups = (from m in InputHelper.Groups.Values
                          where m.MaMonHoc == SubjectID && m.IsIgnored
                          select new
                          {
@@ -100,7 +98,7 @@ namespace Mvc_ESM.Controllers
                          }).ToList();
             if (Groups.Count() > 0)
             {
-                var Subject = Data.Groups[SubjectID + "_" + Groups[0].Nhom];
+                var Subject = InputHelper.Groups[SubjectID + "_" + Groups[0].Nhom];
                 return Json(new { 
                                     MSMH = SubjectID,
                                     TenMH = Subject.TenMonHoc,
@@ -114,17 +112,20 @@ namespace Mvc_ESM.Controllers
                 return Json(new { MSMH = "false" }, JsonRequestBehavior.AllowGet);
             }
         }
+
         [HttpPost]
-        public JsonResult DataTable_SelectGroups(jQueryDataTableParamModel param, List<String> SubjectID = null, List<String> Class = null, List<int> Group = null)
+        public JsonResult DataTable_SelectGroups(jQueryDataTableParamModel param, List<String> SubjectID = null, List<String> Class = null, List<int> Group = null, String Search = null)
         {
 
-            var Groups = (from m in Data.Groups.Values.Where(g=>!g.IsIgnored)
-                            where param.sSearch == null || param.sSearch == "" || m.MaMonHoc.Contains(param.sSearch) || m.TenMonHoc.Contains(param.sSearch)
-                            select m
-                           ).OrderBy(m => m.TenMonHoc);
+            var Groups = from m in InputHelper.Groups.Values.Where(g=>!g.IsIgnored) select m;
+            var total = Groups.Count();
+            if (Search != null && Search != "")
+            {
+                Groups = Groups.Where(m => m.MaMonHoc.ToLower().Contains(Search.ToLower()) || m.TenMonHoc.ToLower().Contains(Search.ToLower()));
+            }
             var Result = new List<string[]>();
 
-            foreach (var su in Groups.Skip(param.iDisplayStart).Take(param.iDisplayLength))
+            foreach (var su in Groups.OrderBy(m => m.TenMonHoc).Skip(param.iDisplayStart).Take(param.iDisplayLength))
             {
                 Result.Add(new string[] {
                                             su.MaMonHoc,
@@ -133,7 +134,7 @@ namespace Mvc_ESM.Controllers
                                             su.TenKhoa,
                                             su.Nhom.ToString(),
                                             su.SoLuongDK.ToString(),
-                                            Data.Groups[su.MaMonHoc + "_" + su.Nhom].GroupID.ToString(),
+                                            InputHelper.Groups[su.MaMonHoc + "_" + su.Nhom].GroupID.ToString(),
                                             //"Xoá"
                                         }
                             );
@@ -144,7 +145,7 @@ namespace Mvc_ESM.Controllers
             }
             return Json(new{
                                 sEcho = param.sEcho,
-                                iTotalRecords = Data.Groups.Count(),
+                                iTotalRecords = total,
                                 iTotalDisplayRecords = Groups.Count(),
                                 //iTotalDisplayedRecords = Subjects.Count(),
                                 aaData = Result
@@ -154,16 +155,30 @@ namespace Mvc_ESM.Controllers
         }
         
         [HttpPost]
-        public JsonResult DataTable_IgnoreGroups(jQueryDataTableParamModel param, List<String> SubjectID = null, List<String> Class = null, List<String> Check = null)
+        public JsonResult DataTable_IgnoreGroups(jQueryDataTableParamModel param, List<String> SubjectID = null, List<String> Class = null, List<String> Check = null, String Search = null, String ShowIgnore = null, String ShowNotIgnore = null)
         {
 
-            var Groups = (from m in Data.Groups.Values
-                            where param.sSearch == null || param.sSearch == "" || m.MaMonHoc.Contains(param.sSearch) || m.TenMonHoc.Contains(param.sSearch)
-                            select m
-                           ).OrderBy(m => m.TenMonHoc);
+            var Groups = from m in InputHelper.Groups.Values select m;
+            var total = Groups.Count();
+            if(Search != null && Search != "")
+            {
+                Groups = Groups.Where(m => m.MaMonHoc.ToLower().Contains(Search.ToLower()) || m.TenMonHoc.ToLower().Contains(Search.ToLower()));
+            }
+            if(ShowIgnore == "checked" && ShowNotIgnore != "checked")
+            {
+                Groups = Groups.Where(m => m.IsIgnored == true);
+            }
+            if(ShowIgnore != "checked" && ShowNotIgnore == "checked")
+            {
+                Groups = Groups.Where(m => m.IsIgnored == false);
+            }
+            if (ShowIgnore != "checked" && ShowNotIgnore != "checked")
+            {
+                Groups = Groups.Where(m => false);
+            }
             var Result = new List<string[]>();
 
-            foreach (var su in Groups.Skip(param.iDisplayStart).Take(param.iDisplayLength))
+            foreach (var su in Groups.OrderBy(m => m.TenMonHoc).Skip(param.iDisplayStart).Take(param.iDisplayLength))
             {
                 Result.Add(new string[] {
                                             su.MaMonHoc,
@@ -184,7 +199,7 @@ namespace Mvc_ESM.Controllers
             return Json(new
                             {
                                 sEcho = param.sEcho,
-                                iTotalRecords = Data.Groups.Count(),
+                                iTotalRecords = total,
                                 iTotalDisplayRecords = Groups.Count(),
                                 //iTotalDisplayedRecords = Subjects.Count(),
                                 aaData = Result
@@ -206,7 +221,7 @@ namespace Mvc_ESM.Controllers
         [HttpGet]
         public JsonResult LoadSubjectByGroupInfo(string SubjectID)
         {
-            var Groups = from g in Data.db.nhoms
+            var Groups = from g in InputHelper.db.nhoms
                           where g.MaMonHoc == SubjectID
                           select new
                           {
@@ -231,7 +246,7 @@ namespace Mvc_ESM.Controllers
         [HttpGet]
         public JsonResult LoadStudentAndSubjectInfo(string StudentID, string SubjectID)
         {
-            var Student = from s in Data.db.sinhviens
+            var Student = from s in InputHelper.db.sinhviens
                           where s.MaSinhVien.Equals(StudentID)
                           select new
                           {
@@ -241,7 +256,7 @@ namespace Mvc_ESM.Controllers
                               Lop = s.Lop,
                               Khoa = s.lop1.khoi.khoa.TenKhoa
                           };
-            var Subject = from m in Data.db.monhocs
+            var Subject = from m in InputHelper.db.monhocs
                           where m.MaMonHoc.Equals(SubjectID)
                           select new
                           {
@@ -265,7 +280,7 @@ namespace Mvc_ESM.Controllers
                         }}, JsonRequestBehavior.AllowGet);
             }
 
-            if ((from d in Data.db.pdkmhs where d.MaMonHoc == SubjectID && d.MaSinhVien == StudentID select d).Count() == 0)
+            if ((from d in InputHelper.db.pdkmhs where d.MaMonHoc == SubjectID && d.MaSinhVien == StudentID select d).Count() == 0)
             {
                 return Json(new List<object>(){ new 
                         {
@@ -293,7 +308,7 @@ namespace Mvc_ESM.Controllers
         [HttpGet]
         public JsonResult LoadClassByFacultyName(string FacultyName)
         {
-            var aData = from b in Data.db.lops
+            var aData = from b in InputHelper.db.lops
                        where b.khoi.khoa.TenKhoa == FacultyName || FacultyName == ""
                        select new SelectListItem()
                        {
@@ -307,7 +322,7 @@ namespace Mvc_ESM.Controllers
         [HttpGet]
         public JsonResult LoadClassByFacultyID(string FacultyID)
         {
-            var aData = from b in Data.db.lops
+            var aData = from b in InputHelper.db.lops
                        where b.khoi.khoa.MaKhoa == FacultyID
                        select new SelectListItem()
                        {
@@ -321,7 +336,7 @@ namespace Mvc_ESM.Controllers
         [HttpGet]
         public JsonResult LoadSubjectsByFacultyID(string FacultyID)
         {
-            var aData = from b in Data.db.bomons
+            var aData = from b in InputHelper.db.bomons
                        where b.khoa.MaKhoa == FacultyID
                        select new SelectListItem()
                        {
@@ -335,7 +350,7 @@ namespace Mvc_ESM.Controllers
         [HttpGet]
         public JsonResult LoadSubjectsByFacultyName(string FacultyName)
         {
-            var aData = (from b in Data.db.bomons
+            var aData = (from b in InputHelper.db.bomons
                         where b.khoa.TenKhoa.Replace("&", "và") == FacultyName || b.khoa.TenKhoa == FacultyName || FacultyName == ""
                         select new SelectListItem()
                         {
@@ -349,7 +364,7 @@ namespace Mvc_ESM.Controllers
         [HttpGet]
         public JsonResult LoadSubjectsBySubject(string SubjectID)
         {
-            var aData = (from m in Data.db.monhocs
+            var aData = (from m in InputHelper.db.monhocs
                         where m.BoMonQL == SubjectID
                         select new SelectListItem()
                          {
@@ -362,7 +377,7 @@ namespace Mvc_ESM.Controllers
         [HttpGet]
         public JsonResult LoadSubjectByFacultyID(string FacultyID)
         {
-            var aData = (from m in Data.db.monhocs
+            var aData = (from m in InputHelper.db.monhocs
                         where m.bomon.KhoaQL == FacultyID
                         select new SelectListItem()
                         {
@@ -375,7 +390,7 @@ namespace Mvc_ESM.Controllers
         [HttpGet]
         public JsonResult LoadRoomsBySubjectID(string SubjectID)
         {
-            var aData = (from b in Data.db.This
+            var aData = (from b in InputHelper.db.This
                        where b.MaMonHoc == SubjectID
                        select new SelectListItem()
                        {

@@ -3,6 +3,17 @@
 }
 
 <h2>@ViewBag.Title</h2>
+<p>
+    <input type="checkbox" id="chkShowIgnore" checked /> Hiện các nhóm không tổ chức thi
+</p>
+<p>
+    <input type="checkbox" id="chkShowNotIgnore" checked /> Hiện các nhóm sẽ tổ chức thi
+</p>
+<p>
+    <label for="Search">Tìm kiếm:</label>
+    <input type="text" id="txtSearch" />
+    <button id="btnUpdate">Tìm</button>
+</p>
 <table id="table">
     <thead>
         <tr>
@@ -13,7 +24,6 @@
             <th>Nhóm</th>
             <th>SL SV</th>
             <th>Chọn</th>
-           @* <th></th>*@
         </tr>
     </thead>
     <tbody>
@@ -106,12 +116,31 @@
                         "value": $(this).attr('checked')
                     });
                 });
+            
+                aoData.push({
+                    "name": "Search",
+                    "value": $("#txtSearch").val()
+                },
+                {
+                    "name": "ShowIgnore",
+                    "value": $("#chkShowIgnore").attr('checked')
+                },
+                {
+                    "name": "ShowNotIgnore",
+                    "value": $("#chkShowNotIgnore").attr('checked')
+                }
+                );
                 
         }
     });
 
     new FixedHeader(oTable);
 
+    $("#btnUpdate").button().click(function () {
+        oTable.fnPageChange(0, true);
+        return false;
+    });
+    
 	$('#SummitButton').button().click(function () {
 	    var sData = "";
 	    oTable.$("#SubjectID").each(function (index, item) {

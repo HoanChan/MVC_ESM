@@ -27,7 +27,7 @@
     <p>Thiết lập ca thi của 1 ngày:</p>
     <p>
         <label for="StepTime">Thời gian 1 ca:</label>
-        <input type="text" id="StepTime" value="@Mvc_ESM.Static_Helper.InputHelper.Options.StepTime" readonly="true" title="Thời gian tổ chức 1 ca thi, đơn vị tính là phút"/>
+        <input type="text" id="StepTime" value="@Mvc_ESM.Static_Helper.InputHelper.Options.ShiftTime" readonly="true" title="Thời gian tổ chức 1 ca thi, đơn vị tính là phút"/>
     </p>
     <p>
         <label for="tBGTime">Thêm ca thi:</label>
@@ -123,6 +123,7 @@
             }
         }).parent().parent().attr('align', 'center');
     });
+
     $(document).ready(function () {
         @for(int i = 0; i < @Mvc_ESM.Static_Helper.InputHelper.Options.Times.Count; i++)
         {
@@ -131,6 +132,7 @@
             </text>
         }
     });
+
     $("#SaveBtn").button().click(function () {
         var sData = "DateStart=" + (parseInt($("#DateStart").datespinner("value")) + 25200000) // bù 7h
                     + "&NumDate=" + $("#NumDate").spinner("value")

@@ -39,7 +39,7 @@ namespace Mvc_ESM.Static_Helper
             String StudentsList2 = "";
             try
             {
-                foreach (String st in InputHelper.Students[Subject1ID])
+                foreach (String st in InputHelper.IgnoreStudents[Subject1ID])
                 {
                     StudentsList1 += (StudentsList1.Length > 0 ? ", " : "") + "'" + st + "'";
                 }
@@ -48,7 +48,7 @@ namespace Mvc_ESM.Static_Helper
 
             try
             {
-                foreach (String st in InputHelper.Students[Subject2ID])
+                foreach (String st in InputHelper.IgnoreStudents[Subject2ID])
                 {
                     StudentsList2 += (StudentsList2.Length > 0 ? ", " : "") + "'" + st + "'";
                 }

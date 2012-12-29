@@ -66,7 +66,7 @@ namespace Mvc_ESM.Static_Helper
             {
                 String SubjectID = AlgorithmRunner.GetSubjectID(AlgorithmRunner.Groups[GroupIndex]);
                 String ClassList = AlgorithmRunner.GetClassList(AlgorithmRunner.Groups[GroupIndex]);
-                String IgnoreStudents = InputHelper.Students.ContainsKey(SubjectID)? JsonConvert.SerializeObject(InputHelper.Students[SubjectID]):"[]";
+                String IgnoreStudents = InputHelper.IgnoreStudents.ContainsKey(SubjectID)? JsonConvert.SerializeObject(InputHelper.IgnoreStudents[SubjectID]):"[]";
                 IgnoreStudents = IgnoreStudents.Substring(1, IgnoreStudents.Length - 2).Replace("\"","'");
                 IEnumerable<String> Result = db.Database.SqlQuery<String>("select sinhvien.MaSinhVien from pdkmh, sinhvien "
                                                                             + "where pdkmh.MaSinhVien = sinhvien.MaSinhVien "

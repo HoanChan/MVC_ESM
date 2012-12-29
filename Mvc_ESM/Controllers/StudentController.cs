@@ -18,12 +18,12 @@ namespace Mvc_ESM.Controllers
         [HttpGet]
         public ViewResult Index()
         {
-            StudentHelper.Khoa = (from d in Data.db.khoas
+            StudentHelper.Khoa = (from d in InputHelper.db.khoas
                                                 orderby d.TenKhoa
                                                 select d).FirstOrDefault().MaKhoa;
             StudentHelper.SearchString = "";
             StudentHelper.Lop = "Tất cả";
-            var students = (from m in Data.db.pdkmhs
+            var students = (from m in InputHelper.db.pdkmhs
                             where m.sinhvien.lop1.khoi.KhoaQL.Equals(StudentHelper.Khoa)
                             select m.sinhvien
                            ).Distinct().Include(m => m.lop1);
@@ -37,7 +37,7 @@ namespace Mvc_ESM.Controllers
             StudentHelper.Khoa = Khoa;
             StudentHelper.SearchString = SearchString;
             StudentHelper.Lop = Lop;
-            var sinhviens = (from m in Data.db.pdkmhs
+            var sinhviens = (from m in InputHelper.db.pdkmhs
                              where (Lop == "" && m.sinhvien.lop1.khoi.KhoaQL.Equals(Khoa)) || (Lop != "" && m.sinhvien.lop1.MaLop.Equals(Lop)) && (m.sinhvien.Ten.Contains(SearchString) || SearchString == "")
                              select m.sinhvien
                            ).Distinct().Include(m => m.lop1);
@@ -47,11 +47,11 @@ namespace Mvc_ESM.Controllers
 
         private void InitViewBag(Boolean IsPost)
         {
-            var KhoaQry = from d in Data.db.khoas
+            var KhoaQry = from d in InputHelper.db.khoas
                           orderby d.TenKhoa
                           select new { MaKhoa = d.MaKhoa, TenKhoa = d.TenKhoa };
             ViewBag.Khoa = new SelectList(KhoaQry.ToArray(), "MaKhoa", "TenKhoa");
-            var ClassQry = from b in Data.db.lops
+            var ClassQry = from b in InputHelper.db.lops
                            where b.khoi.KhoaQL == (IsPost ? StudentHelper.Khoa : KhoaQry.FirstOrDefault().MaKhoa)
                            orderby b.MaLop
                            select new { MaLop = b.MaLop, TenLop = b.MaLop };

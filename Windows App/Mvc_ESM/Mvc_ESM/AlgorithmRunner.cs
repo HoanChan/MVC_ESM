@@ -16,24 +16,12 @@ namespace Mvc_ESM.Static_Helper
         public static int[,] AdjacencyMatrix;
         public static int AdjacencyMatrixSize;
         public static int BeginI;
-        public static Dictionary<String, Group> Data = ReadOBJ<Dictionary<String, Group>>("Groups");
         public static int[] Colors;
         public static int ColorNumber;
         public static DateTime[] GroupsTime;
         public static List<Room>[] GroupsRoom;
         public static List<String>[][] GroupsRoomStudents;
         public static DateTime[] MaxColorTime;
-        public class Group
-        {
-            public string MaMonHoc { get; set; }
-            public string TenMonHoc { get; set; }
-            public string TenBoMon { get; set; }
-            public string TenKhoa { get; set; }
-            public byte Nhom { get; set; }
-            public Nullable<int> SoLuongDK { get; set; }
-            public int GroupID { get; set; }
-            public Boolean IsIgnored { get; set; }
-        }
         public static List<String> Groups;
 
         public static Handmade.HandmadeData HandmadeData;
@@ -60,6 +48,11 @@ namespace Mvc_ESM.Static_Helper
         public static String RealPath(String Name)
         {
             return Path.Combine(Application.StartupPath, Name + ".jso");
+        }
+
+        public static bool OBJExits(string ObjectName)
+        {
+            return File.Exists(RealPath(ObjectName));
         }
 
         public static void SaveOBJ(String Name, Object OBJ)
@@ -91,7 +84,7 @@ namespace Mvc_ESM.Static_Helper
         public void Init()
         {
             Groups = new List<string>();
-            var aGroupList = Data.Where(d => !d.Value.IsIgnored);
+            var aGroupList = InputHelper.Groups.Where(d => !d.Value.IsIgnored);
             var SubjectsList = aGroupList.Select(m => m.Key.Substring(0, m.Key.IndexOf('_'))).Distinct();
             foreach (var subject in SubjectsList)
             {
@@ -107,34 +100,14 @@ namespace Mvc_ESM.Static_Helper
                     Groups.Add(aGroupItem);
                 }
             }
-
-            InputHelper.Students = ReadOBJ<Dictionary<String, List<String>>>("Students");
-            InputHelper.Rooms = ReadOBJ<List<Room>>("Rooms");
-            InputHelper.Options = ReadOBJ<Options>("Options");
             AdjacencyMatrixSize = Groups.Count;
             AdjacencyMatrix = new int[AdjacencyMatrixSize, AdjacencyMatrixSize];
         }
 
-        public static bool JsoExits(string ObjectName)
-        {
-            return File.Exists(RealPath(ObjectName));
-        }
-
-        public static void DeleteJso(string ObjectName)
-        {
-            if (JsoExits(ObjectName))
-            {
-                try
-                {
-                    File.Delete(RealPath(ObjectName));
-                }
-                catch { }
-            }
-        }
-
+        
         public void RunCreateAdjacencyMatrix()
         {
-            if (JsoExits("AdjacencyMatrix"))
+            if (OBJExits("AdjacencyMatrix"))
             {
                 //AdjacencyMatrix = ReadOBJ<int[,]>("AdjacencyMatrix");
                 ReadAdjacencyMatrix(RealPath("AdjacencyMatrix"));
@@ -146,7 +119,7 @@ namespace Mvc_ESM.Static_Helper
                 }
                 else
                 {
-                    if (JsoExits("BeginI"))
+                    if (OBJExits("BeginI"))
                     {
                         BeginI = ReadOBJ<int>("BeginI");
                     }
@@ -220,7 +193,7 @@ namespace Mvc_ESM.Static_Helper
             Thread thread = new Thread(new ThreadStart(Handmade.Run));
             thread.Name = "Handmade";
             thread.Start();
-            DeleteJso("Handmade");
+            DeleteOBJ("Handmade");
         }
     }
 }

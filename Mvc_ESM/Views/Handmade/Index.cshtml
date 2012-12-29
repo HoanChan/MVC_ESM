@@ -191,7 +191,7 @@
                 }
                 $.each(Data.Times, function (index, itemData) {
                     var Time = '<span id="Time">' + itemData + '</span>';
-                    var CheckBox = '<input type="radio" id="TimeCheck" name="TimeCheck" ' + (index == 0 ? "checked" : "") + ' />';
+                    var CheckBox = '<input type="radio" id="TimeCheck" name="TimeCheck" value="' + (index + 1) + '" ' + (index == 0 ? "checked" : "") + ' />';
                     oTableTime.fnAddData([Time, CheckBox]);
                 });
             });
@@ -200,7 +200,8 @@
 
     $("#btnLoadRooms").click(function () {
         var date = $('#datepicker').datespinner("value") + 25200000; // bù 7h
-        $.getJSON("/Services/LoadRoomsByDate", { DateMilisecond: date },
+        var shift = oTableTime.$("#TimeCheck:checked").attr("value") - 1;
+        $.getJSON("/Services/LoadRoomsByDateAndShift", { DateMilisecond: date, Shift: shift },
             function (Data) {
                 oTableRoom.fnClearTable(true);
                 if (Data.Ok == "false") {

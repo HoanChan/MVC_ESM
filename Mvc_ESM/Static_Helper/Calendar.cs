@@ -7,7 +7,7 @@ namespace Mvc_ESM.Static_Helper
 {
     public class Calendar
     {
-        public static String DataFormater(List<Static_Helper.Event> SubjectTime, Boolean Ok)
+        public static String DataFormater(List<Event> SubjectTime, Boolean Ok)
         {
             String Result = "<data>";
             for (int i = 0; i < SubjectTime.Count(); i++)

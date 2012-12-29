@@ -5,6 +5,18 @@ using System.Web;
 
 namespace Mvc_ESM.Static_Helper
 {
+    public class Group
+    {
+        public string MaMonHoc { get; set; }
+        public string TenMonHoc { get; set; }
+        public string TenBoMon { get; set; }
+        public string TenKhoa { get; set; }
+        public byte Nhom { get; set; }
+        public Nullable<int> SoLuongDK { get; set; }
+        public int GroupID { get; set; }
+        public Boolean IsIgnored { get; set; }
+    }
+
     public class Class
     {
         public String ClassID { get; set; }
@@ -51,6 +63,7 @@ namespace Mvc_ESM.Static_Helper
         public int Step { get; set; }
         public String MaPhong { get; set; }
     }
+
     public class jQueryDataTableParamModel
     {
         /// <summary>

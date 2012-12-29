@@ -3,6 +3,11 @@
     ViewBag.Title = "Lập danh sách các môn phân đợt thi";
 }
 <h2>@ViewBag.Title</h2>
+<p>
+    <label for="Search">Tìm kiếm:</label>
+    <input type="text" id="txtSearch" />
+    <button id="btnUpdate">Tìm</button>
+</p>
 <table id="table">
     <thead>
         <tr>
@@ -92,26 +97,7 @@
                     $(nTd).prepend(b.parent()).attr('align', 'center');
                 }
             },
-            //{
-            //    "bSortable": false, "aTargets": [7],
-            //    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-            //        var b = $('<button>' + sData + '</button>');
-            //        b.button({
-            //            icons: {
-            //                primary: "ui-icon-trash" // hình cái thùng rác
-            //            }
-            //        }).click(function (e) {
-            //            e.preventDefault();
-            //            var row = $(this).parent().parent(); // this là cái nút, cha của nó là td ông của nó là tr ==> cái hàng cần xoá
-            //            if (row.length !== 0) {
-            //                oTable.fnDeleteRow(row[0]);
-            //            }
-            //        });
-            //        $(nTd).empty();
-            //        $(nTd).prepend(b).attr('align', 'center');
-            //    }
-            //},
-	    ], // không hiện nút sắp xếp!
+	    ],
         
 	    @Html.Partial("_DataTable")
     });
@@ -137,8 +123,16 @@
                         "value": $(this).spinner("value")
                     });
                 });
-                
+                aoData.push({
+                    "name": "Search",
+                    "value": $("#txtSearch").val()
+                });                
         }
+    });
+
+    $("#btnUpdate").button().click(function () {
+        oTable.fnPageChange(0, true);
+        return false;
     });
 
 	$('#SummitButton').button().click(function () {

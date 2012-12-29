@@ -9,7 +9,7 @@ namespace Mvc_ESM.Static_Helper
 {
     public class MakeTime
     {
-        private static List<Shift> ShiftList = InputHelper.BusyShifts.Where(m => !m.IsBusy).ToList();
+        private static List<Shift> ShiftList = InputHelper.Shifts.Where(m => !m.IsBusy).ToList();
         //B1: Gán thời gian tối thiểu cho tất cả các môn dựa vào màu của chúng
         private static void Init()
         {
@@ -141,8 +141,8 @@ namespace Mvc_ESM.Static_Helper
 
         public static int CalcShift(DateTime OldTime, DateTime NewTime)
         {
-            int Shift1Index = InputHelper.BusyShifts.FindIndex(m => m.Time == OldTime);
-            int Shift2Index = InputHelper.BusyShifts.FindIndex(m => m.Time == NewTime);
+            int Shift1Index = InputHelper.Shifts.FindIndex(m => m.Time == OldTime);
+            int Shift2Index = InputHelper.Shifts.FindIndex(m => m.Time == NewTime);
             return Math.Abs(Shift1Index - Shift2Index);
         }
 
@@ -161,8 +161,8 @@ namespace Mvc_ESM.Static_Helper
         {
             DateTime T1 = AlgorithmRunner.GroupsTime[i];
             DateTime T2 = AlgorithmRunner.GroupsTime[j];
-            int Shift1Index = InputHelper.BusyShifts.FindIndex(m => m.Time == T1);
-            int Shift2Index = InputHelper.BusyShifts.FindIndex(m => m.Time == T2);
+            int Shift1Index = InputHelper.Shifts.FindIndex(m => m.Time == T1);
+            int Shift2Index = InputHelper.Shifts.FindIndex(m => m.Time == T2);
             //Đã đạt yêu cầu, trả về 0 không tăng cái nào lên làm gì
             if (Math.Abs(Shift1Index - Shift2Index) > InputHelper.Options.DateMin)
             {

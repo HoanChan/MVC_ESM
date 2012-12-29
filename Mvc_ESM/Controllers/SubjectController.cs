@@ -19,7 +19,7 @@ namespace Mvc_ESM.Controllers
         {
             if (SubjectHelper.Khoa == null || SubjectHelper.Khoa == "")
             {
-                SubjectHelper.Khoa = (from d in Data.db.khoas
+                SubjectHelper.Khoa = (from d in InputHelper.db.khoas
                                                     orderby d.TenKhoa
                                                     select d).FirstOrDefault().MaKhoa;
                 SubjectHelper.SearchString = "";
@@ -30,7 +30,7 @@ namespace Mvc_ESM.Controllers
             {
                 InitViewBag(true);
             }
-            var monhocs = (from m in Data.db.monhocs
+            var monhocs = (from m in InputHelper.db.monhocs
                            where m.bomon.KhoaQL.Equals(SubjectHelper.Khoa)
                            select m
                            ).Include(m => m.bomon).Include(m => m.khoa);
@@ -44,7 +44,7 @@ namespace Mvc_ESM.Controllers
             SubjectHelper.Khoa = Khoa;
             SubjectHelper.SearchString = SearchString;
             SubjectHelper.BoMon = BoMon;
-            var monhocs = (from m in Data.db.monhocs 
+            var monhocs = (from m in InputHelper.db.monhocs 
                            where ((BoMon == "" && m.bomon.KhoaQL.Equals(Khoa)) || (BoMon != "" && m.bomon.MaBoMon.Equals(BoMon))) && (m.TenMonHoc.Contains(SearchString) || SearchString == "")
                            select m
                            ).Include(m => m.bomon).Include(m => m.khoa);
@@ -54,11 +54,11 @@ namespace Mvc_ESM.Controllers
 
         private void InitViewBag(Boolean IsPost)
         {
-            var KhoaQry = from d in Data.db.khoas
+            var KhoaQry = from d in InputHelper.db.khoas
                           orderby d.TenKhoa
                           select new { MaKhoa = d.MaKhoa, TenKhoa = d.TenKhoa };
             ViewBag.Khoa = new SelectList(KhoaQry.ToArray(), "MaKhoa", "TenKhoa");
-            var BoMonQry = from b in Data.db.bomons
+            var BoMonQry = from b in InputHelper.db.bomons
                             where b.khoa.MaKhoa == (IsPost ? SubjectHelper.Khoa : KhoaQry.FirstOrDefault().MaKhoa)
                             orderby b.TenBoMon
                             select new { MaBoMon = b.MaBoMon, TenBoMon = b.TenBoMon };

@@ -9,12 +9,12 @@ using System.Web.Mvc;
 using Mvc_ESM;
 using Mvc_ESM.Models;
 using Newtonsoft.Json;
+using Mvc_ESM.Static_Helper;
 namespace Mvc_ESM.Controllers
 {
     [Authorize]
     public class CalendarResultsController : Controller
     {
-        private DKMHEntities db = new DKMHEntities();
 
         [Authorize(Roles = "Admin, GiaoVien")]
         public ActionResult RoomsResult()
@@ -29,7 +29,7 @@ namespace Mvc_ESM.Controllers
 
         public ActionResult RoomsData(String id)
         {
-            List<Static_Helper.Event> SubjectTime = (from s in db.This
+            List<Static_Helper.Event> SubjectTime = (from s in InputHelper.db.This
                                                      where s.MaPhong == id
                                                      select new Static_Helper.Event()
                                                      {
@@ -50,7 +50,7 @@ namespace Mvc_ESM.Controllers
 
         public ActionResult StudentsData(String id)
         {
-            List<Static_Helper.Event> SubjectTime = (from s in db.This
+            List<Static_Helper.Event> SubjectTime = (from s in InputHelper.db.This
                                                      where s.MaSinhVien == id
                                                      select new Static_Helper.Event()
                                                      {
@@ -73,8 +73,8 @@ namespace Mvc_ESM.Controllers
         [HttpGet]
         public ActionResult StudentsOfSubjects()
         {
-            var sv = (from s in db.sinhviens
-                      join m in db.This on s.MaSinhVien equals m.MaSinhVien
+            var sv = (from s in InputHelper.db.sinhviens
+                      join m in InputHelper.db.This on s.MaSinhVien equals m.MaSinhVien
                       where m.MaMonHoc == ""
                       select s).Distinct();
             InitViewBag(false, 0);
@@ -84,8 +84,8 @@ namespace Mvc_ESM.Controllers
         [HttpPost]
         public ActionResult StudentsOfSubjects(String MonHoc)
         {
-            var sv = (from s in db.sinhviens
-                      join m in db.This on s.MaSinhVien equals m.MaSinhVien
+            var sv = (from s in InputHelper.db.sinhviens
+                      join m in InputHelper.db.This on s.MaSinhVien equals m.MaSinhVien
                       where m.MaMonHoc == MonHoc
                       select s).Distinct();
             InitViewBag(false, 0);
@@ -95,8 +95,8 @@ namespace Mvc_ESM.Controllers
         [HttpGet]
         public ActionResult StudentsOfRooms()
         {
-            var sv = (from s in db.sinhviens
-                      join m in db.This on s.MaSinhVien equals m.MaSinhVien
+            var sv = (from s in InputHelper.db.sinhviens
+                      join m in InputHelper.db.This on s.MaSinhVien equals m.MaSinhVien
                       where m.MaMonHoc == ""
                       select s).Distinct();
             InitViewBag(false, 1);
@@ -107,8 +107,8 @@ namespace Mvc_ESM.Controllers
         public ActionResult StudentsOfRooms(String MonHoc, String Phong)
         {
             Static_Helper.SubjectHelper.SearchString = MonHoc;
-            var sv = (from s in db.sinhviens
-                      join m in db.This on s.MaSinhVien equals m.MaSinhVien
+            var sv = (from s in InputHelper.db.sinhviens
+                      join m in InputHelper.db.This on s.MaSinhVien equals m.MaSinhVien
                       where m.MaMonHoc == MonHoc && (m.MaPhong == Phong || Phong == "")
                       select s).Distinct();
             InitViewBag(true, 1);
@@ -117,12 +117,12 @@ namespace Mvc_ESM.Controllers
 
         private void InitViewBag(Boolean IsPost, int k)
         {
-            var MonQry = (from d in db.This
-                          select new { MaMH = d.MaMonHoc, TenMH = (from m in db.monhocs where m.MaMonHoc == d.MaMonHoc select m.TenMonHoc).FirstOrDefault() }).Distinct().OrderBy(d => d.TenMH);
+            var MonQry = (from d in InputHelper.db.This
+                          select new { MaMH = d.MaMonHoc, TenMH = (from m in InputHelper.db.monhocs where m.MaMonHoc == d.MaMonHoc select m.TenMonHoc).FirstOrDefault() }).Distinct().OrderBy(d => d.TenMH);
             ViewBag.MonHoc = new SelectList(MonQry.ToArray(), "MaMH", "TenMH");
             if (k == 1)
             {
-                var PhongQry = (from b in db.This
+                var PhongQry = (from b in InputHelper.db.This
                                 where b.MaMonHoc == (IsPost ? Static_Helper.SubjectHelper.SearchString : MonQry.FirstOrDefault().MaMH)
                                 select new { MaPhong = b.MaPhong, TenPhong = b.MaPhong }).Distinct();
                 ViewBag.Phong = new SelectList(PhongQry.ToArray(), "MaPhong", "TenPhong");
@@ -133,7 +133,7 @@ namespace Mvc_ESM.Controllers
         public ActionResult RoomList()
         {
             //STT	Phòng	Mã môn thi	Tên môn thi	SLSV	Ngày thi	Tiết bắt đầu	Số tiết
-            var rooms = (from m in db.This
+            var rooms = (from m in InputHelper.db.This
                          select new
                          {
                              m.MaPhong,
@@ -152,7 +152,7 @@ namespace Mvc_ESM.Controllers
                 s[2] = r.MaMonHoc;
                 s[3] = r.TenMonHoc;
 
-                s[4] = (from t in db.This
+                s[4] = (from t in InputHelper.db.This
                         where t.MaMonHoc == r.MaMonHoc && t.MaPhong == r.MaPhong && t.Nhom == r.Nhom
                         select t.MaSinhVien).Count() + "";
                 s[5] = r.GioThi.Date.ToShortDateString();
@@ -201,7 +201,7 @@ namespace Mvc_ESM.Controllers
         [Authorize(Roles = "Admin, GiaoVien")]
         public ActionResult OpenRooms()
         {
-            var rooms = (from r in db.This
+            var rooms = (from r in InputHelper.db.This
                          select new
                          {
                              r.MaPhong,
@@ -284,7 +284,7 @@ namespace Mvc_ESM.Controllers
         [HttpPost]
         public ActionResult StudentSchedule(String SearchString)
         {
-            var sinhviens = (from mh in db.This
+            var sinhviens = (from mh in InputHelper.db.This
                              where mh.MaSinhVien == SearchString
                              select new
                              {
@@ -299,7 +299,7 @@ namespace Mvc_ESM.Controllers
                 string[] s = new string[6];
                 s[0] = ++stt + "";
                 s[1] = sv.MaMonHoc;
-                s[2] = (from mh in db.monhocs
+                s[2] = (from mh in InputHelper.db.monhocs
                           where mh.MaMonHoc == sv.MaMonHoc
                           select mh.TenMonHoc).FirstOrDefault();
                  //= s1.ToString();
@@ -315,8 +315,8 @@ namespace Mvc_ESM.Controllers
         public ActionResult Save(Event changedEvent, FormCollection actionValues)
         {
             String action_type = actionValues["!nativeeditor_status"];
-            Int64 source_id = Int64.Parse(actionValues["id"]);
-            Int64 target_id = source_id;
+            String source_id = actionValues["id"];
+            String target_id = source_id;
 
             try
             {

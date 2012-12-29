@@ -18,7 +18,7 @@ namespace Mvc_ESM.Controllers
         [HttpGet]
         public ViewResult Index()
         {
-            var giaoviens = (from m in Data.db.giaoviens
+            var giaoviens = (from m in InputHelper.db.giaoviens
                              where ((TeacherHelper.BoMon == "" && m.bomon.KhoaQL.Equals(TeacherHelper.Khoa)) || (TeacherHelper.BoMon != "" && m.bomon.MaBoMon.Equals(TeacherHelper.BoMon))) && ((m.HoLot + " " + m.TenGiaoVien).Contains(TeacherHelper.SearchString) || TeacherHelper.SearchString == "")
                              select m
                            ).Include(m => m.bomon);
@@ -32,7 +32,7 @@ namespace Mvc_ESM.Controllers
             TeacherHelper.Khoa = Khoa;
             TeacherHelper.SearchString = SearchString;
             TeacherHelper.BoMon = BoMon;
-            var giaoviens = (from m in Data.db.giaoviens
+            var giaoviens = (from m in InputHelper.db.giaoviens
                              where ((BoMon == "" && m.bomon.KhoaQL.Equals(Khoa)) || (BoMon != "" && m.bomon.MaBoMon.Equals(BoMon))) && ((m.HoLot + " " + m.TenGiaoVien).Contains(SearchString) || SearchString == "")
                              select m
                            ).Include(m => m.bomon);
@@ -42,12 +42,12 @@ namespace Mvc_ESM.Controllers
 
         private void InitViewBag(Boolean IsPost)
         {
-            var KhoaQry = from d in Data.db.khoas
+            var KhoaQry = from d in InputHelper.db.khoas
                           orderby d.TenKhoa
                           select new { MaKhoa = d.MaKhoa, TenKhoa = d.TenKhoa };
             ViewBag.Khoa = new SelectList(KhoaQry.ToArray(), "MaKhoa", "TenKhoa");
                 
-            var BoMonQry = from b in Data.db.bomons
+            var BoMonQry = from b in InputHelper.db.bomons
                            where b.khoa.MaKhoa == (IsPost ? TeacherHelper.Khoa : KhoaQry.FirstOrDefault().MaKhoa)
                            select new { MaBoMon = b.MaBoMon, TenBoMon = b.TenBoMon };
             ViewBag.BoMon = new SelectList(BoMonQry.ToArray(), "MaBoMon", "TenBoMon");
