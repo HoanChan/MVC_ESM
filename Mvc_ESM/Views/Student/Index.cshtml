@@ -5,10 +5,6 @@
 
 <h2>Danh sách @ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Tạo mới", "Create")
-</p>
-
 @Html.Partial("_DataTable.Lib")
 
 @using (Html.BeginForm("Index", "Student", FormMethod.Post, new { @id = "FilterForm" }))
@@ -80,7 +76,7 @@
                     //alert("Không tìm thấy!");
                     return "";
                 }
-                sOut += '<tr><td>STT</td><td>Mã MH</td><td>Tên MH</td><td>Nhóm</td><td>Số TC</td><td>Giáo Viên</td><td>Thứ</td><td>Tiết BĐ</td><td>Số tiết</td><td>Phòng</td><td>Tuần BĐ</td><td>Số tuần</tr>';
+                sOut += '<tr><td>STT</td><td>Mã MH</td><td>Tên MH</td><td>Nhóm</td><td>Số TC</td><td>Giáo Viên</td><td>Thứ</td><td>Tiết BĐ</td><td>Số tiết</td><td>Phòng</td><td>Tuần BĐ</td><td>Số tuần</td></tr>';
                 for (var i = 0; i < Data.Data.length; i++) {
                     var MaMonHoc = Data.Data[i].MaMonHoc;
                     var TenMonHoc = Data.Data[i].TenMonHoc;
@@ -93,7 +89,7 @@
                     var MaPhong = Data.Data[i].MaPhong;
                     var TuanBD = Data.Data[i].TuanBD;
                     var SoTuan = Data.Data[i].SoTuan;
-                    sOut += '<tr><td>' + (i + 1) + '</td><td>' + MaMonHoc + '</td><td>' + TenMonHoc + '</td><td>' + Nhom + '</td><td>' + SoTC + '</td><td>' + TenGiaoVien + '</td><td>' + Thu + '</td><td>' + TietBD + '</td><td>' + SoTiet + '</td><td>' + MaPhong + '</td><td>' + TuanBD + '</td><td>' + SoTuan + '</tr>';
+                    sOut += '<tr><td>' + (i + 1) + '</td><td>' + MaMonHoc + '</td><td>' + TenMonHoc + '</td><td>' + Nhom + '</td><td>' + SoTC + '</td><td>' + TenGiaoVien + '</td><td>' + Thu + '</td><td>' + TietBD + '</td><td>' + SoTiet + '</td><td>' + MaPhong + '</td><td>' + TuanBD + '</td><td>' + SoTuan + '</td></tr>';
                 }
                 sOut += '</table>';
             }
@@ -104,7 +100,7 @@
 
     $('#KhoaList').change(function () {
         var id = $(this).val();
-        $.getJSON("/Student/LoadClassByFacultyID", { FacultyID: id },
+        $.getJSON("/Services/LoadClassByFacultyID", { FacultyID: id },
         function (Data) {
             var select = $("#LopList");
             select.empty();
