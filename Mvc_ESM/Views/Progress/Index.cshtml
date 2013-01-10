@@ -1,73 +1,61 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Xếp lịch tự động";
 }
 
-<h2>Index</h2>
-<style >
-    .Progress {
-      text-align:center;
-      border: 1px solid rgb(0,0,0);
-      border-radius: 5px;
-      margin: 2px;
-      padding: 5px;
-      width: 171px;
-      height: 300px;              
-      float: left;
-    }
-
-    .ProgressHolder{
-      overflow: auto;
-      width: 100%;
-    }
-
-</style>
+<h2>@ViewBag.Title</h2>
 @Html.Partial("_Jquery-UI.Lib")
-<div class='ProgressHolder'>
-    <div class='Progress'>
-        <button id="RunCreateAdjacencyMatrix">1. Tạo ma trận kề</button>
-        <br />
-        <span id="CreateMatrixInfo">Thông tin</span>
-        <br />
-        <div id="pbCreateMatrix"></div>
-    </div>
-    <div class='Progress'>
-        <button id="RunColoring">2. Tô màu</button>
-    </div>
-    <div class='Progress'>
-        <button id="RunMakeTime">3. Giãn thời gian</button>
-    </div>
-    <div class='Progress'>
-        <button id="RunRoomArrangement">4. Xếp phòng</button>
-    </div>
-    <div class='Progress'>
-        <button id="RunSaveToDatabase">5. Lưu kết quả</button>
-    </div>
-</div>
+<p>
+    <button id="RunCreateAdjacencyMatrix">1. Phân tích CSDL</button>
+    <button id="RunCalc">2. Xếp lịch</button>
+    <button id="RunSaveToDatabase">3. Lưu kết quả</button>
+</p>
+<p id="Info">Thông tin</p>
 <script>
-    var pbCreateMatrix = $("#pbCreateMatrix").progressbar({
-        value: 0
-    });
-    var CreateMatrixInfo = $("#CreateMatrixInfo");
-    setInterval(function () {
+    var btn1 = $("#RunCreateAdjacencyMatrix");
+    var btn2 = $("#RunCalc");
+    var btn3 = $("#RunSaveToDatabase");
+    var Info = $("#Info");
+
+    function DisableAll() {
+        btn1.attr('disabled', 'disabled');
+        btn2.attr('disabled', 'disabled');
+        btn3.attr('disabled', 'disabled');
+    }
+    function EnableAll() {
+        btn1.removeAttr("disabled");
+        btn2.removeAttr("disabled");
+        btn3.removeAttr("disabled");
+        Info.html("Thông tin");
+    }
+
+    function GetProgressInfo() {
         $.getJSON("/Services/GetProgressInfo",
             function (Data) {
-                pbCreateMatrix.progressbar({ value: Data[0].pbCreateMatrix });
-                CreateMatrixInfo.html(Data[0].CreateMatrixInfo);
+                if (!Data.isBusy) {
+                    EnableAll();
+                    Info.html("...");
+                }
+                else {
+                    DisableAll();
+                }
+                if (Data.Type == "inf")
+                    Info.attr("style", "color:blue");
+                else //err
+                    Info.attr("style", "color:red");
+                Info.html(Data.Info);
             });
-    }, 1000);
-    $("#RunCreateAdjacencyMatrix").button().click(function () {
+    }
+    var Timer = setInterval(GetProgressInfo, 1000);
+    //clearTimeout(Timer);
+    btn1.button().click(function () {
         $.post("/Progress/Run", "StepNumber=1");
     });
-    $("#RunColoring").button().click(function () {
+    btn2.button().click(function () {
         $.post("/Progress/Run", "StepNumber=2");
     });
-    $("#RunMakeTime").button().click(function () {
+    btn3.button().click(function () {
         $.post("/Progress/Run", "StepNumber=3");
     });
-    $("#RunRoomArrangement").button().click(function () {
-        $.post("/Progress/Run", "StepNumber=4");
-    });
-    $("#RunSaveToDatabase").button().click(function () {
-        $.post("/Progress/Run", "StepNumber=5");
-    });
+
+    
 </script>

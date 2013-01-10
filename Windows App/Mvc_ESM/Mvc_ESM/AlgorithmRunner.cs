@@ -24,6 +24,8 @@ namespace Mvc_ESM.Static_Helper
         public static DateTime[] MaxColorTime;
         public static List<String> Groups;
 
+        private static Boolean b_IsBusy = false;
+
         public static Handmade.HandmadeData HandmadeData;
 
         private static void ReadAdjacencyMatrix(string DataFilePath)
@@ -103,8 +105,7 @@ namespace Mvc_ESM.Static_Helper
             AdjacencyMatrixSize = Groups.Count;
             AdjacencyMatrix = new int[AdjacencyMatrixSize, AdjacencyMatrixSize];
         }
-
-        
+                
         public void RunCreateAdjacencyMatrix()
         {
             if (OBJExits("AdjacencyMatrix"))
@@ -140,34 +141,30 @@ namespace Mvc_ESM.Static_Helper
             thread.Start();
         }
 
-        public void RunColoring()
+        public void RunCalc()
         {
-            //AdjacencyMatrix = ReadOBJ<int[,]>("AdjacencyMatrix");
-            ReadAdjacencyMatrix(RealPath("AdjacencyMatrix"));
-            Thread thread = new Thread(new ThreadStart(GraphColoringAlgorithm.Run));
-            thread.Name = "GraphColoringAlgorithm";
+            Thread thread = new Thread(new ThreadStart(RunNext));
+            thread.Name = "RunCalc";
             thread.Start();
         }
 
-        public void RunMakeTime()
+        private void RunNext()
         {
-            ColorNumber = ReadOBJ<int>("ColorNumber");
-            Colors = ReadOBJ<int[]>("Colors");
-            //AdjacencyMatrix = ReadOBJ<int[,]>("AdjacencyMatrix");
-            ReadAdjacencyMatrix(RealPath("AdjacencyMatrix"));
-            Thread thread = new Thread(new ThreadStart(MakeTime.Run));
-            thread.Name = "MakeTime";
-            thread.Start();
-        }
-
-        public void RunRoomArrangement()
-        {
-            Colors = ReadOBJ<int[]>("Colors");
-            MaxColorTime = ReadOBJ<DateTime[]>("MaxColorTime");
-            GroupsTime = ReadOBJ<DateTime[]>("GroupsTime");
-            Thread thread = new Thread(new ThreadStart(RoomArrangement.Run));
-            thread.Name = "RoomArrangement";
-            thread.Start();
+            IsBusy = true;
+            if (OBJExits("AdjacencyMatrix") && !OBJExits("BeginI"))
+            {
+                SaveOBJ("Status", "inf Đang xếp lịch...");
+                ReadAdjacencyMatrix(RealPath("AdjacencyMatrix"));
+                GraphColoringAlgorithm.Run();
+                SaveOBJ("Status", "inf Tô màu xong! Đang xếp thời gian...");
+                RoomArrangement.Run();
+                SaveOBJ("Status", "inf Xếp lịch xong! Hãy lưu kết quả vào CSDL (Tất cả các kết quả xếp lịch trước sẽ bị xoá)");
+            }
+            else
+            {
+                SaveOBJ("Status", "err Chưa hoàn thiện quá trình phân tích CSDL");
+            }
+            IsBusy = false;
         }
 
         public void RunSaveToDatabase()
@@ -182,7 +179,7 @@ namespace Mvc_ESM.Static_Helper
 
         public void RunDeleteOldDatabase()
         {
-            Thread thread = new Thread(new ThreadStart(SaveToDatabase.DeleteOld));
+            Thread thread = new Thread(new ThreadStart(SaveToDatabase.Delete));
             thread.Name = "RunDeleteOldDatabase";
             thread.Start();
         }
@@ -194,6 +191,23 @@ namespace Mvc_ESM.Static_Helper
             thread.Name = "Handmade";
             thread.Start();
             DeleteOBJ("Handmade");
+        }
+
+        public static bool IsBusy
+        {
+            get { return b_IsBusy; }
+            set
+            {
+                b_IsBusy = value;
+                if (b_IsBusy)
+                {
+                    SaveOBJ("IsBusy", true);
+                }
+                else
+                {
+                    DeleteOBJ("IsBusy");
+                }
+            }
         }
     }
 }

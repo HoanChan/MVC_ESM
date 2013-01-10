@@ -167,8 +167,8 @@ namespace Mvc_ESM.Static_Helper
                     UpdateNN(ColorNumber);
                 }
             }
-            //AlgorithmRunner.ColorNumber = ColorNumber;
-            AlgorithmRunner.SaveOBJ("ColorNumber", ColorNumber + 1);
+            AlgorithmRunner.ColorNumber = ColorNumber + 1;
+            //AlgorithmRunner.SaveOBJ("ColorNumber", ColorNumber + 1);
         }
 
         public static void Run()
@@ -177,8 +177,8 @@ namespace Mvc_ESM.Static_Helper
             AdjacencyMatrixSize = AlgorithmRunner.AdjacencyMatrixSize;
             Init();
             Coloring();
-            //AlgorithmRunner.Colors = color;
-            AlgorithmRunner.SaveOBJ("Colors", color);
+            AlgorithmRunner.Colors = color;
+            //AlgorithmRunner.SaveOBJ("Colors", color);
             
         }
     }

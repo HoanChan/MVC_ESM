@@ -8,7 +8,7 @@
 
 <div id="wrapper">
     <div id="steps">
-        <form id="formElem" name="formElem" action="" method="post">
+        <form id="formElem">
             <fieldset class="step">
                 <legend>1. Lựa chọn môn học</legend>
                 <p>
@@ -282,7 +282,7 @@
                 Room.push($(itemData).html());
                 Num.push($(itemData).parent().parent().find("#RoomNumText").val());
             });
-            $.post("/Handmade/SelectSuccess", $.param({ MSMH: MSMH, Class: Class, Time: Time, Room: Room, Num: Num }, true));
+            $.post("/Handmade/SelectSuccess", $.param({ SubjectID: MSMH, Class: Class, Time: Time, Room: Room, Num: Num }, true));
             alert("Đã lưu xong");
         }
         return false;

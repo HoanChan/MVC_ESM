@@ -22,12 +22,12 @@ namespace Mvc_ESM.Controllers
         }
 
         [HttpPost]
-        public JsonResult SelectSuccess(String MSMH, List<String> Class, string Time, List<String> Room, List<int> Num)
+        public JsonResult SelectSuccess(String SubjectID, List<String> Class, string Time, List<String> Room, List<int> Num)
         {   
             var Date = DateTime.ParseExact(Time, "dd/MM/yyyy HH:mm", new CultureInfo("en-US"));
-            OutputHelper.SaveOBJ("HandMade", new { MSMH, Class, Date, Room, Num });
-            Process.Start(OutputHelper.WinAppExe, "6"); // Handmade
-            return Json(new { MSMH, Class, Date, Room, Num}, JsonRequestBehavior.AllowGet);
+            OutputHelper.SaveOBJ("HandMade", new { SubjectID, Class, Date, Room, Num });
+            Process.Start(OutputHelper.WinAppExe, "4"); // Handmade
+            return Json(new { SubjectID, Class, Date, Room, Num }, JsonRequestBehavior.AllowGet);
         }
     }
 }

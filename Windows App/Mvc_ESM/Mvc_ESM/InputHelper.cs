@@ -22,7 +22,7 @@ namespace Mvc_ESM.Static_Helper
 
         public static List<Shift> Shifts = InitShift();
 
-        public static List<RoomList> BusyRooms = InitRooms();
+        public static List<RoomList> Rooms = InitRooms();
 
         public static Dictionary<String, Group> InitGroups()
         {

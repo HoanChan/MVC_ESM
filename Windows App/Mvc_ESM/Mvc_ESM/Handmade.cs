@@ -1,4 +1,5 @@
 ﻿using Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,7 +14,7 @@ namespace Mvc_ESM.Static_Helper
     {
         public class HandmadeData
         {
-            public String MSMH { get; set; }
+            public String SubjectData { get; set; }
             public List<String> Class { get; set; }
             public DateTime Date { get; set; }
             public List<String> Room { get; set; }
@@ -26,7 +27,11 @@ namespace Mvc_ESM.Static_Helper
         }
         public static void Run()
         {
+            AlgorithmRunner.IsBusy = true;
+            AlgorithmRunner.SaveOBJ("Status", "inf Đang lưu dữ liệu xếp lịch thủ công");
             Save(AlgorithmRunner.HandmadeData);
+            AlgorithmRunner.SaveOBJ("Status", "inf Hoàn tất lưu dữ liệu xếp lịch thủ công");
+            AlgorithmRunner.IsBusy = false;
         }
         public static void Save(HandmadeData Data)
         {
@@ -36,14 +41,17 @@ namespace Mvc_ESM.Static_Helper
             {
                 ClassList += (ClassList.Length > 0 ? ", " : "") + "'" + cl + "'";
             }
+            String IgnoreStudents = InputHelper.IgnoreStudents.ContainsKey(Data.SubjectData) ? JsonConvert.SerializeObject(InputHelper.IgnoreStudents[Data.SubjectData]) : "[]";
+            IgnoreStudents = IgnoreStudents.Substring(1, IgnoreStudents.Length - 2).Replace("\"", "'");
             var StudentList = db.Database.SqlQuery<StudentInfo>("select pdkmh.MaSinhVien, pdkmh.Nhom from pdkmh, sinhvien " +
-                                                                "where pdkmh.MaSinhVien = sinhvien.MaSinhVien and MaMonHoc = '" + Data.MSMH + "' and Nhom in (" + ClassList + ") " +
+                                                                "where pdkmh.MaSinhVien = sinhvien.MaSinhVien and MaMonHoc = '" + Data.SubjectData + "' and Nhom in (" + ClassList + ") " +
+                                                                (IgnoreStudents.Length > 0 ? "and not(sinhvien.MaSinhVien in (" + IgnoreStudents + ")) " : "") +
                                                                 "order by (sinhvien.Ten + sinhvien.ho)").ToList();
 
             DateTime FirstShiftTime = InputHelper.Options.StartDate.AddHours(InputHelper.Options.Times[0].Hour)
                                                                       .AddMinutes(InputHelper.Options.Times[0].Minute);
             String ShiftID = "";//InputHelper.Options.StartDate.Year + "" + InputHelper.Options.StartDate.Month + "" + InputHelper.Options.StartDate.Day;
-            ShiftID += MakeTime.CalcShift(FirstShiftTime, Data.Date).ToString();
+            ShiftID += RoomArrangement.CalcShift(FirstShiftTime, Data.Date).ToString();
             if ((from ct in db.CaThis where ct.MaCa == ShiftID select ct).Count() == 0)
             {
                 var pa = new SqlParameter[] 
@@ -54,9 +62,9 @@ namespace Mvc_ESM.Static_Helper
                 db.Database.ExecuteSqlCommand("INSERT INTO CaThi (MaCa, GioThi) VALUES (@MaCa, @GioThi)", pa);
             }
             Thi aRecord = new Thi();
-            aRecord.MaMonHoc = Data.MSMH;
+            aRecord.MaMonHoc = Data.SubjectData;
             aRecord.MaCa = ShiftID;
-            var ClassGroup = Data.MSMH;
+            var ClassGroup = Data.SubjectData;
             foreach (var cl in Data.Class)
             {
                 ClassGroup += "_" + cl;

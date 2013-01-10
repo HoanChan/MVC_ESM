@@ -26,19 +26,16 @@ namespace Mvc_ESM.Controllers
             
             switch (StepNumber)
             {
+                case 0:
+                    Process.Start(OutputHelper.WinAppExe, "0");
+                    return Content("RunDeleteDatabase");
                 case 1:
                     Process.Start(OutputHelper.WinAppExe, "1");
                     return Content("RunCreateAdjacencyMatrix");
                 case 2:
                     Process.Start(OutputHelper.WinAppExe, "2");
-                    return Content("RunColoring");
+                    return Content("RunCalc");
                 case 3:
-                    Process.Start(OutputHelper.WinAppExe, "3");
-                    return Content("RunMakeTime");
-                case 4:
-                    Process.Start(OutputHelper.WinAppExe, "4");
-                    return Content("RunRoomArrangement");
-                case 5:
                     Process.Start(OutputHelper.WinAppExe, "5");
                     return Content("RunSaveToDatabase");
                 default:

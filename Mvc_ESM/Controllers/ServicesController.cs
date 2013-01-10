@@ -1,5 +1,6 @@
 ﻿using Model;
 using Mvc_ESM.Static_Helper;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -211,11 +212,17 @@ namespace Mvc_ESM.Controllers
         [HttpGet]
         public JsonResult GetProgressInfo()
         {
-            return Json(new List<object>(){ new 
+            var isBusy = System.IO.File.Exists(OutputHelper.RealPath("IsBusy"));
+            var StatusPath = OutputHelper.RealPath("Status");
+            var Status = System.IO.File.Exists(StatusPath) ? JsonConvert.DeserializeObject<String>(System.IO.File.ReadAllText(StatusPath)) : "";
+            var Type = Status.Length > 4 ? Status.Substring(0, 3) : "";
+            var Info = Status.Length > 4 ? Status.Substring(4) : "";
+            return Json(new 
                     {
-                        pbCreateMatrix = ProgressHelper.pbCreateMatrix,
-                        CreateMatrixInfo = ProgressHelper.CreateMatrixInfo
-                    }}, JsonRequestBehavior.AllowGet);
+                        isBusy,
+                        Type,
+                        Info
+                    }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

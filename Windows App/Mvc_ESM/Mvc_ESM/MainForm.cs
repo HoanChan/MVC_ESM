@@ -27,12 +27,6 @@ namespace Mvc_ESM
             // it reached here.
             if (args != null && args.Length != 0)
             {
-                //txtArgs.Text += DateTime.Now.ToString("mm:ss.ff") + " ";
-                //for (int i = 0; i < args.Length; i++)
-                //{
-                //    txtArgs.Text += args[i] + "\r\n";
-                //}
-
                 switch (args[0])
                 {
                     case "0":
@@ -40,26 +34,28 @@ namespace Mvc_ESM
                         txtArgs.Text += DateTime.Now.ToString() + " DeleteOldData\r\n";
                         break;
                     case "1":
+                        InputHelper.Groups = InputHelper.InitGroups();
+                        InputHelper.IgnoreStudents = InputHelper.InitIgnoreStudents();
                         AlgorithmRunner.RunCreateAdjacencyMatrix();
                         txtArgs.Text += DateTime.Now.ToString() + " RunCreateAdjacencyMatrix\r\n";
                         break;
                     case "2":
-                        AlgorithmRunner.RunColoring();
-                        txtArgs.Text += DateTime.Now.ToString() + " RunColoring\r\n";
+                        InputHelper.IgnoreStudents = InputHelper.InitIgnoreStudents();
+                        InputHelper.Shifts = InputHelper.InitShift();
+                        InputHelper.Rooms = InputHelper.InitRooms();
+                        InputHelper.Options = InputHelper.InitOptions();
+                        AlgorithmRunner.RunCalc();
+                        txtArgs.Text += DateTime.Now.ToString() + " RunCalc\r\n";
                         break;
                     case "3":
-                        AlgorithmRunner.RunMakeTime();
-                        txtArgs.Text += DateTime.Now.ToString() + " RunMakeTime\r\n";
-                        break;
-                    case "4":
-                        AlgorithmRunner.RunRoomArrangement();
-                        txtArgs.Text += DateTime.Now.ToString() + " RunRoomArrangement\r\n";
-                        break;
-                    case "5":
                         AlgorithmRunner.RunSaveToDatabase();
                         txtArgs.Text += DateTime.Now.ToString() + " RunSaveToDatabase\r\n";
                         break;
-                    case "6":
+                    case "4":
+                        InputHelper.IgnoreStudents = InputHelper.InitIgnoreStudents();
+                        InputHelper.Shifts = InputHelper.InitShift();
+                        InputHelper.Rooms = InputHelper.InitRooms();
+                        InputHelper.Options = InputHelper.InitOptions();
                         AlgorithmRunner.RunHandmade();
                         txtArgs.Text += DateTime.Now.ToString() + " Handmade\r\n";
                         break;
@@ -82,19 +78,9 @@ namespace Mvc_ESM
             AlgorithmRunner.Init();
         }
 
-        private void btnRunColoring_Click(object sender, EventArgs e)
+        private void btnRunCalc_Click(object sender, EventArgs e)
         {
-            AlgorithmRunner.RunColoring();
-        }
-
-        private void btnRunMakeTime_Click(object sender, EventArgs e)
-        {
-            AlgorithmRunner.RunMakeTime();
-        }
-
-        private void btnRunRoomArrangement_Click(object sender, EventArgs e)
-        {
-            AlgorithmRunner.RunRoomArrangement();
+            AlgorithmRunner.RunCalc();
         }
 
         private void btnRunSaveToDatabase_Click(object sender, EventArgs e)
@@ -122,8 +108,7 @@ namespace Mvc_ESM
 
         private void ProgressUpdater_Tick(object sender, EventArgs e)
         {
-            lblCreateAdjacencyMatrix.Text = ProgressHelper.CreateMatrixInfo;
-            pbCreateAdjacencyMatrix.Value = ProgressHelper.pbCreateMatrix;
+            //txtArgs.Text += DateTime.Now.ToString() + " " + AlgorithmRunner.ReadOBJ<String>("Status") + "\r\n";
         }
 
         private void btnCreateAdjacencyMatrix_Stop_Click(object sender, EventArgs e)

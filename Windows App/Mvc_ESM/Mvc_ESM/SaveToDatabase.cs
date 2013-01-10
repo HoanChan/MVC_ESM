@@ -7,6 +7,7 @@ using System.Data.Objects;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace Mvc_ESM.Static_Helper
 {
@@ -15,21 +16,45 @@ namespace Mvc_ESM.Static_Helper
         private static DKMHEntities db = new DKMHEntities();
         public static void Run()
         {
+            AlgorithmRunner.IsBusy = true;
+            AlgorithmRunner.SaveOBJ("Status", "inf Đang Xoá CSDL cũ");
             DeleteOld();
+            AlgorithmRunner.SaveOBJ("Status", "inf Đang Lưu vào cơ sở dữ liệu");
             Save();
+            AlgorithmRunner.SaveOBJ("Status", "inf Hoàn tất quá trình lưu!");
+            AlgorithmRunner.IsBusy = false;
         }
 
-        public static void DeleteOld()
+        public static void Delete()
         {
-            db.Database.ExecuteSqlCommand("DELETE FROM Thi");
-            db.Database.ExecuteSqlCommand("DELETE FROM CaThi");
-            var DbName = Regex.Match(db.Database.Connection.ConnectionString, "initial\\scatalog=([^;]+)").Groups[1].Value;
-            db.Database.ExecuteSqlCommand("DBCC SHRINKFILE (" + DbName + ", 1) ");
-            db.Database.ExecuteSqlCommand("DBCC SHRINKFILE (" + DbName + "_log, 1) ");
+            AlgorithmRunner.IsBusy = true;
+            AlgorithmRunner.SaveOBJ("Status", "inf Đang Xoá CSDL cũ");
+            DeleteOld();
+            AlgorithmRunner.SaveOBJ("Status", "inf Hoàn tất quá trình Xoá CSDL!");
+            AlgorithmRunner.IsBusy = false;
+        }
+
+        private static void DeleteOld()
+        {
+            try
+            {
+                db.Database.ExecuteSqlCommand("DELETE FROM Thi");
+                db.Database.ExecuteSqlCommand("DELETE FROM CaThi");
+                var DbName = Regex.Match(db.Database.Connection.ConnectionString, "initial\\scatalog=([^;]+)").Groups[1].Value;
+                db.Database.ExecuteSqlCommand("DBCC SHRINKFILE (" + DbName + ", 1) ");
+                db.Database.ExecuteSqlCommand("DBCC SHRINKFILE (" + DbName + "_log, 1) ");
+            }
+            catch
+            {
+                AlgorithmRunner.SaveOBJ("Status", "err Lỗi trong khi xoá CSDL, hãy thử chạy lại lần nữa!");
+                AlgorithmRunner.IsBusy = false;
+                Thread.CurrentThread.Abort();
+            }
         }
         private static void Save()
         {
-            for (int GroupIndex = 0; GroupIndex < AlgorithmRunner.Groups.Count; GroupIndex++)
+            int GCount = AlgorithmRunner.Groups.Count;
+            for (int GroupIndex = 0; GroupIndex < GCount; GroupIndex++)
             {
                 Thi aRecord = new Thi();
                 aRecord.MaMonHoc = AlgorithmRunner.GetSubjectID(AlgorithmRunner.Groups[GroupIndex]);
@@ -37,7 +62,7 @@ namespace Mvc_ESM.Static_Helper
                 DateTime FirstShiftTime = InputHelper.Options.StartDate.AddHours(InputHelper.Options.Times[0].Hour)
                                                                       .AddMinutes(InputHelper.Options.Times[0].Minute);
                 String ShiftID = "";// InputHelper.Options.StartDate.Year + "" + InputHelper.Options.StartDate.Month + "" + InputHelper.Options.StartDate.Day;
-                ShiftID += MakeTime.CalcShift(FirstShiftTime, AlgorithmRunner.GroupsTime[GroupIndex]).ToString();
+                ShiftID += RoomArrangement.CalcShift(FirstShiftTime, AlgorithmRunner.GroupsTime[GroupIndex]).ToString();
                 if ((from ct in db.CaThis where ct.MaCa == ShiftID select ct).Count() == 0)
                 {
                     var pa = new SqlParameter[] 
@@ -64,8 +89,17 @@ namespace Mvc_ESM.Static_Helper
                                                 );
                     } // sinh viên
                 } // phòng
-                db.Database.ExecuteSqlCommand(SQLQuery);  
-                //db.SaveChanges();
+                try
+                {
+                    AlgorithmRunner.SaveOBJ("Status", "inf Đang Lưu vào cơ sở dữ liệu (" + (GroupIndex + 1) + "/" + GCount + ")");
+                    db.Database.ExecuteSqlCommand(SQLQuery);
+                }
+                catch
+                {
+                    AlgorithmRunner.SaveOBJ("Status", "err Lỗi trong khi chèn thêm nội dung vào CSDL! Hãy thử lại hoặc liên hệ với quản trị nếu vẫn lỗi!");
+                    AlgorithmRunner.IsBusy = false;
+                    Thread.CurrentThread.Abort();
+                }
             }// môn
         }
     }

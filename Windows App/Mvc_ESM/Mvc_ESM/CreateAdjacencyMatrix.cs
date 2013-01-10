@@ -74,10 +74,12 @@ namespace Mvc_ESM.Static_Helper
 
         public static void Run()
         {
+            AlgorithmRunner.IsBusy = true;
             Stop = false;
             Stoped = false;
-            Begin(AlgorithmRunner.AdjacencyMatrix,AlgorithmRunner.BeginI);
+            Begin(AlgorithmRunner.AdjacencyMatrix, AlgorithmRunner.BeginI);
             Stoped = true;
+            AlgorithmRunner.IsBusy = false;
         }
 
         public static void Begin(int[,] oldAdjacencyMatrix, int beginI)
@@ -88,8 +90,9 @@ namespace Mvc_ESM.Static_Helper
             {
                 for (j = i + 1; j < AdjacencyMatrixSize; j++)
                 {
-                    ProgressHelper.CreateMatrixInfo = (1 + i) + "/" + (1 + j);
-                    ProgressHelper.pbCreateMatrix = 100 * (i * AdjacencyMatrixSize + j) / (AdjacencyMatrixSize * AdjacencyMatrixSize);
+                    //ProgressHelper.CreateMatrixInfo = (1 + i) + "/" + (1 + j);
+                    //ProgressHelper.pbCreateMatrix = 100 * (i * AdjacencyMatrixSize + j) / (AdjacencyMatrixSize * AdjacencyMatrixSize);
+                    AlgorithmRunner.SaveOBJ("Status", "inf Đang phân tích dữ liệu (" + (1 + i) + "/" + (1 + j) + ")...");
                     AdjacencyMatrix[i, j] = AdjacencyMatrix[j, i] = CheckGroups(AlgorithmRunner.Groups[i], AlgorithmRunner.Groups[j]);
                 }
                 if (Stop)
@@ -101,11 +104,8 @@ namespace Mvc_ESM.Static_Helper
                     return;
                 }
             }
-            ProgressHelper.CreateMatrixInfo = AdjacencyMatrixSize + "/" + AdjacencyMatrixSize;
-            ProgressHelper.pbCreateMatrix = 100;
-            //AlgorithmRunner.SaveOBJ("AdjacencyMatrix", AdjacencyMatrix);
             WriteAdjacencyMatrix(AdjacencyMatrix, AlgorithmRunner.RealPath("AdjacencyMatrix"));
-            AlgorithmRunner.SaveOBJ("BeginI", 0);
+            AlgorithmRunner.DeleteOBJ("BeginI");
         }
         private static void WriteAdjacencyMatrix(int[,] Matrix, string DataFilePath)
         {
