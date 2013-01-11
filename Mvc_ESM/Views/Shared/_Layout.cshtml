@@ -32,7 +32,7 @@
                     <li><a href="#" class="parent"><span>Xem CSDL</span></a>
                         <ul>
                             <li><a href="@Url.Action("Index", "Subject")"><span>Môn Học</span></a></li>
-                            <li><a href="@Url.Action("Index", "Teacher")"><span>Giáo viên</span></a></li>
+                            @*<li><a href="@Url.Action("Index", "Teacher")"><span>Giáo viên</span></a></li>*@
                             <li><a href="@Url.Action("Index", "Student")"><span>Sinh viên</span></a></li>
                             <li><a href="@Url.Action("Index", "Room")"><span>Phòng thi</span></a></li>
                         </ul>
@@ -84,7 +84,7 @@
                                 @if (Context.User.IsInRole("GiaoVien") || Context.User.IsInRole("Admin"))
                                 {
                                     <li><a href="@Url.Action("RoomList","CalendarResults")"><span>Phòng Thi</span></a></li>
-                                    <li><a href="#"><span>Giáo viên coi thi</span></a></li>
+                                    @*<li><a href="#"><span>Giáo viên coi thi</span></a></li>*@
                                     <li><a href="@Url.Action("StudentsOfRooms", "CalendarResults")"><span>Sinh viên theo phòng</span></a></li>
                                     <li><a href="@Url.Action("StudentsOfSubjects","CalendarResults")"><span>Sinh viên theo môn</span></a></li>
                                     <li><a href="@Url.Action("OpenRooms","CalendarResults")"><span>Lịch mở cửa phòng</span></a></li>
