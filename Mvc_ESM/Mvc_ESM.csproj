@@ -133,6 +133,7 @@
     <Compile Include="Static_Helper\Types.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Printer.css" />
     <Content Include="Content\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Content\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
