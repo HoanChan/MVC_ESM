@@ -18,13 +18,8 @@ namespace Mvc_ESM.Controllers
         [HttpGet]
         public ViewResult Index()
         {
-            StudentHelper.Khoa = (from d in InputHelper.db.khoas
-                                                orderby d.TenKhoa
-                                                select d).FirstOrDefault().MaKhoa;
-            StudentHelper.SearchString = "";
-            StudentHelper.Lop = "Tất cả";
             var students = (from m in InputHelper.db.pdkmhs
-                            where m.sinhvien.lop1.khoi.KhoaQL.Equals(StudentHelper.Khoa)
+                            where m.sinhvien.lop1.khoi.KhoaQL.Equals(InputHelper.db.khoas.FirstOrDefault().MaKhoa)
                             select m.sinhvien
                            ).Distinct().Include(m => m.lop1);
             InitViewBag(false);
@@ -34,35 +29,36 @@ namespace Mvc_ESM.Controllers
         [HttpPost]
         public ViewResult Index(String Khoa, String Lop, String SearchString)
         {
-            StudentHelper.Khoa = Khoa;
-            StudentHelper.SearchString = SearchString;
-            StudentHelper.Lop = Lop;
-            var sinhviens = (from m in InputHelper.db.pdkmhs
-                             where (Lop == "" && m.sinhvien.lop1.khoi.KhoaQL.Equals(Khoa)) || (Lop != "" && m.sinhvien.lop1.MaLop.Equals(Lop)) && (m.sinhvien.Ten.Contains(SearchString) || SearchString == "")
-                             select m.sinhvien
-                           ).Distinct().Include(m => m.lop1);
-            InitViewBag(true);
-            return View(sinhviens.ToList());
+            var Students = from m in InputHelper.db.pdkmhs select m.sinhvien;
+            if(!string.IsNullOrEmpty(Khoa))
+            {
+                Students = Students.Where(m => m.lop1.khoi.KhoaQL.Equals(Khoa));
+            }
+            if (!string.IsNullOrEmpty(Lop))
+            {
+                Students = Students.Where(m => m.lop1.MaLop.Equals(Lop));
+            }
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                Students = Students.Where(m => m.Ten.Contains(SearchString) || m.Ho.Contains(SearchString) || (m.Ho + " " + m.Ten).Contains(SearchString));
+            }
+            Students = Students.Distinct().Include(m => m.lop1);
+            InitViewBag(true, SearchString, Khoa);
+            return View(Students.ToList());
         }
 
-        private void InitViewBag(Boolean IsPost)
+        private void InitViewBag(Boolean IsPost, string SearchString = "", string Khoa = "")
         {
             var KhoaQry = from d in InputHelper.db.khoas
                           orderby d.TenKhoa
                           select new { MaKhoa = d.MaKhoa, TenKhoa = d.TenKhoa };
             ViewBag.Khoa = new SelectList(KhoaQry.ToArray(), "MaKhoa", "TenKhoa");
             var ClassQry = from b in InputHelper.db.lops
-                           where b.khoi.KhoaQL == (IsPost ? StudentHelper.Khoa : KhoaQry.FirstOrDefault().MaKhoa)
+                           where b.khoi.KhoaQL.Equals(IsPost ? Khoa : KhoaQry.FirstOrDefault().MaKhoa)
                            orderby b.MaLop
                            select new { MaLop = b.MaLop, TenLop = b.MaLop };
             ViewBag.Lop = new SelectList(ClassQry.ToArray(), "MaLop", "TenLop");
-            ViewBag.SearchString = "";
-        }
-
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
+            ViewBag.SearchString = SearchString;
         }
     }
 }

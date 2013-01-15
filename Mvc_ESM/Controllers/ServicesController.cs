@@ -142,7 +142,7 @@ namespace Mvc_ESM.Controllers
             }
             if (SubjectID != null && Class != null && Group != null)
             {
-                OutputHelper.SaveGroups(SubjectID, Class, Group);
+                OutputHelper.SaveGroups(SubjectID, Class, Group, false);
             }
             return Json(new{
                                 sEcho = param.sEcho,
@@ -195,7 +195,7 @@ namespace Mvc_ESM.Controllers
             }
             if (SubjectID != null && Class != null && Check != null)
             {
-                OutputHelper.SaveIgnoreGroups(SubjectID, Class, Check);
+                OutputHelper.SaveIgnoreGroups(SubjectID, Class, Check, false);
             }
             return Json(new
                             {

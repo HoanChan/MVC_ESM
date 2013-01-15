@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Model.sinhvien>
 @{
-    ViewBag.Title = "sinh viên";
+    ViewBag.Title = "Sinh viên";
 }
 
 <h2>Danh sách @ViewBag.Title</h2>
@@ -13,8 +13,8 @@
 
         <p>
             Khoa: @Html.DropDownList("Khoa", ViewBag.Khoa as SelectList, new { id = "KhoaList" })
-            Lớp: @Html.DropDownList("Lop", ViewBag.Lop as SelectList, "Tất cả", new { id = "LopList" })
-            Tên: @Html.TextBox("SearchString", Mvc_ESM.Static_Helper.StudentHelper.SearchString, new { id = "SearchString" })
+            Lớp: @Html.DropDownList("Lop", ViewBag.Lop as SelectList, Mvc_ESM.Settings.Page.Settings.SelectAllString, new { id = "LopList" })
+            Tên: @Html.TextBox("SearchString", ViewBag.SearchString as string, new { id = "SearchString" })
             <input type="submit" value="Thực hiện" />
         </p>
 
@@ -106,7 +106,7 @@
             select.empty();
             select.append($('<option/>', {
                 value: "",
-                text: "Tất cả"
+                text: "@Mvc_ESM.Settings.Page.Settings.SelectAllString"
             }));
 
             $.each(Data, function (index, itemData) {
@@ -146,16 +146,10 @@
     });
     //cài đặt bảng
     var oTable = $('#table').dataTable({
-        //"aoColumnDefs": [
-        //    { "bSortable": false, "aTargets": [0] },
-        //    { "bSortable": false, "aTargets": [1] },
-        //    { "bSortable": false, "aTargets": [3] },
-        //    { "bSortable": false, "aTargets": [4] },
-        //    { "bSortable": false, "aTargets": [5] },
-        //    { "bSortable": false, "aTargets": [6] },
-        //    { "bSortable": false, "aTargets": [8] }
-        //], // không hiện nút sắp xếp!
-        //"aaSorting": [[2, 'asc']], //Xếp cột thứ 3
+        "aoColumnDefs": [
+            { "bSortable": false, "aTargets": [0] },
+        ], // không hiện nút sắp xếp!
+        "aaSorting": [[3, 'asc']], //Xếp cột thứ 4
         "bStateSave": true,
         @Html.Partial("_DataTable")
     });

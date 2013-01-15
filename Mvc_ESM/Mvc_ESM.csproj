@@ -122,14 +122,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\CustomMembershipProvider.cs" />
     <Compile Include="Provider\CustomRoleProvider.cs" />
+    <Compile Include="Settings\Page.cs" />
     <Compile Include="Static_Helper\Calendar.cs" />
     <Compile Include="Static_Helper\OutputHelper.cs" />
-    <Compile Include="Static_Helper\ProgressHelper.cs" />
-    <Compile Include="Static_Helper\RoomHelper.cs" />
-    <Compile Include="Static_Helper\StudentHelper.cs" />
-    <Compile Include="Static_Helper\TeacherHelper.cs" />
     <Compile Include="Static_Helper\InputHelper.cs" />
-    <Compile Include="Static_Helper\SubjectHelper.cs" />
     <Compile Include="Static_Helper\Types.cs" />
   </ItemGroup>
   <ItemGroup>

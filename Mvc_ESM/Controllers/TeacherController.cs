@@ -19,7 +19,6 @@ namespace Mvc_ESM.Controllers
         public ViewResult Index()
         {
             var giaoviens = (from m in InputHelper.db.giaoviens
-                             where ((TeacherHelper.BoMon == "" && m.bomon.KhoaQL.Equals(TeacherHelper.Khoa)) || (TeacherHelper.BoMon != "" && m.bomon.MaBoMon.Equals(TeacherHelper.BoMon))) && ((m.HoLot + " " + m.TenGiaoVien).Contains(TeacherHelper.SearchString) || TeacherHelper.SearchString == "")
                              select m
                            ).Include(m => m.bomon);
             InitViewBag(false);
@@ -29,18 +28,15 @@ namespace Mvc_ESM.Controllers
         [HttpPost]
         public ViewResult Index(String Khoa, String BoMon, String SearchString)
         {
-            TeacherHelper.Khoa = Khoa;
-            TeacherHelper.SearchString = SearchString;
-            TeacherHelper.BoMon = BoMon;
             var giaoviens = (from m in InputHelper.db.giaoviens
                              where ((BoMon == "" && m.bomon.KhoaQL.Equals(Khoa)) || (BoMon != "" && m.bomon.MaBoMon.Equals(BoMon))) && ((m.HoLot + " " + m.TenGiaoVien).Contains(SearchString) || SearchString == "")
                              select m
                            ).Include(m => m.bomon);
-            InitViewBag(true);
+            InitViewBag(true, Khoa);
             return View(giaoviens.ToList());
         }
 
-        private void InitViewBag(Boolean IsPost)
+        private void InitViewBag(Boolean IsPost, string Khoa = "")
         {
             var KhoaQry = from d in InputHelper.db.khoas
                           orderby d.TenKhoa
@@ -48,15 +44,10 @@ namespace Mvc_ESM.Controllers
             ViewBag.Khoa = new SelectList(KhoaQry.ToArray(), "MaKhoa", "TenKhoa");
                 
             var BoMonQry = from b in InputHelper.db.bomons
-                           where b.khoa.MaKhoa == (IsPost ? TeacherHelper.Khoa : KhoaQry.FirstOrDefault().MaKhoa)
+                           where b.khoa.MaKhoa == (IsPost ? Khoa : KhoaQry.FirstOrDefault().MaKhoa)
                            select new { MaBoMon = b.MaBoMon, TenBoMon = b.TenBoMon };
             ViewBag.BoMon = new SelectList(BoMonQry.ToArray(), "MaBoMon", "TenBoMon");
             ViewBag.SearchString = "";
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
         }
     }
 }

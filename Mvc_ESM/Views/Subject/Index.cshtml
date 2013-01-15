@@ -11,8 +11,8 @@
        
          <p>
             Khoa: @Html.DropDownList("Khoa", ViewBag.Khoa as SelectList, new {id = "KhoaList"})  
-            Bộ môn: @Html.DropDownList("BoMon", ViewBag.BoMon as SelectList, "Tất cả", new {id = "BoMonList" })
-            Tên: @Html.TextBox("SearchString", Mvc_ESM.Static_Helper.SubjectHelper.SearchString, new { id = "SearchString" })  
+            Bộ môn: @Html.DropDownList("BoMon", ViewBag.BoMon as SelectList, Mvc_ESM.Settings.Page.Settings.SelectAllString, new {id = "BoMonList" })
+            Tên: @Html.TextBox("SearchString", ViewBag.SearchString as string, new { id = "SearchString" })  
             <input type="submit" value="Thực hiện" />
          </p>
 </p>
@@ -110,7 +110,7 @@
             select.empty();
             select.append($('<option/>', {
                 value: "",
-                text: "Tất cả"
+                text: "@Mvc_ESM.Settings.Page.Settings.SelectAllString"
             }));
             $.each(Data, function (index, itemData) {
                 select.append($('<option/>', {
@@ -152,7 +152,7 @@
     var oTable = $('#table').dataTable({
         "aoColumnDefs": [
             { "bSortable": false, "aTargets": [0] },
-            { "bSortable": false, "aTargets": [1] },
+            //{ "bSortable": false, "aTargets": [1] },
             { "bSortable": false, "aTargets": [3] },
             { "bSortable": false, "aTargets": [4] },
             { "bSortable": false, "aTargets": [5] },
@@ -170,6 +170,7 @@
     oTable.fnSetColumnVis(6, false);
     oTable.fnSetColumnVis(8, false);
 
-    new FixedHeader(oTable);
-
+    $(document).ready(function () {
+        new FixedHeader(oTable);
+    });
 </script>

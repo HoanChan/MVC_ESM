@@ -29,44 +29,44 @@ namespace Mvc_ESM.Controllers
 
         public ActionResult RoomsData(String id)
         {
-            List<Static_Helper.Event> SubjectTime = (from s in InputHelper.db.This
+            List<Event> SubjectTime = (from s in InputHelper.db.This
                                                      where s.MaPhong == id
-                                                     select new Static_Helper.Event()
+                                                     select new Event()
                                                      {
                                                          id = s.MaMonHoc + s.Nhom,
                                                          text = s.monhoc.TenMonHoc,
                                                          start_date = s.CaThi.GioThi,
                                                          end_date = s.CaThi.GioThi,
                                                          MaPhong = s.Nhom
-                                                     }).Distinct().ToList<Static_Helper.Event>();
+                                                     }).Distinct().ToList<Event>();
             for (int i = 0; i < SubjectTime.Count(); i++)
             {
                 SubjectTime[i].start_date = SubjectTime[i].start_date;
                 SubjectTime[i].end_date = SubjectTime[i].end_date.AddHours(2);
             }
 
-            return Content(Static_Helper.Calendar.DataFormater(SubjectTime, true), "text/xml");
+            return Content(Calendar.DataFormater(SubjectTime, true), "text/xml");
         }
 
         public ActionResult StudentsData(String id)
         {
-            List<Static_Helper.Event> SubjectTime = (from s in InputHelper.db.This
+            List<Event> SubjectTime = (from s in InputHelper.db.This
                                                      where s.MaSinhVien == id
-                                                     select new Static_Helper.Event()
+                                                     select new Event()
                                                      {
                                                          id = s.MaMonHoc + s.Nhom,
                                                          text = s.monhoc.TenMonHoc,
                                                          start_date = s.CaThi.GioThi,
                                                          end_date = s.CaThi.GioThi,
                                                          MaPhong = s.MaPhong
-                                                     }).ToList<Static_Helper.Event>();
+                                                     }).ToList<Event>();
             for (int i = 0; i < SubjectTime.Count(); i++)
             {
                 SubjectTime[i].start_date = SubjectTime[i].start_date;
                 SubjectTime[i].end_date = SubjectTime[i].end_date.AddHours(2);
             }
 
-            return Content(Static_Helper.Calendar.DataFormater(SubjectTime, true), "text/xml");
+            return Content(Calendar.DataFormater(SubjectTime, true), "text/xml");
         }
 
 
@@ -106,16 +106,15 @@ namespace Mvc_ESM.Controllers
         [HttpPost]
         public ActionResult StudentsOfRooms(String MonHoc, String Phong)
         {
-            Static_Helper.SubjectHelper.SearchString = MonHoc;
             var sv = (from s in InputHelper.db.sinhviens
                       join m in InputHelper.db.This on s.MaSinhVien equals m.MaSinhVien
                       where m.MaMonHoc == MonHoc && (m.MaPhong == Phong || Phong == "")
                       select s).Distinct();
-            InitViewBag(true, 1);
+            InitViewBag(true, 1, MonHoc);
             return View(sv.OrderBy(s => s.Ten + s.Ho).ToList());
         }
 
-        private void InitViewBag(Boolean IsPost, int k)
+        private void InitViewBag(Boolean IsPost, int k, string SearchString = "")
         {
             var MonQry = (from d in InputHelper.db.This
                           select new { MaMH = d.MaMonHoc, TenMH = (from m in InputHelper.db.monhocs where m.MaMonHoc == d.MaMonHoc select m.TenMonHoc).FirstOrDefault() }).Distinct().OrderBy(d => d.TenMH);
@@ -123,7 +122,7 @@ namespace Mvc_ESM.Controllers
             if (k == 1)
             {
                 var PhongQry = (from b in InputHelper.db.This
-                                where b.MaMonHoc == (IsPost ? Static_Helper.SubjectHelper.SearchString : MonQry.FirstOrDefault().MaMH)
+                                where b.MaMonHoc == (IsPost ? SearchString : MonQry.FirstOrDefault().MaMH)
                                 select new { MaPhong = b.MaPhong, TenPhong = b.MaPhong }).Distinct();
                 ViewBag.Phong = new SelectList(PhongQry.ToArray(), "MaPhong", "TenPhong");
             }
@@ -212,13 +211,13 @@ namespace Mvc_ESM.Controllers
             int stt = 0;
             DateTime StartWeek, EndWeek;
             EndWeek = new DateTime(2012, 1, 1);
-            for (int k = 0; k < (Static_Helper.InputHelper.Options.NumDate / 7); k++)
+            for (int k = 0; k < (InputHelper.Options.NumDate / 7); k++)
             {
                 if (k == 0)
-                    StartWeek = Static_Helper.InputHelper.Options.StartDate;
+                    StartWeek = InputHelper.Options.StartDate;
                 else
                     StartWeek = EndWeek.AddDays(2);
-                EndWeek = StartWeek.AddDays((Static_Helper.OutputHelper.DayOffWeekVN(StartWeek) == "Thứ Hai") ? 5 : (Static_Helper.OutputHelper.DayOffWeekVN(StartWeek) == "Thứ Ba") ? 4 : (Static_Helper.OutputHelper.DayOffWeekVN(StartWeek) == "Thứ Tư") ? 3 : (Static_Helper.OutputHelper.DayOffWeekVN(StartWeek) == "Thứ Năm") ? 2 : (Static_Helper.OutputHelper.DayOffWeekVN(StartWeek) == "Thứ Sáu") ? 1 : 0);
+                EndWeek = StartWeek.AddDays((OutputHelper.DayOffWeekVN(StartWeek) == "Thứ Hai") ? 5 : (OutputHelper.DayOffWeekVN(StartWeek) == "Thứ Ba") ? 4 : (OutputHelper.DayOffWeekVN(StartWeek) == "Thứ Tư") ? 3 : (OutputHelper.DayOffWeekVN(StartWeek) == "Thứ Năm") ? 2 : (OutputHelper.DayOffWeekVN(StartWeek) == "Thứ Sáu") ? 1 : 0);
 
                 //lọc theo tuần
                 var w1 = (from w in rooms
@@ -240,7 +239,7 @@ namespace Mvc_ESM.Controllers
                             if (r2.MaPhong == r1.MaPhong)
                             {
                                 DateTime time = r2.GioThi;
-                                switch (Static_Helper.OutputHelper.DayOffWeekVN(time.Date))
+                                switch (OutputHelper.DayOffWeekVN(time.Date))
                                 {
                                     case "Thứ Hai":
                                         Check(time, 0);

@@ -67,36 +67,55 @@ namespace Mvc_ESM.Static_Helper
             return "";
         }
 
-        public static String SaveIgnoreGroups(List<String> SubjectID, List<String> Class, List<String> Check)
+        public static String SaveIgnoreGroups(List<String> SubjectID, List<String> Class, List<String> Check, Boolean IsFinal = false)
         {
             string paramInfo = "";
+            Dictionary<String, Group> IgnoreGroups = (Dictionary<String, Group>)(HttpContext.Current.Session["IgnoreGroups"] ?? InputHelper.Groups);
+
             for (int i = 0; i < SubjectID.Count; i++)
             {
                 String aKey = SubjectID[i] + "_" + Class[i];
-                if (InputHelper.Groups.ContainsKey(aKey))
+                if (IgnoreGroups.ContainsKey(aKey))
                 {
-                    InputHelper.Groups[aKey].IsIgnored = (Check[i] == "checked"); // Check[i] != "undefined"
+                    IgnoreGroups[aKey].IsIgnored = (Check[i] == "checked"); // Check[i] != "undefined"
                 }
                 paramInfo += "MH:" + SubjectID[i] + " Class: " + Class[i] + " Check: " + Check[i] + "<br />";
             }
-            OutputHelper.SaveOBJ("Groups", InputHelper.Groups);
+            if (IsFinal)
+            {
+                InputHelper.Groups = IgnoreGroups;
+                OutputHelper.SaveOBJ("Groups", InputHelper.Groups);
+            }
+            else
+            {
+                HttpContext.Current.Session["IgnoreGroups"] = IgnoreGroups;
+            }
             return paramInfo;
         }
 
-        public static String SaveGroups(List<String> SubjectID, List<String> Class, List<int> Group)
+        public static String SaveGroups(List<String> SubjectID, List<String> Class, List<int> Group, Boolean IsFinal = false)
         {
             string paramInfo = "";
+            Dictionary<String, Group> Groups = (Dictionary<String, Group>)(HttpContext.Current.Session["IgnoreGroups"] ?? InputHelper.Groups);
             for (int i = 0; i < SubjectID.Count; i++)
             {
                 String aKey = SubjectID[i] + "_" + Class[i];
-                if (InputHelper.Groups.ContainsKey(aKey)) // bo cung dc
+                if (Groups.ContainsKey(aKey)) // bo cung dc
                 {
-                    InputHelper.Groups[aKey].GroupID = Group[i];
+                    Groups[aKey].GroupID = Group[i];
                 }
 
                 paramInfo += "MH:" + SubjectID[i] + " Class: " + Class[i] + " Group: " + Group[i] + "<br />";
             }
-            OutputHelper.SaveOBJ("Groups", InputHelper.Groups);
+             if (IsFinal)
+             {
+                 InputHelper.Groups = Groups;
+                 OutputHelper.SaveOBJ("Groups", InputHelper.Groups); 
+             }
+             else
+             {
+                 HttpContext.Current.Session["IgnoreGroups"] = Groups;
+             }
             return paramInfo;
         }
     }

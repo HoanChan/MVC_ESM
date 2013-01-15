@@ -16,10 +16,6 @@ namespace Mvc_ESM.Controllers
     [Authorize(Roles = "Admin")]
     public class SelectGroupController : Controller
     {
-        private DKMHEntities db = new DKMHEntities();
-
-        //
-        // GET: /SelectSubject/
         [HttpGet]
         public ViewResult Index()
         {
@@ -35,19 +31,13 @@ namespace Mvc_ESM.Controllers
         [HttpPost]
         public String IgnoreSuccess(List<String> SubjectID, List<String> Class, List<String> Check)
         {
-            return OutputHelper.SaveIgnoreGroups(SubjectID, Class, Check);
+            return OutputHelper.SaveIgnoreGroups(SubjectID, Class, Check, true);
         }
 
         [HttpPost]
         public String SelectSuccess(List<String> SubjectID, List<String> Class, List<int> Group)
         {
-            return OutputHelper.SaveGroups(SubjectID, Class, Group);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
+            return OutputHelper.SaveGroups(SubjectID, Class, Group, true);
         }
     }
 }
