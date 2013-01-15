@@ -88,7 +88,7 @@ namespace Mvc_ESM.Controllers
                       join m in InputHelper.db.This on s.MaSinhVien equals m.MaSinhVien
                       where m.MaMonHoc == MonHoc
                       select s).Distinct();
-            InitViewBag(false, 0);
+            InitViewBag(false, 0, MonHoc);
             return View(sv.OrderBy(s => s.Ten + s.Ho).ToList());
         }
 
@@ -114,7 +114,7 @@ namespace Mvc_ESM.Controllers
             return View(sv.OrderBy(s => s.Ten + s.Ho).ToList());
         }
 
-        private void InitViewBag(Boolean IsPost, int k, string SearchString = "")
+        private void InitViewBag(Boolean IsPost, int k, string SubjectID = "")
         {
             var MonQry = (from d in InputHelper.db.This
                           select new { MaMH = d.MaMonHoc, TenMH = (from m in InputHelper.db.monhocs where m.MaMonHoc == d.MaMonHoc select m.TenMonHoc).FirstOrDefault() }).Distinct().OrderBy(d => d.TenMH);
@@ -122,10 +122,11 @@ namespace Mvc_ESM.Controllers
             if (k == 1)
             {
                 var PhongQry = (from b in InputHelper.db.This
-                                where b.MaMonHoc == (IsPost ? SearchString : MonQry.FirstOrDefault().MaMH)
+                                where b.MaMonHoc == (IsPost ? SubjectID : MonQry.FirstOrDefault().MaMH)
                                 select new { MaPhong = b.MaPhong, TenPhong = b.MaPhong }).Distinct();
                 ViewBag.Phong = new SelectList(PhongQry.ToArray(), "MaPhong", "TenPhong");
             }
+            ViewBag.SearchString = SubjectID;
         }
 
 
@@ -306,7 +307,8 @@ namespace Mvc_ESM.Controllers
                 s[4] = sv.MaPhong;
                 s[5] = sv.GioThi.ToString("HH:mm");
                 Results.Add(s);
-            }
+            } 
+            ViewBag.SearchString = SearchString;
             return View(Results);
         }
 

@@ -129,7 +129,7 @@
     <Compile Include="Static_Helper\Types.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Printer.css" />
+    <Content Include="Content\TableTools.css" />
     <Content Include="Content\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Content\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
@@ -309,6 +309,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\SelectRoom\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\Printer\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_DataTable.Printer.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

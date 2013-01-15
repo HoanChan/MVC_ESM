@@ -3,11 +3,11 @@
 <script src="@Url.Content("~/Scripts/jquery.dataTables.ZeroClipboard.js")" type="text/javascript" lang="javascript" ></script>
 <script src="@Url.Content("~/Scripts/jquery.Printer.js")" type="text/javascript" lang="javascript" ></script>
 <link href="@Url.Content("~/Content/Printer/print-preview.css")" rel="stylesheet" type="text/css" />
-
+<link href="@Url.Content("~/Content/TableTools.css")" rel="stylesheet" type="text/css" />
 <script  type="text/javascript" lang="javascript" >
     TableTools.BUTTONS.PrintBtn = $.extend(true, TableTools.buttonBase, {
         "sNewLine": "<br>",
-        "sButtonText": "Print",
+        "sButtonText": "In kết quả",
         "fnClick": function (nButton, oConfig) {
             $.printPreview.loadPrintPreview();
         }

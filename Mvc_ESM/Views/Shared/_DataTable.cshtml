@@ -8,6 +8,14 @@ iDisplayLength: 25,
 @*"sDom": 'T<"clear"><"fg-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"lfr>t<"fg-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"ip>',
 "oTableTools": {
             "sSwfPath": "@Url.Content("~/Content/copy_csv_xls.swf")",
-            "aButtons": ["copy", "xls", "PrintBtn"] 
+            "aButtons": [
+				            "copy",
+				            "PrintBtn",
+				            {
+					            "sExtends":    "collection",
+					            "sButtonText": "Save",
+					            "aButtons":    [ "csv", "xls"]
+				            }
+			            ]
         },*@
 @Html.Partial("_DataTable.Lang")

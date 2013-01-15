@@ -236,7 +236,7 @@
 			print_frame_ref.write('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">' +
                 '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">' +
                 '<head><title>' + document.title + '</title></head>' +
-                '<body><link href="/Content/Printer.css" rel="stylesheet" type="text/css" /></body>' +
+                '<body><link href="/Content/Printer/print-body.css" rel="stylesheet" type="text/css" /></body>' +
                 '</html>');
 			print_frame_ref.close();
 
