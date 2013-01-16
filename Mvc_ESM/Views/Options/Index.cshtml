@@ -162,11 +162,11 @@
     $("#NumDate").spinner({
         step: 1,
         spin: function (event, ui) {
-            if (ui.value > 90) {
-                $(this).spinner("value", 7);
+            if (ui.value > @Mvc_ESM.Settings.Page.Settings.OptionMaxNumDate) {
+                $(this).spinner("value", @Mvc_ESM.Settings.Page.Settings.OptionMinNumDate);
                 return false;
-            } else if (ui.value < 7) {
-                $(this).spinner("value", 90);
+            } else if (ui.value < @Mvc_ESM.Settings.Page.Settings.OptionMinNumDate) {
+                $(this).spinner("value", @Mvc_ESM.Settings.Page.Settings.OptionMaxNumDate);
                 return false;
             }
         }
@@ -175,24 +175,24 @@
     $("#DateMin").spinner({
         step: 1,
         spin: function (event, ui) {
-            if (ui.value > 5) {
-                $(this).spinner("value", 0);
+            if (ui.value > @Mvc_ESM.Settings.Page.Settings.OptionMaxDateMin) {
+                $(this).spinner("value", @Mvc_ESM.Settings.Page.Settings.OptionMinDateMin);
                 return false;
-            } else if (ui.value < 0) {
-                $(this).spinner("value", 5);
+            } else if (ui.value < @Mvc_ESM.Settings.Page.Settings.OptionMinDateMin) {
+                $(this).spinner("value", @Mvc_ESM.Settings.Page.Settings.OptionMaxDateMin);
                 return false;
             }
         }
     });
 
     $("#StepTime").spinner({
-        step: 5,
+        step: @Mvc_ESM.Settings.Page.Settings.OptionStepShiftTime,
         spin: function (event, ui) {
-            if (ui.value > 360) {
-                $(this).spinner("value", 60);
+            if (ui.value > @Mvc_ESM.Settings.Page.Settings.OptionMaxShiftTime) {
+                $(this).spinner("value", @Mvc_ESM.Settings.Page.Settings.OptionMinShiftTime);
                 return false;
-            } else if (ui.value < 60) {
-                $(this).spinner("value", 360);
+            } else if (ui.value < @Mvc_ESM.Settings.Page.Settings.OptionMinShiftTime) {
+                $(this).spinner("value", @Mvc_ESM.Settings.Page.Settings.OptionMaxShiftTime);
                 return false;
             }
         }

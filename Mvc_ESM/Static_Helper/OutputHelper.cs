@@ -70,7 +70,7 @@ namespace Mvc_ESM.Static_Helper
         public static String SaveIgnoreGroups(List<String> SubjectID, List<String> Class, List<String> Check, Boolean IsFinal = false)
         {
             string paramInfo = "";
-            Dictionary<String, Group> IgnoreGroups = (Dictionary<String, Group>)(HttpContext.Current.Session["IgnoreGroups"] ?? InputHelper.Groups);
+            Dictionary<String, Group> IgnoreGroups = (Dictionary<String, Group>)(CurrentSession.Get("IgnoreGroups") ?? InputHelper.Groups);
 
             for (int i = 0; i < SubjectID.Count; i++)
             {
@@ -88,7 +88,7 @@ namespace Mvc_ESM.Static_Helper
             }
             else
             {
-                HttpContext.Current.Session["IgnoreGroups"] = IgnoreGroups;
+                CurrentSession.Set("IgnoreGroups", IgnoreGroups);
             }
             return paramInfo;
         }
@@ -96,7 +96,7 @@ namespace Mvc_ESM.Static_Helper
         public static String SaveGroups(List<String> SubjectID, List<String> Class, List<int> Group, Boolean IsFinal = false)
         {
             string paramInfo = "";
-            Dictionary<String, Group> Groups = (Dictionary<String, Group>)(HttpContext.Current.Session["IgnoreGroups"] ?? InputHelper.Groups);
+            Dictionary<String, Group> Groups = (Dictionary<String, Group>)(CurrentSession.Get("Groups") ?? InputHelper.Groups);
             for (int i = 0; i < SubjectID.Count; i++)
             {
                 String aKey = SubjectID[i] + "_" + Class[i];
@@ -114,7 +114,7 @@ namespace Mvc_ESM.Static_Helper
              }
              else
              {
-                 HttpContext.Current.Session["IgnoreGroups"] = Groups;
+                 CurrentSession.Set("Groups", Groups);
              }
             return paramInfo;
         }

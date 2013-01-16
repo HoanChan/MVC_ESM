@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-
 namespace Mvc_ESM.Controllers
 {
     public class ServicesController : Controller
@@ -117,8 +116,12 @@ namespace Mvc_ESM.Controllers
         [HttpPost]
         public JsonResult DataTable_SelectGroups(jQueryDataTableParamModel param, List<String> SubjectID = null, List<String> Class = null, List<int> Group = null, String Search = null)
         {
-
-            var Groups = from m in InputHelper.Groups.Values.Where(g=>!g.IsIgnored) select m;
+            if (SubjectID != null && Class != null && Group != null)
+            {
+                OutputHelper.SaveGroups(SubjectID, Class, Group, false);
+            }
+            Dictionary<String, Group> dbGroups = (Dictionary<String, Group>)(CurrentSession.Get("Groups") ?? InputHelper.Groups);
+            var Groups = from m in dbGroups.Values.Where(g => !g.IsIgnored) select m;
             var total = Groups.Count();
             if (Search != null && Search != "")
             {
@@ -140,10 +143,6 @@ namespace Mvc_ESM.Controllers
                                         }
                             );
             }
-            if (SubjectID != null && Class != null && Group != null)
-            {
-                OutputHelper.SaveGroups(SubjectID, Class, Group, false);
-            }
             return Json(new{
                                 sEcho = param.sEcho,
                                 iTotalRecords = total,
@@ -158,8 +157,12 @@ namespace Mvc_ESM.Controllers
         [HttpPost]
         public JsonResult DataTable_IgnoreGroups(jQueryDataTableParamModel param, List<String> SubjectID = null, List<String> Class = null, List<String> Check = null, String Search = null, String ShowIgnore = null, String ShowNotIgnore = null)
         {
-
-            var Groups = from m in InputHelper.Groups.Values select m;
+            if (SubjectID != null && Class != null && Check != null)
+            {
+                OutputHelper.SaveIgnoreGroups(SubjectID, Class, Check, false);
+            }
+            Dictionary<String, Group> dbGroups = (Dictionary<String, Group>)(CurrentSession.Get("IgnoreGroups") ?? InputHelper.Groups);
+            var Groups = from m in dbGroups.Values select m;
             var total = Groups.Count();
             if(Search != null && Search != "")
             {
@@ -192,10 +195,6 @@ namespace Mvc_ESM.Controllers
                                             //"Xoá"
                                         }
                             );
-            }
-            if (SubjectID != null && Class != null && Check != null)
-            {
-                OutputHelper.SaveIgnoreGroups(SubjectID, Class, Check, false);
             }
             return Json(new
                             {

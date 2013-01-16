@@ -126,6 +126,7 @@
     <Compile Include="Static_Helper\Calendar.cs" />
     <Compile Include="Static_Helper\OutputHelper.cs" />
     <Compile Include="Static_Helper\InputHelper.cs" />
+    <Compile Include="Static_Helper\CurrentSession.cs" />
     <Compile Include="Static_Helper\Types.cs" />
   </ItemGroup>
   <ItemGroup>
