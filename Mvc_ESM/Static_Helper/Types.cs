@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Web;
 
 namespace Mvc_ESM.Static_Helper
 {
-    public class Group
+    public class Group : ICloneable
     {
         public string MaMonHoc { get; set; }
         public string TenMonHoc { get; set; }
@@ -15,6 +17,10 @@ namespace Mvc_ESM.Static_Helper
         public Nullable<int> SoLuongDK { get; set; }
         public int GroupID { get; set; }
         public Boolean IsIgnored { get; set; }
+        public object Clone()
+        {
+            return new Group() { MaMonHoc = MaMonHoc, TenMonHoc = TenMonHoc, TenBoMon = TenBoMon, TenKhoa = TenKhoa, Nhom = Nhom, SoLuongDK = SoLuongDK, GroupID = GroupID, IsIgnored = IsIgnored };
+        }
     }
 
     public class Class
@@ -101,6 +107,14 @@ namespace Mvc_ESM.Static_Helper
         /// Comma separated list of column names
         /// </summary>
         public string sColumns { get; set; }
+    }
+
+    public class Clone
+    {
+        public static Dictionary<A, B> Dictionary<A, B>(Dictionary<A, B> dict) where B : ICloneable
+        {
+            return (from x in dict select x).ToDictionary(x => x.Key, x => (B)x.Value.Clone());
+        }
     }
 
 }

@@ -120,10 +120,10 @@ namespace Mvc_ESM.Controllers
             {
                 OutputHelper.SaveGroups(SubjectID, Class, Group, false);
             }
-            Dictionary<String, Group> dbGroups = (Dictionary<String, Group>)(CurrentSession.Get("Groups") ?? InputHelper.Groups);
+            Dictionary<String, Group> dbGroups = Clone.Dictionary<String, Group>((Dictionary<String, Group>)(CurrentSession.Get("Groups") ?? InputHelper.Groups));
             var Groups = from m in dbGroups.Values.Where(g => !g.IsIgnored) select m;
             var total = Groups.Count();
-            if (Search != null && Search != "")
+            if (!string.IsNullOrEmpty(Search)) 
             {
                 Groups = Groups.Where(m => m.MaMonHoc.ToLower().Contains(Search.ToLower()) || m.TenMonHoc.ToLower().Contains(Search.ToLower()));
             }
@@ -138,7 +138,7 @@ namespace Mvc_ESM.Controllers
                                             su.TenKhoa,
                                             su.Nhom.ToString(),
                                             su.SoLuongDK.ToString(),
-                                            InputHelper.Groups[su.MaMonHoc + "_" + su.Nhom].GroupID.ToString(),
+                                            su.GroupID.ToString(),
                                             //"Xoá"
                                         }
                             );
@@ -161,25 +161,29 @@ namespace Mvc_ESM.Controllers
             {
                 OutputHelper.SaveIgnoreGroups(SubjectID, Class, Check, false);
             }
-            Dictionary<String, Group> dbGroups = (Dictionary<String, Group>)(CurrentSession.Get("IgnoreGroups") ?? InputHelper.Groups);
+            Dictionary<String, Group> dbGroups = Clone.Dictionary<String, Group>((Dictionary<String, Group>)(CurrentSession.Get("IgnoreGroups") ?? InputHelper.Groups));
             var Groups = from m in dbGroups.Values select m;
             var total = Groups.Count();
-            if(Search != null && Search != "")
+            if (!string.IsNullOrEmpty(Search)) 
             {
                 Groups = Groups.Where(m => m.MaMonHoc.ToLower().Contains(Search.ToLower()) || m.TenMonHoc.ToLower().Contains(Search.ToLower()));
             }
-            if(ShowIgnore == "checked" && ShowNotIgnore != "checked")
+            if (ShowIgnore != null && ShowNotIgnore != null)
             {
-                Groups = Groups.Where(m => m.IsIgnored == true);
+                if (ShowIgnore == "checked" && ShowNotIgnore != "checked")
+                {
+                    Groups = Groups.Where(m => m.IsIgnored == true);
+                }
+                if (ShowIgnore != "checked" && ShowNotIgnore == "checked")
+                {
+                    Groups = Groups.Where(m => m.IsIgnored == false);
+                }
+                if (ShowIgnore != "checked" && ShowNotIgnore != "checked")
+                {
+                    Groups = Groups.Where(m => false);
+                }
             }
-            if(ShowIgnore != "checked" && ShowNotIgnore == "checked")
-            {
-                Groups = Groups.Where(m => m.IsIgnored == false);
-            }
-            if (ShowIgnore != "checked" && ShowNotIgnore != "checked")
-            {
-                Groups = Groups.Where(m => false);
-            }
+
             var Result = new List<string[]>();
 
             foreach (var su in Groups.OrderBy(m => m.TenMonHoc).Skip(param.iDisplayStart).Take(param.iDisplayLength))

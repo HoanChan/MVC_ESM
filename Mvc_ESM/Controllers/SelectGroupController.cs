@@ -39,5 +39,21 @@ namespace Mvc_ESM.Controllers
         {
             return OutputHelper.SaveGroups(SubjectID, Class, Group, true);
         }
+
+        [HttpPost]
+        public String IgnoreCancel()
+        {
+            CurrentSession.Reset("IgnoreGroups");
+            //CurrentSession.Set("IgnoreGroups", Clone.Dictionary<String, Group>(InputHelper.Groups));
+            return "Cancel";
+        }
+
+        [HttpPost]
+        public String SelectCancel()
+        {
+            CurrentSession.Reset("Groups");
+            //CurrentSession.Set("Groups", Clone.Dictionary<String, Group>(InputHelper.Groups));
+            return "Cancel";
+        }
     }
 }

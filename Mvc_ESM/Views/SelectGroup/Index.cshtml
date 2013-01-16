@@ -26,7 +26,8 @@
 </table>
     <p></p>
     <br />
-    <button id="SummitButton" type="button">Lưu</button>
+    <button id="btnSummit" type="button">Lưu</button> 
+    <button id="btnCancel" type="button">Huỷ</button>
 
 @Html.Partial("_DataTable.Lib")
 
@@ -135,7 +136,7 @@
         return false;
     });
 
-	$('#SummitButton').button().click(function () {
+	$('#btnSummit').button().click(function () {
 	    var sData = "";
 	    oTable.$("#SubjectID").each(function (index, item) {
 	        sData = sData + (sData == '' ? '' : '&') + 'SubjectID=' + $(this).text();
@@ -146,9 +147,16 @@
 	    oTable.$("#Group").each(function (index, item) {
 	        sData = sData + '&Group=' + $(this).spinner("value");
 	    });
-	    $.post("/SelectGroup/SelectSuccess", sData);
-	    alert("Đã lưu xong");
+	    $.post("/SelectGroup/SelectSuccess", sData, function () {
+	        alert("Đã lưu xong");
+	    });
 	    return false; 
+	});
+
+	$("#btnCancel").button().click(function () {
+	    $.post("/SelectGroup/SelectCancel", "", function () {
+	        alert("Đã huỷ thiết lập xong! Bấm F5 để tải lại trang!");
+	    });
 	});
 	new FixedHeader(oTable);
 </script>

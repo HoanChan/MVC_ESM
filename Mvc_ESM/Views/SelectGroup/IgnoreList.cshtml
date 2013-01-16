@@ -31,7 +31,8 @@
 </table>
     <p></p>
     <br />
-    <button id="SummitButton" type="button">Lưu</button>
+    <button id="btnSummit" type="button">Lưu</button> 
+    <button id="btnCancel" type="button">Huỷ</button>
 
 @Html.Partial("_DataTable.Lib")
 
@@ -141,7 +142,7 @@
         return false;
     });
     
-	$('#SummitButton').button().click(function () {
+	$('#btnSummit').button().click(function () {
 	    var sData = "";
 	    oTable.$("#SubjectID").each(function (index, item) {
 	        sData += (sData == '' ? '' : '&') + 'SubjectID=' + $(this).text();
@@ -152,8 +153,15 @@
 	    oTable.$("#Check").each(function (index, item) {
 	        sData += '&Check=' + $(this).attr('checked');
 	    });
-	    $.post("/SelectGroup/IgnoreSuccess", sData);
-	    alert("Đã lưu xong");
+	    $.post("/SelectGroup/IgnoreSuccess", sData, function () {
+	        alert("Đã lưu xong");
+	    });
 	    return false; 
+	});
+
+	$("#btnCancel").button().click(function () {
+	    $.post("/SelectGroup/IgnoreCancel", "", function () {
+	        alert("Đã huỷ thiết lập xong! Bấm F5 để tải lại trang!");
+	    });
 	});
 </script>

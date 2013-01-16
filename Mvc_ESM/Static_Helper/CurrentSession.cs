@@ -32,5 +32,12 @@ namespace Mvc_ESM.Static_Helper
                 Data.Add(HttpContext.Current.User.Identity.Name + Name, Value);
             }
         }
+        public static void Reset(String Name)
+        {
+            if (Data.ContainsKey(HttpContext.Current.User.Identity.Name + Name))
+            {
+                Data.Remove(HttpContext.Current.User.Identity.Name + Name);
+            }
+        }
     }
 }

@@ -70,7 +70,7 @@ namespace Mvc_ESM.Static_Helper
         public static String SaveIgnoreGroups(List<String> SubjectID, List<String> Class, List<String> Check, Boolean IsFinal = false)
         {
             string paramInfo = "";
-            Dictionary<String, Group> IgnoreGroups = (Dictionary<String, Group>)(CurrentSession.Get("IgnoreGroups") ?? InputHelper.Groups);
+            Dictionary<String, Group> IgnoreGroups = Clone.Dictionary<String, Group>((Dictionary<String, Group>)(CurrentSession.Get("IgnoreGroups") ?? InputHelper.Groups));
 
             for (int i = 0; i < SubjectID.Count; i++)
             {
@@ -83,12 +83,12 @@ namespace Mvc_ESM.Static_Helper
             }
             if (IsFinal)
             {
-                InputHelper.Groups = IgnoreGroups;
+                InputHelper.Groups = Clone.Dictionary<String, Group>(IgnoreGroups);
                 OutputHelper.SaveOBJ("Groups", InputHelper.Groups);
             }
             else
             {
-                CurrentSession.Set("IgnoreGroups", IgnoreGroups);
+                CurrentSession.Set("IgnoreGroups", Clone.Dictionary<String, Group>(IgnoreGroups));
             }
             return paramInfo;
         }
@@ -96,7 +96,7 @@ namespace Mvc_ESM.Static_Helper
         public static String SaveGroups(List<String> SubjectID, List<String> Class, List<int> Group, Boolean IsFinal = false)
         {
             string paramInfo = "";
-            Dictionary<String, Group> Groups = (Dictionary<String, Group>)(CurrentSession.Get("Groups") ?? InputHelper.Groups);
+            Dictionary<String, Group> Groups = Clone.Dictionary<String, Group>((Dictionary<String, Group>)(CurrentSession.Get("Groups") ?? InputHelper.Groups));
             for (int i = 0; i < SubjectID.Count; i++)
             {
                 String aKey = SubjectID[i] + "_" + Class[i];
@@ -109,12 +109,12 @@ namespace Mvc_ESM.Static_Helper
             }
              if (IsFinal)
              {
-                 InputHelper.Groups = Groups;
+                 InputHelper.Groups = Clone.Dictionary<String, Group>(Groups);
                  OutputHelper.SaveOBJ("Groups", InputHelper.Groups); 
              }
              else
              {
-                 CurrentSession.Set("Groups", Groups);
+                 CurrentSession.Set("Groups", Clone.Dictionary<String, Group>(Groups));
              }
             return paramInfo;
         }
