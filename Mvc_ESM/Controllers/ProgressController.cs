@@ -28,7 +28,7 @@ namespace Mvc_ESM.Controllers
             {
                 case 0:
                     Process.Start(OutputHelper.WinAppExe, "0");
-                    return Content("RunDeleteDatabase");
+                    return Content("RunStop");
                 case 1:
                     Process.Start(OutputHelper.WinAppExe, "1");
                     return Content("RunCreateAdjacencyMatrix");
@@ -36,7 +36,7 @@ namespace Mvc_ESM.Controllers
                     Process.Start(OutputHelper.WinAppExe, "2");
                     return Content("RunCalc");
                 case 3:
-                    Process.Start(OutputHelper.WinAppExe, "5");
+                    Process.Start(OutputHelper.WinAppExe, "3");
                     return Content("RunSaveToDatabase");
                 default:
                     return Content("NotRunAnyThing");

@@ -169,19 +169,45 @@ namespace Mvc_ESM.Static_Helper
 
         public void RunSaveToDatabase()
         {
-            GroupsTime = ReadOBJ<DateTime[]>("GroupsTime");
-            GroupsRoom = ReadOBJ<List<Room>[]>("GroupsRoom");
-            GroupsRoomStudents = ReadOBJ<List<String>[][]>("GroupsRoomStudents");
-            Thread thread = new Thread(new ThreadStart(SaveToDatabase.Run));
-            thread.Name = "SaveToDatabase";
+            if (OBJExits("GroupsTime") && OBJExits("GroupsRoom") && OBJExits("GroupsRoomStudents"))
+            {
+                GroupsTime = ReadOBJ<DateTime[]>("GroupsTime");
+                GroupsRoom = ReadOBJ<List<Room>[]>("GroupsRoom");
+                GroupsRoomStudents = ReadOBJ<List<String>[][]>("GroupsRoomStudents");
+                Thread thread = new Thread(new ThreadStart(SaveToDatabase.Run));
+                thread.Name = "SaveToDatabase";
+                thread.Start();
+            }
+            else
+            {
+                SaveOBJ("Status", "err Chưa hoàn thiện quá trình xếp lịch");
+            }
+        }
+
+        public void RunStop()
+        {
+            Thread thread = new Thread(new ThreadStart(Stop));
+            thread.Name = "RunStop";
             thread.Start();
         }
 
-        public void RunDeleteOldDatabase()
+        private void Stop()
         {
-            Thread thread = new Thread(new ThreadStart(SaveToDatabase.Delete));
-            thread.Name = "RunDeleteOldDatabase";
-            thread.Start();
+            if (!CreateAdjacencyMatrix.Stoped)
+            {
+                CreateAdjacencyMatrix.Stop = true;
+            }
+            else
+            {
+                Clear();
+                Environment.Exit(0);
+            }
+        }
+
+        public static void Clear()
+        {
+            IsBusy = false;
+            DeleteOBJ("Status");
         }
 
         public void RunHandmade()

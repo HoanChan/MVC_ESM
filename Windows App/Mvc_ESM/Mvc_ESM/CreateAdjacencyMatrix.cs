@@ -23,7 +23,7 @@ namespace Mvc_ESM.Static_Helper
         public static int[,] AdjacencyMatrix;
         public static int i, j;
         public static Boolean Stop = false;
-        public static Boolean Stoped = false;
+        public static Boolean Stoped = true;
 
         static int CheckGroups(String Group1ID, String Group2ID)
         {   
@@ -100,7 +100,9 @@ namespace Mvc_ESM.Static_Helper
                     //AlgorithmRunner.SaveOBJ("AdjacencyMatrix", AdjacencyMatrix);
                     WriteAdjacencyMatrix(AdjacencyMatrix, AlgorithmRunner.RealPath("AdjacencyMatrix"));
                     AlgorithmRunner.SaveOBJ("BeginI", i + 1);
+                    AlgorithmRunner.Clear();
                     Stoped = true;
+                    Environment.Exit(0);
                     return;
                 }
             }

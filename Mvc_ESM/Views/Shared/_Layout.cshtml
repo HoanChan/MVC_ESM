@@ -72,10 +72,10 @@
                                     <li><a href="@Url.Action("RoomsResult", "CalendarResults")"><span>Phòng Thi</span></a></li>
                                 }
                                     <li><a href="@Url.Action("StudentsResult", "CalendarResults")"><span>Sinh viên</span></a></li>
-                                @if (Context.User.IsInRole("GiaoVien") || Context.User.IsInRole("Admin"))
+                                @*@if (Context.User.IsInRole("GiaoVien") || Context.User.IsInRole("Admin"))
                                 {
                                     <li><a href="#"><span>Giáo viên</span></a></li>
-                                }
+                                }*@
                                 </ul>
                             </li>
                             <li><a href="#" class="parent"><span>Dạng Danh sách</span></a>

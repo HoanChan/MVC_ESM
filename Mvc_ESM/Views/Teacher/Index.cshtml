@@ -10,8 +10,8 @@
     <p>
         <p>
             Khoa: @Html.DropDownList("Khoa", ViewBag.Khoa as SelectList, new { id = "KhoaList" })
-            Bộ môn: @Html.DropDownList("BoMon", ViewBag.BoMon as SelectList, "Tất cả", new { id = "BoMonList" })
-            Tên: @Html.TextBox("SearchString", Mvc_ESM.Static_Helper.TeacherHelper.SearchString, new { id = "SearchString" })
+            Bộ môn: @Html.DropDownList("BoMon", ViewBag.BoMon as SelectList, Mvc_ESM.Settings.Page.Settings.SelectAllString, new { id = "BoMonList" })
+            Tên: @Html.TextBox("SearchString", ViewBag.SearchString as string, new { id = "SearchString" })
             <input type="submit" value="Thực hiện" />
         </p>
 
@@ -74,7 +74,7 @@
             select.empty();
             select.append($('<option/>', {
                 value: "",
-                text: "Tất cả"
+                text: "@Mvc_ESM.Settings.Page.Settings.SelectAllString"
             }));
             $.each(Data, function (index, itemData) {
                 select.append($('<option/>', {

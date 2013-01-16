@@ -4,27 +4,33 @@
 
 <h2>@ViewBag.Title</h2>
 @Html.Partial("_Jquery-UI.Lib")
-<p>
-    <button id="RunCreateAdjacencyMatrix">1. Phân tích CSDL</button>
-    <button id="RunCalc">2. Xếp lịch</button>
-    <button id="RunSaveToDatabase">3. Lưu kết quả</button>
-</p>
-<p id="Info">Thông tin</p>
+<div style="text-align:center">
+    <p>
+        <button id="RunCreateAdjacencyMatrix">1. Phân tích CSDL</button>
+        <button id="RunCalc">2. Xếp lịch</button>
+        <button id="RunSaveToDatabase">3. Lưu kết quả</button>
+    </p>
+    <p id="Info">Thông tin</p>
+    <p><button id="RunStop">Dừng ngang tiến trình</button></p>
+</div>
 <script>
+    var btn0 = $("#RunStop");
     var btn1 = $("#RunCreateAdjacencyMatrix");
     var btn2 = $("#RunCalc");
     var btn3 = $("#RunSaveToDatabase");
     var Info = $("#Info");
 
     function DisableAll() {
-        btn1.attr('disabled', 'disabled');
-        btn2.attr('disabled', 'disabled');
-        btn3.attr('disabled', 'disabled');
+        btn1.attr('disabled', 'disabled').removeClass("ui-state-focus");
+        btn2.attr('disabled', 'disabled').removeClass("ui-state-focus");
+        btn3.attr('disabled', 'disabled').removeClass("ui-state-focus");
+        btn0.removeAttr("disabled").removeClass("ui-state-focus");
     }
     function EnableAll() {
-        btn1.removeAttr("disabled");
-        btn2.removeAttr("disabled");
-        btn3.removeAttr("disabled");
+        btn1.removeAttr("disabled").removeClass("ui-state-focus");
+        btn2.removeAttr("disabled").removeClass("ui-state-focus");
+        btn3.removeAttr("disabled").removeClass("ui-state-focus");
+        btn0.attr('disabled', 'disabled').removeClass("ui-state-focus");
         Info.html("Thông tin");
     }
 
@@ -47,6 +53,9 @@
     }
     var Timer = setInterval(GetProgressInfo, 1000);
     //clearTimeout(Timer);
+    btn0.button().click(function () {
+        $.post("/Progress/Run", "StepNumber=0");
+    });
     btn1.button().click(function () {
         $.post("/Progress/Run", "StepNumber=1");
     });

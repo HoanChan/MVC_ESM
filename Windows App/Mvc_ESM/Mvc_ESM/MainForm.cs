@@ -30,8 +30,8 @@ namespace Mvc_ESM
                 switch (args[0])
                 {
                     case "0":
-                        AlgorithmRunner.RunDeleteOldDatabase();
-                        txtArgs.Text += DateTime.Now.ToString() + " DeleteOldData\r\n";
+                        txtArgs.Text += DateTime.Now.ToString() + " Stop\r\n";
+                        AlgorithmRunner.RunStop();
                         break;
                     case "1":
                         InputHelper.Groups = InputHelper.InitGroups();
@@ -98,7 +98,7 @@ namespace Mvc_ESM
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            AlgorithmRunner.RunDeleteOldDatabase();
+            AlgorithmRunner.RunStop();
         }
 
         private void btnRunHandmade_Click(object sender, EventArgs e)
@@ -135,6 +135,8 @@ namespace Mvc_ESM
 
         private void notifyIcon_DoubleClick(object sender, EventArgs e)
         {
+            this.Left = 300;
+            this.Top = 300;
             this.Show();
             this.WindowState = FormWindowState.Normal;
         }
@@ -143,6 +145,7 @@ namespace Mvc_ESM
         {
             if (this.WindowState == FormWindowState.Minimized)
             {
+                this.Left = this.Top = -10000;
                 this.Hide();
             }
         }
