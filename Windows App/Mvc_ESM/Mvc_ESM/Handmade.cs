@@ -14,7 +14,7 @@ namespace Mvc_ESM.Static_Helper
     {
         public class HandmadeData
         {
-            public String SubjectID { get; set; }
+            public String SubjectData { get; set; }
             public List<String> Class { get; set; }
             public DateTime Date { get; set; }
             public List<String> Room { get; set; }
@@ -41,10 +41,10 @@ namespace Mvc_ESM.Static_Helper
             {
                 ClassList += (ClassList.Length > 0 ? ", " : "") + "'" + cl + "'";
             }
-            String IgnoreStudents = InputHelper.IgnoreStudents.ContainsKey(Data.SubjectID) ? JsonConvert.SerializeObject(InputHelper.IgnoreStudents[Data.SubjectID]) : "[]";
+            String IgnoreStudents = InputHelper.IgnoreStudents.ContainsKey(Data.SubjectData) ? JsonConvert.SerializeObject(InputHelper.IgnoreStudents[Data.SubjectData]) : "[]";
             IgnoreStudents = IgnoreStudents.Substring(1, IgnoreStudents.Length - 2).Replace("\"", "'");
             var StudentList = db.Database.SqlQuery<StudentInfo>("select pdkmh.MaSinhVien, pdkmh.Nhom from pdkmh, sinhvien " +
-                                                                "where pdkmh.MaSinhVien = sinhvien.MaSinhVien and MaMonHoc = '" + Data.SubjectID + "' and Nhom in (" + ClassList + ") " +
+                                                                "where pdkmh.MaSinhVien = sinhvien.MaSinhVien and MaMonHoc = '" + Data.SubjectData + "' and Nhom in (" + ClassList + ") " +
                                                                 (IgnoreStudents.Length > 0 ? "and not(sinhvien.MaSinhVien in (" + IgnoreStudents + ")) " : "") +
                                                                 "order by (sinhvien.Ten + sinhvien.ho)").ToList();
 
@@ -62,9 +62,9 @@ namespace Mvc_ESM.Static_Helper
                 db.Database.ExecuteSqlCommand("INSERT INTO CaThi (MaCa, GioThi) VALUES (@MaCa, @GioThi)", pa);
             }
             Thi aRecord = new Thi();
-            aRecord.MaMonHoc = Data.SubjectID;
+            aRecord.MaMonHoc = Data.SubjectData;
             aRecord.MaCa = ShiftID;
-            var ClassGroup = Data.SubjectID;
+            var ClassGroup = Data.SubjectData;
             foreach (var cl in Data.Class)
             {
                 ClassGroup += "_" + cl;

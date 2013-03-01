@@ -16227,7 +16227,7 @@
     "Nhom": 3,
     "SoLuongDK": 26,
     "GroupID": 1,
-    "IsIgnored": false
+    "IsIgnored": true
   },
   "1245021_4": {
     "MaMonHoc": "1245021",
@@ -16237,7 +16237,7 @@
     "Nhom": 4,
     "SoLuongDK": 21,
     "GroupID": 1,
-    "IsIgnored": false
+    "IsIgnored": true
   },
   "1245021_5": {
     "MaMonHoc": "1245021",
@@ -16247,7 +16247,7 @@
     "Nhom": 5,
     "SoLuongDK": 22,
     "GroupID": 1,
-    "IsIgnored": false
+    "IsIgnored": true
   },
   "1245021_6": {
     "MaMonHoc": "1245021",
@@ -16257,7 +16257,7 @@
     "Nhom": 6,
     "SoLuongDK": 18,
     "GroupID": 1,
-    "IsIgnored": false
+    "IsIgnored": true
   },
   "1245021_7": {
     "MaMonHoc": "1245021",
@@ -16267,7 +16267,7 @@
     "Nhom": 7,
     "SoLuongDK": 17,
     "GroupID": 1,
-    "IsIgnored": false
+    "IsIgnored": true
   },
   "1245021_8": {
     "MaMonHoc": "1245021",
@@ -16277,7 +16277,7 @@
     "Nhom": 8,
     "SoLuongDK": 21,
     "GroupID": 1,
-    "IsIgnored": false
+    "IsIgnored": true
   },
   "1245021_9": {
     "MaMonHoc": "1245021",
@@ -16287,7 +16287,7 @@
     "Nhom": 9,
     "SoLuongDK": 23,
     "GroupID": 1,
-    "IsIgnored": false
+    "IsIgnored": true
   },
   "1245021_10": {
     "MaMonHoc": "1245021",
@@ -16297,7 +16297,7 @@
     "Nhom": 10,
     "SoLuongDK": 24,
     "GroupID": 1,
-    "IsIgnored": false
+    "IsIgnored": true
   },
   "1245021_11": {
     "MaMonHoc": "1245021",
@@ -16307,7 +16307,7 @@
     "Nhom": 11,
     "SoLuongDK": 22,
     "GroupID": 1,
-    "IsIgnored": false
+    "IsIgnored": true
   },
   "1245021_12": {
     "MaMonHoc": "1245021",
@@ -16317,7 +16317,7 @@
     "Nhom": 12,
     "SoLuongDK": 23,
     "GroupID": 1,
-    "IsIgnored": false
+    "IsIgnored": true
   },
   "1245021_13": {
     "MaMonHoc": "1245021",
@@ -16327,7 +16327,7 @@
     "Nhom": 13,
     "SoLuongDK": 23,
     "GroupID": 1,
-    "IsIgnored": false
+    "IsIgnored": true
   },
   "1245021_14": {
     "MaMonHoc": "1245021",
@@ -16337,7 +16337,7 @@
     "Nhom": 14,
     "SoLuongDK": 16,
     "GroupID": 1,
-    "IsIgnored": false
+    "IsIgnored": true
   },
   "1245021_15": {
     "MaMonHoc": "1245021",
@@ -16347,7 +16347,7 @@
     "Nhom": 15,
     "SoLuongDK": 13,
     "GroupID": 1,
-    "IsIgnored": false
+    "IsIgnored": true
   },
   "1245022_3": {
     "MaMonHoc": "1245022",

@@ -216,7 +216,7 @@ namespace Mvc_ESM.Static_Helper
             Thread thread = new Thread(new ThreadStart(Handmade.Run));
             thread.Name = "Handmade";
             thread.Start();
-            //DeleteOBJ("Handmade");
+            DeleteOBJ("Handmade");
         }
 
         public static bool IsBusy
